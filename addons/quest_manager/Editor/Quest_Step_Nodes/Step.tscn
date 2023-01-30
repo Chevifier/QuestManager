@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7wyoxtkrolb6"]
+
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/Step.gd" id="1_sv62o"]
+
+[node name="Step" type="GraphNode"]
+custom_minimum_size = Vector2(150, 150)
+offset_right = 150.009
+offset_bottom = 150.012
+size_flags_vertical = 4
+tooltip_text = "Action Quest Step requires an action to be completed to advance"
+title = "Step"
+resizable = true
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(0, 1, 0, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(0, 1, 0, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_sv62o")
+Node_Type = 1
+
+[node name="details" type="TextEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "Step details"
+context_menu_enabled = false
+caret_blink = true
+caret_blink_interval = 0.5
+
+[connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]

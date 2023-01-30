@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_thoyx"]
+
+[resource]
+script = ExtResource("1_thoyx")
+quest_data = {
+"02b2426b9c": {
+"completed": false,
+"failed": false,
+"group": "",
+"meta_data": "",
+"quest_details": "Some info of Quest	",
+"quest_id": "02b2426b9c",
+"quest_name": "Example Quest",
+"step_index": 0,
+"steps": ["c71a4a1d49"]
+}
+}
+steps_data = {
+"c71a4a1d49": {
+"complete": false,
+"details": "Stap 1",
+"type": "action_step"
+}
+}
+items_list = {}
+meta_data = {}
+connections_list = [{
+"from": &"Quest",
+"from_port": 0,
+"to": &"Step",
+"to_port": 0
+}, {
+"from": &"Step",
+"from_port": 0,
+"to": &"EndNode",
+"to_port": 0
+}]
+graph_data = {
+"02b2426b9c": {
+"id": "02b2426b9c",
+"name": &"Quest",
+"position": Vector2(150, 150),
+"type": 0
+},
+"7a23a2e33a": {
+"id": "7a23a2e33a",
+"name": &"EndNode",
+"position": Vector2(757, 142),
+"type": 6
+},
+"c71a4a1d49": {
+"id": "c71a4a1d49",
+"name": &"Step",
+"position": Vector2(493, 337),
+"type": 1
+}
+}

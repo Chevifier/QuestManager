@@ -1,0 +1,203 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5mp0k8vtj13e"]
+
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/Meta_data.gd" id="1_4srrm"]
+
+[node name="MetaData" type="GraphNode"]
+custom_minimum_size = Vector2(250, 150)
+offset_right = 247.0
+offset_bottom = 147.0
+tooltip_text = "Meta data nodes are extra parameters you can add 
+to quests such as storing Quest Rewards
+or keeping track of something related to the quest.
+i.e how much coins this quest rewards or
+what items the player receives
+"
+title = "Meta Data"
+resizable = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 2
+slot/0/right_color = Color(0, 0, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 2
+slot/1/right_color = Color(0, 0, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+script = ExtResource("1_4srrm")
+Node_Type = 5
+
+[node name="vb" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="data" type="VBoxContainer" parent="vb"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="vb"]
+layout_mode = 2
+alignment = 1
+
+[node name="String" type="Button" parent="vb/HBoxContainer"]
+layout_mode = 2
+text = "String"
+
+[node name="int" type="Button" parent="vb/HBoxContainer"]
+layout_mode = 2
+text = "Int"
+
+[node name="float" type="Button" parent="vb/HBoxContainer"]
+layout_mode = 2
+text = "float"
+
+[node name="bool" type="Button" parent="vb/HBoxContainer"]
+layout_mode = 2
+text = "boolean
+"
+
+[node name="Types" type="Control" parent="."]
+layout_mode = 2
+
+[node name="String" type="HBoxContainer" parent="Types" groups=["string"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -15.5
+offset_right = 88.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="delete" type="Button" parent="Types/String"]
+layout_mode = 2
+text = "X"
+flat = true
+
+[node name="name" type="LineEdit" parent="Types/String"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "String Name"
+
+[node name="data" type="LineEdit" parent="Types/String"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "String Value"
+
+[node name="Integer" type="HBoxContainer" parent="Types" groups=["numerical"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="delete" type="Button" parent="Types/Integer"]
+layout_mode = 2
+text = "X"
+flat = true
+
+[node name="name" type="LineEdit" parent="Types/Integer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Integer name"
+
+[node name="data" type="SpinBox" parent="Types/Integer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+min_value = -1e+07
+max_value = 1e+07
+allow_greater = true
+allow_lesser = true
+alignment = 1
+update_on_text_changed = true
+
+[node name="Float" type="HBoxContainer" parent="Types" groups=["numerical"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="delete" type="Button" parent="Types/Float"]
+layout_mode = 2
+text = "X"
+flat = true
+
+[node name="name" type="LineEdit" parent="Types/Float"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Float name"
+
+[node name="data" type="SpinBox" parent="Types/Float"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+min_value = -1e+07
+max_value = 1e+07
+step = 0.001
+allow_greater = true
+allow_lesser = true
+alignment = 1
+update_on_text_changed = true
+
+[node name="Bool" type="HBoxContainer" parent="Types" groups=["boolean"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="delete" type="Button" parent="Types/Bool"]
+layout_mode = 2
+text = "X"
+flat = true
+
+[node name="name" type="LineEdit" parent="Types/Bool"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Boolean name"
+
+[node name="data" type="CheckBox" parent="Types/Bool"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[connection signal="pressed" from="vb/HBoxContainer/String" to="." method="_on_string_pressed"]
+[connection signal="pressed" from="vb/HBoxContainer/int" to="." method="_on_int_pressed"]
+[connection signal="pressed" from="vb/HBoxContainer/float" to="." method="_on_float_pressed"]
+[connection signal="pressed" from="vb/HBoxContainer/bool" to="." method="_on_bool_pressed"]

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cw6kvhmsi6twp"]
+
+[ext_resource type="Script" path="res://addons/quest_manager/GraphData.gd" id="1_y1ksj"]
+
+[resource]
+script = ExtResource("1_y1ksj")
+connections = null
+nodes = null

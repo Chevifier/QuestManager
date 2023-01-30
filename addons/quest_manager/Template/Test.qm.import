@@ -1,0 +1,14 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://x4xqsh2q3moi"
+path="res://.godot/imported/Test.qm-ca1b9836e209703bd4029eda251af8bb.qm"
+
+[deps]
+
+source_file="res://addons/quest_manager/Template/Test.qm"
+dest_files=["res://.godot/imported/Test.qm-ca1b9836e209703bd4029eda251af8bb.qm"]
+
+[params]
+
