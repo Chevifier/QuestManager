@@ -237,16 +237,25 @@ func save_data(file_path):
 		quest.update_group_data()
 		quest.update_meta_data()
 	
+	var Save = FileAccess.open(file_path,FileAccess.WRITE)
 	
-	var quest_res = QuestResource.new()
-	quest_res.connections_list = graph.get_connection_list()
-	quest_res.quest_data = get_quest_data()
-	quest_res.steps_data = get_steps_data()
-	quest_res.items_list = get_items_data()
-	quest_res.graph_data = get_editor_data()
-	quest_res.meta_data = get_meta_data()
-	quest_res.groups = get_group_data()
-	ResourceSaver.save(quest_res,file_path)
+	Save.store_var(get_quest_data())
+	Save.store_var(get_steps_data())
+	Save.store_var(get_items_data())
+	Save.store_var(get_meta_data())
+	Save.store_var(get_editor_data())
+	Save.store_var(graph.get_connection_list())
+	Save.store_var(get_group_data())
+
+	
+#	Save.store_line(JSON.stringify(get_quest_data()))
+#	Save.store_line(JSON.stringify(get_steps_data()))
+#	Save.store_line(JSON.stringify(get_items_data()))
+#	Save.store_line(JSON.stringify(get_meta_data()))
+#	Save.store_line(JSON.stringify(get_editor_data()))
+#	Save.store_var(graph.get_connection_list())
+#	Save.store_var(get_group_data())
+
 	current_file_path = file_path
 	if quest_chains_complete == false:
 		$Quest_Warning.popup_centered()
@@ -303,35 +312,21 @@ func get_editor_data():
 
 #=============================LOAD DATA================================
 
-#func test_save_scene(file_path):
-#	var quest_res = QuestResource.new()
-#	ResourceSaver.save(quest_res,file_path)
-#	current_file_path = file_path
-#	var packed_scene = PackedScene.new()
-#	packed_scene.pack(graph)
-#	quest_res.Graph = packed_scene
-#	graph.free()
-#func test_load_scene(file_path):
-#	var quest_res:QuestResource
-#	if ResourceLoader.exists(file_path):
-#		quest_res = ResourceLoader.load(file_path)
-#		current_file_path = file_path
-#	else:
-#		print("file doesnt exist")
-#		return
-#	var container = graph.get_parent()
-#	graph.free()
-#	graph = quest_res.Graph.instantiate()
-#	container.add_child(graph)
-
 func load_data(file_path):
-	var quest_res:QuestResource
-	if ResourceLoader.exists(file_path):
-		quest_res = ResourceLoader.load(file_path)
-		current_file_path = file_path
-	else:
-		print("file doesnt exist")
-		return
+	var file = FileAccess.open(file_path,FileAccess.READ)
+	var err = file.get_open_error()
+	if err != OK:
+		return err
+	var quest_res = QuestResource.new()
+	quest_res.quest_data = file.get_var()
+	quest_res.steps_data = file.get_var()
+	quest_res.items_list = file.get_var()
+	quest_res.meta_data = file.get_var()
+	quest_res.graph_data = file.get_var()
+	quest_res.connections_list = file.get_var()
+	quest_res.groups = file.get_var()
+	
+	current_file_path = file_path
 	#clear the current nodes in the graph
 	clear_graph()
 	#load new node and set data from resource
@@ -378,11 +373,10 @@ func load_data(file_path):
 				node = end.instantiate()
 				graph.add_child(node)
 				node.set_node_data(quest_res.graph_data[i])
-		node.owner = graph
 	
 	
 	for con in quest_res.connections_list:
-		_on_graph_edit_connection_request(con.from,con.to_port,con.to,con.to_port)
+		_on_graph_edit_connection_request(con.from,con.from_port,con.to,con.to_port)
 
 func clear_graph():
 	graph.clear_connections()

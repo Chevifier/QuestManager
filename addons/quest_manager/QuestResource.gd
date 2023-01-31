@@ -1,3 +1,4 @@
+@tool
 class_name QuestResource
 extends Resource
 #Data for quest Management
@@ -5,14 +6,8 @@ extends Resource
 @export var steps_data = {}
 @export var items_list = {}
 @export var meta_data = {}
-
-@export var Graph : PackedScene
-
+@export var groups = {}
 #Data For Graph Editing
-@export var connections_list = []
 @export var graph_data = {}
+@export var connections_list = []
 
-@export var groups = {
-	"vwvh" : 
-		"name"
-}

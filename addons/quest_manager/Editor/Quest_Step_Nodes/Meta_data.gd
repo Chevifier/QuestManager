@@ -7,6 +7,9 @@ extends EditorNode
 @onready var float_meta = %Float
 @onready var bool_meta = %Bool
 
+func _ready():
+	%AddButton.get_popup().index_pressed.connect(_on_option_selected)
+
 func get_data():
 	var data = {}
 	for node in data_container.get_children():
@@ -29,47 +32,27 @@ func set_data(data):
 		var meta_node
 		if typeof(data[meta]) == TYPE_STRING:
 			meta_node = string_meta.duplicate()
-			data_container.add_child(meta_node)
-			meta_node.get_node("name").text = meta
-			meta_node.get_node("data").value = data[meta]
 		if typeof(data[meta]) == TYPE_INT:
 			meta_node = integer_meta.duplicate()
-			data_container.add_child(meta_node)
-			meta_node.get_node("name").text = meta
-			meta_node.get_node("data").value = data[meta]
 		elif typeof(data[meta]) == TYPE_FLOAT:
 			meta_node = float_meta.duplicate()
-			data_container.add_child(meta_node)
-			meta_node.get_node("name").text = meta
-			meta_node.get_node("data").value = data[meta]
 		elif typeof(data[meta]) == TYPE_BOOL:
 			meta_node = bool_meta.duplicate()
-			data_container.add_child(meta_node)
-			meta_node.get_node("name").text = meta
-			meta_node.get_node("data").value = data[meta]
+		data_container.add_child(meta_node)
+		meta_node.get_node("name").text = meta
+		meta_node.get_node("data").value = data[meta]
 		meta_node.get_node("delete").pressed.connect(delete_meta_data.bind(meta_node.get_path()))
 
 func delete_meta_data(node_path):
 	data_container.get_node(node_path).queue_free()
-	
-func _on_string_pressed():
-	var s = string_meta.duplicate()
-	data_container.add_child(s)
-	s.get_node("delete").pressed.connect(delete_meta_data.bind(s.get_path()))
 
-func _on_int_pressed():
-	var i = integer_meta.duplicate()
-	data_container.add_child(i)
-	i.get_node("delete").pressed.connect(delete_meta_data.bind(i.get_path()))
-	
+func _on_option_selected(index):
+	var option
+	match index:
+		0: option = string_meta.duplicate()
+		1: option = integer_meta.duplicate()
+		2: option = float_meta.duplicate()
+		3: option = bool_meta.duplicate()
 
-func _on_float_pressed():
-	var f = float_meta.duplicate()
-	data_container.add_child(f)
-	f.get_node("delete").pressed.connect(delete_meta_data.bind(f.get_path()))
-
-func _on_bool_pressed():
-	var b = bool_meta.duplicate()
-	data_container.add_child(b)
-	b.get_node("delete").pressed.connect(delete_meta_data.bind(b.get_path()))
-
+	data_container.add_child(option)
+	option.get_node("delete").pressed.connect(delete_meta_data.bind(option.get_path()))

@@ -14,16 +14,19 @@ func _enter_tree():
 	EditorWindow = editor_window_scene.instantiate()
 	get_editor_interface().get_editor_main_screen().add_child(EditorWindow)
 	quest_importer = preload("res://addons/quest_manager/ImportPlugin.gd").new()
-	#add_import_plugin(quest_importer)
+	add_import_plugin(quest_importer)
 	_make_visible(false)
 	
-
+func _edit(object):
+	if is_instance_valid(EditorWindow) and is_instance_valid(object):
+		EditorWindow.load_data(object.resource_path)
 
 func _has_main_screen():
 	return true
 
 func _get_plugin_name():
 	return "Quest Manager"
+
 func _make_visible(visible):
 	if EditorWindow:
 		EditorWindow.visible = visible
@@ -42,13 +45,9 @@ func get_icon(scale: float = 1.0) -> Texture2D:
 	image.resize(size.x, size.y, Image.INTERPOLATE_TRILINEAR)
 	return ImageTexture.create_from_image(image)
 
-
-
-
-
-
 func _exit_tree():
 	if EditorWindow:
 		EditorWindow.queue_free()
 	remove_autoload_singleton("QuestManager")
-	#remove_import_plugin(quest_importer)
+	remove_import_plugin(quest_importer)
+	quest_importer = null

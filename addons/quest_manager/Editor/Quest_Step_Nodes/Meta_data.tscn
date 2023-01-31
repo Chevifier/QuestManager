@@ -15,7 +15,7 @@ what items the player receives
 title = "Meta Data"
 resizable = true
 slot/0/left_enabled = false
-slot/0/left_type = 0
+slot/0/left_type = 2
 slot/0/left_color = Color(1, 1, 1, 1)
 slot/0/left_icon = null
 slot/0/right_enabled = true
@@ -28,8 +28,8 @@ slot/1/left_type = 0
 slot/1/left_color = Color(1, 1, 1, 1)
 slot/1/left_icon = null
 slot/1/right_enabled = false
-slot/1/right_type = 2
-slot/1/right_color = Color(0, 0, 1, 1)
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
 script = ExtResource("1_4srrm")
@@ -46,28 +46,23 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="vb"]
+[node name="AddButton" type="MenuButton" parent="vb"]
+unique_name_in_owner = true
 layout_mode = 2
-alignment = 1
-
-[node name="String" type="Button" parent="vb/HBoxContainer"]
-layout_mode = 2
-text = "String"
-
-[node name="int" type="Button" parent="vb/HBoxContainer"]
-layout_mode = 2
-text = "Int"
-
-[node name="float" type="Button" parent="vb/HBoxContainer"]
-layout_mode = 2
-text = "float"
-
-[node name="bool" type="Button" parent="vb/HBoxContainer"]
-layout_mode = 2
-text = "boolean
-"
+text = "Add"
+switch_on_hover = true
+item_count = 4
+popup/item_0/text = "String"
+popup/item_0/id = 0
+popup/item_1/text = "Int"
+popup/item_1/id = 1
+popup/item_2/text = "Float"
+popup/item_2/id = 2
+popup/item_3/text = "Boolean"
+popup/item_3/id = 3
 
 [node name="Types" type="Control" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="String" type="HBoxContainer" parent="Types" groups=["string"]]
@@ -196,8 +191,3 @@ placeholder_text = "Boolean name"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
-
-[connection signal="pressed" from="vb/HBoxContainer/String" to="." method="_on_string_pressed"]
-[connection signal="pressed" from="vb/HBoxContainer/int" to="." method="_on_int_pressed"]
-[connection signal="pressed" from="vb/HBoxContainer/float" to="." method="_on_float_pressed"]
-[connection signal="pressed" from="vb/HBoxContainer/bool" to="." method="_on_bool_pressed"]

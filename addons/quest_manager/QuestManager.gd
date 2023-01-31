@@ -8,7 +8,7 @@ signal quest_reset()
 
 var quests_data = {
 	"231456a" : {
-		"name": "Theres Nothing Stronger than Family",
+		"name": "Stronger than Family",
 		"details" : "Your Parents are in Peril, Get 10 coins and give them to your mom and dad",
 		"completed" : false,
 		"failed" : false,
@@ -45,15 +45,12 @@ var items_list = {
 		"name":"5 for father",
 		"complete" : false
 	}
-}
+	}
 var meta_data = {
 	"342424" : {
 		"coins" : 100
 	}
-	
-}
-
-
+	}
 
 var player_quests = {}
 func _ready():
@@ -67,17 +64,22 @@ func get_quest_list(QuestResource, group ="all"):
 	return {}
 
 #Adds quest to the quest list
-func add_quest(quest:Dictionary):
-	player_quests[quest.name] = quest
+func add_quest(quest_name, id = ""):
+	var quest #Get Quest dictionary
+	#TO_Do check if id is given first if not search by name
+	if id != "":
+		player_quests
+	player_quests[quest_name] = quest
 	#print(player_quests)
 	
-func remove_quest(quest:String):
+func remove_quest(quest_name, id= ""):
 	#Remove quest from player quests
+	#also remove steps and items_steps
 	pass
 
-#gets quest of name
+#gets quest info i.e details
 func get_quest_info(quest:String):
-	return player_quests[quest]
+	return player_quests[quest].details
 
 #Progresses a quest to its next step
 #completes quest it was at its last step
@@ -90,21 +92,10 @@ func progress_quest(quest:String,amount:int=1):
 	#To do check if step greater than total steps
 	pass
 	
-#Collects an item required to progress_quest
-#Can be multiple items
+#Collect item(s) required to progress_quest
 #Once all items are collected progress_quest is called automatically
-func collect_quest_item(quest:String,item_name:String,auto_progress = true):
-	var step = player_quests[quest].step_index
-	quest_item_collected.emit(quest,item_name)
-	assert(player_quests[quest].steps[step].type != "item_step","This Quest step is not an Item Step")
-	player_quests[quest].steps[step].item_list[item_name] = true
-	var item_list = player_quests[quest].steps[step].item_list
-	for item in item_list:
-		if item_list[item] == false:
-			return
-	if auto_progress:
-		progress_quest(quest)
-
+func collect_quest_item(quest_id:String,item_id:String,auto_progress = true):
+	pass
 
 #Completes a quest if every required step was completed
 func complete_quest(quest):
@@ -112,13 +103,22 @@ func complete_quest(quest):
 	quest_completed.emit(quest)
 	pass
 
-#Fails a quest if call
-#i.e Reset the quest step to 1
+#get meta data of quest
+func get_meta_data(quest,meta_data):
+	var data
+	return data
+	
+#sets the quests meta data
+func set_meta_data(quest,meta_data, value:Variant):
+	pass
+
+#Fails a quest
 func fail_quest(quest):
 	player_quests[quest].failed = true
 	quest_failed.emit(quest)
 	pass
 	
+#Reset Quest Values
 func reset_quest(quest):
 	#reload and overwrite quest
 	pass
