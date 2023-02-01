@@ -1,13 +1,13 @@
 @tool
 extends Control
-
-@onready var quest_node = preload("res://addons/quest_manager/Editor/Quest_Step_Nodes/quest.tscn")
-@onready var step = preload("res://addons/quest_manager/Editor/Quest_Step_Nodes/Step.tscn")
-@onready var inc_step = preload("res://addons/quest_manager/Editor/Quest_Step_Nodes/IncrementalStep.tscn")
-@onready var item_step = preload("res://addons/quest_manager/Editor/Quest_Step_Nodes/items_step.tscn")
-@onready var group_tag = preload("res://addons/quest_manager/Editor/Quest_Step_Nodes/Group.tscn")
-@onready var meta_data = preload("res://addons/quest_manager/Editor/Quest_Step_Nodes/Meta_data.tscn")
-@onready var end = preload("res://addons/quest_manager/Editor/Quest_Step_Nodes/End.tscn")
+signal data_saved()
+@onready var quest_node = preload("res://addons/quest_manager/Editor/Nodes/quest.tscn")
+@onready var step = preload("res://addons/quest_manager/Editor/Nodes/Step.tscn")
+@onready var inc_step = preload("res://addons/quest_manager/Editor/Nodes/IncrementalStep.tscn")
+@onready var item_step = preload("res://addons/quest_manager/Editor/Nodes/items_step.tscn")
+@onready var group_tag = preload("res://addons/quest_manager/Editor/Nodes/Group.tscn")
+@onready var meta_data = preload("res://addons/quest_manager/Editor/Nodes/Meta_data.tscn")
+@onready var end = preload("res://addons/quest_manager/Editor/Nodes/End.tscn")
 var instance_position = Vector2(150,150)
 var node_offset = Vector2(0,0)
 
@@ -20,7 +20,7 @@ var node_offset = Vector2(0,0)
 #Check to see if all quest are properly structured
 #Used for sending warning after save
 var quest_chains_complete = false
-
+var quest_name_duplicate = false
 var current_file_path = ""
 
 var popup_options_list =[
@@ -45,7 +45,7 @@ func _ready():
 	for item in popup_options_list:
 		context_menu.get_popup().add_item(item)
 	context_menu.get_popup().index_pressed.connect(_on_context_menu_index_pressed)
-	OS.low_processor_usage_mode = true
+	save_btn.get_popup().index_pressed.connect(_on_save_pressed)
 	
 func setup_menu():
 	for item in popup_options_list:
@@ -58,19 +58,15 @@ func set_button_icons():
 	save_btn.icon = get_theme_icon("Save", "EditorIcons")
 	load_btn.icon = get_theme_icon("Load", "EditorIcons")
 
-#func test_save():
-#	var packed_scene = PackedScene.new()
-#	packed_scene.pack(graph)
-#	ResourceSaver.save(packed_scene,"res://my_scene.tscn")
-
-
-func _on_save_pressed():
-	#TO DO check if file already exist and save if not open save dialogue
-	if ResourceLoader.exists(current_file_path):
-		save_data(current_file_path)
-	else:
-		%Save_File.popup_centered_clamped(Vector2(300,300))
-
+func _on_save_pressed(index):
+	match index:
+		0:
+			if ResourceLoader.exists(current_file_path):
+				save_data(current_file_path)
+			else:
+				%Save_File.popup_centered_clamped(Vector2(300,300))
+		1:
+			%Save_File.popup_centered_clamped(Vector2(300,300))
 func _on_load_pressed():
 	%Open_File.popup_centered_clamped(Vector2(300,300))
 
@@ -149,6 +145,8 @@ func updateMetaDataAndGroup(to,from):
 func updateIdSteps():
 	var quest_nodes = get_quest_nodes()
 	quest_chains_complete = false
+	quest_name_duplicate = hasDuplicateNames()
+	
 	for quest in quest_nodes:
 		var steps = []
 		var current_node = quest.output_node
@@ -156,13 +154,21 @@ func updateIdSteps():
 			quest_chains_complete = false
 			if current_node.Node_Type == EditorNode.Type.END_NODE:
 				if steps.size() > 0:
-					print("Quest: " + quest.id + " steps complete. Steps: " + str(steps))
 					quest_chains_complete = true
 				break
 			steps.append(current_node.id)
 			current_node = current_node.output_node
 		quest.steps = steps
 
+#Check if quest has the same names
+func hasDuplicateNames():
+	var namesofar = []
+	for quest in get_quest_nodes():
+		var value = quest.get_data()["quest_name"];
+		if value in namesofar:
+			return true
+		namesofar.append(value)
+	return false
 		
 func get_quest_nodes():
 	var quest_nodes = []
@@ -195,8 +201,6 @@ func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port
 func _on_graph_edit_popup_request(position):
 	right_mouse_popup.position = graph.position + position + graph.scroll_offset
 	right_mouse_popup.popup()
-	#context_menu.get_popup().position = position
-	#context_menu.get_popup().popup()
 
 #On Node option selected from context menu
 func _on_context_menu_index_pressed(index):
@@ -236,7 +240,7 @@ func save_data(file_path):
 	for quest in get_quest_nodes():
 		quest.update_group_data()
 		quest.update_meta_data()
-	
+
 	var Save = FileAccess.open(file_path,FileAccess.WRITE)
 	
 	Save.store_var(get_quest_data())
@@ -247,18 +251,14 @@ func save_data(file_path):
 	Save.store_var(graph.get_connection_list())
 	Save.store_var(get_group_data())
 
-	
-#	Save.store_line(JSON.stringify(get_quest_data()))
-#	Save.store_line(JSON.stringify(get_steps_data()))
-#	Save.store_line(JSON.stringify(get_items_data()))
-#	Save.store_line(JSON.stringify(get_meta_data()))
-#	Save.store_line(JSON.stringify(get_editor_data()))
-#	Save.store_var(graph.get_connection_list())
-#	Save.store_var(get_group_data())
-
 	current_file_path = file_path
 	if quest_chains_complete == false:
 		$Quest_Warning.popup_centered()
+	if quest_name_duplicate == true:
+		$Quest_Name_Warning.popup_centered()
+		
+	data_saved.emit(file_path)
+
 
 func get_quest_data():
 	var quest_data = {}
@@ -313,19 +313,7 @@ func get_editor_data():
 #=============================LOAD DATA================================
 
 func load_data(file_path):
-	var file = FileAccess.open(file_path,FileAccess.READ)
-	var err = file.get_open_error()
-	if err != OK:
-		return err
-	var quest_res = QuestResource.new()
-	quest_res.quest_data = file.get_var()
-	quest_res.steps_data = file.get_var()
-	quest_res.items_list = file.get_var()
-	quest_res.meta_data = file.get_var()
-	quest_res.graph_data = file.get_var()
-	quest_res.connections_list = file.get_var()
-	quest_res.groups = file.get_var()
-	
+	var quest_res = ResourceLoader.load(file_path)
 	current_file_path = file_path
 	#clear the current nodes in the graph
 	clear_graph()
@@ -383,6 +371,13 @@ func clear_graph():
 	for node in graph.get_children():
 		if node is GraphNode:
 			node.free()
+			
+func get_all_nodes():
+	var nodes=[]
+	for node in graph.get_children():
+		if node is GraphNode:
+			nodes.append(node)
+	return nodes
 
 func _on_open_file_file_selected(path):
 	load_data(path)
@@ -402,3 +397,8 @@ func _on_graph_edit_connection_from_empty(to_node, to_port, release_position):
 
 func _on_graph_edit_connection_to_empty(from_node, from_port, release_position):
 	pass
+
+
+func _on_graph_edit_mouse_exited():
+	for node in get_all_nodes():
+		node.release_all_focus()

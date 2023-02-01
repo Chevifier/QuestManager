@@ -1,0 +1,14 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://dp4mq7tbyeyni"
+path="res://.godot/imported/Example.quest-6353c8881b15465e9d534a676a158e29.tres"
+
+[deps]
+
+source_file="res://test/Example.quest"
+dest_files=["res://.godot/imported/Example.quest-6353c8881b15465e9d534a676a158e29.tres"]
+
+[params]
+

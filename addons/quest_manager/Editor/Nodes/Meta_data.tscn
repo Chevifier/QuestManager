@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5mp0k8vtj13e"]
+[gd_scene load_steps=2 format=3 uid="uid://dhmvblhnaeape"]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/Meta_data.gd" id="1_4srrm"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Meta_data.gd" id="1_q8meh"]
 
 [node name="MetaData" type="GraphNode"]
 custom_minimum_size = Vector2(250, 150)
@@ -32,7 +32,7 @@ slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
-script = ExtResource("1_4srrm")
+script = ExtResource("1_q8meh")
 Node_Type = 5
 
 [node name="vb" type="VBoxContainer" parent="."]

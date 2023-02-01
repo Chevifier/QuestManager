@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccjltewqddsiu"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/End.gd" id="1_18gav"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/End.gd" id="1_18gav"]
 
 [node name="EndNode" type="GraphNode"]
 custom_minimum_size = Vector2(111, 80)

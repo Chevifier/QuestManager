@@ -7,7 +7,8 @@ extends EditorNode
 @onready var float_meta = %Float
 @onready var bool_meta = %Bool
 
-func _ready():
+func setup():
+	super.setup()
 	%AddButton.get_popup().index_pressed.connect(_on_option_selected)
 
 func get_data():
@@ -45,6 +46,7 @@ func set_data(data):
 
 func delete_meta_data(node_path):
 	data_container.get_node(node_path).queue_free()
+	
 
 func _on_option_selected(index):
 	var option
@@ -53,6 +55,7 @@ func _on_option_selected(index):
 		1: option = integer_meta.duplicate()
 		2: option = float_meta.duplicate()
 		3: option = bool_meta.duplicate()
-
+	focus_nodes.append(option.get_node("name"))
+	focus_nodes.append(option.get_node("data"))
 	data_container.add_child(option)
 	option.get_node("delete").pressed.connect(delete_meta_data.bind(option.get_path()))

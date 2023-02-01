@@ -8,6 +8,12 @@ var meta_data_node = null
 var group = ""
 var meta_data_id = ""
 var steps = []
+
+func setup():
+	super.setup()
+	focus_nodes.append(quest_name)
+	focus_nodes.append(quest_details)
+
 #returns an array with both the stored data and node position and name data
 func get_data():
 	var data = {
@@ -47,3 +53,5 @@ func clear_meta_data():
 func clear_group():
 	group = ""
 	group_node = null
+
+

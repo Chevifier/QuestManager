@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/quest.tscn" id="1_jj5iu"]
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/Quest.gd" id="2_77u07"]
-[ext_resource type="PackedScene" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/Step.tscn" id="3_deemm"]
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/Step.gd" id="4_yjj7g"]
+[ext_resource type="PackedScene" uid="uid://dv1d2xuc87v0a" path="res://addons/quest_manager/Editor/Nodes/quest.tscn" id="1_jj5iu"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest.gd" id="2_77u07"]
+[ext_resource type="PackedScene" path="res://addons/quest_manager/Editor/Nodes/Step.tscn" id="3_deemm"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Step.gd" id="4_yjj7g"]
 
 [node name="GraphEdit" type="GraphEdit"]
 unique_name_in_owner = true

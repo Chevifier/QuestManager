@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ywft0xfo1oe4"]
+[gd_scene load_steps=2 format=3 uid="uid://bq6mr5rd3n8lp"]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/IncrementalStep.gd" id="1_dipun"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/IncrementalStep.gd" id="1_dipun"]
 
 [node name="IncrementalStep" type="GraphNode"]
 custom_minimum_size = Vector2(240, 100)

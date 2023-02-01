@@ -4,6 +4,11 @@ extends EditorNode
 @onready var details = %details
 @onready var quantity = %quantity
 
+func setup():
+	super.setup()
+	focus_nodes.append(details)
+	focus_nodes.append(quantity)
+	
 #returns an array with both the stored data and node position and name data
 func get_data():
 	var data = {

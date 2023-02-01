@@ -3,6 +3,10 @@ extends EditorNode
 
 @onready var details = %details
 
+func setup():
+	super.setup()
+	focus_nodes.append(details)
+
 func get_data():
 	var data = {
 		"type" : "action_step",

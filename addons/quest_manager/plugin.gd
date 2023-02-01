@@ -16,11 +16,15 @@ func _enter_tree():
 	quest_importer = preload("res://addons/quest_manager/ImportPlugin.gd").new()
 	add_import_plugin(quest_importer)
 	_make_visible(false)
+	EditorWindow.data_saved.connect(_update_imports)
 	
 func _edit(object):
 	if is_instance_valid(EditorWindow) and is_instance_valid(object):
 		EditorWindow.load_data(object.resource_path)
-
+		
+func _handles(object):
+	return object is QuestResource
+	
 func _has_main_screen():
 	return true
 
@@ -51,3 +55,6 @@ func _exit_tree():
 	remove_autoload_singleton("QuestManager")
 	remove_import_plugin(quest_importer)
 	quest_importer = null
+
+func _update_imports(file_path):
+	get_editor_interface().get_resource_filesystem().scan()

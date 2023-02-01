@@ -17,7 +17,13 @@ var input_node = null
 var output_node = null
 var id = ""
 var data = {}
+var focus_nodes = []
+
 func _ready():
+	setup()
+	print("ID: ", id)
+
+func setup():
 	close_request.connect(_on_close_request)
 	resize_request.connect(_on_resize_request)
 	slot_updated.connect(_on_slot_updated)
@@ -27,8 +33,8 @@ func _ready():
 	position_offset_changed.connect(_on_position_offset_changed)
 	raise_request.connect(_on_raise_request)
 	id = get_random_id()
-	print("ID: ",id)
 	
+
 func get_data():
 	pass
 
@@ -71,6 +77,11 @@ func _on_slot_updated(slot):
 	
 func _on_raise_request():
 	pass
+
+func release_all_focus():
+	for node in focus_nodes:
+		if node != null:
+			node.release_focus()
 
 func get_random_id() -> String:
 	randomize()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dv1d2xuc87v0a"]
+[gd_scene load_steps=2 format=3 uid="uid://c3h2fldn3q6t6"]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Quest_Step_Nodes/Quest.gd" id="1_p6wh4"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest.gd" id="1_pyl1j"]
 
 [node name="Quest" type="GraphNode"]
 custom_minimum_size = Vector2(200, 250)
@@ -50,7 +50,7 @@ slot/3/right_type = 0
 slot/3/right_color = Color(1, 1, 1, 1)
 slot/3/right_icon = null
 slot/3/draw_stylebox = true
-script = ExtResource("1_p6wh4")
+script = ExtResource("1_pyl1j")
 
 [node name="Quest_Name" type="LineEdit" parent="."]
 layout_mode = 2

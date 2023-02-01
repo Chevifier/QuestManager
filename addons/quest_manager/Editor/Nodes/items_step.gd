@@ -7,6 +7,11 @@ extends EditorNode
 
 var items = {}
 var last_selected = -1
+func setup():
+	super.setup()
+	focus_nodes.append(details)
+	focus_nodes.append(list)
+	focus_nodes.append(item_to_add)
 
 #Returns All added items for processing
 func get_data():
@@ -25,7 +30,6 @@ func get_items():
 	return items
 	
 func set_data(data):
-	print(data)
 	details.text = data.details
 	
 	for item in data.items:
@@ -39,20 +43,17 @@ func _on_add_pressed():
 	var id = get_random_id()
 	list.add_item(item_to_add.text)
 	list.set_item_metadata(list.item_count-1,id)
-	print(list.get_item_metadata(list.item_count-1))
 	items[id] = {
 		"id" : id,
 		"name" : item_to_add.text,
 		"complete" : false
 	}
 	item_to_add.clear()
-	print(items)
 	
 func _on_remove_pressed():
 	items.erase(list.get_item_metadata(last_selected))
 	list.remove_item(last_selected)
 	last_selected = -1
-	print(items)
 
 func _on_list_item_selected(index):
 	last_selected = index

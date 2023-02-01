@@ -51,27 +51,46 @@ var meta_data = {
 		"coins" : 100
 	}
 	}
-
+var current_resource:QuestResource
 var player_quests = {}
 func _ready():
 	pass
 #all the current quests the player has
 
 
-#returns every quest created
+#loads the Quest resource for use
+func load_quest_list(res:QuestResource):
+	current_resource = res
+
 #Optionally get quests that were grouped by group name grouped to all by default
-func get_quest_list(QuestResource, group ="all"):
-	return {}
+func get_quest_list(group =""):
+	assert(current_resource == null, "Quest Resource not Loaded")
+	return current_resource.quest_data
+
+func get_quest(quest_name):
+	var quest_data = {}
+	for quest in current_resource.quest_data:
+		if current_resource.quest_data[quest].quest_name == quest_name:
+			quest_data = current_resource.quest_data[quest]
+			break
+	assert(quest_data.is_empty(),"The Quest:"+str(quest_name) + " was not found in loaded resource")
+	return quest_data
 
 #Adds quest to the quest list
 func add_quest(quest_name, id = ""):
-	var quest #Get Quest dictionary
-	#TO_Do check if id is given first if not search by name
-	if id != "":
-		player_quests
-	player_quests[quest_name] = quest
-	#print(player_quests)
+	var quest = get_quest(quest_name)
+	player_quests["quests"][quest.quest_id] = quest
+	for step in quest["steps"]:
+		player_quests["steps"][step.id] = get_step(step.id)
 	
+	player_quests["meta_data"][quest.meta_data] = get_meta_data(quest.meta_data)
+	
+	print(player_quests)
+	
+func get_step(step_id):
+	return current_resource.steps_data[step_id]
+func get_meta_data(meta_data_id):
+	return current_resource.meta_data[meta_data_id]
 func remove_quest(quest_name, id= ""):
 	#Remove quest from player quests
 	#also remove steps and items_steps
@@ -103,11 +122,6 @@ func complete_quest(quest):
 	quest_completed.emit(quest)
 	pass
 
-#get meta data of quest
-func get_meta_data(quest,meta_data):
-	var data
-	return data
-	
 #sets the quests meta data
 func set_meta_data(quest,meta_data, value:Variant):
 	pass

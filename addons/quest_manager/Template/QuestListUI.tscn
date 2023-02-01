@@ -1,11 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjbe84p0nqm0a"]
+[gd_scene load_steps=5 format=3 uid="uid://bso125l6wd56d"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Template/QuestListUI.gd" id="1_dqp48"]
+[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="2_l760n"]
+
+[sub_resource type="Resource" id="Resource_i60c4"]
+script = ExtResource("2_l760n")
+quest_data = {}
+steps_data = {}
+items_list = {}
+meta_data = {}
+groups = {}
+graph_data = {}
+connections_list = []
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dv1av"]
 
 [node name="QuestListUI" type="CanvasLayer"]
 script = ExtResource("1_dqp48")
+Quest = SubResource("Resource_i60c4")
 
 [node name="Control" type="Panel" parent="."]
 anchors_preset = 15
