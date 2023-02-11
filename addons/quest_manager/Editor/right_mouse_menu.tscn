@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdxun5nw54paa"]
+
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/right_mouse_menu.gd" id="1_tpqfi"]
+
+[node name="right_mouse_list" type="PopupMenu"]
+position = Vector2i(125, 0)
+size = Vector2i(195, 197)
+visible = true
+transparent = true
+max_size = Vector2i(200, 200)
+hide_on_checkable_item_selection = false
+allow_search = false
+item_count = 7
+item_0/text = "Add Quest"
+item_0/id = 0
+item_1/text = "Add Step"
+item_1/id = 1
+item_2/text = "Add Incremental Step"
+item_2/id = 2
+item_3/text = "Add Item Step"
+item_3/id = 3
+item_4/text = "Add Group Tag"
+item_4/id = 4
+item_5/text = "Add Meta Data"
+item_5/id = 5
+item_6/text = "And End Node"
+item_6/id = 6
+script = ExtResource("1_tpqfi")
+
+[connection signal="popup_hide" from="." to="." method="_on_popup_hide"]

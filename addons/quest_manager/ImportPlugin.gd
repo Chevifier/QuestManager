@@ -47,22 +47,8 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	if err != OK:
 		return err
 	var quest_res = QuestResource.new()
-#	quest_res.quest_data = JSON.parse_string(file.get_line())
-#	quest_res.steps_data = JSON.parse_string(file.get_line())
-#	quest_res.items_list = JSON.parse_string(file.get_line())
-#	quest_res.meta_data = JSON.parse_string(file.get_line())
-#	quest_res.graph_data = JSON.parse_string(file.get_line())
-#	quest_res.connections_list = JSON.parse_string(file.get_line())
-#	quest_res.groups = JSON.parse_string(file.get_line())
-#
 	quest_res.quest_data = file.get_var()
-	quest_res.steps_data = file.get_var()
-	quest_res.items_list = file.get_var()
-	quest_res.meta_data = file.get_var()
 	quest_res.graph_data = file.get_var()
-	quest_res.connections_list = file.get_var()
-	quest_res.groups = file.get_var()
-
 	return ResourceSaver.save(quest_res, "%s.%s" % [save_path, _get_save_extension()])
 	
 

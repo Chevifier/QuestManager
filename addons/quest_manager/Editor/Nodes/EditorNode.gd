@@ -36,7 +36,7 @@ func setup():
 	
 
 func get_data():
-	pass
+	return data
 
 func get_node_data():
 	node_data["id"] = id

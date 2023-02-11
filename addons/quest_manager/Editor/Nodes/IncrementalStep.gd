@@ -18,11 +18,11 @@ func get_data():
 		"collected" : 0
 	}
 
-	return [data,get_node_data()]
+	return data
 	
 func set_data(data):
-	details.text = data[0].details
-	quantity.value = data[0].required
+	details.text = data.details
+	quantity.value = data.required
 
 func _on_details_gui_input(event):
 	if event is InputEventKey:

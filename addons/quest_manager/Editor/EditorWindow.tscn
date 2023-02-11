@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://blg3pqyxefe0v"]
+[gd_scene load_steps=6 format=3 uid="uid://blg3pqyxefe0v"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/EditorWindow.gd" id="1_8041a"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/right_mouse_menu.gd" id="2_vr34h"]
 
-[sub_resource type="Image" id="Image_7wr5u"]
+[sub_resource type="Image" id="Image_tnmvu"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 131, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 131, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 131, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 93, 93, 55, 255, 97, 97, 58, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 97, 97, 42, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 98, 98, 47, 255, 97, 97, 42, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 93, 93, 233, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 94, 94, 46, 255, 93, 93, 236, 255, 93, 93, 233, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -11,10 +12,10 @@ data = {
 "width": 16
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_fkemw"]
-image = SubResource("Image_7wr5u")
+[sub_resource type="ImageTexture" id="ImageTexture_q2dvy"]
+image = SubResource("Image_tnmvu")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ilj4a"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amscl"]
 
 [node name="EditorView" type="Control"]
 layout_mode = 3
@@ -52,20 +53,20 @@ layout_mode = 2
 [node name="New" type="Button" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
-icon = SubResource("ImageTexture_fkemw")
+icon = SubResource("ImageTexture_q2dvy")
 flat = true
 
 [node name="Load" type="Button" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
-icon = SubResource("ImageTexture_fkemw")
+icon = SubResource("ImageTexture_q2dvy")
 flat = true
 
 [node name="Save" type="MenuButton" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Save Quest"
-icon = SubResource("ImageTexture_fkemw")
+icon = SubResource("ImageTexture_q2dvy")
 item_count = 2
 popup/item_0/text = "Save"
 popup/item_0/id = 0
@@ -75,7 +76,7 @@ popup/item_1/id = 1
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/hb/side_panel"]
 layout_mode = 2
 theme_override_constants/separation = 16
-theme_override_styles/separator = SubResource("StyleBoxFlat_ilj4a")
+theme_override_styles/separator = SubResource("StyleBoxFlat_amscl")
 
 [node name="Panel" type="Panel" parent="MarginContainer/hb/side_panel"]
 layout_mode = 2
@@ -125,6 +126,31 @@ right_disconnects = true
 use_snap = false
 arrange_nodes_button_hidden = true
 
+[node name="right_mouse_list" type="PopupMenu" parent="MarginContainer/hb/Quest Panel/GraphEdit"]
+unique_name_in_owner = true
+position = Vector2i(125, 0)
+size = Vector2i(195, 197)
+transparent = true
+max_size = Vector2i(200, 200)
+hide_on_checkable_item_selection = false
+allow_search = false
+item_count = 7
+item_0/text = "Add Quest"
+item_0/id = 0
+item_1/text = "Add Step"
+item_1/id = 1
+item_2/text = "Add Incremental Step"
+item_2/id = 2
+item_3/text = "Add Item Step"
+item_3/id = 3
+item_4/text = "Add Group Tag"
+item_4/id = 4
+item_5/text = "Add Meta Data"
+item_5/id = 5
+item_6/text = "And End Node"
+item_6/id = 6
+script = ExtResource("2_vr34h")
+
 [node name="New_File" type="FileDialog" parent="."]
 unique_name_in_owner = true
 size = Vector2i(312, 162)
@@ -158,24 +184,6 @@ size = Vector2i(431, 135)
 dialog_text = "Quest has Duplicate Names.
 Doing this will only return the first instance of the quest."
 
-[node name="right_mouse_list" type="PopupMenu" parent="."]
-unique_name_in_owner = true
-item_count = 7
-item_0/text = "Add Quest"
-item_0/id = 0
-item_1/text = "Add Step"
-item_1/id = 1
-item_2/text = "Add Incremental Step"
-item_2/id = 2
-item_3/text = "Add Item Step"
-item_3/id = 3
-item_4/text = "Add Group Tag"
-item_4/id = 4
-item_5/text = "Add Meta Data"
-item_5/id = 5
-item_6/text = "And End Node"
-item_6/id = 6
-
 [connection signal="pressed" from="MarginContainer/hb/side_panel/hb/New" to="." method="_on_new_pressed"]
 [connection signal="pressed" from="MarginContainer/hb/side_panel/hb/Load" to="." method="_on_load_pressed"]
 [connection signal="connection_from_empty" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_connection_from_empty"]
@@ -183,7 +191,6 @@ item_6/id = 6
 [connection signal="connection_to_empty" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_connection_to_empty"]
 [connection signal="delete_nodes_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_delete_nodes_request"]
 [connection signal="disconnection_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_disconnection_request"]
-[connection signal="mouse_exited" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_mouse_exited"]
 [connection signal="node_selected" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_node_selected"]
 [connection signal="popup_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_popup_request"]
 [connection signal="file_selected" from="New_File" to="." method="_on_new_file_file_selected"]

@@ -16,6 +16,7 @@ var node_offset = Vector2(0,0)
 @onready var load_btn = %Load
 @onready var graph : GraphEdit = %GraphEdit
 @onready var context_menu = %MenuButton
+@onready var rightmousemenu = preload("res://addons/quest_manager/Editor/right_mouse_menu.tscn")
 
 #Check to see if all quest are properly structured
 #Used for sending warning after save
@@ -32,15 +33,11 @@ var popup_options_list =[
 	"Add Meta Data",
 	"And End Node"
 ]
-@onready var right_mouse_popup : PopupMenu = %right_mouse_list
 var quest_data = {}
 var graph_data = {}
 func _ready():
 	set_button_icons()
-	right_mouse_popup.clear()
-	for item in popup_options_list:
-		right_mouse_popup.add_item(item)
-	right_mouse_popup.index_pressed.connect(_on_context_menu_index_pressed)
+	%right_mouse_list.index_pressed.connect(_on_context_menu_index_pressed)
 	context_menu.get_popup().clear()
 	for item in popup_options_list:
 		context_menu.get_popup().add_item(item)
@@ -51,7 +48,6 @@ func setup_menu():
 	for item in popup_options_list:
 		context_menu.get_popup().add_item(item)
 	context_menu.get_popup().index_pressed.connect(_on_context_menu_index_pressed)
-	context_menu.get_popup().mouse_passthrough = true
 
 func set_button_icons():
 	new_btn.icon = get_theme_icon("New", "EditorIcons")
@@ -99,8 +95,10 @@ func add_graph_node(index):
 	
 	graph.add_child(node)
 	node.owner = graph
-	node.set_position_offset(instance_position+node_offset)
+	node.set_position_offset(instance_position+graph.scroll_offset+node_offset)
 	node_offset += Vector2(50,50)
+	if node_offset.x > 400:
+		node_offset = Vector2()
 	#remove @ signs from random Node names for save/load compatibility
 	node.name = node.name.replace("@", "")
 
@@ -152,11 +150,11 @@ func updateIdSteps():
 		var current_node = quest.output_node
 		while current_node != null:
 			quest_chains_complete = false
+			
 			if current_node.Node_Type == EditorNode.Type.END_NODE:
-				if steps.size() > 0:
-					quest_chains_complete = true
+				quest_chains_complete = true
 				break
-			steps.append(current_node.id)
+			steps.append(current_node.get_data())
 			current_node = current_node.output_node
 		quest.steps = steps
 
@@ -197,10 +195,11 @@ func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port
 	
 	graph.disconnect_node(from_node,from_port,to_node,to_port)
 	updateIdSteps()
-	
-func _on_graph_edit_popup_request(position):
-	right_mouse_popup.position = graph.position + position + graph.scroll_offset
-	right_mouse_popup.popup()
+
+func _on_graph_edit_popup_request(_position):
+	instance_position = _position
+	%right_mouse_list.position = get_global_mouse_position() + Vector2(100,100)
+	%right_mouse_list.popup()
 
 #On Node option selected from context menu
 func _on_context_menu_index_pressed(index):
@@ -233,6 +232,7 @@ func save_new_file(file_path):
 	var quest_res = QuestResource.new()
 	ResourceSaver.save(quest_res,file_path)
 	current_file_path = file_path
+	data_saved.emit(file_path)
 	clear_graph()
 
 #=============================SAVE DATA==============================
@@ -244,12 +244,7 @@ func save_data(file_path):
 	var Save = FileAccess.open(file_path,FileAccess.WRITE)
 	
 	Save.store_var(get_quest_data())
-	Save.store_var(get_steps_data())
-	Save.store_var(get_items_data())
-	Save.store_var(get_meta_data())
 	Save.store_var(get_editor_data())
-	Save.store_var(graph.get_connection_list())
-	Save.store_var(get_group_data())
 
 	current_file_path = file_path
 	if quest_chains_complete == false:
@@ -258,7 +253,7 @@ func save_data(file_path):
 		$Quest_Name_Warning.popup_centered()
 		
 	data_saved.emit(file_path)
-
+	print("File saved %s" % file_path)
 
 func get_quest_data():
 	var quest_data = {}
@@ -267,47 +262,14 @@ func get_quest_data():
 			if node.Node_Type == EditorNode.Type.QUEST_NODE:
 				quest_data[node.id] = node.get_data()
 	return quest_data
-	
-func get_items_data():
-	var items_data = {}
-	for node in graph.get_children():
-		if node is EditorNode:
-			if node.Node_Type == EditorNode.Type.ITEM_STEP_NODE:
-				items_data.merge(node.get_items())
-	return items_data
-
-func get_steps_data():
-	var steps_data = {}
-	for node in graph.get_children():
-		if node is EditorNode:
-			if node.Node_Type == EditorNode.Type.STEP_NODE \
-				or node.Node_Type == EditorNode.Type.INCREMENTAL_NODE \
-				or node.Node_Type == EditorNode.Type.ITEM_STEP_NODE:
-					steps_data[node.id] = node.get_data()
-	return steps_data
-	
-func get_meta_data():
-	var meta_data = {}
-	for node in graph.get_children():
-		if node is EditorNode:
-			if node.Node_Type == EditorNode.Type.META_DATA:
-				meta_data[node.id] = node.get_data()
-	return meta_data
-
-func get_group_data():
-	var group_data = {}
-	for node in graph.get_children():
-		if node is EditorNode:
-			if node.Node_Type == EditorNode.Type.GROUP_NODE:
-				group_data[node.id] = node.get_data()
-	return group_data
-	
 
 func get_editor_data():
 	var node_data = {}
 	for node in graph.get_children():
 		if node is EditorNode:
 			node_data[node.id] = node.get_node_data()
+			node_data[node.id]["quest_data"] = node.get_data()
+			node_data["connections_list"] = graph.get_connection_list()
 	return node_data
 
 #=============================LOAD DATA================================
@@ -321,49 +283,27 @@ func load_data(file_path):
 	
 	for i in quest_res.graph_data:
 		var node
+		if i == "connections_list":
+			continue
 		match quest_res.graph_data[i].type:
 			EditorNode.Type.QUEST_NODE:
 				node = quest_node.instantiate()
-				graph.add_child(node)
-				node.set_node_data(quest_res.graph_data[i])
-				node.set_data(quest_res.quest_data[node.id])
 			EditorNode.Type.STEP_NODE:
 				node = step.instantiate()
-				graph.add_child(node)
-				node.set_node_data(quest_res.graph_data[i])
-				node.set_data(quest_res.steps_data[node.id])
 			EditorNode.Type.INCREMENTAL_NODE:
 				node = inc_step.instantiate()
-				graph.add_child(node)
-				node.set_node_data(quest_res.graph_data[i])
-				node.set_data(quest_res.steps_data[node.id])
 			EditorNode.Type.ITEM_STEP_NODE:
 				node = item_step.instantiate()
-				graph.add_child(node)
-				node.set_node_data(quest_res.graph_data[i])
-				var data = quest_res.steps_data[node.id]
-				var list = {}
-				for item_id in data.item_list:
-					list[item_id] = quest_res.items_list[item_id]
-				data["items"] = list
-				node.set_data(data)
 			EditorNode.Type.META_DATA:
 				node = meta_data.instantiate()
-				graph.add_child(node)
-				node.set_node_data(quest_res.graph_data[i])
-				node.set_data(quest_res.meta_data[i])
 			EditorNode.Type.GROUP_NODE:
 				node = group_tag.instantiate()
-				graph.add_child(node)
-				node.set_node_data(quest_res.graph_data[i])
-				node.set_data(quest_res.groups[i])
 			EditorNode.Type.END_NODE:
 				node = end.instantiate()
-				graph.add_child(node)
-				node.set_node_data(quest_res.graph_data[i])
-	
-	
-	for con in quest_res.connections_list:
+		graph.add_child(node)
+		node.set_node_data(quest_res.graph_data[i])
+		node.set_data(quest_res.graph_data[i]["quest_data"])
+	for con in quest_res.graph_data.connections_list:
 		_on_graph_edit_connection_request(con.from,con.from_port,con.to,con.to_port)
 
 func clear_graph():
@@ -385,8 +325,7 @@ func _on_open_file_file_selected(path):
 func _on_save_file_file_selected(path):
 	save_data(path)
 
-func _on_right_mouse_list_focus_exited():
-	right_mouse_popup.hide()
+
 
 func _on_new_file_file_selected(path):
 	save_new_file(path)

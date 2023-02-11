@@ -1,138 +1,182 @@
 extends Node
-
+signal new_quest_added()
 signal quest_progressed()
 signal quest_item_collected()
 signal quest_failed()
 signal quest_completed()
 signal quest_reset()
 
-var quests_data = {
-	"231456a" : {
-		"name": "Stronger than Family",
-		"details" : "Your Parents are in Peril, Get 10 coins and give them to your mom and dad",
-		"completed" : false,
-		"failed" : false,
-		"step_index" : 0,
-		"group": "",
-		"step_ids" : ["645313","323412","457355"],
-		"metadata": "342424"
-		}
-	}
-var steps_list = {
-		"645313" : {
-		"type" : "action_step",
-		"details":"reach location",
-		"complete":false
-		},
-		"323412" : {
-		"type" : "incremental_step",
-		"details":"collect 10 coins",
-		"required": 10,
-		"collected": 0
-		},
-		"447355" : {
-		"type" : "items_step",
-		"details":"give 5 coins to mother and 5 to father",
-		"item_list" : ["342212","539347"]
-		}
-	}
-var items_list = {
-	"342212" : {
-		"name":"5 for mother",
-		"complete": false
-	},
-	"539347" : {
-		"name":"5 for father",
-		"complete" : false
-	}
-	}
-var meta_data = {
-	"342424" : {
-		"coins" : 100
-	}
-	}
 var current_resource:QuestResource
 var player_quests = {}
+
+
 func _ready():
 	pass
 #all the current quests the player has
+func get_all_player_quests():
+	return player_quests
 
-
-#loads the Quest resource for use
-func load_quest_list(res:QuestResource):
+#loads the Quest resource to view/accept quests
+func load_quest_resource(res:QuestResource):
 	current_resource = res
 
 #Optionally get quests that were grouped by group name grouped to all by default
-func get_quest_list(group =""):
-	assert(current_resource == null, "Quest Resource not Loaded")
-	return current_resource.quest_data
+func get_quest_list(group=""):
+	if group == "":
+		return current_resource.quest_data
+	var quests = {}
+	for quest in current_resource.quest_data:
+		if current_resource.quest_data[quest].group == group:
+			quests[quest] = current_resource.quest_data[quest]
+	assert(current_resource != null, "Quest Resource not Loaded")
+	return quests
 
-func get_quest(quest_name):
+#Get a quest that the player has accepted
+func get_player_quest(quest_name=""):
+	var quest_data = {}
+	for quest in player_quests:
+		if player_quests[quest].quest_name == quest_name:
+			quest_data = player_quests[quest]
+	assert(quest_data.is_empty()==false,"The Quest: %s was not found in loaded resource" % quest_name)
+	return quest_data
+	
+#Get the current step progress in one of the players quests
+func get_quest_current_step(quest_name= ""):
+	var quest = get_player_quest(quest_name).step_index
+	var step_index = quest.step_index
+	assert(step_index > quest.steps.size()-1,"Index out of bounds")
+	var step_id = quest.steps[step_index]
+	return player_quests.steps[step_id]
+
+#Adds quest from the current loaded resource
+#to the player_quests list
+func add_quest(quest_name, quest_id=""):
+	var quest = get_quest_from_resource(quest_name)
+	player_quests[quest.quest_id] = quest
+	new_quest_added.emit(quest_name)
+	
+#Get a quest from the current loaded resource
+#Usefull for displaying quest data
+func get_quest_from_resource(quest_name= ""):
 	var quest_data = {}
 	for quest in current_resource.quest_data:
 		if current_resource.quest_data[quest].quest_name == quest_name:
 			quest_data = current_resource.quest_data[quest]
 			break
-	assert(quest_data.is_empty(),"The Quest:"+str(quest_name) + " was not found in loaded resource")
+	assert(!quest_data.is_empty(),"The Quest: %s was not found in loaded resource" % quest_name)
 	return quest_data
 
-#Adds quest to the quest list
-func add_quest(quest_name, id = ""):
-	var quest = get_quest(quest_name)
-	player_quests["quests"][quest.quest_id] = quest
-	for step in quest["steps"]:
-		player_quests["steps"][step.id] = get_step(step.id)
+#Return true if the player currently has a quest
+func has_quest(quest_name):
+	for i in player_quests:
+		if player_quests[i].quest_name == quest_name:
+			return true
+	return false
+func is_quest_complete(quest_name):
+	var quest = get_player_quest(quest_name)
+	return quest.completed
+#get the current step in the quest
+func get_current_step(quest_name):
+	var quest = get_player_quest(quest_name)
+	if quest.step_index >= quest.steps.size():
+		print("quest %s was completed. Step index out of bounds" % quest_name)
+		return {}
+	return quest.steps[quest.step_index]
 	
-	player_quests["meta_data"][quest.meta_data] = get_meta_data(quest.meta_data)
-	
-	print(player_quests)
-	
-func get_step(step_id):
-	return current_resource.steps_data[step_id]
-func get_meta_data(meta_data_id):
-	return current_resource.meta_data[meta_data_id]
-func remove_quest(quest_name, id= ""):
-	#Remove quest from player quests
-	#also remove steps and items_steps
-	pass
 
-#gets quest info i.e details
-func get_quest_info(quest:String):
-	return player_quests[quest].details
+func get_all_steps(quest_name):
+	var steps = []
+	for quest in player_quests:
+		if player_quests[quest].quest_name == quest_name:
+			steps = player_quests[quest].steps
+			break
 
+func get_meta_data(quest_name):
+	var meta_data ={}
+	for quest in player_quests:
+		if player_quests[quest].quest_name == quest_name:
+			meta_data = player_quests[quest].meta_data
+			break
+	return meta_data
+	
+#Remove quest from player quests including steps/items and metadata
+func remove_quest(quest_name):
+	var steps = player_quests.quests[quest_name].steps
+	var items = player_quests.quests[quest_name].items
+	var metadata = player_quests.quests[quest_name].meta_data
+	player_quests.quests.remove(quest_name)
+	for i in steps:
+		player_quests.steps.remove(i)
+	for i in items:
+		player_quests.items.remove(i)
+	player_quests.meta_data.remove(metadata)
+
+#Gets quest info i.e quest_details from loaded quest resource
+func get_quest_info(quest_name):
+	return current_resource.quest_data[quest_name].quest_details
+	
 #Progresses a quest to its next step
-#completes quest it was at its last step
-func progress_quest(quest:String,amount:int=1):
-	player_quests[quest].step_index += amount
-	quest_progressed.emit(quest)
-	var total_steps = player_quests[quest].steps.size()
-	if player_quests[quest].step_index == total_steps:
-		complete_quest(quest)
-	#To do check if step greater than total steps
-	pass
-	
-#Collect item(s) required to progress_quest
-#Once all items are collected progress_quest is called automatically
-func collect_quest_item(quest_id:String,item_id:String,auto_progress = true):
-	pass
+#completes quest if it was at its last step
+func progress_quest(quest_name:String, quest_item="",amount:int=1):
+	var quest_complete = false
+	var id = get_player_quest(quest_name).quest_id
+	var step = get_current_step(quest_name)
+	match step.step_type:
+		"action_step":
+			step.complete = true
+			player_quests[id].step_index += 1
+		"incremental_step":
+			step.collected += amount
+			if step.collected >= step.required:
+				player_quests[id].step_index += 1
+		"items_step":
+			var items = player_quests[id]["item_list"]
+			for item in items:
+				if item.name == quest_item:
+					item.complete = true
+			var missing_items = false
+			for item in items:
+				if item.complete == false:
+					missing_items = true
+			if missing_items == false:
+				player_quests[id].step_index += 1
+	var total_steps = player_quests[id].steps.size()
+	if player_quests[id].step_index >= total_steps:
+		complete_quest(quest_name)
 
 #Completes a quest if every required step was completed
-func complete_quest(quest):
-	player_quests[quest].completed = true
-	quest_completed.emit(quest)
-	pass
+func complete_quest(quest_name):
+	var id = get_player_quest(quest_name).quest_id
+	player_quests[id].completed = true
+	quest_completed.emit(quest_name)
 
 #sets the quests meta data
-func set_meta_data(quest,meta_data, value:Variant):
-	pass
+func set_meta_data(quest_name,meta_data, value:Variant):
+	var id = get_player_quest(quest_name).quest_id
+	player_quests[id].metadata[meta_data] = value
 
 #Fails a quest
-func fail_quest(quest):
-	player_quests[quest].failed = true
-	quest_failed.emit(quest)
-	pass
+func fail_quest(quest_name):
+	var id = get_player_quest(quest_name).quest_id
+	player_quests[id].failed = true
+	quest_failed.emit(quest_name)
 	
 #Reset Quest Values
-func reset_quest(quest):
-	#reload and overwrite quest
-	pass
+func reset_quest(quest_name):
+	var id = get_player_quest(quest_name).quest_id
+	player_quests[id].completed = false
+	player_quests[id].failed = false
+	player_quests[id].step_index = 0
+	for step in player_quests[id].steps:
+		match step.step_type:
+			"action_step":
+				step.complete = false
+			"incremental_step":
+				step.collected = 0
+			"items_step":
+				for i in step.items_list:
+					i.complete = false
+#Removes Every Quest from player 
+#Usefull for new game files if neccessary
+func wipe_quest_data():
+	player_quests = {}
