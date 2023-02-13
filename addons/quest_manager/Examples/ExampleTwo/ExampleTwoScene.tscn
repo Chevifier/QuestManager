@@ -1,16 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcyfr7t8mkc3i"]
+[gd_scene load_steps=15 format=3 uid="uid://d32kwvg5rw8em"]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Example/ExampleTwo/SampleWorld.gd" id="1_anq6p"]
-[ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_6td38"]
-[ext_resource type="PackedScene" uid="uid://dp8jieleb451u" path="res://addons/quest_manager/Example/ExampleTwo/npc.tscn" id="3_qar3v"]
-[ext_resource type="Resource" uid="uid://xpnw6ggixm3w" path="res://addons/quest_manager/Example/ExampleQuest.quest" id="4_ulamp"]
-[ext_resource type="PackedScene" path="res://addons/quest_manager/Example/ExampleTwo/player.tscn" id="5_mfh7w"]
-[ext_resource type="Script" path="res://addons/quest_manager/Example/ExampleTwo/UI.gd" id="6_mrqs3"]
-[ext_resource type="PackedScene" uid="uid://e8s4gur52qgk" path="res://addons/quest_manager/Example/ExampleTwo/apple_spawner.tscn" id="7_d43nw"]
-[ext_resource type="PackedScene" uid="uid://4mxj5ftcj1fx" path="res://addons/quest_manager/extras/action_step_area.tscn" id="8_m5yyh"]
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/ExampleTwo.gd" id="1_q7www"]
+[ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_1wes3"]
+[ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleTwo/npc.tscn" id="3_1tb1d"]
+[ext_resource type="Resource" uid="uid://xpnw6ggixm3w" path="res://addons/quest_manager/Examples/ExampleQuest.quest" id="4_xfha4"]
+[ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleTwo/player.tscn" id="5_ryyt7"]
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/UI.gd" id="6_ydyli"]
+[ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleTwo/apple_spawner.tscn" id="7_5xqfh"]
+[ext_resource type="PackedScene" uid="uid://4mxj5ftcj1fx" path="res://addons/quest_manager/extras/action_step_area.tscn" id="8_dst23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jx4ok"]
-texture = ExtResource("2_6td38")
+texture = ExtResource("2_1wes3")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -302,14 +302,14 @@ sources/1 = SubResource("TileSetAtlasSource_jx4ok")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b82o7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t60a6"]
-atlas = ExtResource("2_6td38")
+atlas = ExtResource("2_1wes3")
 region = Rect2(196, 99, 23, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yxfq"]
 size = Vector2(20, 29)
 
 [node name="SampleWorld" type="Node2D" node_paths=PackedStringArray("enter_pos", "exit_pos")]
-script = ExtResource("1_anq6p")
+script = ExtResource("1_q7www")
 enter_pos = NodePath("Enter_Pos")
 exit_pos = NodePath("Exit_Pos")
 
@@ -354,28 +354,28 @@ position = Vector2(1872, 222)
 [node name="Enter_Pos" type="Marker2D" parent="."]
 position = Vector2(272, 95)
 
-[node name="Father" parent="." instance=ExtResource("3_qar3v")]
+[node name="Father" parent="." instance=ExtResource("3_1tb1d")]
 position = Vector2(184, 67)
 dialogue = "Im starving"
 
-[node name="Mother" parent="." instance=ExtResource("3_qar3v")]
+[node name="Mother" parent="." instance=ExtResource("3_1tb1d")]
 position = Vector2(351, 69)
 dialogue = "Son can you get some apples and use them to make pie. When its ready share it with Me your Dad and Sister"
-quest = ExtResource("4_ulamp")
+quest = ExtResource("4_xfha4")
 family_member = 1
 
-[node name="Sister" parent="." instance=ExtResource("3_qar3v")]
+[node name="Sister" parent="." instance=ExtResource("3_1tb1d")]
 position = Vector2(292, -4)
 dialogue = "Cant wait. Im so hungry."
 family_member = 2
 
-[node name="Player" parent="." instance=ExtResource("5_mfh7w")]
+[node name="Player" parent="." instance=ExtResource("5_ryyt7")]
 unique_name_in_owner = true
 position = Vector2(241, 34)
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3
-script = ExtResource("6_mrqs3")
+script = ExtResource("6_ydyli")
 
 [node name="Panel" type="Panel" parent="UI"]
 visible = false
@@ -425,7 +425,7 @@ offset_bottom = 40.0
 [node name="discription" type="Label" parent="UI/Quest/step"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Quest Discription"
+text = "Speak To Mother To Get Quest"
 
 [node name="items" type="VBoxContainer" parent="UI/Quest/step"]
 unique_name_in_owner = true
@@ -434,28 +434,30 @@ size_flags_vertical = 3
 
 [node name="Apples" type="Label" parent="UI"]
 unique_name_in_owner = true
-offset_left = 1052.0
-offset_top = 13.0
-offset_right = 1131.0
-offset_bottom = 39.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -79.0
+offset_bottom = 26.0
+grow_horizontal = 0
 text = "Apples: 00"
 
-[node name="Apple_Spawner2" parent="." instance=ExtResource("7_d43nw")]
+[node name="Apple_Spawner2" parent="." instance=ExtResource("7_5xqfh")]
 position = Vector2(1664, 229)
 
-[node name="Apple_Spawner3" parent="." instance=ExtResource("7_d43nw")]
+[node name="Apple_Spawner3" parent="." instance=ExtResource("7_5xqfh")]
 position = Vector2(1757, 417)
 
-[node name="Apple_Spawner4" parent="." instance=ExtResource("7_d43nw")]
+[node name="Apple_Spawner4" parent="." instance=ExtResource("7_5xqfh")]
 position = Vector2(1921, 468)
 
-[node name="Apple_Spawner5" parent="." instance=ExtResource("7_d43nw")]
+[node name="Apple_Spawner5" parent="." instance=ExtResource("7_5xqfh")]
 position = Vector2(2011, -9)
 
-[node name="Apple_Spawner6" parent="." instance=ExtResource("7_d43nw")]
+[node name="Apple_Spawner6" parent="." instance=ExtResource("7_5xqfh")]
 position = Vector2(2143, -7)
 
-[node name="Action_Step_Area" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_m5yyh")]
+[node name="Action_Step_Area" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_dst23")]
 position = Vector2(1871, 221)
 quest_name = "Meal For The Family"
 target = NodePath("../Player")

@@ -82,7 +82,6 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1) -> voi
 			if missing_items == false:
 				step_complete.emit(get_current_step(quest_name))
 				player_quests[id].step_index += 1
-				step_updated.emit(get_current_step(quest_name))
 	var total_steps = player_quests[id].steps.size()
 	if player_quests[id].step_index >= total_steps:
 		complete_quest(quest_name)
@@ -150,10 +149,9 @@ func is_quest_complete(quest_name:String) -> bool:
 func get_current_step(quest_name:String) -> Dictionary:
 	quest_error(quest_name)
 	var quest = get_player_quest(quest_name)
-	if is_quest_complete(quest_name):
-		print("quest %s was completed. Step index out of bounds" % quest_name)
-		return {}
 	if quest.step_index >= quest.steps.size():
+		return {}
+	if is_quest_complete(quest_name):
 		return {}
 	return quest.steps[quest.step_index]
 
@@ -223,5 +221,5 @@ func wipe_quest_data() -> void:
 	player_quests = {}
 
 func quest_error(quest_name:String) -> void:
-	assert(has_quest(quest_name),"The Quest: %s doesnt exist in player quests" %quest_name)
+	assert(has_quest(quest_name),"The Quest: %s doesnt exist" %quest_name)
 	

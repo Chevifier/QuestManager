@@ -25,7 +25,7 @@ var quest_chains_complete = false
 var quest_name_duplicate = false
 var current_file_path = ""
 var editor_plugin: EditorPlugin
-var test_scene_path = "res://addons/quest_manager/Editor/Quest_File_Test_Scene.tscn"
+const test_scene_path = "res://addons/quest_manager/Editor/TestScene.tscn"
 var popup_options_list =[
 	"Add Quest",
 	"Add Step",

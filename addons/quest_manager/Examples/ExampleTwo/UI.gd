@@ -48,7 +48,7 @@ func update_ui(step):
 func quest_complete(n):
 	for c in %items.get_children():
 		c.free()
-	%discription.text = "COMPLETE"
+	%discription.text = "QUEST COMPLETE"
 func process_input():
 	if Input.is_action_just_pressed("ui_accept")and exitpressed == false:
 		exitpressed = true

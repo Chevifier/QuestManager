@@ -6,8 +6,7 @@
 
 - `quest_complete()` - Emitted when a quest is complete, returns quest name
 - `quest_failed` - Emittied when a quest was failed
-- `step complete()` - Emitted when a step is complete returns the step dictionary
-- `next_step()` - Emitted when a new step is started returns step dictionary
+- `step_complete()` - Emitted when a step is complete returns the step dictionary
 - `step_updated()` - Emitted when a step is updated returns the step dictionary
 - `new_quest_added`- Emitted when a quest is added to player quests, returns quest_name
 - `quest_reset` - Emitted when a quest was reset returns quest name

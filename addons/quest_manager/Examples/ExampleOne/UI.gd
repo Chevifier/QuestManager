@@ -25,19 +25,19 @@ func _ready():
 	QuestManager.quest_completed.connect(quest_complete)
 	QuestManager.quest_failed.connect(quest_failed)
 	#set quest detail text 
-	$Quest.text = QuestManager.get_player_quest(quest_name).quest_details
+	$QuestStart.text = QuestManager.get_player_quest(quest_name).quest_details
 	#scale quest label to initailly be 0 for tweening
-	$Quest.scale.y = 0
+	$QuestStart.scale.y = 0
 	#Show quest info and start game after tween
 	var t = create_tween().chain()
-	t.tween_property($Quest,"scale:y",1,0.5)
-	t.tween_property($Quest,"scale:y",0,0.5).set_delay(2)
+	t.tween_property($QuestStart,"scale:y",1,0.5)
+	t.tween_property($QuestStart,"scale:y",0,0.5).set_delay(2)
 	t.tween_callback(start)
 
 func start():
 	state = RUNNING
 	get_tree().paused = false
-	$Quest.hide()
+	$QuestStart.hide()
 	
 func quest_complete(n):
 	state = WIN

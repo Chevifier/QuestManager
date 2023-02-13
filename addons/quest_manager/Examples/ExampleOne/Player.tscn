@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcaqekk7pkfa6"]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Example/ExampleOne/Player.gd" id="1_e3ya5"]
-[ext_resource type="PackedScene" uid="uid://b34lbys3ykw66" path="res://addons/quest_manager/Example/ExampleOne/projectile.tscn" id="2_86qut"]
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleOne/Player.gd" id="1_e3ya5"]
+[ext_resource type="PackedScene" uid="uid://b34lbys3ykw66" path="res://addons/quest_manager/Examples/ExampleOne/projectile.tscn" id="2_86qut"]
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_qskpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5k4io"]

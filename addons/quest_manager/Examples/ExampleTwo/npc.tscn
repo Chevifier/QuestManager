@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dp8jieleb451u"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="1_ooyks"]
-[ext_resource type="Script" path="res://addons/quest_manager/Example/ExampleTwo/NPC.gd" id="2_vio6p"]
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/NPC.gd" id="2_vio6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qwep7"]
 size = Vector2(20, 43)

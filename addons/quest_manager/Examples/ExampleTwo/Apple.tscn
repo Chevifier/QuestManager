@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://3cepcclvfpik"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Example/ExampleTwo/Apple.gd" id="1_xin7v"]
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/Apple.gd" id="1_xin7v"]
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_arn76"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3byu"]

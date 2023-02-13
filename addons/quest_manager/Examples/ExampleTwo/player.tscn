@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Example/ExampleTwo/Player.gd" id="1_sryyx"]
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/Player.gd" id="1_sryyx"]
 [ext_resource type="Texture2D" uid="uid://cqw68ky2utcct" path="res://addons/quest_manager/assets/Character Sheet.png" id="2_ok8vs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ljfaj"]

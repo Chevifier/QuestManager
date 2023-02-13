@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1fj6foamnhvj"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Example/ExampleOne/Enemy.gd" id="1_ww3ap"]
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleOne/Enemy.gd" id="1_ww3ap"]
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_65dc7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sw6wr"]
