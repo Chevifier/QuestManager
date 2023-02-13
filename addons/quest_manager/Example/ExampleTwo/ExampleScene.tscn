@@ -371,6 +371,7 @@ family_member = 2
 
 [node name="Player" parent="." instance=ExtResource("5_mfh7w")]
 unique_name_in_owner = true
+position = Vector2(241, 34)
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3
