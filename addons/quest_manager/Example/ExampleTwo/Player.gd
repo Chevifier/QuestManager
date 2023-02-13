@@ -55,6 +55,9 @@ func talk():
 		if d < dis and ob.is_in_group("NPC"):
 			npc = ob
 			dis = d
+		if ob.is_in_group("stove"):
+			QuestManager.progress_quest(QuestManager.active_quest)
+			has_pie = true
 	if npc == null:
 		return
 	
@@ -66,11 +69,16 @@ func talk():
 		if has_pie == false:
 			get_parent().get_node("UI").set_text("Ill be waiting for my slice")
 		else:
+			QuestManager.progress_quest(QuestManager.active_quest,"Mother")
 			get_parent().get_node("UI").set_text("Tasty, Youve outdone yourself")
 	else:
 		if has_pie == false:
 			get_parent().get_node("UI").set_text(npc.get_dialogue(0))
 		else:
+			if npc.family_member == 0:
+				QuestManager.progress_quest(QuestManager.active_quest,"Father")
+			elif npc.family_member ==2:
+				QuestManager.progress_quest(QuestManager.active_quest,"Sister")
 			get_parent().get_node("UI").set_text(npc.get_dialogue(1))
 
 

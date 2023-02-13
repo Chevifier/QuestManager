@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/IncrementalStep.gd" id="1_dipun"]
 
 [node name="IncrementalStep" type="GraphNode"]
-custom_minimum_size = Vector2(240, 100)
+custom_minimum_size = Vector2(240, 150)
 offset_right = 240.0
 offset_bottom = 100.0
 tooltip_text = "Incremental quest steps require
@@ -22,27 +22,38 @@ slot/0/draw_stylebox = true
 script = ExtResource("1_dipun")
 Node_Type = 2
 
-[node name="hb" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
-alignment = 1
 
-[node name="details" type="TextEdit" parent="hb"]
+[node name="details" type="TextEdit" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 placeholder_text = "Step details"
 wrap_mode = 1
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="quantity" type="SpinBox" parent="hb"]
+[node name="hb" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="item_name" type="LineEdit" parent="VBoxContainer/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "Item Name"
+
+[node name="quantity" type="SpinBox" parent="VBoxContainer/hb"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.4
 max_value = 1e+09
 alignment = 1
 
-[connection signal="gui_input" from="hb/details" to="." method="_on_details_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/details" to="." method="_on_details_gui_input"]

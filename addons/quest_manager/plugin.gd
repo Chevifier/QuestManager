@@ -16,6 +16,7 @@ func _enter_tree():
 	quest_importer = preload("res://addons/quest_manager/ImportPlugin.gd").new()
 	add_import_plugin(quest_importer)
 	_make_visible(false)
+	EditorWindow.editor_plugin = self
 	EditorWindow.data_saved.connect(_update_imports)
 	
 func _edit(object):
@@ -28,6 +29,15 @@ func _handles(object):
 func _has_main_screen():
 	return true
 
+func _input(event: InputEvent) -> void:
+	if not EditorWindow.visible:
+		return
+	if event is InputEventKey and event.is_pressed():
+		match event.as_text():
+			"Ctrl+S":
+				EditorWindow._on_save_pressed(0)
+
+	
 func _get_plugin_name():
 	return "Quest Manager"
 
@@ -37,7 +47,6 @@ func _make_visible(visible):
 	
 func _get_plugin_icon():
 	return get_icon()
-
 
 func get_icon(scale: float = 1.0) -> Texture2D:
 	var size: Vector2 = Vector2(16, 16) * get_editor_interface().get_editor_scale() * scale
@@ -58,3 +67,4 @@ func _exit_tree():
 
 func _update_imports(file_path):
 	get_editor_interface().get_resource_filesystem().scan()
+

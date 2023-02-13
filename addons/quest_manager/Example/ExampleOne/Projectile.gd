@@ -9,6 +9,6 @@ func _physics_process(delta):
 
 func _on_area_entered(area):
 	if area.is_in_group("enemy"):
-		QuestManager.progress_quest("ShootEmUp")
+		QuestManager.progress_quest("ShootEmUp","Enemies")
 		area.queue_free()
 	queue_free()

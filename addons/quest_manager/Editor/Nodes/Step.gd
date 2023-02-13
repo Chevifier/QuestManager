@@ -9,7 +9,7 @@ func setup():
 
 func get_data():
 	var data = {
-		"type" : "action_step",
+		"step_type" : "action_step",
 		"details": details.text,
 		"complete" : false
 	}

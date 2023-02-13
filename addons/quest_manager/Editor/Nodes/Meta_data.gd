@@ -28,17 +28,13 @@ func get_data():
 	
 
 func set_data(data):
-	return
 	for meta in data:
 		var meta_node
-		if typeof(data[meta]) == TYPE_STRING:
-			meta_node = string_meta.duplicate()
-		if typeof(data[meta]) == TYPE_INT:
-			meta_node = integer_meta.duplicate()
-		elif typeof(data[meta]) == TYPE_FLOAT:
-			meta_node = float_meta.duplicate()
-		elif typeof(data[meta]) == TYPE_BOOL:
-			meta_node = bool_meta.duplicate()
+		match typeof(data[meta]):
+			TYPE_STRING: meta_node = string_meta.duplicate()
+			TYPE_INT: meta_node = integer_meta.duplicate()
+			TYPE_FLOAT: meta_node = float_meta.duplicate()
+			TYPE_BOOL: meta_node = bool_meta.duplicate()
 		data_container.add_child(meta_node)
 		meta_node.get_node("name").text = meta
 		meta_node.get_node("data").value = data[meta]

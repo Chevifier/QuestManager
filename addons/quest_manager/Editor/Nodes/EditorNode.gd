@@ -21,7 +21,6 @@ var focus_nodes = []
 
 func _ready():
 	setup()
-	print("ID: ", id)
 
 func setup():
 	close_request.connect(_on_close_request)

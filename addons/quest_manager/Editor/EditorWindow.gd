@@ -16,6 +16,7 @@ var node_offset = Vector2(0,0)
 @onready var load_btn = %Load
 @onready var graph : GraphEdit = %GraphEdit
 @onready var context_menu = %MenuButton
+@onready var test_btn = %Test
 @onready var rightmousemenu = preload("res://addons/quest_manager/Editor/right_mouse_menu.tscn")
 
 #Check to see if all quest are properly structured
@@ -23,7 +24,8 @@ var node_offset = Vector2(0,0)
 var quest_chains_complete = false
 var quest_name_duplicate = false
 var current_file_path = ""
-
+var editor_plugin: EditorPlugin
+var test_scene_path = "res://addons/quest_manager/Editor/Quest_File_Test_Scene.tscn"
 var popup_options_list =[
 	"Add Quest",
 	"Add Step",
@@ -31,7 +33,7 @@ var popup_options_list =[
 	"Add Item Step",
 	"Add Group Tag",
 	"Add Meta Data",
-	"And End Node"
+	"Add End Node"
 ]
 var quest_data = {}
 var graph_data = {}
@@ -53,6 +55,10 @@ func set_button_icons():
 	new_btn.icon = get_theme_icon("New", "EditorIcons")
 	save_btn.icon = get_theme_icon("Save", "EditorIcons")
 	load_btn.icon = get_theme_icon("Load", "EditorIcons")
+	test_btn.icon = get_theme_icon("PlayScene", "EditorIcons")
+	test_btn.tooltip_text = "Test Quest File"
+	context_menu.icon = get_theme_icon("RichTextEffect", "EditorIcons")
+	context_menu.tooltip_text = "Add Node..."
 
 func _on_save_pressed(index):
 	match index:
@@ -146,15 +152,21 @@ func updateIdSteps():
 	quest_name_duplicate = hasDuplicateNames()
 	
 	for quest in quest_nodes:
+		quest.update_group_data()
+		quest.update_meta_data()
 		var steps = []
 		var current_node = quest.output_node
+		var index = 0
 		while current_node != null:
 			quest_chains_complete = false
 			
 			if current_node.Node_Type == EditorNode.Type.END_NODE:
 				quest_chains_complete = true
 				break
-			steps.append(current_node.get_data())
+			var data = current_node.get_data()
+			data["index"] = index
+			steps.append(data)
+			index += 1
 			current_node = current_node.output_node
 		quest.steps = steps
 
@@ -237,9 +249,7 @@ func save_new_file(file_path):
 
 #=============================SAVE DATA==============================
 func save_data(file_path):
-	for quest in get_quest_nodes():
-		quest.update_group_data()
-		quest.update_meta_data()
+	updateIdSteps()
 
 	var Save = FileAccess.open(file_path,FileAccess.WRITE)
 	
@@ -325,8 +335,6 @@ func _on_open_file_file_selected(path):
 func _on_save_file_file_selected(path):
 	save_data(path)
 
-
-
 func _on_new_file_file_selected(path):
 	save_new_file(path)
 
@@ -341,3 +349,12 @@ func _on_graph_edit_connection_to_empty(from_node, from_port, release_position):
 func _on_graph_edit_mouse_exited():
 	for node in get_all_nodes():
 		node.release_all_focus()
+
+
+func _on_test_button_pressed():
+	_on_save_pressed(0)
+	if current_file_path == "":
+		return
+	ProjectSettings.set_setting("quest_file_path",current_file_path)
+	ProjectSettings.save()
+	editor_plugin.get_editor_interface().play_custom_scene(test_scene_path)

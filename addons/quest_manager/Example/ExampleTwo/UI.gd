@@ -7,9 +7,15 @@ enum {
 var state = RUNNING
 var exitpressed = false
 func _ready():
-	update_incremental_step("Apple",0,10)
-	update_items_step("Give a slice to each memeber",["Father","Mother","Sister"])
-
+	QuestManager.new_quest_added.connect(new_quest)
+	QuestManager.step_updated.connect(update_ui)
+	
+	QuestManager.quest_completed.connect(quest_complete)
+	
+func new_quest(n):
+	update_ui(QuestManager.get_current_step(n))
+	
+	
 func _process(delta):
 	%Apples.text = "Apples: %02d" % %Player.apples
 	match state:
@@ -18,28 +24,31 @@ func _process(delta):
 		DIALOGUE:
 			process_input()
 
-func update_step(discription):
-	%discription.text = discription
+func update_ui(step):
+	for c in %items.get_children():
+		c.free()
+	if step.is_empty():
+		quest_complete("")
+		return
+	match step.step_type:
+		QuestManager.ACTION_STEP:
+			%discription.text = step.details
+		QuestManager.INCREMENTAL_STEP:
+			var text = "%s %02d/%02d" % [step.details, step.collected, step.required]
+			%discription.text = text
+		QuestManager.ITEMS_STEP:
+			%discription.text = step.details
+			for item in step.item_list:
+				var i = %item.duplicate()
+				%items.add_child(i)
+				i.text = item.name
+				i.button_pressed = item.complete
+				i.show()
 
-func update_incremental_step(discription,num,total):
-	var details = "%s %02d/%02d" % [discription, num, total]
-	%discription.text = details
-	
-func update_items_step(discription,items:Array):
-	%discription.text = discription
-	for c in %step.get_children():
-		if c.name == "discription":
-			continue
-		c.queue_free()
-	for i in items:
-		var item = %item.duplicate()
-		%step.add_child(item)
-		item.text = i
-		item.show()
-		
-func quest_complete():
+func quest_complete(n):
+	for c in %items.get_children():
+		c.free()
 	%discription.text = "COMPLETE"
-		
 func process_input():
 	if Input.is_action_just_pressed("ui_accept")and exitpressed == false:
 		exitpressed = true

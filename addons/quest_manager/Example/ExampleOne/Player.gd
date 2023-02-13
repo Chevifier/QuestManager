@@ -14,8 +14,8 @@ func _physics_process(delta):
 	velocity.x = dir * SPEED
 	move_and_slide()
 	
-	if position.x <= 400:
-		position.x = 401
+	if position.x <= 372:
+		position.x = 373
 	if position.x >= 800:
 		position.x = 799
 	

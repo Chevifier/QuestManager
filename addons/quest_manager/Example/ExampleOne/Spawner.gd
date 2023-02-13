@@ -7,4 +7,4 @@ extends Marker2D
 func _on_timer_timeout():
 	var e = Enemy.instantiate()
 	get_parent().add_child(e)
-	e.position = Vector2(randf_range(400,800),-30)
+	e.position = Vector2(randf_range(372,800),-30)

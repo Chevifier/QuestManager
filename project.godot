@@ -8,6 +8,8 @@
 
 config_version=5
 
+quest_file_path="res://addons/quest_manager/Example/ExampleQuest.quest"
+
 [application]
 
 config/name="Quest Manager"

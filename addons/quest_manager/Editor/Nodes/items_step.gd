@@ -5,7 +5,7 @@ extends EditorNode
 @onready var list:ItemList = %list
 @onready var item_to_add = %ItemEdit
 
-var items = []
+var item_list = []
 var last_selected = -1
 func setup():
 	super.setup()
@@ -18,15 +18,16 @@ func get_data():
 	var data = {
 		"step_type" : "items_step",
 		"details": details.text,
-		"item_list": items
+		"item_list": item_list
 	}
 	return data
 
 func get_items():
-	return items
+	return item_list
 	
 func set_data(data):
 	details.text = data.details
+	item_list = data.item_list
 	for item in data.item_list:
 		list.add_item(item.name)
 
@@ -34,22 +35,29 @@ func _on_add_pressed():
 	if item_to_add.text == "":
 		print("Add item name")
 		return
-	for item in items:
+	for item in item_list:
 		if item_to_add.text == item["name"]:
 			print("Item already added")
 			return
 	
 	list.add_item(item_to_add.text)
-	items.append({
+	item_list.append({
 		"name" : item_to_add.text,
 		"complete" : false
 		})
 	item_to_add.clear()
+	print(item_list)
 	
 func _on_remove_pressed():
-	items.remove_at(last_selected)
+	var item_name = list.get_item_text(last_selected)
+	for i in range(item_list.size()):
+		var item = item_list[i]
+		if item.name == item_name:
+			item_list.remove_at(i)
+			break
 	list.remove_item(last_selected)
 	last_selected = -1
+	print(item_list)
 
 func _on_list_item_selected(index):
 	last_selected = index
