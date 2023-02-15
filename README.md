@@ -8,6 +8,7 @@ __NOTICE!__ This plugin was created specifically for Godot 4.0.
 ## Installation
 1. Copy the `quest_manager` directory to your `res://addons/` folder. 
 2. Open `Project>Project Settings>Plugins` and enable the `Quest Manager` plugin
+3. You now have a new tab `Quest Manager` at the top of the editor.
 
 ## Documentations
 

@@ -36,3 +36,7 @@ For this example we'll keep it simple and create a 1 step Quest to kill 15 enemi
 8. Open up the `Example/ExampleOne/Projectile.gd` script. Notice we check to see it the bullet hits an enemy. If it did, we call `QuestManager.progress_quest("ShootEmUp","Enemies")` before removing the projectile. This increases the the `collected` items of the `Incremental Step` by 1 by default.
 9. In the Player.gd we also check if the player ran out of lives. If so we call `QuestManager.fail_quest("ShootEmUp")` This sets the quest as failed and emits the `quest_failed` signal.
 10. And Thats about it for the tutorial it a quest has multiple steps the `step_updated` signal returns the new step its up to you how you want to display the information of that current step by checking its `step_type`. Check the [API](Quest_Manager_API.md) for what properties each step_type contains 
+
+## Exporting Projects
+
+Running a project in the editor is fine but when you want to export a project youll need to tell godot to export your quest files. To do this, in the export window, select your export format(Window/Linux/Android etc) then open the Resources tab and add `*.quest` as an entry with comma seperating other file types.
