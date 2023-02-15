@@ -7,6 +7,7 @@ signal data_saved()
 @onready var item_step = preload("res://addons/quest_manager/Editor/Nodes/items_step.tscn")
 @onready var group_tag = preload("res://addons/quest_manager/Editor/Nodes/Group.tscn")
 @onready var meta_data = preload("res://addons/quest_manager/Editor/Nodes/Meta_data.tscn")
+@onready var timer_step = preload("res://addons/quest_manager/Editor/Nodes/Timer_Step.tscn")
 @onready var end = preload("res://addons/quest_manager/Editor/Nodes/End.tscn")
 var instance_position = Vector2(150,150)
 var node_offset = Vector2(0,0)
@@ -33,15 +34,18 @@ var popup_options_list =[
 	"Add Item Step",
 	"Add Group Tag",
 	"Add Meta Data",
+	"Add Timer",
 	"Add End Node"
 ]
 var quest_data = {}
 var graph_data = {}
 func _ready():
 	set_button_icons()
+	%right_mouse_list.clear()
 	%right_mouse_list.index_pressed.connect(_on_context_menu_index_pressed)
 	context_menu.get_popup().clear()
 	for item in popup_options_list:
+		%right_mouse_list.add_item(item)
 		context_menu.get_popup().add_item(item)
 	context_menu.get_popup().index_pressed.connect(_on_context_menu_index_pressed)
 	save_btn.get_popup().index_pressed.connect(_on_save_pressed)
@@ -94,6 +98,8 @@ func add_graph_node(index):
 		5:
 			node = meta_data.instantiate()
 		6:
+			node = timer_step.instantiate()
+		7:
 			node = end.instantiate()
 	if node == null:
 		print("Node instance Error, Check Index")
@@ -159,7 +165,6 @@ func updateIdSteps():
 		var index = 0
 		while current_node != null:
 			quest_chains_complete = false
-			
 			if current_node.Node_Type == EditorNode.Type.END_NODE:
 				quest_chains_complete = true
 				break
@@ -310,6 +315,8 @@ func load_data(file_path):
 				node = group_tag.instantiate()
 			EditorNode.Type.END_NODE:
 				node = end.instantiate()
+			EditorNode.Type.TIMER_NODE:
+				node = timer_step.instantiate()
 		graph.add_child(node)
 		node.set_node_data(quest_res.graph_data[i])
 		node.set_data(quest_res.graph_data[i]["quest_data"])

@@ -8,10 +8,12 @@ enum Type {
 	ITEM_STEP_NODE,
 	GROUP_NODE,
 	META_DATA,
-	END_NODE 
+	END_NODE,
+	TIMER_NODE 
 }
 
 @export var Node_Type :Type = Type.QUEST_NODE
+
 var node_data = {}
 var input_node = null
 var output_node = null

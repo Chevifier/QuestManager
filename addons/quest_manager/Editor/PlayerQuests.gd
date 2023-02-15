@@ -15,21 +15,33 @@ func _ready():
 	QuestManager.new_quest_added.connect(update_quest_list)
 	QuestManager.step_updated.connect(update_current_step)
 	QuestManager.quest_completed.connect(on_quest_complete)
+	QuestManager.quest_failed.connect(on_quest_failed)
 	
 	
 func update_quest_list(quest_name):
 	player_quest_list.clear()
 	for quest in QuestManager.get_all_player_quests_names():
 		player_quest_list.add_item(quest)
+	update_current_step(QuestManager.get_current_step(quest_name))
+	print("Quest: "+ quest_name)
 		
 func on_quest_complete(n):
 	step_details.text = "QUEST COMPLETE"
 	for control in controls.get_children():
 		control.queue_free()
-	
+func on_quest_failed(n):
+	step_details.text = "QUEST FAILED"
+	for control in controls.get_children():
+		control.queue_free()
+		
 func update_current_step(step):
 	if QuestManager.is_quest_complete(selected_quest):
 		step_details.text = "QUEST COMPLETE"
+		return
+	if QuestManager.is_quest_failed(selected_quest):
+		step_details.text = "QUEST FAILED"
+		return
+	if QuestManager.has_quest(selected_quest)==false:
 		return
 	step_details.text = step.details
 	for node in controls.get_children():
@@ -54,7 +66,11 @@ func update_current_step(step):
 				c.text = i.name
 				c.button_pressed = i.complete
 				c.toggled.connect(item_completed.bind(c.text))
-
+		QuestManager.TIMER_STEP:
+			step_details.text = "%s, \n Time Remaining: %03d"%[step.details,step.time]
+			var c = action_step_btn.duplicate()
+			controls.add_child(c)
+			c.pressed.connect(action_button_pressed)
 			
 func action_button_pressed():
 	QuestManager.progress_quest(selected_quest)
@@ -74,6 +90,7 @@ func _on_player_quests_list_item_selected(index):
 
 func _on_delete_quest_pressed():
 	if QuestManager.has_quest(selected_quest):
+		#QuestManager.reset_quest(selected_quest)
 		QuestManager.remove_quest(selected_quest)
 		set_defaults()
 		update_quest_list("")

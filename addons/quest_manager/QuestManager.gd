@@ -11,16 +11,21 @@ signal quest_reset()
 const ACTION_STEP = "action_step"
 const INCREMENTAL_STEP = "incremental_step"
 const ITEMS_STEP = "items_step"
-
+const TIMER_STEP = "timer_step"
+#Helper variable for searching for quest
 var active_quest = ""
 
 var current_resource:QuestResource
 var player_quests = {}
+#---TIMER_STEP VARIABLE-------
+var counter = 0.0
+#used to update timer steps individually
 
 #loads and add a quest to player quests from quest_resource
 func add_quest_from_resource(resource:QuestResource,quest_name:String) -> void:
 	current_resource = resource
 	add_quest(quest_name)
+	step_updated.emit(get_current_step(quest_name))
 
 #loads the Quest resource to view/accept quests
 func load_quest_resource(resource:QuestResource) -> void:
@@ -49,12 +54,11 @@ func get_all_player_quests_names() -> Array:
 #Progresses a quest to its next step
 #completes quest if it was at its last step
 func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true) -> void:
+	active_quest = quest_name
 	if has_quest(quest_name) == false:
 		return
 	if is_quest_complete(quest_name):
 		return
-		
-	var quest_complete = false
 	var id = get_player_quest(quest_name).quest_id
 	var step = get_current_step(quest_name)
 	match step.step_type:
@@ -82,12 +86,51 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 			if missing_items == false:
 				step_complete.emit(get_current_step(quest_name))
 				player_quests[id].step_index += 1
+		TIMER_STEP:
+			if quest_item != "":
+				#prevents progress quest calls that contains item
+				return
+			step_complete.emit(get_current_step(quest_name))
+			player_quests[id].step_index += 1
+
 	var total_steps = player_quests[id].steps.size()
 	if player_quests[id].step_index >= total_steps:
 		complete_quest(quest_name)
 	else:
 		step_updated.emit(get_current_step(quest_name))
 
+#Updates Timer_Steps
+func _process(delta):
+	if Engine.is_editor_hint():
+		return
+	counter += delta
+	for quest in get_quests_in_progress():
+		var step = get_current_step(player_quests[quest].quest_name)
+		if step.is_empty():
+			return
+		if step.step_type != TIMER_STEP:
+			return
+		if counter >= 1.0:
+			if step.is_count_down:
+				step.time -= 1
+				if step.time <= 0:
+					if step.fail_on_timeout:
+						fail_quest(player_quests[quest].quest_name)
+					else:
+						progress_quest(player_quests[quest].quest_name)
+			else:
+				step.time += 1
+				if step.time >= step.total_time:
+					if step.fail_on_timeout:
+						fail_quest(player_quests[quest].quest_name)
+					else:
+						progress_quest(player_quests[quest].quest_name)
+						
+			step_updated.emit(step)
+	if counter >= 1.0:
+		counter = 0
+	
+#------------------------------
 #Set a specific value for Incremental and Item Steps
 #For example the player could have some of an item
 #already use this to match the players inventory
@@ -118,16 +161,19 @@ func get_quest_list(group:String="") -> Dictionary:
 #to the player_quests list
 func add_quest(quest_name:String) -> void:
 	var quest = get_quest_from_resource(quest_name)
-	player_quests[quest.quest_id] = quest
+	player_quests[quest.quest_id] = quest.duplicate(true)
 	new_quest_added.emit(quest_name)
-
+	active_quest = quest_name
+	
 #Get a quest from the current loaded resource
 #Usefull for displaying quest data
 func get_quest_from_resource(quest_name:String) -> Dictionary:
 	var quest_data = {}
 	for quest in current_resource.quest_data:
 		if current_resource.quest_data[quest].quest_name == quest_name:
-			quest_data = current_resource.quest_data[quest]
+			for entry in current_resource.quest_data[quest]:
+				quest_data[entry] = current_resource.quest_data[quest][entry]
+			#quest_data = current_resource.quest_data[quest]
 			break
 	assert(!quest_data.is_empty(),"The Quest: %s was not found in loaded resource" % quest_name)
 	return quest_data
@@ -138,16 +184,31 @@ func has_quest(quest_name:String) -> bool:
 		if player_quests[i].quest_name == quest_name:
 			return true
 	return false
-	
+#Returns all the player quests that are not
+#completed or not have been failed
+func get_quests_in_progress():
+	var active_quests = {}
+	for quest in player_quests:
+		if player_quests[quest].failed or player_quests[quest].completed:
+			continue
+		active_quests[quest] = player_quests[quest]
+	return active_quests
 #return true if quest is complete
 func is_quest_complete(quest_name:String) -> bool:
-	quest_error(quest_name)
+	if has_quest(quest_name)==false:
+		return false
 	var quest = get_player_quest(quest_name)
 	return quest.completed
-
+#returns true if quest was failed
+func is_quest_failed(quest_name) -> bool:
+	quest_error(quest_name)
+	var quest = get_player_quest(quest_name)
+	return quest.failed
+	
 #get the current step in quest
 func get_current_step(quest_name:String) -> Dictionary:
-	quest_error(quest_name)
+	if has_quest(quest_name)==false:
+		return {}
 	var quest = get_player_quest(quest_name)
 	if quest.step_index >= quest.steps.size():
 		return {}
@@ -206,6 +267,11 @@ func reset_quest(quest_name:String) -> void:
 			ITEMS_STEP:
 				for i in step.items_list:
 					i.complete = false
+			TIMER_STEP:
+				if step.count_down:
+					step.time = step.total_time
+				else:
+					step.time = 0
 	quest_reset.emit(quest_name)
 	
 #Removes Every Quest from player 

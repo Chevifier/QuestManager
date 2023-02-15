@@ -55,6 +55,16 @@ A `Quest` has various properties such as:
         - `item_list` - An Array of Dictionaries of actions/items required
             - `name` - name of item
             - `complete` - boolean stating if item was collected/complete
+    4. `timer_step` - This step tracks time and can serve both as a timer or a stop watch
+        - `index` - Index of this step
+        - `details` - Details for this step
+        - `step_type`  - The type of step i.e `timer_step`.
+        - `time` - The time remaining or time elapsed in seconds.
+        - `total_time` - the total time set in seconds
+        - `time_minutes` - The total minutes set in the editor.
+        - `time_seconds` - The total seconds set in the Editor.
+        - `is_count_down` - boolean stating if Time counts down or count up.
+        - `fail_on_timeout` - boolean stating if quest fails on timeout if not step becomes complete.
 - `meta_data` - A dictionary containing stored meta data for the quest
   - `key` - name of variable
   - `value` - Variant type of value `int,float,string,boolean`
@@ -78,7 +88,11 @@ Progresses a quest to its next step if it was an action step updates other steps
 - `item_name` - Name of an item to collect/complete.
 - `amount` - Amount to increment `incremental_steps`. 1 by default
 
-##### `func set_quest_step_items(quest_name:String,quest_item:String,amount:int=0,collected:bool=false) -> void:`
+#### `func _process(delta) -> void`
+
+Called by the Engine and updates the time of any quest that is currently at a `timer_step`
+
+#### `func set_quest_step_items(quest_name:String,quest_item:String,amount:int=0,collected:bool=false) -> void:`
 
 Set a specific value for Incremental and Item Steps. For example the player could have some of an item already use this to match the players inventory
 
@@ -97,6 +111,9 @@ Returns if the player has this quest `quest_name`
 #### `is_quest_complete(quest_name:String) -> bool`
 Returns if the player has completed this quest `quest_name`
 
+#### `is_quest_failed(quest_name) -> bool`
+Returns if the player has failed this quest `quest_name`
+
 #### `get_current_step(quest_name:String) -> Dictionary`
 Returns a Dictionary of the current quest step of this quest `quest_name`
 
@@ -114,6 +131,9 @@ Create new or Change meta data of the quest `quest_name`
 
 #### `fail_quest(quest_name:String) -> void`
 Fails the quest `quest_name`
+
+#### `get_quests_in_progress() -> Dictionary`
+Returns all quests that have not been completed or failed
 
 #### `reset_quest(quest_name:String) -> void`
 Resets the quest `quest_name`

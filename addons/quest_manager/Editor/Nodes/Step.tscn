@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://b7vnivpp87vho"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Step.gd" id="1_sv62o"]
 
