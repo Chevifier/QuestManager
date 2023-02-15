@@ -19,6 +19,15 @@ The 3 types of quest steps currently.
 - #### INCREMENTAL_STEP = "incremental_step"
 
 - #### ITEM_STEP = "item_step"
+  
+- #### TIMER_STEP = "timer_step"
+
+### Variables
+
+- `active_quest := ""` - Helper variable to assign a quest name
+- `current_resource:QuestResource` -current loaded resource
+- `player_quests :Dictionary= {}` - all player quests
+- `counter := 0.0` -counter for tracking time
 
 ### Methods
 
