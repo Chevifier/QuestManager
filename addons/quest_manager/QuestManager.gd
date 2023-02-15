@@ -48,7 +48,7 @@ func get_all_player_quests_names() -> Array:
 
 #Progresses a quest to its next step
 #completes quest if it was at its last step
-func progress_quest(quest_name:String, quest_item:String="",amount:int=1) -> void:
+func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true) -> void:
 	if has_quest(quest_name) == false:
 		return
 	if is_quest_complete(quest_name):
@@ -73,7 +73,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1) -> voi
 		ITEMS_STEP:
 			for item in step.item_list:
 				if item.name == quest_item:
-					item.complete = true
+					item.complete = completed
 					step_updated.emit(get_current_step(quest_name))
 			var missing_items = false
 			for item in step.item_list:
@@ -157,16 +157,9 @@ func get_current_step(quest_name:String) -> Dictionary:
 
 #Remove quest from player quests including steps/items and metadata
 func remove_quest(quest_name:String) -> void:
-	quest_error(quest_name)
-	var steps = player_quests.quests[quest_name].steps
-	var items = player_quests.quests[quest_name].items
-	var metadata = player_quests.quests[quest_name].meta_data
-	player_quests.quests.remove(quest_name)
-	for i in steps:
-		player_quests.steps.remove(i)
-	for i in items:
-		player_quests.items.remove(i)
-	player_quests.meta_data.remove(metadata)
+	for i in player_quests:
+		if player_quests[i].quest_name == quest_name:
+			player_quests.erase(i)
 
 #Completes a quest if every required step was completed
 func complete_quest(quest_name:String) -> void:
