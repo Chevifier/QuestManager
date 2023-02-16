@@ -1,6 +1,8 @@
 extends Area2D
 #Helper Class for positional Actions
 #i.e Go to location (WIP)
+#Requires a Collision shape to be added
+
 @export var quest_name = ""
 @export var target:Node2D
 @export var step_index = -1

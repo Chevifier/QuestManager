@@ -23,7 +23,6 @@ func update_quest_list(quest_name):
 	for quest in QuestManager.get_all_player_quests_names():
 		player_quest_list.add_item(quest)
 	update_current_step(QuestManager.get_current_step(quest_name))
-	print("Quest: "+ quest_name)
 		
 func on_quest_complete(n):
 	step_details.text = "QUEST COMPLETE"
@@ -106,3 +105,12 @@ func set_defaults():
 	
 	
 	
+
+
+func _on_show_data_pressed():
+	var quest = QuestManager.get_player_quest(selected_quest)
+	if quest.is_empty():
+		return
+	var quest_data = "Group: %s\nMeta Data: %s" % [quest.group, quest.meta_data]
+	%quest_data_label.text = quest_data
+	%quest_data.popup_centered()

@@ -10,6 +10,7 @@ To create a quest you should use the editor. The editor has various nodes requir
 5. `End Node` - This node is required to end a quest after the final step.
 6. `Group Node` - A group node only requires its `group` name and can be connected to multiple quest nodes.
 7. `Meta Data Node` - A meta data node is use to add meta data to quest such as quest rewards or any arbitrary information stored as a `String`, `Integer`, `float` or `boolean`
+8. `Timer Node` - This Node is a `timer_step` node that is used as a Timer or a Stopwatch
 
 ## How to use
 

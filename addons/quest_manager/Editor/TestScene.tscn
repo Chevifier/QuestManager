@@ -182,6 +182,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="show_data" type="Button" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quest Meta Data"
+
 [node name="delete_quest" type="Button" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Delete Quest"
@@ -219,7 +223,21 @@ layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
 
+[node name="quest_data" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Quest Info"
+ok_button_text = "CLOSE"
+
+[node name="quest_data_label" type="Label" parent="quest_data"]
+unique_name_in_owner = true
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 92.0
+offset_bottom = 51.0
+vertical_alignment = 1
+
 [connection signal="item_selected" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/ScrollContainer/VBoxContainer/Quest_List" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_quest_list_item_selected"]
 [connection signal="pressed" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/accept_quest" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_accept_quest_pressed"]
 [connection signal="item_selected" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/ScrollContainer/VBoxContainer/Player_Quests_List" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_player_quests_list_item_selected"]
+[connection signal="pressed" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/show_data" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_show_data_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/delete_quest" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_delete_quest_pressed"]

@@ -49,7 +49,7 @@ A `Quest` has various properties such as:
         - `index` - Index of this step
         - `details` - Details for this step
         - `step_type`  - The type of step i.e `action_step`
-        - `complete` - boolean stating if step it complete
+        - `complete` - boolean stating if step is completed
     2. `incremental_step` - This step requires an amount of an item to be collected.
         - `index` - Index of this step
         - `details` - Details for this step

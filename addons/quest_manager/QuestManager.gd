@@ -33,7 +33,6 @@ func load_quest_resource(resource:QuestResource) -> void:
 
 #Get a quest that the player has accepted
 func get_player_quest(quest_name:String) -> Dictionary:
-	quest_error(quest_name)
 	var quest_data = {}
 	for quest in player_quests:
 		if player_quests[quest].quest_name == quest_name:
@@ -201,8 +200,9 @@ func is_quest_complete(quest_name:String) -> bool:
 	return quest.completed
 #returns true if quest was failed
 func is_quest_failed(quest_name) -> bool:
-	quest_error(quest_name)
 	var quest = get_player_quest(quest_name)
+	if quest.is_empty():
+		return false
 	return quest.failed
 	
 #get the current step in quest
@@ -230,7 +230,6 @@ func complete_quest(quest_name:String) -> void:
 
 #get all the meta data stored for this quest
 func get_meta_data(quest_name:String) -> Dictionary:
-	quest_error(quest_name)
 	var meta_data ={}
 	for quest in player_quests:
 		if player_quests[quest].quest_name == quest_name:
@@ -240,20 +239,17 @@ func get_meta_data(quest_name:String) -> Dictionary:
 	
 #sets or create new quests meta data
 func set_meta_data(quest_name:String,meta_data:String, value:Variant) -> void:
-	quest_error(quest_name)
 	var id = get_player_quest(quest_name).quest_id
 	player_quests[id].metadata[meta_data] = value
 
 #Fails a quest
 func fail_quest(quest_name:String) -> void:
-	quest_error(quest_name)
 	var id = get_player_quest(quest_name).quest_id
 	player_quests[id].failed = true
 	quest_failed.emit(quest_name)
 	
 #Reset Quest Values
 func reset_quest(quest_name:String) -> void:
-	quest_error(quest_name)
 	var id = get_player_quest(quest_name).quest_id
 	player_quests[id].completed = false
 	player_quests[id].failed = false
@@ -278,7 +274,3 @@ func reset_quest(quest_name:String) -> void:
 #Usefull for new game files if neccessary
 func wipe_quest_data() -> void:
 	player_quests = {}
-
-func quest_error(quest_name:String) -> void:
-	assert(has_quest(quest_name),"The Quest: %s doesnt exist" %quest_name)
-	
