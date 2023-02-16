@@ -8,6 +8,7 @@ var hp = 3
 @export var projectile :PackedScene
 func _ready():
 	hp = 3
+	
 func _physics_process(delta):
 	var dir = Input.get_axis(left,right)
 	

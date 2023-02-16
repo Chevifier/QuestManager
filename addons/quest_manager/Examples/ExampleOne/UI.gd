@@ -1,9 +1,9 @@
 extends CanvasLayer
 
+@export var quest_name = "ShootEmUp"
 @export var quest:QuestResource
 @onready var quest_info_label = $Do
 @onready var life = $HP
-const quest_name = "ShootEmUp"
 enum {
 	START,
 	RUNNING,

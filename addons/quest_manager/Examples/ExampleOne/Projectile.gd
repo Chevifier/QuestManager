@@ -12,3 +12,4 @@ func _on_area_entered(area):
 		QuestManager.progress_quest("ShootEmUp","Enemies")
 		area.queue_free()
 	queue_free()
+

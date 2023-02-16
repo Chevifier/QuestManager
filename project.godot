@@ -8,7 +8,7 @@
 
 config_version=5
 
-quest_file_path="res://addons/quest_manager/Examples/ExampleQuest.quest"
+quest_file_path="res://test.quest"
 
 [application]
 
@@ -23,3 +23,7 @@ QuestManager="*res://addons/quest_manager/QuestManager.gd"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/quest_manager/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false

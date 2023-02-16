@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://dkgxjm5uka6l7"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleOne/Player.gd" id="1_e3ya5"]
-[ext_resource type="PackedScene" uid="uid://b34lbys3ykw66" path="res://addons/quest_manager/Examples/ExampleOne/projectile.tscn" id="2_86qut"]
+[ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleOne/Projectile.tscn" id="2_8g4sx"]
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_qskpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5k4io"]
@@ -13,7 +13,7 @@ radius = 13.0384
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e3ya5")
-projectile = ExtResource("2_86qut")
+projectile = ExtResource("2_8g4sx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_5k4io")

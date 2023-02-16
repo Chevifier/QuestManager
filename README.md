@@ -16,7 +16,7 @@ __NOTICE!__ This plugin was created specifically for Godot 4.0.
 
 [Quest Manager API](documentation/Quest_Manager_API.md)
 
-[Video Tutorial](https://www.youtube.com/Chevifier) (Soon)
+[Video Tutorial](https://youtu.be/9tu-Q-T--mY)
 
 ## Discord
 
