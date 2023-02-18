@@ -8,7 +8,7 @@
 
 config_version=5
 
-quest_file_path="res://test.quest"
+quest_file_path="res://vectest.quest"
 
 [application]
 

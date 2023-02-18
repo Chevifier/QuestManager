@@ -6,6 +6,9 @@ extends EditorNode
 @onready var integer_meta = %Integer
 @onready var float_meta = %Float
 @onready var bool_meta = %Bool
+@onready var vec2 = %Vector2
+@onready var vec3 = %Vector3
+
 
 func setup():
 	super.setup()
@@ -22,11 +25,19 @@ func get_data():
 			meta_value = node.get_node("data").text
 		if node.is_in_group("boolean"):
 			meta_value = node.get_node("data").button_pressed
+		if node.is_in_group("vector2"):
+			var x = node.get_node("x").value
+			var y = node.get_node("y").value
+			meta_value = Vector2(x,y)
+		if node.is_in_group("vector3"):
+			var x = node.get_node("x").value
+			var y = node.get_node("y").value
+			var z = node.get_node("z").value
+			meta_value = Vector3(x,y,z)
 		data[meta_name] = meta_value
 
 	return data
 	
-
 func set_data(data):
 	for meta in data:
 		var meta_node
@@ -35,9 +46,19 @@ func set_data(data):
 			TYPE_INT: meta_node = integer_meta.duplicate()
 			TYPE_FLOAT: meta_node = float_meta.duplicate()
 			TYPE_BOOL: meta_node = bool_meta.duplicate()
+			TYPE_VECTOR2: meta_node = vec2.duplicate()
+			TYPE_VECTOR3: meta_node = vec3.duplicate()
 		data_container.add_child(meta_node)
 		meta_node.get_node("name").text = meta
-		meta_node.get_node("data").value = data[meta]
+		if typeof(data[meta]) == TYPE_VECTOR2:
+			meta_node.get_node("x").value = data[meta].x
+			meta_node.get_node("y").value = data[meta].y
+		elif typeof(data[meta]) == TYPE_VECTOR3:
+			meta_node.get_node("x").value = data[meta].x
+			meta_node.get_node("y").value = data[meta].y
+			meta_node.get_node("z").value = data[meta].z
+		else:
+			meta_node.get_node("data").value = data[meta]
 		meta_node.get_node("delete").pressed.connect(delete_meta_data.bind(meta_node.get_path()))
 
 func delete_meta_data(node_path):
@@ -51,6 +72,8 @@ func _on_option_selected(index):
 		1: option = integer_meta.duplicate()
 		2: option = float_meta.duplicate()
 		3: option = bool_meta.duplicate()
+		4: option = vec2.duplicate()
+		5: option = vec3.duplicate()
 	focus_nodes.append(option.get_node("name"))
 	focus_nodes.append(option.get_node("data"))
 	data_container.add_child(option)

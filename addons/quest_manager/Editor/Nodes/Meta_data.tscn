@@ -51,7 +51,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Add"
 switch_on_hover = true
-item_count = 4
+item_count = 6
 popup/item_0/text = "String"
 popup/item_0/id = 0
 popup/item_1/text = "Int"
@@ -60,10 +60,15 @@ popup/item_2/text = "Float"
 popup/item_2/id = 2
 popup/item_3/text = "Boolean"
 popup/item_3/id = 3
+popup/item_4/text = "Vector2"
+popup/item_4/id = 4
+popup/item_5/text = "Vector3"
+popup/item_5/id = 5
 
 [node name="Types" type="Control" parent="."]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="String" type="HBoxContainer" parent="Types" groups=["string"]]
 unique_name_in_owner = true
@@ -153,6 +158,113 @@ size_flags_horizontal = 3
 placeholder_text = "Float name"
 
 [node name="data" type="SpinBox" parent="Types/Float"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+min_value = -1e+07
+max_value = 1e+07
+step = 0.001
+allow_greater = true
+allow_lesser = true
+alignment = 1
+update_on_text_changed = true
+
+[node name="Vector2" type="HBoxContainer" parent="Types" groups=["vector2"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="delete" type="Button" parent="Types/Vector2"]
+layout_mode = 2
+text = "X"
+flat = true
+
+[node name="name" type="LineEdit" parent="Types/Vector2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Vector2 name"
+
+[node name="x" type="SpinBox" parent="Types/Vector2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.1
+min_value = -1e+07
+max_value = 1e+07
+step = 0.001
+allow_greater = true
+allow_lesser = true
+alignment = 1
+update_on_text_changed = true
+
+[node name="y" type="SpinBox" parent="Types/Vector2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.1
+min_value = -1e+07
+max_value = 1e+07
+step = 0.001
+allow_greater = true
+allow_lesser = true
+alignment = 1
+update_on_text_changed = true
+
+[node name="Vector3" type="HBoxContainer" parent="Types" groups=["vector3"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="delete" type="Button" parent="Types/Vector3"]
+layout_mode = 2
+text = "X"
+flat = true
+
+[node name="name" type="LineEdit" parent="Types/Vector3"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Vector3 name"
+
+[node name="x" type="SpinBox" parent="Types/Vector3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+min_value = -1e+07
+max_value = 1e+07
+step = 0.001
+allow_greater = true
+allow_lesser = true
+alignment = 1
+update_on_text_changed = true
+
+[node name="y" type="SpinBox" parent="Types/Vector3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+min_value = -1e+07
+max_value = 1e+07
+step = 0.001
+allow_greater = true
+allow_lesser = true
+alignment = 1
+update_on_text_changed = true
+
+[node name="z" type="SpinBox" parent="Types/Vector3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
