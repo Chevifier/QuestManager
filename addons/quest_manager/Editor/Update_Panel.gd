@@ -65,8 +65,8 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	# Save the downloaded zip
 	save_zip(body)
 	
-	if DirAccess.dir_exists_absolute("res://addons/dialogue_manager"):
-		DirAccess.remove_absolute("res://addons/dialogue_manager")
+	if DirAccess.dir_exists_absolute("res://addons/quest_manager"):
+		DirAccess.remove_absolute("res://addons/quest_manager")
 	
 	var zip_reader: ZIPReader = ZIPReader.new()
 	zip_reader.open(TEMP_FILE_NAME)
@@ -91,6 +91,8 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	DirAccess.remove_absolute(TEMP_FILE_NAME)
 	
 	emit_signal("updated", next_version)
+	#restart
+	get_parent().editor_plugin.get_editor_interface().restart_editor(true)
 
 
 func _on_patch_notes_pressed():
@@ -100,9 +102,5 @@ func _on_patch_notes_pressed():
 func _on_cancel_pressed():
 	hide()
 
-
-
-
 func _on_update_update_available():
 	update_ui()
-	print("update avail")

@@ -210,6 +210,7 @@ Doing this will only return the first instance of the quest."
 
 [node name="Update_Panel" type="Panel" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
