@@ -17,7 +17,8 @@ var node_offset = Vector2(0,0)
 @onready var load_btn = %Load
 @onready var graph : GraphEdit = %GraphEdit
 @onready var context_menu = %MenuButton
-@onready var test_btn = %Test
+@onready var test_btn = %test
+@onready var update_btn = %update
 @onready var rightmousemenu = preload("res://addons/quest_manager/Editor/right_mouse_menu.tscn")
 
 #Check to see if all quest are properly structured
@@ -61,6 +62,7 @@ func set_button_icons():
 	load_btn.icon = get_theme_icon("Load", "EditorIcons")
 	test_btn.icon = get_theme_icon("PlayScene", "EditorIcons")
 	test_btn.tooltip_text = "Test Quest File"
+	update_btn.icon = get_theme_icon("Reload", "EditorIcons")
 	context_menu.icon = get_theme_icon("RichTextEffect", "EditorIcons")
 	context_menu.tooltip_text = "Add Node..."
 
