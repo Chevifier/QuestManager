@@ -31,12 +31,14 @@ func _on_http_request_request_completed(result, response_code, headers, body):
 		%DownloadButton.text = "Download Update v%s" % new_version
 		%DownloadButton.disabled = false
 		%PatchNotes.text = "v%s Patch Notes" % new_version
+		%Update_Panel.next_version = new_version
 		add_theme_color_override("font_color",Color.GREEN)
 	else:
 		text = current_version
 		%DownloadButton.text = "Up To Date"
 		%DownloadButton.disabled = true
 		%PatchNotes.text = "v%s Patch Notes" % current_version
+		%Update_Panel.next_version = current_version
 		add_theme_color_override("font_color",Color.WHITE)
 
 func version_number(version:String):

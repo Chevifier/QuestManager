@@ -14,18 +14,6 @@ const TEMP_FILE_NAME = "user://temp.zip"
 @onready var download_button: Button = %DownloadButton
 var next_version:String
 
-
-func _ready() -> void:
-	update_ui()
-	
-func update_ui():
-	cfg.load(CONFIG_PATH)
-	next_version = cfg.get_value("plugin","new_version")
-	var update_available = cfg.get_value("plugin","update_available","false")
-	%label.text = "CURRENT VERSION: %s" % cfg.get_value("plugin","version")
-	
-	
-
 func save_zip(bytes: PackedByteArray) -> void:
 	var file: FileAccess = FileAccess.open(TEMP_FILE_NAME, FileAccess.WRITE)
 	file.store_buffer(bytes)
@@ -77,13 +65,9 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	#restart
 	get_parent().editor_plugin.get_editor_interface().restart_editor(true)
 
-
 func _on_patch_notes_pressed():
 	OS.shell_open("https://github.com/Chevifier/QuestManager/releases/tag/v%s" % next_version)
-	
 
 func _on_cancel_pressed():
 	hide()
 
-func _on_update_update_available():
-	update_ui()
