@@ -20,9 +20,9 @@ func save_zip(bytes: PackedByteArray) -> void:
 	file.flush()
 
 func _on_download_button_pressed() -> void:
-	# Safeguard the actual dialogue manager repo from accidentally updating itself
-	if FileAccess.file_exists("res://addons/quest_manager/extras/test.gd"): 
-		prints("You can't update the dialogue manager from within itself.")
+	if not Engine.is_editor_hint():
+		print("Updating from running the editor window can cause \
+		data loss. Cancelling...")
 		return
 	%DownloadButton.disabled = true
 	%DownloadButton.text = "Updating..."

@@ -25,6 +25,7 @@ func _on_http_request_request_completed(result, response_code, headers, body):
 	if not found: return
 	var new_version = found.strings[found.names.get("version")]
 	var current_version = cfg.get_value("plugin","version")
+	%VersionLabel.text = "CURRENT VERSION: %s" %current_version
 	
 	if version_number(current_version) < version_number(new_version):
 		text = new_version
@@ -37,7 +38,6 @@ func _on_http_request_request_completed(result, response_code, headers, body):
 		text = current_version
 		%DownloadButton.text = "Up To Date"
 		%DownloadButton.disabled = true
-		%VersionLabel.text = "CURRENT VERSION: %s" %current_version
 		%PatchNotes.text = "v%s Patch Notes" % current_version
 		%Update_Panel.next_version = current_version
 		add_theme_color_override("font_color",Color.WHITE)
