@@ -48,13 +48,20 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	zip_reader.open(TEMP_FILE_NAME)
 	var files: PackedStringArray = zip_reader.get_files()
 	
+	# Remove archive folder
+	files.remove_at(0)
+	# Remove assets folder
+	files.remove_at(0)
+	print(files[1])
 	var base_path = files[1]
 
 	for path in files:
+		print(path)
 		var new_file_path: String = path.replace(base_path, "")
-		if path.ends_with("/"):
+		if path.ends_with("/"): # create path
 			DirAccess.make_dir_recursive_absolute("res://addons/%s" % new_file_path)
 		else:
+			# add file to path
 			var file: FileAccess = FileAccess.open("res://addons/%s" % new_file_path, FileAccess.WRITE)
 			file.store_buffer(zip_reader.read_file(path))
 
