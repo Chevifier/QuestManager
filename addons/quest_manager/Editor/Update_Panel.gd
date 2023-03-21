@@ -63,7 +63,7 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	
 	zip_reader.close()
 	%DownloadButton.text = "Restarting..."
-	#DirAccess.remove_absolute(TEMP_FILE_NAME)
+	DirAccess.remove_absolute(TEMP_FILE_NAME)
 
 	#restart
 	get_parent().editor_plugin.get_editor_interface().restart_editor(true)
