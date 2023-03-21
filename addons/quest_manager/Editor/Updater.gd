@@ -37,6 +37,7 @@ func _on_http_request_request_completed(result, response_code, headers, body):
 		text = current_version
 		%DownloadButton.text = "Up To Date"
 		%DownloadButton.disabled = true
+		%VersionLabel.text = "CURRENT VERSION: %s" %current_version
 		%PatchNotes.text = "v%s Patch Notes" % current_version
 		%Update_Panel.next_version = current_version
 		add_theme_color_override("font_color",Color.WHITE)
