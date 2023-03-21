@@ -23,15 +23,6 @@ func update_ui():
 	next_version = cfg.get_value("plugin","new_version")
 	var update_available = cfg.get_value("plugin","update_available","false")
 	%label.text = "CURRENT VERSION: %s" % cfg.get_value("plugin","version")
-	if update_available:
-		%DownloadButton.text = " Download Update v%s" % cfg.get_value("plugin","new_version")
-		%DownloadButton.disabled = false
-		%PatchNotes.text = "v%s Patch Notes" % cfg.get_value("plugin","new_version")
-	else:
-		%DownloadButton.text = "Up To Date"
-		%DownloadButton.disabled = true
-		%PatchNotes.text = "v%s Patch Notes" % cfg.get_value("plugin","version")
-	
 	
 	
 
@@ -45,20 +36,18 @@ func _on_download_button_pressed() -> void:
 	if FileAccess.file_exists("res://addons/quest_manager/extras/test.gd"): 
 		prints("You can't update the dialogue manager from within itself.")
 		return
-	if cfg.get_value("plugin","update_available") == "true":
-		
-		%DownloadButton.disabled = true
-		%DownloadButton.text = "Updating..."
-		http_request.request("https://github.com/Chevifier/QuestManager/archive/refs/tags/v%s.zip" % next_version)
-	else:
-		%DownloadButton.disabled = true
-		%DownloadButton.text = "Up To Date"
+	%DownloadButton.disabled = true
+	%DownloadButton.text = "Updating..."
+	http_request.request("https://github.com/Chevifier/QuestManager/archive/refs/tags/v%s.zip" % next_version)
+	
 
 
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	if result != HTTPRequest.RESULT_SUCCESS: 
 		emit_signal("failed")
 		print("update failed")
+		%DownloadButton.disabled = false
+		%DownloadButton.text = "Retry Update"
 		return
 	
 	# Save the downloaded zip
@@ -72,9 +61,6 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	var files: PackedStringArray = zip_reader.get_files()
 	
 	var base_path = files[1]
-	
-	for path in files:
-		print(path)
 
 	for path in files:
 		var new_file_path: String = path.replace(base_path, "")
@@ -85,7 +71,7 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 			file.store_buffer(zip_reader.read_file(path))
 
 	zip_reader.close()
-	
+	%DownloadButton.text = "Restarting..."
 	#DirAccess.remove_absolute(TEMP_FILE_NAME)
 
 	#restart
