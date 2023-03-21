@@ -12,7 +12,6 @@ const TEMP_FILE_NAME = "user://temp.zip"
 
 @onready var http_request: HTTPRequest = $HTTPRequest
 @onready var download_button: Button = %DownloadButton
-
 var next_version:String
 
 
@@ -23,7 +22,6 @@ func update_ui():
 	cfg.load(CONFIG_PATH)
 	next_version = cfg.get_value("plugin","new_version")
 	var update_available = cfg.get_value("plugin","update_available","false")
-	print(update_available)
 	%label.text = "CURRENT VERSION: %s" % cfg.get_value("plugin","version")
 	if update_available:
 		%DownloadButton.text = " Download Update v%s" % cfg.get_value("plugin","new_version")
@@ -42,24 +40,25 @@ func save_zip(bytes: PackedByteArray) -> void:
 	file.store_buffer(bytes)
 	file.flush()
 
-
-### Signals
-
-
 func _on_download_button_pressed() -> void:
 	# Safeguard the actual dialogue manager repo from accidentally updating itself
-	if FileAccess.file_exists("res://addons/quest_manager/Editor/TestScene.tscn"): 
+	if FileAccess.file_exists("res://addons/quest_manager/extras/test.gd"): 
 		prints("You can't update the dialogue manager from within itself.")
 		return
-	
-	http_request.request("https://github.com/Chevifier/QuestManager/releases/tag/v%s.zip" % next_version)
-	%DownloadButton.disabled = true
-	%DownloadButton.text = "Updating..."
+	if cfg.get_value("plugin","update_available") == "true":
+		
+		%DownloadButton.disabled = true
+		%DownloadButton.text = "Updating..."
+		http_request.request("https://github.com/Chevifier/QuestManager/archive/refs/tags/v%s.zip" % next_version)
+	else:
+		%DownloadButton.disabled = true
+		%DownloadButton.text = "Up To Date"
 
 
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	if result != HTTPRequest.RESULT_SUCCESS: 
 		emit_signal("failed")
+		print("update failed")
 		return
 	
 	# Save the downloaded zip
@@ -73,11 +72,10 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	var files: PackedStringArray = zip_reader.get_files()
 	
 	var base_path = files[1]
-	# Remove archive folder
-	files.remove_at(0)
-	# Remove assets folder
-	files.remove_at(0)
 	
+	for path in files:
+		print(path)
+
 	for path in files:
 		var new_file_path: String = path.replace(base_path, "")
 		if path.ends_with("/"):
@@ -85,18 +83,17 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		else:
 			var file: FileAccess = FileAccess.open("res://addons/%s" % new_file_path, FileAccess.WRITE)
 			file.store_buffer(zip_reader.read_file(path))
-		
+
 	zip_reader.close()
 	
-	DirAccess.remove_absolute(TEMP_FILE_NAME)
-	
-	emit_signal("updated", next_version)
+	#DirAccess.remove_absolute(TEMP_FILE_NAME)
+
 	#restart
 	get_parent().editor_plugin.get_editor_interface().restart_editor(true)
 
 
 func _on_patch_notes_pressed():
-	OS.shell_open("https://github.com/Chevifier/QuestManager/releases/tag/v%s-alpha" % next_version)
+	OS.shell_open("https://github.com/Chevifier/QuestManager/releases/tag/v%s" % next_version)
 	
 
 func _on_cancel_pressed():

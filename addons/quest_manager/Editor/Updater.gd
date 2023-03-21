@@ -24,12 +24,10 @@ func _on_http_request_request_completed(result, response_code, headers, body):
 	var found = regex.search(response)
 	
 	if not found: return
-	
-	cfg.set_value("plugin","new_version",found.strings[found.names.get("version")])
 	var new_version = found.strings[found.names.get("version")]
+	cfg.set_value("plugin","new_version",new_version)
 	var current_version = cfg.get_value("plugin","version")
 	
-	print(version_number(current_version))
 	if version_number(current_version) < version_number(new_version):
 		text = new_version
 		add_theme_color_override("font_color",Color.GREEN)
