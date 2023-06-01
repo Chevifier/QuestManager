@@ -9,6 +9,7 @@ var item_list = []
 var last_selected = -1
 func setup():
 	super.setup()
+	Node_Type = Type.ITEM_STEP_NODE
 	focus_nodes.append(details)
 	focus_nodes.append(list)
 	focus_nodes.append(item_to_add)
@@ -18,7 +19,8 @@ func get_data():
 	var data = {
 		"step_type" : "items_step",
 		"details": details.text,
-		"item_list": item_list
+		"item_list": item_list,
+		"meta_data" : get_meta_data()
 	}
 	return data
 

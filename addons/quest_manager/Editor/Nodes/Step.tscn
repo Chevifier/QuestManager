@@ -19,8 +19,16 @@ slot/0/right_type = 0
 slot/0/right_color = Color(0, 1, 0, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
+slot/1/left_enabled = true
+slot/1/left_type = 2
+slot/1/left_color = Color(0, 0, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
 script = ExtResource("1_sv62o")
-Node_Type = 1
 
 [node name="details" type="TextEdit" parent="."]
 unique_name_in_owner = true
@@ -31,5 +39,9 @@ placeholder_text = "Step details"
 context_menu_enabled = false
 caret_blink = true
 caret_blink_interval = 0.5
+
+[node name="meta_data" type="Label" parent="."]
+layout_mode = 2
+text = "Meta Data"
 
 [connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]

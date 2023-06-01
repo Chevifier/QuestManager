@@ -13,7 +13,7 @@
 
 ### Constants
 
-The 3 types of quest steps currently.
+The 4 types of quest steps currently.
 - #### ACTION_STEP = "action_step"
 
 - #### INCREMENTAL_STEP = "incremental_step"

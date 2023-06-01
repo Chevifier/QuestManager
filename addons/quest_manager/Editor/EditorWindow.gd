@@ -1,7 +1,7 @@
 @tool
 extends Control
 signal data_saved()
-@onready var quest_node = preload("res://addons/quest_manager/Editor/Nodes/quest.tscn")
+@onready var quest_node = preload("res://addons/quest_manager/Editor/Nodes/Quest.tscn")
 @onready var step = preload("res://addons/quest_manager/Editor/Nodes/Step.tscn")
 @onready var inc_step = preload("res://addons/quest_manager/Editor/Nodes/IncrementalStep.tscn")
 @onready var item_step = preload("res://addons/quest_manager/Editor/Nodes/items_step.tscn")
@@ -9,8 +9,11 @@ signal data_saved()
 @onready var meta_data = preload("res://addons/quest_manager/Editor/Nodes/Meta_data.tscn")
 @onready var timer_step = preload("res://addons/quest_manager/Editor/Nodes/Timer_Step.tscn")
 @onready var end = preload("res://addons/quest_manager/Editor/Nodes/End.tscn")
+@onready var rewards = preload("res://addons/quest_manager/Editor/Nodes/Quest_Rewards.tscn")
 var instance_position = Vector2(150,150)
 var node_offset = Vector2(0,0)
+var selected_node = null
+var new_copy = null
 
 @onready var new_btn = %New
 @onready var save_btn = %Save
@@ -36,7 +39,8 @@ var popup_options_list =[
 	"Add Group Tag",
 	"Add Meta Data",
 	"Add Timer",
-	"Add End Node"
+	"Add End Node",
+	"Add Rewards Node"
 ]
 var quest_data = {}
 var graph_data = {}
@@ -103,6 +107,8 @@ func add_graph_node(index):
 			node = timer_step.instantiate()
 		7:
 			node = end.instantiate()
+		8: 
+			node = rewards.instantiate()
 	if node == null:
 		print("Node instance Error, Check Index")
 		return
@@ -132,6 +138,9 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 		EditorNode.Type.META_DATA:
 			to.meta_data_node = from
 			from.output_node = to
+		EditorNode.Type.REWARDS_NODE:
+			to.quest_rewards_node = from
+			from.output_node = to
 		_:
 			to.input_node = from
 			from.output_node = to
@@ -154,6 +163,7 @@ func updateMetaDataAndGroup(to,from):
 		quest.update_meta_data()
 		quest.update_group_data()
 
+#Pulls all data into Quest Nodes
 func updateIdSteps():
 	var quest_nodes = get_quest_nodes()
 	quest_chains_complete = false
@@ -162,6 +172,7 @@ func updateIdSteps():
 	for quest in quest_nodes:
 		quest.update_group_data()
 		quest.update_meta_data()
+		quest.update_quest_rewards()
 		var steps = []
 		var current_node = quest.output_node
 		var index = 0
@@ -170,6 +181,7 @@ func updateIdSteps():
 			if current_node.Node_Type == EditorNode.Type.END_NODE:
 				quest_chains_complete = true
 				break
+			current_node.update_meta_data()
 			var data = current_node.get_data()
 			data["index"] = index
 			steps.append(data)
@@ -186,7 +198,7 @@ func hasDuplicateNames():
 			return true
 		namesofar.append(value)
 	return false
-		
+#Gets all Nodes that are Quests
 func get_quest_nodes():
 	var quest_nodes = []
 	for child in graph.get_children():
@@ -209,6 +221,8 @@ func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port
 		to.clear_meta_data()
 	if from.Node_Type == EditorNode.Type.GROUP_NODE:
 		to.clear_group()
+	if from.Node_Type == EditorNode.Type.REWARDS_NODE:
+		to.clear_rewards()
 	from.output_node = null
 	to.input_node = null
 	
@@ -225,8 +239,7 @@ func _on_context_menu_index_pressed(index):
 	add_graph_node(index)
 
 func _on_graph_edit_node_selected(node):
-#	instance_position = get_global_mouse_position()
-	pass
+	selected_node = node
 
 
 func _on_graph_edit_delete_nodes_request(nodes):
@@ -319,6 +332,8 @@ func load_data(file_path):
 				node = end.instantiate()
 			EditorNode.Type.TIMER_NODE:
 				node = timer_step.instantiate()
+			EditorNode.Type.REWARDS_NODE:
+				node = rewards.instantiate()
 		graph.add_child(node)
 		node.set_node_data(quest_res.graph_data[i])
 		node.set_data(quest_res.graph_data[i]["quest_data"])
@@ -348,17 +363,16 @@ func _on_new_file_file_selected(path):
 	save_new_file(path)
 
 func _on_graph_edit_connection_from_empty(to_node, to_port, release_position):
-	pass # Replace with function body.
-
-
-func _on_graph_edit_connection_to_empty(from_node, from_port, release_position):
+	#TO-DO context sensitive node menu
 	pass
 
+func _on_graph_edit_connection_to_empty(from_node, from_port, release_position):
+	#TO-DO context sensitive node menu
+	pass
 
 func _on_graph_edit_mouse_exited():
 	for node in get_all_nodes():
 		node.release_all_focus()
-
 
 func _on_test_button_pressed():
 	_on_save_pressed(0)
@@ -367,3 +381,20 @@ func _on_test_button_pressed():
 	ProjectSettings.set_setting("quest_file_path",current_file_path)
 	ProjectSettings.save()
 	editor_plugin.get_editor_interface().play_custom_scene(test_scene_path)
+
+#copy selected node data
+func _on_graph_edit_copy_nodes_request():
+	if selected_node != null:
+		var tip = selected_node.get_child(selected_node.get_child_count()-1)
+		if tip is PopupPanel:
+			tip.free()
+		new_copy = selected_node.duplicate()
+
+#Paste duplicate node
+func _on_graph_edit_paste_nodes_request():
+	if new_copy != null:
+		graph.add_child(new_copy)
+		new_copy.position_offset += Vector2(10,10)
+		graph.set_selected(new_copy)
+		new_copy.id = new_copy.get_random_id()
+		

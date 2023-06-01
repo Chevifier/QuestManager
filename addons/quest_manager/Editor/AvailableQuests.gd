@@ -6,6 +6,7 @@ extends Control
 
 @onready var quest_description = %Quest_Description
 @onready var quest_step_details = %QuestSteps
+@onready var quest_rewards_details = %Rewards
 
 
 var selected_quest :=""
@@ -38,6 +39,16 @@ func _on_quest_list_item_selected(index):
 		steps_string += str(current) + ". %s \n" % step.details
 		current += 1 
 	quest_step_details.text = steps_string
+	
+	var quest_rewards = QuestManager.get_quest_from_resource(selected_quest).quest_rewards
+	var rewards_string: String = ""
+	var reward_no = 1
+	for reward in quest_rewards:
+		rewards_string += str(reward_no) +". %s : %s" % [reward,quest_rewards[reward]] 
+		reward_no += 1
+	if quest_rewards.is_empty():
+		rewards_string = "None"
+	quest_rewards_details.text = rewards_string
 	if QuestManager.has_quest(selected_quest):
 		%accept_quest.disabled = true
 	else:

@@ -7,6 +7,7 @@ extends EditorNode
 
 func setup():
 	super.setup()
+	Node_Type = Type.INCREMENTAL_NODE
 	focus_nodes.append(details)
 	focus_nodes.append(quantity)
 	
@@ -17,7 +18,8 @@ func get_data():
 		"details" : details.text,
 		"item_name" : item_name.text,
 		"required" : quantity.value,
-		"collected" : 0
+		"collected" : 0,
+		"meta_data" : get_meta_data()
 	}
 
 	return data

@@ -163,7 +163,13 @@ func add_quest(quest_name:String) -> void:
 	player_quests[quest.quest_id] = quest.duplicate(true)
 	new_quest_added.emit(quest_name)
 	active_quest = quest_name
-	
+
+#Add a quest that was created from script/at runtime
+func add_scripted_quest(quest:ScriptQuest):
+	player_quests[quest.quest_data.quest_id] = quest.quest_data
+	new_quest_added.emit(quest.quest_data.quest_name)
+	active_quest = quest.quest_data.quest_name
+
 #Get a quest from the current loaded resource
 #Usefull for displaying quest data
 func get_quest_from_resource(quest_name:String) -> Dictionary:
@@ -221,12 +227,21 @@ func remove_quest(quest_name:String) -> void:
 	for i in player_quests:
 		if player_quests[i].quest_name == quest_name:
 			player_quests.erase(i)
-
+#returns a dictionary of all the rewards of a player quest
+func get_quest_rewards(quest_name:String) -> Dictionary:
+	var quest_rewards ={}
+	for quest in player_quests:
+		if player_quests[quest].quest_name == quest_name:
+			quest_rewards = player_quests[quest].quest_rewards
+			break
+	return quest_rewards
+	
 #Completes a quest if every required step was completed
 func complete_quest(quest_name:String) -> void:
 	var id = get_player_quest(quest_name).quest_id
 	player_quests[id].completed = true
-	quest_completed.emit(quest_name)
+	#emits quest name and rewards dictionary
+	quest_completed.emit(quest_name,get_quest_rewards(quest_name))
 
 #get all the meta data stored for this quest
 func get_meta_data(quest_name:String) -> Dictionary:
@@ -236,7 +251,8 @@ func get_meta_data(quest_name:String) -> Dictionary:
 			meta_data = player_quests[quest].meta_data
 			break
 	return meta_data
-	
+
+
 #sets or create new quests meta data
 func set_meta_data(quest_name:String,meta_data:String, value:Variant) -> void:
 	var id = get_player_quest(quest_name).quest_id
@@ -264,7 +280,7 @@ func reset_quest(quest_name:String) -> void:
 				for i in step.items_list:
 					i.complete = false
 			TIMER_STEP:
-				if step.count_down:
+				if step.is_count_down:
 					step.time = step.total_time
 				else:
 					step.time = 0
@@ -274,3 +290,9 @@ func reset_quest(quest_name:String) -> void:
 #Usefull for new game files if neccessary
 func wipe_quest_data() -> void:
 	player_quests = {}
+
+func get_random_id() -> String:
+	randomize()
+	#seed(Time.get_unix_time_from_system())
+	return str(randi() % 1000000).sha1_text().substr(0, 10)
+	

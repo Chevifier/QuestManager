@@ -19,8 +19,16 @@ slot/0/right_type = 0
 slot/0/right_color = Color(0, 1, 0, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
+slot/1/left_enabled = true
+slot/1/left_type = 2
+slot/1/left_color = Color(0, 0, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
 script = ExtResource("1_xb21r")
-Node_Type = 3
 
 [node name="ItemList" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -60,6 +68,10 @@ text = "ADD ITEM"
 [node name="Remove" type="Button" parent="ItemList"]
 layout_mode = 2
 text = "REMOVE"
+
+[node name="meta_data" type="Label" parent="."]
+layout_mode = 2
+text = "Meta Data"
 
 [connection signal="item_selected" from="ItemList/ScrollContainer/list" to="." method="_on_list_item_selected"]
 [connection signal="pressed" from="ItemList/Add" to="." method="_on_add_pressed"]

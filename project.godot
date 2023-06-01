@@ -8,7 +8,7 @@
 
 config_version=5
 
-quest_file_path="res://testr.quest"
+quest_file_path="res://addons/quest_manager/Examples/ExampleQuest.quest"
 
 [application]
 

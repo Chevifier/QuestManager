@@ -1,16 +1,19 @@
 @tool
 extends EditorNode
+
+#All data get pull to this node on save
 @onready var quest_name = $Quest_Name
 @onready var quest_details = $Quest_Details
 
 var group_node = null
-var meta_data_node = null
-var group = ""
-var steps = []
-var meta_data = {}
+var quest_rewards_node = null
+var group := ""
+var steps := []
+var quest_rewards := {}
 
 func setup():
 	super.setup()
+	Node_Type = Type.QUEST_NODE
 	focus_nodes.append(quest_name)
 	focus_nodes.append(quest_details)
 
@@ -25,7 +28,8 @@ func get_data():
 		"step_index" : 0,
 		"steps" : steps,
 		"group" : group,
-		"meta_data" : meta_data
+		"meta_data" : get_meta_data(),
+		"quest_rewards" : quest_rewards
 	}
 	return data
 
@@ -41,16 +45,15 @@ func update_group_data():
 	if is_instance_valid(group_node):
 		group = group_node.get_data()
 
-func update_meta_data():
-	meta_data = {}
-	if is_instance_valid(meta_data_node):
-		meta_data = meta_data_node.get_data()
 
-func clear_meta_data():
-	meta_data = {}
-	meta_data_node = null
+func update_quest_rewards():
+	if is_instance_valid(quest_rewards_node):
+		quest_rewards = quest_rewards_node.get_data()
+		
 func clear_group():
 	group = ""
 	group_node = null
-
+func clear_rewards():
+	quest_rewards = {}
+	quest_rewards_node = null
 

@@ -39,9 +39,11 @@ func start():
 	get_tree().paused = false
 	$Quest.hide()
 	
-func quest_complete(n):
+func quest_complete(n,rewards):
 	state = WIN
+	$Complete.text += "\n Points " + str(rewards.Points)
 	$Complete.show()
+	
 	get_tree().paused = true
 	
 func quest_failed(n):

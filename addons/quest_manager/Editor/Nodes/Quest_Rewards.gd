@@ -11,8 +11,8 @@ extends EditorNode
 
 
 func setup():
+	Node_Type = Type.REWARDS_NODE
 	super.setup()
-	Node_Type = Type.META_DATA
 	%AddButton.get_popup().index_pressed.connect(_on_option_selected)
 
 func get_data():
@@ -51,19 +51,14 @@ func set_data(data):
 			TYPE_VECTOR3: meta_node = vec3.duplicate()
 		data_container.add_child(meta_node)
 		meta_node.get_node("name").text = meta
-		if typeof(data[meta]) == TYPE_STRING:
-			meta_node.get_node("data").text = data[meta]
-		elif typeof(data[meta]) == TYPE_VECTOR2:
+		if typeof(data[meta]) == TYPE_VECTOR2:
 			meta_node.get_node("x").value = data[meta].x
 			meta_node.get_node("y").value = data[meta].y
 		elif typeof(data[meta]) == TYPE_VECTOR3:
 			meta_node.get_node("x").value = data[meta].x
 			meta_node.get_node("y").value = data[meta].y
 			meta_node.get_node("z").value = data[meta].z
-		elif typeof(data[meta]) == TYPE_BOOL:
-			meta_node.get_node("data").button_pressed = data[meta]
 		else:
-			#Integer/Float
 			meta_node.get_node("data").value = data[meta]
 		meta_node.get_node("delete").pressed.connect(delete_meta_data.bind(meta_node.get_path()))
 
@@ -80,5 +75,7 @@ func _on_option_selected(index):
 		3: option = bool_meta.duplicate()
 		4: option = vec2.duplicate()
 		5: option = vec3.duplicate()
+	focus_nodes.append(option.get_node("name"))
+	focus_nodes.append(option.get_node("data"))
 	data_container.add_child(option)
 	option.get_node("delete").pressed.connect(delete_meta_data.bind(option.get_path()))

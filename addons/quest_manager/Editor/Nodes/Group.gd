@@ -4,6 +4,7 @@ extends EditorNode
 @onready var group = $LineEdit
 func setup():
 	super.setup()
+	Node_Type = Type.GROUP_NODE
 	focus_nodes.append(group)
 
 func get_data():

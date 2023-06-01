@@ -1,26 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhmvblhnaeape"]
+[gd_scene load_steps=2 format=3 uid="uid://dirh1n1wsgfst"]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Meta_data.gd" id="1_q8meh"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest_Rewards.gd" id="1_y2wej"]
 
-[node name="MetaData" type="GraphNode"]
+[node name="Quest_Rewards" type="GraphNode"]
 custom_minimum_size = Vector2(250, 150)
 offset_right = 247.0
 offset_bottom = 147.0
-tooltip_text = "Meta data nodes are extra parameters you can add to each quest/quest step to keep
-track of something related to the quest.
-i.e some extra condition to progress a step or other quest related variables.
-This data is not directly used by the quest manager but you can access it using
-QuestManager.get_quest_meta_data(quest_name) or QuestManager.get_step_meta_data(step_index)
+tooltip_text = "Quest Reward nodes are items the player receive on quest completion. 
+i.e How much coins this quest rewards or
+what items the player receives
 "
-title = "Meta Data"
+title = "Quest Rewards"
 resizable = true
 slot/0/left_enabled = false
 slot/0/left_type = 2
 slot/0/left_color = Color(1, 1, 1, 1)
 slot/0/left_icon = null
 slot/0/right_enabled = true
-slot/0/right_type = 2
-slot/0/right_color = Color(0, 0, 1, 1)
+slot/0/right_type = 3
+slot/0/right_color = Color(1, 0.843137, 0, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
 slot/1/left_enabled = false
@@ -32,7 +30,7 @@ slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
-script = ExtResource("1_q8meh")
+script = ExtResource("1_y2wej")
 
 [node name="vb" type="VBoxContainer" parent="."]
 layout_mode = 2

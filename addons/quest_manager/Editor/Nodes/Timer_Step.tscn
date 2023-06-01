@@ -19,8 +19,16 @@ slot/0/right_type = 0
 slot/0/right_color = Color(0, 1, 0, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
+slot/1/left_enabled = true
+slot/1/left_type = 2
+slot/1/left_color = Color(0, 0, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
 script = ExtResource("1_7ncg0")
-Node_Type = 7
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -73,6 +81,10 @@ tooltip_text = "If the quest fails on Timeout.
 Completes this step if false"
 button_pressed = true
 text = "Fail On Timeout"
+
+[node name="meta_data" type="Label" parent="."]
+layout_mode = 2
+text = "Meta Data"
 
 [connection signal="gui_input" from="VBoxContainer/details" to="." method="_on_details_gui_input"]
 [connection signal="toggled" from="VBoxContainer/VBoxContainer/count_dir" to="." method="_on_count_down_toggled"]

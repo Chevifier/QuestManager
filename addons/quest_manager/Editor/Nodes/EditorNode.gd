@@ -9,14 +9,17 @@ enum Type {
 	GROUP_NODE,
 	META_DATA,
 	END_NODE,
-	TIMER_NODE 
+	TIMER_NODE,
+	REWARDS_NODE
 }
 
-@export var Node_Type :Type = Type.QUEST_NODE
+var Node_Type :Type
 
 var node_data = {}
 var input_node = null
 var output_node = null
+var meta_data_node = null
+var meta_data := {}
 var id = ""
 var data = {}
 var focus_nodes = []
@@ -35,7 +38,11 @@ func setup():
 	raise_request.connect(_on_raise_request)
 	id = get_random_id()
 	
-
+func get_meta_data():
+	if is_instance_valid(meta_data_node):
+		return meta_data_node.get_data()
+	else:
+		return {}
 func get_data():
 	return data
 
@@ -53,6 +60,8 @@ func set_node_data(data):
 	position_offset = data["position"]
 	
 func set_data(data):
+	if data.has("meta_data"):
+		meta_data = data["meta_data"]
 	pass
 
 func _on_node_selected():
@@ -88,4 +97,13 @@ func get_random_id() -> String:
 	randomize()
 	#seed(Time.get_unix_time_from_system())
 	return str(randi() % 1000000).sha1_text().substr(0, 10)
+	
+func update_meta_data():
+	meta_data = {}
+	if is_instance_valid(meta_data_node):
+		meta_data = meta_data_node.get_data()
+		
 
+func clear_meta_data():
+	meta_data = {}
+	meta_data_node = null

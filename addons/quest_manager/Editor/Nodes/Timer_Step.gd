@@ -8,6 +8,7 @@ extends EditorNode
 @onready var fail_toggle = %fail_on_timeout
 func setup():
 	super.setup()
+	Node_Type = Type.TIMER_NODE
 	focus_nodes.append(details)
 
 func get_data():
@@ -19,7 +20,8 @@ func get_data():
 		"is_count_down" : count_dir.button_pressed,
 		"fail_on_timeout" : fail_toggle.button_pressed,
 		"time_minutes": minutes_node.value,
-		"time_seconds": seconds_node.value
+		"time_seconds": seconds_node.value,
+		"meta_data" : get_meta_data()
 	}
 	return data
 func set_data(data):

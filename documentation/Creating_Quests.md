@@ -31,12 +31,16 @@ For this example we'll keep it simple and create a 1 step Quest to kill 15 enemi
     - We also connect a few signals:
         - `step_updated` - we update the UI to show what changed in the case an enemy was killed so the value increases
         - `step_complete` - We just use a lambda here to print step complete
-        - `quest complete` - We update to UI to show that the quest was completed
+        - `quest complete` - We update the UI to show that the quest was completed
         - `quest_failed` - Show if the quest failed if the player died
     - Then we set the QuestStart label text to the quest details and do some tweening the start the level
-8. Open up the `Example/ExampleOne/Projectile.gd` script. Notice we check to see it the bullet hits an enemy. If it did, we call `QuestManager.progress_quest("ShootEmUp","Enemies")` before removing the projectile. This increases the the `collected` items of the `Incremental Step` by 1 by default.
+8. Open up the `Example/ExampleOne/Projectile.gd` script. Notice we check to see if the bullet hits an enemy. If it did, we call `QuestManager.progress_quest("ShootEmUp","Enemies")` before removing the projectile. This increases the the `collected` items of the `Incremental Step` by 1 by default.
 9. In the Player.gd we also check if the player ran out of lives. If so we call `QuestManager.fail_quest("ShootEmUp")` This sets the quest as failed and emits the `quest_failed` signal.
-10. And Thats about it for the tutorial it a quest has multiple steps the `step_updated` signal returns the new step its up to you how you want to display the information of that current step by checking its `step_type`. Check the [API](Quest_Manager_API.md) for what properties each step_type contains 
+10. And Thats about it for the tutorial. If a quest has multiple steps the `step_updated` signal returns the new step its up to you how you want to display the information of that current step by checking its `step_type`. Check the [API](Quest_Manager_API.md) for what properties each step_type contains 
+
+# Creating Quests for code
+
+As of version 0.3.0, you can now create quest at Run-Time using the ScriptQuest class. This allows you to be able to randomly/procedurally make quest if need be. To do this check the ScriptQuest class in the [Script Quest API](Script_Quest_API.md)
 
 ## Exporting Projects
 

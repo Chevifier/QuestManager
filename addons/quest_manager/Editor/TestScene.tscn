@@ -70,7 +70,7 @@ size_flags_horizontal = 3
 
 [node name="Quest_Name" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
 text = "QUEST NAME"
@@ -84,17 +84,41 @@ text = "Quest Description"
 
 [node name="STEPS" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
 text = "STEPS"
 
-[node name="QuestSteps" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="QuestSteps" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 20
 text = "<Step>"
+
+[node name="REWARDS" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "REWARDS"
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Rewards" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/ScrollContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 20
+text = "<Rewards>"
 
 [node name="accept_quest" type="Button" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
