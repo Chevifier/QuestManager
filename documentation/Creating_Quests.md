@@ -38,9 +38,9 @@ For this example we'll keep it simple and create a 1 step Quest to kill 15 enemi
 9. In the Player.gd we also check if the player ran out of lives. If so we call `QuestManager.fail_quest("ShootEmUp")` This sets the quest as failed and emits the `quest_failed` signal.
 10. And Thats about it for the tutorial. If a quest has multiple steps the `step_updated` signal returns the new step its up to you how you want to display the information of that current step by checking its `step_type`. Check the [API](Quest_Manager_API.md) for what properties each step_type contains 
 
-# Creating Quests for code
+# Creating Quests from code
 
-As of version 0.3.0, you can now create quest at Run-Time using the ScriptQuest class. This allows you to be able to randomly/procedurally make quest if need be. To do this check the ScriptQuest class in the [Script Quest API](Script_Quest_API.md)
+As of version 0.3.0, you can now create quest at Run-Time using the ScriptQuest class. This allows you to be able to randomly/procedurally make quests if necessary. To do this check the ScriptQuest class in the [Script Quest API](Script_Quest_API.md)
 
 ## Exporting Projects
 
