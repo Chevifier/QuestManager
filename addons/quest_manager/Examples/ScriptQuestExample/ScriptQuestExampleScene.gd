@@ -6,11 +6,11 @@ func _ready():
 	#set the quest details
 	quest.set_quest_details("Race your rival to the top of the hill.")
 	#create an action step 
-	var action_step = ScriptQuest.QuestStep.new(ScriptQuest.Step_Type.ACTION_STEP)
+	var action_step = ScriptQuest.QuestStep.new(ScriptQuest.ACTION_STEP)
 	#set step instruction
 	action_step.set_step_details("Reach hill")
 	#create a timer step
-	var timer_step = ScriptQuest.QuestStep.new(ScriptQuest.Step_Type.TIMER_STEP)
+	var timer_step = ScriptQuest.QuestStep.new(ScriptQuest.TIMER_STEP)
 	#set timer step instruction
 	timer_step.set_step_details("Run back down hill in time")
 	#set timer step data; time, is_count_down = true,fail_on_timeout = true

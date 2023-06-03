@@ -111,6 +111,9 @@ Returns all the quest stored in the current_resource. optionally get only the qu
 #### `add_quest(quest_name:String) -> void`
 Add quest to player_quest from current dictionary
 
+#### `add_scripted_quest(quest:ScriptQuest) -> void`
+Add a ScriptQuest to player_quests.
+
 #### `get_quest_from_resource(quest_name:String) -> Dictionary`
 Returns a quest from the current_resource
 
@@ -124,10 +127,10 @@ Returns if the player has completed this quest `quest_name`
 Returns if the player has failed this quest `quest_name`
 
 #### `get_current_step(quest_name:String) -> Dictionary`
-Returns a Dictionary of the current quest step of this quest `quest_name`
+Returns a dictionary of the current quest step of this quest `quest_name`
 
 #### `remove_quest(quest_name:String) -> void`
-Removes Quest from player_quests `quest_name`
+Removes quest from player_quests `quest_name`
 
 #### `complete_quest(quest_name:String) -> void`
 Completes quest `quest_name`

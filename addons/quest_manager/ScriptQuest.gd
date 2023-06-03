@@ -2,7 +2,8 @@ class_name ScriptQuest
 var quest_data = {}
 
 var steps = []
-enum Step_Type {
+#Step Types
+enum {
 ACTION_STEP,
 INCREMENTAL_STEP,
 ITEM_STEP,
@@ -45,15 +46,15 @@ class QuestStep:
 		"meta_data" : {},
 	}
 	
-	func _init(step_type:Step_Type):
+	func _init(step_type):
 		match step_type:
-			Step_Type.ACTION_STEP:
+			ACTION_STEP:
 				data["step_type"] = "action_step"
-			Step_Type.INCREMENTAL_STEP:
+			INCREMENTAL_STEP:
 				data["step_type"] = "incremental_step"
-			Step_Type.ITEM_STEP:
+			ITEM_STEP:
 				data["step_type"] = "items_step"
-			Step_Type.TIMER_STEP:
+			TIMER_STEP:
 				data["step_type"] = "timer_step"
 	
 	func set_step_details(details:String):
@@ -62,14 +63,17 @@ class QuestStep:
 			data["completed"] = false
 	
 	func set_incremental_data(item_name:String, required:int):
+		assert(data["step_type"] == "incremental_step", "Step is not Incremental Step")
 		data["item_name"] = item_name
 		data["required"] = required
 		data["collected"] = 0
 		
 	func set_item_step_items(items:Array):
+		assert(data["step_type"] == "items_step", "Step is not Item Step")
 		data["item_list"] = items
 		
 	func set_timer_data(time_in_seconds:int, is_count_down:bool = true,fail_on_timeout:bool = true):
+		assert(data["step_type"] == "timer_step", "Step is not Timer Step")
 		data["total_time"] = time_in_seconds
 		data["time"] = time_in_seconds if is_count_down else 0
 		data["is_count_down"] = is_count_down
