@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://bnbtwf5q2hh1n"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/End.gd" id="1_18gav"]
 
@@ -17,7 +17,6 @@ slot/0/right_color = Color(1, 1, 1, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
 script = ExtResource("1_18gav")
-Node_Type = 6
 
 [node name="end" type="Label" parent="."]
 layout_mode = 2

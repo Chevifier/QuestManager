@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest.gd" id="1_i7joj"]
 
-[node name="Quest" type="GraphNode"]
+[node name="55991ef41c" type="GraphNode"]
 custom_minimum_size = Vector2(200, 250)
 offset_left = 12.0
 offset_top = 10.0

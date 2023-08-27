@@ -1,21 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://blg3pqyxefe0v"]
+[gd_scene load_steps=9 format=3 uid="uid://blg3pqyxefe0v"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/EditorWindow.gd" id="1_8041a"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Updater.gd" id="2_2g81w"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/right_mouse_menu.gd" id="2_vr34h"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Update_Panel.gd" id="4_2b7cs"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/SaveSystem.gd" id="5_jr3xe"]
 
-[sub_resource type="Image" id="Image_1nuja"]
+[sub_resource type="Image" id="Image_bdri3"]
 data = {
-"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 131, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 131, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 131, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 128, 128, 4, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 93, 93, 55, 255, 97, 97, 58, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 97, 97, 42, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 98, 98, 47, 255, 97, 97, 42, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 93, 93, 233, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 94, 94, 46, 255, 93, 93, 236, 255, 93, 93, 233, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 93, 93, 252, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
+"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
 "height": 16,
 "mipmaps": false,
 "width": 16
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_jl37y"]
-image = SubResource("Image_1nuja")
+[sub_resource type="ImageTexture" id="ImageTexture_ldufw"]
+image = SubResource("Image_bdri3")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amscl"]
 
@@ -55,20 +56,20 @@ layout_mode = 2
 [node name="New" type="Button" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
-icon = SubResource("ImageTexture_jl37y")
+icon = SubResource("ImageTexture_ldufw")
 flat = true
 
 [node name="Load" type="Button" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
-icon = SubResource("ImageTexture_jl37y")
+icon = SubResource("ImageTexture_ldufw")
 flat = true
 
 [node name="Save" type="MenuButton" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Save Quest"
-icon = SubResource("ImageTexture_jl37y")
+icon = SubResource("ImageTexture_ldufw")
 item_count = 2
 popup/item_0/text = "Save"
 popup/item_0/id = 0
@@ -94,8 +95,8 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Node..."
-icon = SubResource("ImageTexture_jl37y")
-item_count = 9
+icon = SubResource("ImageTexture_ldufw")
+item_count = 10
 popup/item_0/text = "Add Quest"
 popup/item_0/id = 0
 popup/item_1/text = "Add Step"
@@ -114,12 +115,14 @@ popup/item_7/text = "Add End Node"
 popup/item_7/id = 7
 popup/item_8/text = "Add Rewards Node"
 popup/item_8/id = 8
+popup/item_9/text = "Add Branch Node"
+popup/item_9/id = 9
 
 [node name="test" type="Button" parent="MarginContainer/hb/Quest Panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Test Quest File"
-icon = SubResource("ImageTexture_jl37y")
+icon = SubResource("ImageTexture_ldufw")
 flat = true
 
 [node name="update" type="Button" parent="MarginContainer/hb/Quest Panel/hb"]
@@ -127,7 +130,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "0.3.0"
-icon = SubResource("ImageTexture_jl37y")
+icon = SubResource("ImageTexture_ldufw")
 flat = true
 script = ExtResource("2_2g81w")
 
@@ -143,7 +146,9 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 right_disconnects = true
+snap_distance = 10
 use_snap = false
+zoom_step = 0.5
 arrange_nodes_button_hidden = true
 
 [node name="right_mouse_list" type="PopupMenu" parent="MarginContainer/hb/Quest Panel/GraphEdit"]
@@ -154,7 +159,7 @@ transparent = true
 max_size = Vector2i(200, 200)
 hide_on_checkable_item_selection = false
 allow_search = false
-item_count = 9
+item_count = 10
 item_0/text = "Add Quest"
 item_0/id = 0
 item_1/text = "Add Step"
@@ -173,6 +178,8 @@ item_7/text = "Add End Node"
 item_7/id = 7
 item_8/text = "Add Rewards Node"
 item_8/id = 8
+item_9/text = "Add Branch Node"
+item_9/id = 9
 script = ExtResource("2_vr34h")
 
 [node name="New_File" type="FileDialog" parent="."]
@@ -199,6 +206,7 @@ filters = PackedStringArray("*.quest")
 show_hidden_files = true
 
 [node name="Quest_Warning" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
 title = "Invalid/Incomplete Quest(s)."
 size = Vector2i(431, 135)
 dialog_text = "File Saved.
@@ -206,6 +214,7 @@ Make sure Quests has Connected Steps
 and an End Node at the end of their steps chain"
 
 [node name="Quest_Name_Warning" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
 title = "Invalid/Incomplete Quest(s)."
 size = Vector2i(431, 135)
 dialog_text = "Quest has Duplicate Names.
@@ -272,6 +281,10 @@ text = "Cancel"
 [node name="HTTPRequest" type="HTTPRequest" parent="Update_Panel"]
 unique_name_in_owner = true
 
+[node name="QuestManagerSaveSystem" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_jr3xe")
+
 [connection signal="pressed" from="MarginContainer/hb/side_panel/hb/New" to="." method="_on_new_pressed"]
 [connection signal="pressed" from="MarginContainer/hb/side_panel/hb/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="MarginContainer/hb/Quest Panel/hb/test" to="." method="_on_test_button_pressed"]
@@ -283,6 +296,7 @@ unique_name_in_owner = true
 [connection signal="copy_nodes_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_copy_nodes_request"]
 [connection signal="delete_nodes_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_delete_nodes_request"]
 [connection signal="disconnection_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_disconnection_request"]
+[connection signal="duplicate_nodes_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_duplicate_nodes_request"]
 [connection signal="node_selected" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_node_selected"]
 [connection signal="paste_nodes_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_paste_nodes_request"]
 [connection signal="popup_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_popup_request"]

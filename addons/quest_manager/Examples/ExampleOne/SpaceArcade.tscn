@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="1_h2u44"]
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleOne/Spawner.gd" id="2_178tv"]
 [ext_resource type="PackedScene" uid="uid://dkgxjm5uka6l7" path="res://addons/quest_manager/Examples/ExampleOne/Player.tscn" id="2_wt15h"]
-[ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleOne/Enemy.tscn" id="2_xic0p"]
+[ext_resource type="PackedScene" uid="uid://b1x0n5bd18fi4" path="res://addons/quest_manager/Examples/ExampleOne/Enemy.tscn" id="2_xic0p"]
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleOne/UI.gd" id="5_dd25g"]
 [ext_resource type="Resource" uid="uid://xpnw6ggixm3w" path="res://addons/quest_manager/Examples/ExampleQuest.quest" id="6_cnepv"]
 

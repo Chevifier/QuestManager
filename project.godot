@@ -13,7 +13,8 @@ quest_file_path="res://addons/quest_manager/Examples/ExampleQuest.quest"
 [application]
 
 config/name="Quest Manager"
-config/features=PackedStringArray("4.0", "Forward Plus")
+run/main_scene="res://addons/quest_manager/Editor/EditorWindow.tscn"
+config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.png"
 
 [autoload]

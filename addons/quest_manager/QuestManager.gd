@@ -12,6 +12,7 @@ const ACTION_STEP = "action_step"
 const INCREMENTAL_STEP = "incremental_step"
 const ITEMS_STEP = "items_step"
 const TIMER_STEP = "timer_step"
+const BRANCH_STEP = "branch"
 #Helper variable for searching for quest
 var active_quest = ""
 
@@ -52,7 +53,7 @@ func get_all_player_quests_names() -> Array:
 
 #Progresses a quest to its next step
 #completes quest if it was at its last step
-func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true) -> void:
+func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true, branch:bool=false) -> void:
 	active_quest = quest_name
 	if has_quest(quest_name) == false:
 		return
@@ -62,7 +63,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 	var step = get_current_step(quest_name)
 	match step.step_type:
 		ACTION_STEP:
-			step.complete = true
+			step.complete = completed
 			step_complete.emit(get_current_step(quest_name))
 			player_quests[id].step_index += 1
 		INCREMENTAL_STEP:
@@ -89,6 +90,30 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 			if quest_item != "":
 				#prevents progress quest calls that contains item
 				return
+			step_complete.emit(get_current_step(quest_name))
+			player_quests[id].step_index += 1
+		#Checks condition and decides if it should branch
+		BRANCH_STEP:
+			step.current_value = amount
+			var condition = step.condition
+			var val1 = step.current_value
+			var val2 = step.condition_value
+			var condition_true = false
+			match condition:
+				Branch.Condition.GREATER_THAN:
+					condition_true = val1 > val2
+				Branch.Condition.LESS_THAN:
+					condition_true = val1 < val2
+				Branch.Condition.EQUAL_TO:
+					condition_true = val1 == val2
+				Branch.Condition.NOT_EQUAL_TO:
+					condition_true = val1 != val2
+			if condition == false:
+				#go to next step
+				pass
+			else:
+				#go to alternate step
+				pass
 			step_complete.emit(get_current_step(quest_name))
 			player_quests[id].step_index += 1
 

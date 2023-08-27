@@ -10,10 +10,11 @@ enum Type {
 	META_DATA,
 	END_NODE,
 	TIMER_NODE,
-	REWARDS_NODE
+	REWARDS_NODE,
+	BRANCH_NODE
 }
 
-var Node_Type :Type
+var Node_Type : Type
 
 var node_data = {}
 var input_node = null
@@ -21,11 +22,13 @@ var output_node = null
 var meta_data_node = null
 var meta_data := {}
 var id = ""
+var next_id = ""
 var data = {}
 var focus_nodes = []
 
 func _ready():
 	setup()
+	name = id
 
 func setup():
 	close_request.connect(_on_close_request)
@@ -43,26 +46,24 @@ func get_meta_data():
 		return meta_data_node.get_data()
 	else:
 		return {}
+	
 func get_data():
-	return data
-
-func get_node_data():
 	node_data["id"] = id
 	node_data["name"] = name
 	node_data["type"] = Node_Type
 	node_data["position"] = position_offset
+	node_data["size"] = size
+	node_data["next_id"] = next_id
 	return node_data
-	
-func set_node_data(data):
-	id = data["id"]
-	name = data["name"]
-	Node_Type = data["type"]
-	position_offset = data["position"]
 	
 func set_data(data):
 	if data.has("meta_data"):
 		meta_data = data["meta_data"]
-	pass
+	id = data["id"]
+	name = data["name"]
+	Node_Type = data["type"]
+	position_offset = data["position"]
+	size = data["size"]
 
 func _on_node_selected():
 	pass
@@ -95,7 +96,6 @@ func release_all_focus():
 
 func get_random_id() -> String:
 	randomize()
-	#seed(Time.get_unix_time_from_system())
 	return str(randi() % 1000000).sha1_text().substr(0, 10)
 	
 func update_meta_data():

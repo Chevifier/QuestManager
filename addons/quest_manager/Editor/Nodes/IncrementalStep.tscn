@@ -61,7 +61,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.4
-max_value = 1e+09
+allow_greater = true
 alignment = 1
 
 [node name="meta_data" type="Label" parent="."]
