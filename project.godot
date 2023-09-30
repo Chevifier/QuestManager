@@ -8,7 +8,7 @@
 
 config_version=5
 
-quest_file_path="res://addons/quest_manager/Examples/ExampleQuest.quest"
+quest_file_path="res://Test.quest"
 
 [application]
 
@@ -20,6 +20,7 @@ config/icon="res://icon.png"
 [autoload]
 
 QuestManager="*res://addons/quest_manager/QuestManager.gd"
+TestAutoLoad="*res://TestAutoLoad.gd"
 
 [editor_plugins]
 

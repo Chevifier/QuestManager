@@ -15,8 +15,10 @@ func setup():
 	Node_Type = Type.META_DATA
 	%AddButton.get_popup().index_pressed.connect(_on_option_selected)
 
-func get_data():
+#set is_function_param to true if you want an ordered array to be returnd
+func get_data(is_function_params :bool= false):
 	var data = {}
+	var arr = []
 	for node in data_container.get_children():
 		var meta_name = node.get_node("name").text
 		var meta_value
@@ -36,11 +38,16 @@ func get_data():
 			var z = node.get_node("z").value
 			meta_value = Vector3(x,y,z)
 		data[meta_name] = meta_value
-
+		if is_function_params:
+			arr.append(meta_value)
+	if is_function_params:
+		data["funcparams"] = arr
 	return data
 	
 func set_data(data):
 	for meta in data:
+		if meta == "funcparams":
+			continue
 		var meta_node
 		match typeof(data[meta]):
 			TYPE_STRING: meta_node = string_meta.duplicate()

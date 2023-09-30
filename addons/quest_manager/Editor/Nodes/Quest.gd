@@ -9,6 +9,7 @@ var group_node = null
 var quest_rewards_node = null
 var group := ""
 var quest_rewards := {}
+var quest_steps = {}
 
 func setup():
 	super.setup()
@@ -23,6 +24,7 @@ func get_data():
 	node_data["quest_name"]= quest_name.text
 	node_data["quest_details"]= quest_details.text
 	node_data["first_step"]= next_id
+	node_data["quest_steps"] = quest_steps
 	node_data["completed"]= false
 	node_data["failed"]= false
 	node_data["group"]= group
@@ -41,7 +43,7 @@ func set_data(data):
 func update_group_data():
 	group = ""
 	if is_instance_valid(group_node):
-		group = group_node.get_data()
+		group = group_node.get_data()["group"]
 
 
 func update_quest_rewards():
@@ -54,4 +56,3 @@ func clear_group():
 func clear_rewards():
 	quest_rewards = {}
 	quest_rewards_node = null
-

@@ -11,7 +11,7 @@ signal data_saved()
 @onready var end = preload("res://addons/quest_manager/Editor/Nodes/End.tscn")
 @onready var rewards = preload("res://addons/quest_manager/Editor/Nodes/Quest_Rewards.tscn")
 @onready var branch = preload("res://addons/quest_manager/Editor/Nodes/Branch.tscn")
-var instance_position = Vector2(150,150)
+@onready var function_call = preload("res://addons/quest_manager/Editor/Nodes/Callable_Step.tscn")
 var node_offset = Vector2(0,0)
 var selected_node = null
 var new_copy = null
@@ -41,7 +41,8 @@ var popup_options_list =[
 	"Add Timer",
 	"Add End Node",
 	"Add Rewards Node",
-	"Add Branch Node"
+	"Add Branch Node",
+	"Add Function Call Node"
 ]
 func _ready():
 	set_button_icons()
@@ -53,6 +54,7 @@ func _ready():
 		context_menu.get_popup().add_item(item)
 	context_menu.get_popup().index_pressed.connect(_on_context_menu_index_pressed)
 	save_btn.get_popup().index_pressed.connect(_on_save_pressed)
+	
 	
 func setup_menu():
 	for item in popup_options_list:
@@ -110,13 +112,15 @@ func add_graph_node(index):
 			node = rewards.instantiate()
 		9:
 			node = branch.instantiate()
+		10:
+			node = function_call.instantiate()
 	if node == null:
 		print("Node instance Error, Check Index")
 		return
 	
 	graph.add_child(node)
 	node.owner = graph
-	node.set_position_offset(instance_position+graph.scroll_offset+node_offset)
+	node.set_position_offset(graph.scroll_offset+node_offset)
 	node_offset += Vector2(50,50)
 	if node_offset.x > 400:
 		node_offset = Vector2()
@@ -126,6 +130,8 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 	#Prevent multiple connections to same port
 	for connection in graph.get_connection_list():
 		if connection.to == to_node and connection.to_port == to_port:
+			return
+		if connection.from == from_node and connection.from_port == from_port:
 			return
 			
 	var from = get_connection_node(from_node)
@@ -143,14 +149,16 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 			from.output_node = to
 		EditorNode.Type.BRANCH_NODE:
 			if from_port == 1: # second output
-				from.branch_step_id = to.name
+				from.alt_output_node = to
+				from.branch_step_id = to.id
+			elif from_port == 0:
+				from.output_node = to
+				to.input_node = from
 		_:
 			to.input_node = from
 			from.output_node = to
 
 	graph.connect_node(from_node,from_port,to_node,to_port)
-	#graph.set_connection_activity(from_node,from_port,to_node,to_port,1.0)
-	updateIdSteps()
 	#Check if from node is Group or Meta Data
 	updateMetaDataAndGroup(to,from)
 	
@@ -161,31 +169,49 @@ func updateMetaDataAndGroup(to,from):
 		to.group_node = from
 	if from.Node_Type == EditorNode.Type.META_DATA:
 		to.meta_data_node = from
-
 	for quest in quest_nodes:
 		quest.update_meta_data()
 		quest.update_group_data()
 
-#Pulls all data into Quest Nodes
-func updateIdSteps():
+#Pulls all data into Quest Nodes and return it for saving
+func get_quest_data():
+	var quest_data = {}
 	var quest_nodes = get_quest_nodes()
-	quest_chains_complete = false
 	quest_name_duplicate = hasDuplicateNames()
-	
 	for quest in quest_nodes:
 		quest.update_group_data()
 		quest.update_meta_data()
 		quest.update_quest_rewards()
+		var steps = {}
 		var current_node = quest.output_node
+		var branches = []
+		var branches2 = []
 		while current_node != null:
-			quest_chains_complete = false
-			if current_node.Node_Type == EditorNode.Type.END_NODE:
-				quest_chains_complete = true
-				break
 			current_node.update_meta_data()
 			var data = current_node.get_data()
+			steps[current_node.id] = data
+			if current_node.Node_Type == EditorNode.Type.BRANCH_NODE:
+				branches.append(current_node)
 			current_node = current_node.output_node
-
+		for branch in branches:
+			var current_node2 = branch.alt_output_node
+			while current_node2 != null:
+				var data2 = current_node2.get_data()
+				steps[current_node2.id] = current_node2.get_data()
+				if current_node2.Node_Type == EditorNode.Type.BRANCH_NODE:
+					branches2.append(current_node2)
+				current_node2 = current_node2.output_node
+		for branch2 in branches2:
+			var current_node3 = branch2.alt_output_node
+			while current_node3 != null:
+				var data2 = current_node3.get_data()
+				steps[current_node3.id] = current_node3.get_data()
+				current_node3 = current_node3.output_node
+		quest.quest_steps = steps
+		quest_data[quest.id] = quest.get_data()
+	return quest_data
+		
+		
 #Check if quest has the same names
 #ToDO auto appen names with number if it exists
 func hasDuplicateNames():
@@ -229,11 +255,9 @@ func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port
 	to.input_node = null
 	
 	graph.disconnect_node(from_node,from_port,to_node,to_port)
-	updateIdSteps()
 
 func _on_graph_edit_popup_request(_position):
-	instance_position = _position
-	%right_mouse_list.position = get_global_mouse_position() + Vector2(100,100)
+	%right_mouse_list.position = get_global_mouse_position() + Vector2(100,0)
 	%right_mouse_list.popup()
 
 #On Node option selected from context menu
@@ -259,16 +283,16 @@ func remove_connections_to_node(node):
 	for connection in graph.get_connection_list():
 		if connection.to == node.name or connection.from == node.name:
 			graph.disconnect_node(connection.from, connection.from_port, connection.to, connection.to_port)
-#retreive data for saving
-func get_quest_data():
-	var quest_data = {}
+
+
+#retreive editor data for saving
+func get_editor_data():
+	var editor_data = {}
 	for node in graph.get_children():
 		if node is EditorNode:
-			quest_data[node.name] = node.get_data()
-	quest_data["connections_list"] = graph.get_connection_list()
-	return quest_data
-
-
+			editor_data[node.name] = node.get_data()
+	editor_data["connections_list"] = graph.get_connection_list()
+	return editor_data
 
 func clear_graph():
 	graph.clear_connections()
@@ -299,6 +323,9 @@ func _on_graph_edit_connection_from_empty(to_node, to_port, release_position):
 func _on_graph_edit_connection_to_empty(from_node, from_port, release_position):
 	#TO-DO context sensitive node menu
 	pass
+
+func reimport_saved_file(saved_file):
+	editor_plugin._update_imports(saved_file)
 
 func _on_graph_edit_mouse_exited():
 	for node in get_all_nodes():
@@ -334,3 +361,6 @@ func _on_graph_edit_duplicate_nodes_request():
 	_on_graph_edit_copy_nodes_request()
 	_on_graph_edit_paste_nodes_request()
 
+func _on_graph_edit_gui_input(event):
+	if event is InputEventMouseButton:
+		node_offset = graph.get_local_mouse_position()

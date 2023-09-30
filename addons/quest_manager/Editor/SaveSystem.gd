@@ -9,13 +9,11 @@ func _ready():
 	pass
 
 func save_data(file_path):
-	Editor.updateIdSteps()
 	var Save = FileAccess.open(file_path,FileAccess.WRITE)
 	Save.store_var(Editor.get_quest_data())
+	Save.store_var(Editor.get_editor_data())
 	current_file_path = file_path
-	
-	if Editor.quest_chains_complete == false:
-		%Quest_Warning.popup_centered()
+
 	if Editor.quest_name_duplicate == true:
 		%Quest_Name_Warning.popup_centered()
 		
@@ -29,13 +27,13 @@ func load_data(file_path):
 	Editor.clear_graph()
 	#load new node and set data from resource
 	
-	for i in quest_res.quest_data:
+	for i in quest_res.editor_data:
 		var node
 		#skip connection list until all node are loaded
 		if i == "connections_list":
 			continue
 
-		match quest_res.quest_data[i].type:
+		match quest_res.editor_data[i].type:
 			EditorNode.Type.QUEST_NODE:
 				node = Editor.quest_node.instantiate()
 			EditorNode.Type.STEP_NODE:
@@ -57,8 +55,8 @@ func load_data(file_path):
 			EditorNode.Type.BRANCH_NODE:
 				node = Editor.branch.instantiate()
 		Editor.graph.add_child(node)
-		node.set_data(quest_res.quest_data[i])
-	for con in quest_res.quest_data.connections_list:
+		node.set_data(quest_res.editor_data[i])
+	for con in quest_res.editor_data.connections_list:
 		Editor._on_graph_edit_connection_request(con.from,con.from_port,con.to,con.to_port)
 
 func save_new_file(file_path):
@@ -67,3 +65,4 @@ func save_new_file(file_path):
 	current_file_path = file_path
 	data_saved.emit(file_path)
 	Editor.clear_graph()
+	

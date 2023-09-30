@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Update_Panel.gd" id="4_2b7cs"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/SaveSystem.gd" id="5_jr3xe"]
 
-[sub_resource type="Image" id="Image_bdri3"]
+[sub_resource type="Image" id="Image_witx6"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -15,8 +15,8 @@ data = {
 "width": 16
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_ldufw"]
-image = SubResource("Image_bdri3")
+[sub_resource type="ImageTexture" id="ImageTexture_5lkjd"]
+image = SubResource("Image_witx6")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amscl"]
 
@@ -56,20 +56,20 @@ layout_mode = 2
 [node name="New" type="Button" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
-icon = SubResource("ImageTexture_ldufw")
+icon = SubResource("ImageTexture_5lkjd")
 flat = true
 
 [node name="Load" type="Button" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
-icon = SubResource("ImageTexture_ldufw")
+icon = SubResource("ImageTexture_5lkjd")
 flat = true
 
 [node name="Save" type="MenuButton" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Save Quest"
-icon = SubResource("ImageTexture_ldufw")
+icon = SubResource("ImageTexture_5lkjd")
 item_count = 2
 popup/item_0/text = "Save"
 popup/item_0/id = 0
@@ -95,8 +95,8 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Node..."
-icon = SubResource("ImageTexture_ldufw")
-item_count = 10
+icon = SubResource("ImageTexture_5lkjd")
+item_count = 11
 popup/item_0/text = "Add Quest"
 popup/item_0/id = 0
 popup/item_1/text = "Add Step"
@@ -117,20 +117,22 @@ popup/item_8/text = "Add Rewards Node"
 popup/item_8/id = 8
 popup/item_9/text = "Add Branch Node"
 popup/item_9/id = 9
+popup/item_10/text = "Add Function Call Node"
+popup/item_10/id = 10
 
 [node name="test" type="Button" parent="MarginContainer/hb/Quest Panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Test Quest File"
-icon = SubResource("ImageTexture_ldufw")
+icon = SubResource("ImageTexture_5lkjd")
 flat = true
 
 [node name="update" type="Button" parent="MarginContainer/hb/Quest Panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "0.3.0"
-icon = SubResource("ImageTexture_ldufw")
+text = "0.6.0"
+icon = SubResource("ImageTexture_5lkjd")
 flat = true
 script = ExtResource("2_2g81w")
 
@@ -148,18 +150,15 @@ mouse_filter = 1
 right_disconnects = true
 snap_distance = 10
 use_snap = false
-zoom_step = 0.5
 arrange_nodes_button_hidden = true
 
 [node name="right_mouse_list" type="PopupMenu" parent="MarginContainer/hb/Quest Panel/GraphEdit"]
 unique_name_in_owner = true
-position = Vector2i(125, 0)
-size = Vector2i(195, 197)
+size = Vector2i(200, 200)
 transparent = true
 max_size = Vector2i(200, 200)
 hide_on_checkable_item_selection = false
-allow_search = false
-item_count = 10
+item_count = 11
 item_0/text = "Add Quest"
 item_0/id = 0
 item_1/text = "Add Step"
@@ -180,6 +179,8 @@ item_8/text = "Add Rewards Node"
 item_8/id = 8
 item_9/text = "Add Branch Node"
 item_9/id = 9
+item_10/text = "Add Function Call Node"
+item_10/id = 10
 script = ExtResource("2_vr34h")
 
 [node name="New_File" type="FileDialog" parent="."]
@@ -256,7 +257,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "CURRENT VERSION: 0.3.0"
+text = "CURRENT VERSION: 0.6.0"
 horizontal_alignment = 1
 
 [node name="VSplitContainer" type="VSplitContainer" parent="Update_Panel/MarginContainer/VBoxContainer"]
@@ -272,7 +273,7 @@ text = "Up To Date"
 [node name="PatchNotes" type="Button" parent="Update_Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "v0.3.0 Patch Notes"
+text = "v0.6.0 Patch Notes"
 
 [node name="Cancel" type="Button" parent="Update_Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -297,6 +298,7 @@ script = ExtResource("5_jr3xe")
 [connection signal="delete_nodes_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_delete_nodes_request"]
 [connection signal="disconnection_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_disconnection_request"]
 [connection signal="duplicate_nodes_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_duplicate_nodes_request"]
+[connection signal="gui_input" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_gui_input"]
 [connection signal="node_selected" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_node_selected"]
 [connection signal="paste_nodes_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_paste_nodes_request"]
 [connection signal="popup_request" from="MarginContainer/hb/Quest Panel/GraphEdit" to="." method="_on_graph_edit_popup_request"]
@@ -307,3 +309,4 @@ script = ExtResource("5_jr3xe")
 [connection signal="pressed" from="Update_Panel/MarginContainer/VBoxContainer/PatchNotes" to="Update_Panel" method="_on_patch_notes_pressed"]
 [connection signal="pressed" from="Update_Panel/MarginContainer/VBoxContainer/Cancel" to="Update_Panel" method="_on_cancel_pressed"]
 [connection signal="request_completed" from="Update_Panel/HTTPRequest" to="Update_Panel" method="_on_http_request_request_completed"]
+[connection signal="data_saved" from="QuestManagerSaveSystem" to="." method="reimport_saved_file"]

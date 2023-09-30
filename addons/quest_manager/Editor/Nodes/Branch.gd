@@ -8,6 +8,7 @@ extends EditorNode
 @onready var condition_value = %condition_value
 
 var branch_step_id = ""
+var alt_output_node = null
 enum Condition {
 	GREATER_THAN,
 	LESS_THAN,

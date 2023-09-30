@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Branch.gd" id="1_5cc0i"]
 
-[node name="9d6c4ed379" type="GraphNode"]
+[node name="1ba8bc6aa6" type="GraphNode"]
 custom_minimum_size = Vector2(150, 250)
 offset_right = 197.0
 offset_bottom = 250.0
 size_flags_vertical = 4
-tooltip_text = "Action Quest Step requires an action to be completed to advance"
+tooltip_text = "Branch Step goes to alternate step if contition is true"
 title = "Branch Step"
 resizable = true
 slot/0/left_enabled = true

@@ -1,18 +1,20 @@
 @tool
 extends Node
 
-signal quest_completed()
-signal quest_failed()
-signal step_complete()
-signal step_updated()
-signal new_quest_added()
-signal quest_reset()
+signal quest_completed(quest_name)
+signal quest_failed(quest_name)
+signal step_complete(quest_name)
+signal step_updated(quest_name)
+signal new_quest_added(quest_name)
+signal quest_reset(quest_name)
 
 const ACTION_STEP = "action_step"
 const INCREMENTAL_STEP = "incremental_step"
 const ITEMS_STEP = "items_step"
 const TIMER_STEP = "timer_step"
 const BRANCH_STEP = "branch"
+const FUNCTION_CALL_STEP = "function_call_step"
+const END = "end"
 #Helper variable for searching for quest
 var active_quest = ""
 
@@ -24,13 +26,12 @@ var counter = 0.0
 
 #loads and add a quest to player quests from quest_resource
 func add_quest_from_resource(resource:QuestResource,quest_name:String) -> void:
-	current_resource = resource
-	add_quest(quest_name)
+	var quest_data = resource.get_quest_by_name(quest_name)
+	player_quests[quest_data.quest_id] = quest_data.duplicate(true)
+	new_quest_added.emit(quest_name)
+	active_quest = quest_name
 	step_updated.emit(get_current_step(quest_name))
 
-#loads the Quest resource to view/accept quests
-func load_quest_resource(resource:QuestResource) -> void:
-	current_resource = resource
 
 #Get a quest that the player has accepted
 func get_player_quest(quest_name:String) -> Dictionary:
@@ -116,6 +117,13 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 				pass
 			step_complete.emit(get_current_step(quest_name))
 			player_quests[id].step_index += 1
+		FUNCTION_CALL_STEP:
+			call_function(step.callable,step.params["funcparams"])
+			step.complete = completed
+			step_complete.emit(get_current_step(quest_name))
+		END:
+			quest_completed.emit(quest_name)
+			pass
 
 	var total_steps = player_quests[id].steps.size()
 	if player_quests[id].step_index >= total_steps:
@@ -171,42 +179,15 @@ func set_quest_step_items(quest_name:String,quest_item:String,amount:int=0,colle
 					step_updated.emit(get_current_step(quest_name))
 	step_updated.emit(step)
 #Optionally get quests that were grouped by group name grouped to all by default
-func get_quest_list(group:String="") -> Dictionary:
-	if group == "":
-		return current_resource.quest_data
-	var quests = {}
-	for quest in current_resource.quest_data:
-		if current_resource.quest_data[quest].group == group:
-			quests[quest] = current_resource.quest_data[quest]
-	assert(current_resource != null, "Quest Resource not Loaded")
-	return quests
-
-#Adds quest from the current loaded resource
-#to the player_quests list
-func add_quest(quest_name:String) -> void:
-	var quest = get_quest_from_resource(quest_name)
-	player_quests[quest.quest_id] = quest.duplicate(true)
-	new_quest_added.emit(quest_name)
-	active_quest = quest_name
-
+func get_quest_list(quest_resource:QuestResource, group:String="") -> Array:
+	assert(quest_resource != null, "Quest Resource not Loaded")
+	return quest_resource.get_quests(group)
+	
 #Add a quest that was created from script/at runtime
 func add_scripted_quest(quest:ScriptQuest):
 	player_quests[quest.quest_data.quest_id] = quest.quest_data
 	new_quest_added.emit(quest.quest_data.quest_name)
 	active_quest = quest.quest_data.quest_name
-
-#Get a quest from the current loaded resource
-#Usefull for displaying quest data
-func get_quest_from_resource(quest_name:String) -> Dictionary:
-	var quest_data = {}
-	for quest in current_resource.quest_data:
-		if current_resource.quest_data[quest].quest_name == quest_name:
-			for entry in current_resource.quest_data[quest]:
-				quest_data[entry] = current_resource.quest_data[quest][entry]
-			#quest_data = current_resource.quest_data[quest]
-			break
-	assert(!quest_data.is_empty(),"The Quest: %s was not found in loaded resource" % quest_name)
-	return quest_data
 
 #Return true if the player currently has a quest
 func has_quest(quest_name:String) -> bool:
@@ -223,6 +204,7 @@ func get_quests_in_progress():
 			continue
 		active_quests[quest] = player_quests[quest]
 	return active_quests
+	
 #return true if quest is complete
 func is_quest_complete(quest_name:String) -> bool:
 	if has_quest(quest_name)==false:
@@ -321,3 +303,16 @@ func get_random_id() -> String:
 	#seed(Time.get_unix_time_from_system())
 	return str(randi() % 1000000).sha1_text().substr(0, 10)
 	
+func call_function(autoloadfunction:String,params:Array):
+	#split function from autoload script name
+	var autofuncsplit = autoloadfunction.split(".")
+	var singleton_name = autofuncsplit[0]
+	var function :String= autofuncsplit[1]
+	#get only function name without ()
+	var callable = function.split("(")[0]
+	#TestAutoLoad.call(callable)
+	var auto_load = get_tree().root.get_node(singleton_name)
+	if params.size()>=0:
+		auto_load.call(callable,params)
+	else:
+		auto_load.call(callable)

@@ -12,3 +12,4 @@ dest_files=["res://.godot/imported/ExampleQuest.quest-1c7a50c0170d36e7436fe08e16
 
 [params]
 
+defaults=true

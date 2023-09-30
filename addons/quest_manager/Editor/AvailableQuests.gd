@@ -32,7 +32,7 @@ func _on_quest_list_item_selected(index):
 	var quest = QuestManager.get_quest_from_resource(selected_quest)
 	quest_name_lbl.text = quest.quest_name
 	quest_description.text = quest.quest_details
-	var steps = QuestManager.get_quest_from_resource(selected_quest).steps
+	var steps = QuestManager.get_quest_steps(selected_quest)
 	var steps_string :String= ""
 	var current = 1
 	for step in steps:

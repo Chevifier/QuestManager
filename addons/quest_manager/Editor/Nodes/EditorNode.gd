@@ -1,5 +1,6 @@
 @tool
 class_name EditorNode
+
 extends GraphNode
 enum Type {
 	QUEST_NODE,
@@ -11,7 +12,8 @@ enum Type {
 	END_NODE,
 	TIMER_NODE,
 	REWARDS_NODE,
-	BRANCH_NODE
+	BRANCH_NODE,
+	FUNCTION_CALL_NODE
 }
 
 var Node_Type : Type
@@ -23,12 +25,12 @@ var meta_data_node = null
 var meta_data := {}
 var id = ""
 var next_id = ""
+var quest_id = ""
 var data = {}
 var focus_nodes = []
 
 func _ready():
 	setup()
-	name = id
 
 func setup():
 	close_request.connect(_on_close_request)
@@ -40,10 +42,11 @@ func setup():
 	position_offset_changed.connect(_on_position_offset_changed)
 	raise_request.connect(_on_raise_request)
 	id = get_random_id()
+	name = id
 	
-func get_meta_data():
+func get_meta_data(func_params:bool = false):
 	if is_instance_valid(meta_data_node):
-		return meta_data_node.get_data()
+		return meta_data_node.get_data(func_params)
 	else:
 		return {}
 	

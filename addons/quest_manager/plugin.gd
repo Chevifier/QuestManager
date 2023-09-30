@@ -66,5 +66,4 @@ func _exit_tree():
 	quest_importer = null
 
 func _update_imports(file_path):
-	get_editor_interface().get_resource_filesystem().scan()
-
+	get_editor_interface().get_resource_filesystem().scan_sources()
