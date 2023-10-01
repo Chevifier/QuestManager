@@ -8,14 +8,14 @@ extends Resource
 func get_quest_by_name(quest_name:String) -> Dictionary:
 	var return_quest = {}
 	for quest in quest_data:
-		if quest.quest_name == quest_name:
-			return_quest = quest.duplicate()
+		if quest_data[quest]["quest_name"] == quest_name:
+			return_quest = quest_data[quest].duplicate()
 			break
 	assert(!quest_data.is_empty(),"The Quest: %s was not found in loaded resource" % quest_name)
-	return quest_data
+	return return_quest
 
 
-func get_quests(group:String="") -> Array:
+func get_quests(group:String="") -> Dictionary:
 	var quests = {}
 	if group == "":
 		quests = quest_data.duplicate()

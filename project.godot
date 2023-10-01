@@ -19,8 +19,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-QuestManager="*res://addons/quest_manager/QuestManager.gd"
 TestAutoLoad="*res://TestAutoLoad.gd"
+QuestManager="*res://addons/quest_manager/QuestManager.gd"
 
 [editor_plugins]
 

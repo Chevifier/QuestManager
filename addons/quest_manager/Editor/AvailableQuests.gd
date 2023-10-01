@@ -32,11 +32,13 @@ func _on_quest_list_item_selected(index):
 	var quest = QuestManager.get_quest_from_resource(selected_quest)
 	quest_name_lbl.text = quest.quest_name
 	quest_description.text = quest.quest_details
-	var steps = QuestManager.get_quest_steps(selected_quest)
+	var steps = quest.quest_steps
 	var steps_string :String= ""
 	var current = 1
 	for step in steps:
-		steps_string += str(current) + ". %s \n" % step.details
+		if steps[step].step_type == "end" or steps[step].step_type == "function_call_step":
+			continue
+		steps_string += str(current) + ". %s \n" % steps[step].details
 		current += 1 
 	quest_step_details.text = steps_string
 	

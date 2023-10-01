@@ -5,9 +5,9 @@ extends EditorNode
 
 
 func setup():
-	super.setup()
 	Node_Type = Type.STEP_NODE
 	focus_nodes.append(details)
+	super.setup()
 
 func get_data():
 	node_data["step_type"] = "action_step"

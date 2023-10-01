@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Callable_Step.gd" id="1_mxhm0"]
 
-[node name="dc880cffce" type="GraphNode"]
+[node name="a10eddd925" type="GraphNode"]
 custom_minimum_size = Vector2(150, 100)
 offset_right = 267.0
 offset_bottom = 113.0

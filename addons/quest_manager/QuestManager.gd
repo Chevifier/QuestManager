@@ -24,14 +24,20 @@ var player_quests = {}
 var counter = 0.0
 #used to update timer steps individually
 
+#get quest to view data
+func get_quest_from_resource(quest_name:String,resource:QuestResource=current_resource):
+	return resource.get_quest_by_name(quest_name)
+
 #loads and add a quest to player quests from quest_resource
-func add_quest_from_resource(resource:QuestResource,quest_name:String) -> void:
+func add_quest(quest_name:String,resource:QuestResource=current_resource) -> void:
 	var quest_data = resource.get_quest_by_name(quest_name)
 	player_quests[quest_data.quest_id] = quest_data.duplicate(true)
 	new_quest_added.emit(quest_name)
 	active_quest = quest_name
 	step_updated.emit(get_current_step(quest_name))
 
+func load_quest_resource(quest_res:QuestResource):
+	current_resource = quest_res
 
 #Get a quest that the player has accepted
 func get_player_quest(quest_name:String) -> Dictionary:
@@ -178,8 +184,9 @@ func set_quest_step_items(quest_name:String,quest_item:String,amount:int=0,colle
 					item.complete = collected
 					step_updated.emit(get_current_step(quest_name))
 	step_updated.emit(step)
+
 #Optionally get quests that were grouped by group name grouped to all by default
-func get_quest_list(quest_resource:QuestResource, group:String="") -> Array:
+func get_quest_list(quest_resource:QuestResource=current_resource, group:String="") -> Dictionary:
 	assert(quest_resource != null, "Quest Resource not Loaded")
 	return quest_resource.get_quests(group)
 	
@@ -307,7 +314,7 @@ func call_function(autoloadfunction:String,params:Array):
 	#split function from autoload script name
 	var autofuncsplit = autoloadfunction.split(".")
 	var singleton_name = autofuncsplit[0]
-	var function :String= autofuncsplit[1]
+	var function = autofuncsplit[1]
 	#get only function name without ()
 	var callable = function.split("(")[0]
 	#TestAutoLoad.call(callable)

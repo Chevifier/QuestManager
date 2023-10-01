@@ -151,7 +151,7 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 			if from_port == 1: # second output
 				from.alt_output_node = to
 				from.branch_step_id = to.id
-			elif from_port == 0:
+			elif from_port == 0: #otherwise connect
 				from.output_node = to
 				to.input_node = from
 		_:
@@ -164,6 +164,8 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 	
 
 func updateMetaDataAndGroup(to,from):
+	if Engine.is_editor_hint():
+		return
 	var quest_nodes = get_quest_nodes()
 	if  from.Node_Type == EditorNode.Type.GROUP_NODE:
 		to.group_node = from
@@ -177,7 +179,6 @@ func updateMetaDataAndGroup(to,from):
 func get_quest_data():
 	var quest_data = {}
 	var quest_nodes = get_quest_nodes()
-	quest_name_duplicate = hasDuplicateNames()
 	for quest in quest_nodes:
 		quest.update_group_data()
 		quest.update_meta_data()
@@ -210,18 +211,7 @@ func get_quest_data():
 		quest.quest_steps = steps
 		quest_data[quest.id] = quest.get_data()
 	return quest_data
-		
-		
-#Check if quest has the same names
-#ToDO auto appen names with number if it exists
-func hasDuplicateNames():
-	var namesofar = []
-	for quest in get_quest_nodes():
-		var value = quest.get_data()["quest_name"];
-		if value in namesofar:
-			return true
-		namesofar.append(value)
-	return false
+	
 #Gets all Nodes that are Quests
 func get_quest_nodes():
 	var quest_nodes = []

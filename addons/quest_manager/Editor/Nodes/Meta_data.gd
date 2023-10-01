@@ -18,7 +18,8 @@ func setup():
 #set is_function_param to true if you want an ordered array to be returnd
 func get_data(is_function_params :bool= false):
 	var data = {}
-	var arr = []
+	#Array for function parameter for callable Node
+	var arr = [] 
 	for node in data_container.get_children():
 		var meta_name = node.get_node("name").text
 		var meta_value
@@ -38,6 +39,7 @@ func get_data(is_function_params :bool= false):
 			var z = node.get_node("z").value
 			meta_value = Vector3(x,y,z)
 		data[meta_name] = meta_value
+	
 		if is_function_params:
 			arr.append(meta_value)
 	if is_function_params:
@@ -46,6 +48,7 @@ func get_data(is_function_params :bool= false):
 	
 func set_data(data):
 	for meta in data:
+		#skip function params setting
 		if meta == "funcparams":
 			continue
 		var meta_node

@@ -54,6 +54,8 @@ func load_data(file_path):
 				node = Editor.rewards.instantiate()
 			EditorNode.Type.BRANCH_NODE:
 				node = Editor.branch.instantiate()
+			EditorNode.Type.FUNCTION_CALL_NODE:
+				node = Editor.function_call.instantiate()
 		Editor.graph.add_child(node)
 		node.set_data(quest_res.editor_data[i])
 	for con in quest_res.editor_data.connections_list:
