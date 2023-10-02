@@ -31,4 +31,18 @@ func get_quest_list() -> Dictionary:
 func get_editor_data() -> Dictionary:
 	return editor_data
 
+func get_quest_steps_sorted(quest_name:String) -> Array:
+	var steps = []
+	var quest = get_quest_by_name(quest_name)
+	
+	var steps_dic = quest.quest_steps
+	for step in steps_dic:
+		steps.append(steps_dic[step])
+	steps.sort_custom(sort_by_next_id)
+	return steps
 
+func sort_by_next_id(a,b):
+	if a.id == b.next_id:
+		return true
+	else:
+		return false
