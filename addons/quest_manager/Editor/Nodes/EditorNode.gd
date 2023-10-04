@@ -31,7 +31,7 @@ var focus_nodes = []
 @onready var id_lbl = $id_lbl
 func _ready():
 	setup()
-func show_ids(vis:bool):
+func show_id(vis:bool):
 	id_lbl.visible = vis
 func setup():
 	close_request.connect(_on_close_request)

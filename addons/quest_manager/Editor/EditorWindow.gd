@@ -120,6 +120,7 @@ func add_graph_node(index):
 	
 	graph.add_child(node)
 	node.owner = graph
+	node.show_id(%show_ids.button_pressed)
 	node.set_position_offset(graph.scroll_offset+node_offset)
 	node_offset += Vector2(50,50)
 	if node_offset.x > 400:
@@ -356,3 +357,8 @@ func _on_graph_edit_duplicate_nodes_request():
 func _on_graph_edit_gui_input(event):
 	if event is InputEventMouseButton:
 		node_offset = graph.get_local_mouse_position()
+
+func _on_show_ids_toggled(button_pressed):
+	for node in graph.get_children():
+		if node is EditorNode:
+			node.show_id(button_pressed)
