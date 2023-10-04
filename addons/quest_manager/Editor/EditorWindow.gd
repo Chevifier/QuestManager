@@ -136,7 +136,7 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 			
 	var from = get_connection_node(from_node)
 	var to = get_connection_node(to_node)
-	from.next_id = to.name
+	
 	match from.Node_Type:
 		EditorNode.Type.GROUP_NODE:
 			to.group_node = from
@@ -154,9 +154,11 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 			elif from_port == 0: #otherwise connect
 				from.output_node = to
 				to.input_node = from
+				from.next_id = to.name
 		_:
 			to.input_node = from
 			from.output_node = to
+			from.next_id = to.name
 
 	graph.connect_node(from_node,from_port,to_node,to_port)
 	#Check if from node is Group or Meta Data
