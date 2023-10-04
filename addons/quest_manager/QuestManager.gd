@@ -60,7 +60,11 @@ func get_all_player_quests_names() -> Array:
 	for i in player_quests:
 		quests.append(player_quests[i].quest_name)
 	return quests
-
+func set_branch_step(quest_name, should_branch:bool=true):
+	var step = get_current_step(quest_name)
+	if step.step_type == BRANCH_STEP:
+		get_current_step(quest_name)["branch"] = should_branch
+		
 #Progresses a quest to its next step
 #completes quest if it was at its last step
 func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true, branch:bool=false) -> void:
@@ -74,16 +78,16 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 	match step.step_type:
 		ACTION_STEP:
 			get_current_step(id,true).complete = completed
-			step_complete.emit(get_current_step(id,true))
 			player_quests[id].next_id = step["next_id"]
+			step_complete.emit(get_current_step(id,true))
 		INCREMENTAL_STEP:
 			if step.item_name != quest_item:
 				return
 			get_current_step(id,true).collected += amount
 			step_updated.emit(get_current_step(id,true))
 			if step.collected >= step.required:
-				step_complete.emit(get_current_step(id,true))
 				player_quests[id].next_id = step["next_id"]
+				step_complete.emit(get_current_step(id,true))
 		ITEMS_STEP:
 			for item in get_current_step(id,true).item_list:
 				if item.name == quest_item:
@@ -98,44 +102,34 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 					break
 			if missing_items == false:
 				get_current_step(id,true).complete = true
-				step_complete.emit(get_current_step(id,true))
 				player_quests[id].next_id = step["next_id"]
+				step_complete.emit(get_current_step(id,true))
 		TIMER_STEP:
 			if quest_item != "":
 				#prevents progress quest calls that contains item
 				return
-			step_complete.emit(get_current_step(id,true))
 			player_quests[id].next_id = step["next_id"]
+			step_complete.emit(get_current_step(id,true))
 		#Checks condition and decides if it should branch
 		BRANCH_STEP:
-			step.current_value = amount
-			var condition = step.condition
-			var val1 = step.current_value
-			var val2 = step.condition_value
-			var condition_true = false
-			match condition:
-				Branch.Condition.GREATER_THAN:
-					condition_true = val1 > val2
-				Branch.Condition.LESS_THAN:
-					condition_true = val1 < val2
-				Branch.Condition.EQUAL_TO:
-					condition_true = val1 == val2
-				Branch.Condition.NOT_EQUAL_TO:
-					condition_true = val1 != val2
-			if condition_true == false:
-				player_quests[id].next_id = step["next_id"]
+			if get_current_step(id,true).branch == false:
+				player_quests[id].next_id = get_current_step(id,true)["next_id"]
 			else:
-				player_quests[id].next_id = step["branch_step_id"]
+				player_quests[id].next_id = get_current_step(id,true)["branch_step_id"]
+			get_current_step(id,true)["complete"] = true
 			step_complete.emit(get_current_step(id,true))
 		FUNCTION_CALL_STEP:
 			call_function(step.callable,step.params["funcparams"])
-			step.complete = completed
+			get_current_step(id,true)["complete"] = true
 			player_quests[id].next_id = step["next_id"]
 			step_complete.emit(get_current_step(id,true))
-		END:
-			get_player_quest(id,true).completed = true
-			quest_completed.emit(quest_name)
-			complete_quest(quest_name)
+	#Ends the quest
+	if get_current_step(id,true).step_type == END:
+		get_player_quest(id,true).completed = true
+		complete_quest(id,true)
+		step_updated.emit(step)
+			
+		
 
 #Updates Timer_Steps
 func _process(delta):
@@ -263,9 +257,11 @@ func get_quest_rewards(quest_name:String) -> Dictionary:
 	return quest_rewards
 	
 #Completes a quest if every required step was completed
-func complete_quest(quest_name:String) -> void:
-	var id = get_player_quest(quest_name).quest_id
-	player_quests[id].completed = true
+func complete_quest(quest_name:String,is_id:bool = false) -> void:
+	if is_id:
+		player_quests[quest_name].completed = true
+	else:
+		get_player_quest(quest_name).completed = true
 	#emits quest name and rewards dictionary
 	quest_completed.emit(quest_name,get_quest_rewards(quest_name))
 

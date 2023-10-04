@@ -7,5 +7,6 @@ func setup():
 
 func get_data():
 	node_data["step_type"] = "end"
+	node_data["details"] = "Complete"
 	super.get_data()
 	return node_data

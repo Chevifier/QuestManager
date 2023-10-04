@@ -14,6 +14,7 @@ func _ready():
 	set_defaults()
 	QuestManager.new_quest_added.connect(update_quest_list)
 	QuestManager.step_updated.connect(update_current_step)
+	QuestManager.step_complete.connect(update_current_step)
 	QuestManager.quest_completed.connect(on_quest_complete)
 	QuestManager.quest_failed.connect(on_quest_failed)
 	
@@ -22,12 +23,12 @@ func update_quest_list(quest_name):
 	player_quest_list.clear()
 	for quest in QuestManager.get_all_player_quests_names():
 		player_quest_list.add_item(quest)
-	update_current_step(QuestManager.get_current_step(quest_name))
 		
-func on_quest_complete(n):
+func on_quest_complete(quest_name,rewards:Dictionary):
 	step_details.text = "QUEST COMPLETE"
 	for control in controls.get_children():
 		control.queue_free()
+	print(rewards)
 func on_quest_failed(n):
 	step_details.text = "QUEST FAILED"
 	for control in controls.get_children():
@@ -70,8 +71,21 @@ func update_current_step(step):
 			var c = action_step_btn.duplicate()
 			controls.add_child(c)
 			c.pressed.connect(action_button_pressed)
-			
+		QuestManager.BRANCH_STEP:
+			var c = action_step_btn.duplicate()
+			controls.add_child(c)
+			c.pressed.connect(action_button_pressed)
+			var d = action_step_btn.duplicate()
+			controls.add_child(d)
+			d.text = "BRANCH"
+			d.pressed.connect(branch_button_pressed)
+
 func action_button_pressed():
+	QuestManager.set_branch_step(selected_quest,false)
+	QuestManager.progress_quest(selected_quest)
+
+func branch_button_pressed():
+	QuestManager.set_branch_step(selected_quest,true)
 	QuestManager.progress_quest(selected_quest)
 
 func add_amount_pressed(item_name,node:SpinBox):
