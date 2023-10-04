@@ -87,7 +87,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
-text = "STEPS"
+text = "STEPS(Unordered)"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)

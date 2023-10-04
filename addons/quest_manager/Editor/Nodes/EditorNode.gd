@@ -33,6 +33,7 @@ func _ready():
 	setup()
 func show_id(vis:bool):
 	id_lbl.visible = vis
+	
 func setup():
 	close_request.connect(_on_close_request)
 	resize_request.connect(_on_resize_request)
@@ -47,10 +48,12 @@ func setup():
 	id_lbl.text = id
 	
 func get_meta_data(func_params:bool = false):
+	var data = {}
 	if is_instance_valid(meta_data_node):
-		return meta_data_node.get_data(func_params)
+		data = meta_data_node.get_data(func_params)
+		return data
 	else:
-		return {}
+		return [] if func_params else {}
 	
 func get_data():
 	node_data["id"] = id
@@ -69,6 +72,8 @@ func set_data(data):
 	Node_Type = data["type"]
 	position_offset = data["position"]
 	size = data["size"]
+	id_lbl.text = id
+	
 
 func _on_node_selected():
 	pass

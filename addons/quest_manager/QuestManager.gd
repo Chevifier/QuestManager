@@ -118,13 +118,15 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 				player_quests[id].next_id = get_current_step(id,true)["branch_step_id"]
 			get_current_step(id,true)["complete"] = true
 			step_complete.emit(get_current_step(id,true))
-		FUNCTION_CALL_STEP:
-			call_function(step.callable,step.params["funcparams"])
-			get_current_step(id,true)["complete"] = true
-			player_quests[id].next_id = step["next_id"]
-			step_complete.emit(get_current_step(id,true))
+	#get updated step
+	step = get_current_step(id,true)
+	if step.step_type == FUNCTION_CALL_STEP:
+		call_function(step.callable,step.params)
+		get_current_step(id,true)["complete"] = true
+		player_quests[id].next_id = step["next_id"]
+		step_complete.emit(get_current_step(id,true))
 	#Ends the quest
-	if get_current_step(id,true).step_type == END:
+	if step.step_type == END:
 		get_player_quest(id,true).completed = true
 		complete_quest(id,true)
 		step_updated.emit(step)
@@ -331,3 +333,6 @@ func call_function(autoloadfunction:String,params:Array):
 		auto_load.call(callable,params)
 	else:
 		auto_load.call(callable)
+		
+func testfunc(v):
+	print("Hello QuestManager")

@@ -43,7 +43,8 @@ func get_data(is_function_params :bool= false):
 		if is_function_params:
 			arr.append(meta_value)
 	if is_function_params:
-		data["funcparams"] = arr
+		data = arr
+	
 	return data
 	
 func set_data(data):
