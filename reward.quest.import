@@ -1,0 +1,15 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://vbiwjvwqh0gk"
+path="res://.godot/imported/reward.quest-bb56a5cb7d101b15c3be1bc853047081.tres"
+
+[deps]
+
+source_file="res://reward.quest"
+dest_files=["res://.godot/imported/reward.quest-bb56a5cb7d101b15c3be1bc853047081.tres"]
+
+[params]
+
+defaults=true

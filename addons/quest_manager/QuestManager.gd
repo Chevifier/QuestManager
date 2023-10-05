@@ -121,7 +121,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 	#get updated step
 	step = get_current_step(id,true)
 	if step.step_type == FUNCTION_CALL_STEP:
-		call_function(step.callable,step.params)
+		call_function(step.callable,step.params["funcparams"])
 		get_current_step(id,true)["complete"] = true
 		player_quests[id].next_id = step["next_id"]
 		step_complete.emit(get_current_step(id,true))

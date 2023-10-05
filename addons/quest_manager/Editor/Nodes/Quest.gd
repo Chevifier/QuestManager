@@ -48,8 +48,9 @@ func update_group_data():
 
 func update_quest_rewards():
 	if is_instance_valid(quest_rewards_node):
-		quest_rewards = quest_rewards_node.get_data()
-		
+		quest_rewards = quest_rewards_node.get_data()["rewards"]
+	else:
+		quest_rewards = {}
 func clear_group():
 	group = ""
 	group_node = null

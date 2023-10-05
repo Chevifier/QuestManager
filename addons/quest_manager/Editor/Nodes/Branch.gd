@@ -35,3 +35,5 @@ func _on_details_gui_input(event):
 	if event is InputEventKey:
 		if event.keycode == KEY_ENTER:
 			details.release_focus()
+
+
