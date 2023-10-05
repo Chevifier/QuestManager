@@ -54,9 +54,7 @@ func set_data(data):
 			TYPE_VECTOR3: meta_node = vec3.duplicate()
 		data_container.add_child(meta_node)
 		meta_node.get_node("name").text = meta
-		if typeof(rewards[meta]) == TYPE_INT or typeof(rewards[meta]) == TYPE_FLOAT:
-			meta_node.get_node("data").value = rewards[meta]
-		elif typeof(rewards[meta]) == TYPE_STRING:
+		if typeof(rewards[meta]) == TYPE_STRING:
 			meta_node.get_node("data").text = rewards[meta]
 		elif typeof(rewards[meta]) == TYPE_VECTOR2:
 			meta_node.get_node("x").value = data[meta].x
@@ -65,7 +63,9 @@ func set_data(data):
 			meta_node.get_node("x").value = data[meta].x
 			meta_node.get_node("y").value = data[meta].y
 			meta_node.get_node("z").value = data[meta].z
-			
+		else:
+			#int/float
+			meta_node.get_node("data").value = rewards[meta]
 		meta_node.get_node("delete").pressed.connect(delete_meta_data.bind(meta_node.get_path()))
 
 func delete_meta_data(node_path):

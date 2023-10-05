@@ -51,6 +51,7 @@ func update_quest_rewards():
 		quest_rewards = quest_rewards_node.get_data()["rewards"]
 	else:
 		quest_rewards = {}
+		
 func clear_group():
 	group = ""
 	group_node = null

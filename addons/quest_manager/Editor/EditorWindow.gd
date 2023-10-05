@@ -362,3 +362,5 @@ func _on_show_ids_toggled(button_pressed):
 	for node in graph.get_children():
 		if node is EditorNode:
 			node.show_id(button_pressed)
+	#workaround to redraw connections
+	graph.scroll_offset.x += 0.01

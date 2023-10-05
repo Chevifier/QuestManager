@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Meta_data.gd" id="1_q8meh"]
 
-[node name="5125d60cc2" type="GraphNode"]
+[node name="b2191e7cdd" type="GraphNode"]
 custom_minimum_size = Vector2(250, 150)
 offset_right = 247.0
 offset_bottom = 147.0
@@ -314,3 +314,4 @@ size_flags_stretch_ratio = 0.2
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
+text = "b2191e7cdd"

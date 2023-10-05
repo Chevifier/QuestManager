@@ -17,7 +17,6 @@ func setup():
 
 #set is_function_param to true if you want an ordered array to be returnd
 func get_data(is_function_params :bool= false):
-	var data = {}
 	#Array for function parameter for callable Node
 	var arr = [] 
 	for node in data_container.get_children():
@@ -38,21 +37,24 @@ func get_data(is_function_params :bool= false):
 			var y = node.get_node("y").value
 			var z = node.get_node("z").value
 			meta_value = Vector3(x,y,z)
-		data[meta_name] = meta_value
-	
+		meta_data[meta_name] = meta_value
+		#store only value in array if for a function call
 		if is_function_params:
 			arr.append(meta_value)
-	data["funcparams"] = arr
+	meta_data["funcparams"] = arr
+	node_data["meta_data"] = meta_data
 	super.get_data()
-	return data
+	return node_data
 	
 func set_data(data):
-	for meta in data:
+	super.set_data(data)
+	var user_data = data["meta_data"]
+	for meta in user_data:
 		#skip function params setting
 		if meta == "funcparams":
 			continue
 		var meta_node
-		match typeof(data[meta]):
+		match typeof(user_data[meta]):
 			TYPE_STRING: meta_node = string_meta.duplicate()
 			TYPE_INT: meta_node = integer_meta.duplicate()
 			TYPE_FLOAT: meta_node = float_meta.duplicate()
@@ -61,20 +63,20 @@ func set_data(data):
 			TYPE_VECTOR3: meta_node = vec3.duplicate()
 		data_container.add_child(meta_node)
 		meta_node.get_node("name").text = meta
-		if typeof(data[meta]) == TYPE_STRING:
+		if typeof(user_data[meta]) == TYPE_STRING:
 			meta_node.get_node("data").text = data[meta]
-		elif typeof(data[meta]) == TYPE_VECTOR2:
+		elif typeof(user_data[meta]) == TYPE_VECTOR2:
 			meta_node.get_node("x").value = data[meta].x
 			meta_node.get_node("y").value = data[meta].y
-		elif typeof(data[meta]) == TYPE_VECTOR3:
+		elif typeof(user_data[meta]) == TYPE_VECTOR3:
 			meta_node.get_node("x").value = data[meta].x
 			meta_node.get_node("y").value = data[meta].y
 			meta_node.get_node("z").value = data[meta].z
-		elif typeof(data[meta]) == TYPE_BOOL:
+		elif typeof(user_data[meta]) == TYPE_BOOL:
 			meta_node.get_node("data").button_pressed = data[meta]
 		else:
 			#Integer/Float
-			meta_node.get_node("data").value = data[meta]
+			meta_node.get_node("data").value = user_data[meta]
 		meta_node.get_node("delete").pressed.connect(delete_meta_data.bind(meta_node.get_path()))
 
 func delete_meta_data(node_path):

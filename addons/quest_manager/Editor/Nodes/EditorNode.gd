@@ -26,7 +26,6 @@ var meta_data := {}
 var id = ""
 var next_id = ""
 var quest_id = ""
-var data = {}
 var focus_nodes = []
 @onready var id_lbl = $id_lbl
 func _ready():
@@ -51,7 +50,7 @@ func get_meta_data(func_params:bool = false):
 	var data = {}
 	if is_instance_valid(meta_data_node):
 		data = meta_data_node.get_data(func_params)
-		return data
+		return data["meta_data"]
 	else:
 		return [] if func_params else {}
 	
@@ -68,7 +67,7 @@ func set_data(data):
 	if data.has("meta_data"):
 		meta_data = data["meta_data"]
 	id = data["id"]
-	name = data["name"]
+	name = id
 	Node_Type = data["type"]
 	position_offset = data["position"]
 	size = data["size"]
