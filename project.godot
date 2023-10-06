@@ -8,7 +8,7 @@
 
 config_version=5
 
-quest_file_path="res://reward.quest"
+quest_file_path="res://All Nodes Test.quest"
 
 [application]
 

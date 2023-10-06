@@ -11,6 +11,10 @@ func setup():
 	focus_nodes.append(details)
 	focus_nodes.append(quantity)
 	
+func propogate_quest_id(id):
+	if output_node != null:
+		output_node.propogate_quest_id(id)
+
 func get_data():
 	node_data["step_type"] = "incremental_step"
 	node_data["details"] = details.text

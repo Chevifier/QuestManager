@@ -16,6 +16,7 @@ var node_offset = Vector2(0,0)
 var selected_node = null
 var new_copy = null
 
+
 @onready var new_btn = %New
 @onready var save_btn = %Save
 @onready var load_btn = %Load
@@ -128,16 +129,19 @@ func add_graph_node(index):
 
 
 func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
+	var from = get_connection_node(from_node)
+	var to = get_connection_node(to_node)
 	#Prevent multiple connections to same port
 	for connection in graph.get_connection_list():
+		#Allow multiple connections to end node
+		if to.Node_Type == EditorNode.Type.END_NODE:
+			to.add_node(from)
+			break
 		if connection.to == to_node and connection.to_port == to_port:
 			return
 		if connection.from == from_node and connection.from_port == from_port:
 			return
-			
-	var from = get_connection_node(from_node)
-	var to = get_connection_node(to_node)
-	
+
 	match from.Node_Type:
 		EditorNode.Type.GROUP_NODE:
 			to.group_node = from
@@ -156,12 +160,15 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 				from.output_node = to
 				to.input_node = from
 				from.next_id = to.name
+			from.propagate_quest_id(from.quest_id);
 		_:
 			to.input_node = from
 			from.output_node = to
 			from.next_id = to.name
+			from.propagate_quest_id(from.quest_id);
 
 	graph.connect_node(from_node,from_port,to_node,to_port)
+	#propagates quest id to output node if any
 	#Check if from node is Group or Meta Data
 	updateMetaDataAndGroup(to,from)
 	
@@ -187,30 +194,11 @@ func get_quest_data():
 		quest.update_meta_data()
 		quest.update_quest_rewards()
 		var steps = {}
-		var current_node = quest.output_node
-		var branches = []
-		var branches2 = []
-		while current_node != null:
-			current_node.update_meta_data()
-			var data = current_node.get_data()
-			steps[current_node.id] = data
-			if current_node.Node_Type == EditorNode.Type.BRANCH_NODE:
-				branches.append(current_node)
-			current_node = current_node.output_node
-		for branch in branches:
-			var current_node2 = branch.alt_output_node
-			while current_node2 != null:
-				var data2 = current_node2.get_data()
-				steps[current_node2.id] = current_node2.get_data()
-				if current_node2.Node_Type == EditorNode.Type.BRANCH_NODE:
-					branches2.append(current_node2)
-				current_node2 = current_node2.output_node
-		for branch2 in branches2:
-			var current_node3 = branch2.alt_output_node
-			while current_node3 != null:
-				var data2 = current_node3.get_data()
-				steps[current_node3.id] = current_node3.get_data()
-				current_node3 = current_node3.output_node
+		for node in graph.get_children():
+			if node is EditorNode:
+				if node.Node_Type != EditorNode.Type.QUEST_NODE:
+					if node.quest_id == quest.id:
+						steps[node.id] = node.get_data()
 		quest.quest_steps = steps
 		quest_data[quest.id] = quest.get_data()
 	return quest_data
@@ -233,20 +221,34 @@ func get_connection_node(node_name):
 func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port):
 	var from = get_connection_node(from_node)
 	var to = get_connection_node(to_node)
-	
-	from.next_id = ""
-	if from.Node_Type == EditorNode.Type.META_DATA:
-		to.clear_meta_data()
-	if from.Node_Type == EditorNode.Type.GROUP_NODE:
-		to.clear_group()
-	if from.Node_Type == EditorNode.Type.REWARDS_NODE:
-		to.clear_rewards()
+	match from.Node_Type:
+		EditorNode.Type.META_DATA:
+			to.clear_meta_data()
+		EditorNode.Type.GROUP_NODE:
+			to.clear_group()
+		EditorNode.Type.REWARDS_NODE:
+			to.clear_rewards()
+		_:
+			#remove from node from end node list
+			if to.Node_Type == EditorNode.Type.END_NODE:
+				to.remove_node(from)
+			#Only call clear id on None quest nodes
+			if to.Node_Type != EditorNode.Type.QUEST_NODE:
+				to.clear_quest_id()
+	#special check on branch node
 	if from.Node_Type == EditorNode.Type.BRANCH_NODE:
 		if from_port == 1: # second output
 			from.branch_step_id = ""
-	from.output_node = null
-	to.input_node = null
-	
+			from.alt_output_node = null
+		elif from_port == 0:
+			from.next_id = ""
+			from.output_node = null
+			to.input_node = null
+	else:
+		from.next_id = ""
+		from.output_node = null
+		to.input_node = null
+	#Disconnect lines
 	graph.disconnect_node(from_node,from_port,to_node,to_port)
 
 func _on_graph_edit_popup_request(_position):
@@ -344,12 +346,9 @@ func _on_graph_edit_copy_nodes_request():
 func _on_graph_edit_paste_nodes_request():
 	if new_copy != null:
 		graph.add_child(new_copy)
-		new_copy.name = new_copy.get_random_id()
 		new_copy.position_offset += Vector2(10,10)
 		graph.set_selected(new_copy)
-		new_copy.id = new_copy.get_random_id()
-		new_copy = new_copy.duplicate() #create a new copy of node in cache
-
+		
 func _on_graph_edit_duplicate_nodes_request():
 	_on_graph_edit_copy_nodes_request()
 	_on_graph_edit_paste_nodes_request()

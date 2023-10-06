@@ -72,7 +72,23 @@ func set_data(data):
 	position_offset = data["position"]
 	size = data["size"]
 	id_lbl.text = id
-	
+
+
+#passes quest id to output node when a connection accures
+func propagate_quest_id(_id):
+	quest_id = _id
+	if output_node != null:
+		#failsafe avoid wiping quest Id from quest node
+		if output_node.Node_Type != Type.QUEST_NODE:
+			node_data["quest_id"]= quest_id
+			print("propogating id: %s to %s" % [_id,output_node.id])
+			output_node.propagate_quest_id(_id)
+
+func clear_quest_id():
+	print("clearing quest id from %s" % id)
+	node_data["quest_id"]= ""
+	if output_node != null:
+		output_node.clear_quest_id()
 
 func _on_node_selected():
 	pass

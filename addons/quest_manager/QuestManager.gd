@@ -335,4 +335,4 @@ func call_function(autoloadfunction:String,params:Array):
 		auto_load.call(callable)
 		
 func testfunc(v):
-	print("Hello QuestManager")
+	print("Hello QuestManager "+str(v))

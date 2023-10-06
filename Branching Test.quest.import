@@ -1,0 +1,15 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://c6gcg87cfa12h"
+path="res://.godot/imported/Branching Test.quest-2497ab0b1ab19c239b44804dc4187e7f.tres"
+
+[deps]
+
+source_file="res://Branching Test.quest"
+dest_files=["res://.godot/imported/Branching Test.quest-2497ab0b1ab19c239b44804dc4187e7f.tres"]
+
+[params]
+
+defaults=true

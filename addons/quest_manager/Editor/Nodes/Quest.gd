@@ -16,10 +16,10 @@ func setup():
 	Node_Type = Type.QUEST_NODE
 	focus_nodes.append(quest_name)
 	focus_nodes.append(quest_details)
+	quest_id = id
 
 #returns an array with both the stored data and node position and name data
 func get_data():
-	node_data["type"]= Node_Type
 	node_data["quest_id"]= id
 	node_data["quest_name"]= quest_name.text
 	node_data["quest_details"]= quest_details.text
@@ -36,10 +36,12 @@ func get_data():
 func set_data(data):
 	super.set_data(data)
 	id = data["quest_id"]
+	quest_id = id
 	quest_name.text = data.quest_name
 	quest_details.text = data.quest_details
 	group = data["group"]
-	
+
+
 func update_group_data():
 	group = ""
 	if is_instance_valid(group_node):
