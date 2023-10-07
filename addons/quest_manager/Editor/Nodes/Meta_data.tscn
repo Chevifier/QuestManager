@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Meta_data.gd" id="1_q8meh"]
 
-[node name="49159d010c" type="GraphNode"]
+[node name="79fa9481b3" type="GraphNode"]
 custom_minimum_size = Vector2(250, 150)
 offset_right = 247.0
 offset_bottom = 147.0
@@ -10,7 +10,7 @@ tooltip_text = "Meta data nodes are extra parameters you can add to each quest/q
 track of something related to the quest.
 i.e some extra condition to progress a step or other quest related variables.
 This data is not directly used by the quest manager but you can access it using
-QuestManager.get_quest_meta_data(quest_name) or QuestManager.get_step_meta_data(step_index)
+QuestManager.get_quest_meta_data(quest_name) or QuestManager.get_step_meta_data(step_id)
 "
 title = "Meta Data"
 resizable = true
@@ -314,4 +314,4 @@ size_flags_stretch_ratio = 0.2
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "49159d010c"
+text = "79fa9481b3"

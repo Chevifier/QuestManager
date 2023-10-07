@@ -7,10 +7,13 @@ To create a quest you should use the editor. The editor has various nodes requir
 2. `Step Node` - This node is an `action_step` node and only requires a discription of the action to complete.
 3. `Incremental Step Node` - This node is an `incremental_step` node and requires both its `details` , `item_name` and the `required` amount to complete. 
 4. `Item Step Node` - This node is an `items_step` node and requires the `details` as well as the list of items/actions to complete
-5. `End Node` - This node is required to end a quest after the final step.
-6. `Group Node` - A group node only requires its `group` name and can be connected to multiple quest nodes.
-7. `Meta Data Node` - A meta data node is use to add meta data to quest such as quest rewards or any arbitrary information stored as a `String`, `Integer`, `float` or `boolean`
-8. `Timer Node` - This Node is a `timer_step` node that is used as a Timer or a Stopwatch
+5. `Group Node` - A group node only requires its `group` name and can be connected to multiple quest nodes.
+6. `Meta Data Node` - A meta data node is use to add meta data to quest such as quest rewards or any arbitrary information stored as a `String`, `Integer`, `float` or `boolean`
+7. `Timer Node` - This Node is a `timer_step` node that is used as a Timer or a Stopwatch
+8. `Callable Node` - This Node is a `callable_step` node that is used to call a function from an Autoloaded Script.
+9. `Branch Node` - The Node is a `branch_step` that works similar to anc `action_step` but has 2 output for creating branching quests.
+10. `Rewards Node` -This Node is similar to a meta_data node but can only be connected to a `Quest Node`
+11. `End Node` - This node is required to end a quest after the final step.
 
 ## How to use
 

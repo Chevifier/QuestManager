@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Branch.gd" id="1_5cc0i"]
 
-[node name="8acf3527b5" type="GraphNode"]
+[node name="667e35ef2a" type="GraphNode"]
 custom_minimum_size = Vector2(150, 250)
 offset_right = 197.0
 offset_bottom = 250.0
 size_flags_vertical = 4
-tooltip_text = "Branch Step goes to alternate step if contition is true"
+tooltip_text = "Branch Step goes to alternate step if branch contition is true.
+Use QuestManager.set_branching_step(quest_name) before calling progress quest on a branch step to enable. if called will be true by defaut otherwise false "
 title = "Branch Step"
 resizable = true
 slot/0/left_enabled = true
@@ -56,6 +57,6 @@ text = "Branch"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "8acf3527b5"
+text = "667e35ef2a"
 
 [connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]

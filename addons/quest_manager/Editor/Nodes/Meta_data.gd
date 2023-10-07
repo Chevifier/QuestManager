@@ -64,16 +64,16 @@ func set_data(data):
 		data_container.add_child(meta_node)
 		meta_node.get_node("name").text = meta
 		if typeof(user_data[meta]) == TYPE_STRING:
-			meta_node.get_node("data").text = data[meta]
+			meta_node.get_node("data").text = user_data[meta]
 		elif typeof(user_data[meta]) == TYPE_VECTOR2:
-			meta_node.get_node("x").value = data[meta].x
-			meta_node.get_node("y").value = data[meta].y
+			meta_node.get_node("x").value = user_data[meta].x
+			meta_node.get_node("y").value = user_data[meta].y
 		elif typeof(user_data[meta]) == TYPE_VECTOR3:
-			meta_node.get_node("x").value = data[meta].x
-			meta_node.get_node("y").value = data[meta].y
-			meta_node.get_node("z").value = data[meta].z
+			meta_node.get_node("x").value = user_data[meta].x
+			meta_node.get_node("y").value = user_data[meta].y
+			meta_node.get_node("z").value = user_data[meta].z
 		elif typeof(user_data[meta]) == TYPE_BOOL:
-			meta_node.get_node("data").button_pressed = data[meta]
+			meta_node.get_node("data").button_pressed = true #node_data[meta]
 		else:
 			#Integer/Float
 			meta_node.get_node("data").value = user_data[meta]

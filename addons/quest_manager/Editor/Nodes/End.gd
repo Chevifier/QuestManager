@@ -1,20 +1,20 @@
 @tool
 extends EditorNode
 
-var nodes = {}
+var nodes = 0
 
-func add_node(node):
-	nodes[node.id] = node
-func remove_node(node):
-	nodes.erase(node.id)
+func add_node():
+	nodes += 1
 
 func propagate_quest_id(_id):
+	print("end")
 	if quest_id == "":
 		super.propagate_quest_id(_id)
 
 
 func clear_quest_id():
-	if nodes.size() == 0:
+	nodes -= 1
+	if nodes == 0:
 		super.clear_quest_id()
 
 func setup():

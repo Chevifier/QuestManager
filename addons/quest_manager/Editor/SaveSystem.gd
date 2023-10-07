@@ -55,7 +55,7 @@ func load_data(file_path):
 			EditorNode.Type.BRANCH_NODE:
 				node = Editor.branch.instantiate()
 			EditorNode.Type.FUNCTION_CALL_NODE:
-				node = Editor.function_call.instantiate()
+				node = Editor.callable_node.instantiate()
 		Editor.graph.add_child(node)
 		node.set_data(quest_res.editor_data[i])
 		node.show_id(%show_ids.button_pressed)

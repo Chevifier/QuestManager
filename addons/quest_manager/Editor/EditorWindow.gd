@@ -11,7 +11,7 @@ signal data_saved()
 @onready var end = preload("res://addons/quest_manager/Editor/Nodes/End.tscn")
 @onready var rewards = preload("res://addons/quest_manager/Editor/Nodes/Quest_Rewards.tscn")
 @onready var branch = preload("res://addons/quest_manager/Editor/Nodes/Branch.tscn")
-@onready var function_call = preload("res://addons/quest_manager/Editor/Nodes/Callable_Step.tscn")
+@onready var callable_node = preload("res://addons/quest_manager/Editor/Nodes/Callable_Step.tscn")
 var node_offset = Vector2(0,0)
 var selected_node = null
 var new_copy = null
@@ -114,7 +114,7 @@ func add_graph_node(index):
 		9:
 			node = branch.instantiate()
 		10:
-			node = function_call.instantiate()
+			node = callable_node.instantiate()
 	if node == null:
 		print("Node instance Error, Check Index")
 		return
@@ -133,9 +133,12 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 	var to = get_connection_node(to_node)
 	#Prevent multiple connections to same port
 	for connection in graph.get_connection_list():
-		#Allow multiple connections to end node
 		if to.Node_Type == EditorNode.Type.END_NODE:
-			to.add_node(from)
+			#prevent multiple Quest from connecting to same end node
+			if to.quest_id != "" and from.quest_id  != to.quest_id:
+				return
+			#Allow multiple connections to end node
+			to.add_node()
 			break
 		if connection.to == to_node and connection.to_port == to_port:
 			return
@@ -228,10 +231,6 @@ func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port
 			to.clear_group()
 		EditorNode.Type.REWARDS_NODE:
 			to.clear_rewards()
-		_:
-			#remove from node from end node list
-			if to.Node_Type == EditorNode.Type.END_NODE:
-				to.remove_node(from)
 			#Only call clear id on None quest nodes
 			if to.Node_Type != EditorNode.Type.QUEST_NODE:
 				to.clear_quest_id()

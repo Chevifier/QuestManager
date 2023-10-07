@@ -19,7 +19,7 @@ func setup():
 	focus_nodes.append(details)
 	
 func get_data():
-	node_data["step_type"]= "branch"
+	node_data["step_type"]= "branch_step"
 	node_data["details"]= details.text
 	node_data["branch"]= false
 	node_data["complete"]= false

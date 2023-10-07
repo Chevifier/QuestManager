@@ -12,8 +12,8 @@ const ACTION_STEP = "action_step"
 const INCREMENTAL_STEP = "incremental_step"
 const ITEMS_STEP = "items_step"
 const TIMER_STEP = "timer_step"
-const BRANCH_STEP = "branch"
-const FUNCTION_CALL_STEP = "function_call_step"
+const BRANCH_STEP = "branch_step"
+const FUNCTION_CALL_STEP = "callable_step"
 const END = "end"
 #Helper variable for searching for quest
 var active_quest = ""
@@ -36,7 +36,7 @@ func add_quest(quest_name:String,resource:QuestResource=current_resource) -> voi
 	active_quest = quest_name
 	step_updated.emit(get_current_step(quest_name))
 
-func load_quest_resource(quest_res:QuestResource):
+func load_quest_resource(quest_res:QuestResource) -> void:
 	current_resource = quest_res
 
 #Get a quest that the player has accepted
@@ -60,7 +60,7 @@ func get_all_player_quests_names() -> Array:
 	for i in player_quests:
 		quests.append(player_quests[i].quest_name)
 	return quests
-func set_branch_step(quest_name, should_branch:bool=true):
+func set_branch_step(quest_name, should_branch:bool=true) -> void:
 	var step = get_current_step(quest_name)
 	if step.step_type == BRANCH_STEP:
 		get_current_step(quest_name)["branch"] = should_branch
@@ -334,5 +334,5 @@ func call_function(autoloadfunction:String,params:Array):
 	else:
 		auto_load.call(callable)
 		
-func testfunc(v):
+func testfunc(v:Array=[]):
 	print("Hello QuestManager "+str(v))

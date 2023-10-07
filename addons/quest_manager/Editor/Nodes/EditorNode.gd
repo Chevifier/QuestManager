@@ -56,7 +56,6 @@ func get_meta_data(func_params:bool = false):
 	
 func get_data():
 	node_data["id"] = id
-	node_data["name"] = name
 	node_data["type"] = Node_Type
 	node_data["position"] = position_offset
 	node_data["size"] = size
@@ -86,7 +85,8 @@ func propagate_quest_id(_id):
 
 func clear_quest_id():
 	print("clearing quest id from %s" % id)
-	node_data["quest_id"]= ""
+	quest_id = ""
+	node_data["quest_id"]= quest_id
 	if output_node != null:
 		output_node.clear_quest_id()
 
