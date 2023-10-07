@@ -43,7 +43,7 @@ var popup_options_list =[
 	"Add End Node",
 	"Add Rewards Node",
 	"Add Branch Node",
-	"Add Function Call Node"
+	"Add Callable Node"
 ]
 func _ready():
 	set_button_icons()
