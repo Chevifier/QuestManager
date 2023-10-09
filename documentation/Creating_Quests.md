@@ -37,9 +37,9 @@ For this example we'll keep it simple and create a 1 step Quest to kill 15 enemi
         - `quest complete` - We update the UI to show that the quest was completed
         - `quest_failed` - Show if the quest failed if the player died
     - Then we set the QuestStart label text to the quest details and do some tweening the start the level
-8. Open up the `Example/ExampleOne/Projectile.gd` script. Notice we check to see if the bullet hits an enemy. If it did, we call `QuestManager.progress_quest("ShootEmUp","Enemies")` before removing the projectile. This increases the `collected` items of the `Incremental Step` by 1 by default.
+8. Open up the `Example/ExampleOne/Projectile.gd` script. Notice we check to see if the bullet hits an enemy. If it did, we call `QuestManager.progress_quest("ShootEmUp","Ship")` before removing the projectile. This increases the `collected` items of the `Incremental Step` by 1 by default.
 9. In the Player.gd we also check if the player ran out of lives. If so we call `QuestManager.fail_quest("ShootEmUp")` This sets the quest as failed and emits the `quest_failed` signal.
-10. And Thats about it for the tutorial. If a quest has multiple steps the `step_updated` signal returns the new step its up to you how you want to display the information of that current step by checking its `step_type`. Check the [API](Quest_Manager_API.md) for what properties each step_type contains 
+10. And Thats about it for the tutorial. If a quest has multiple steps the `step_updated` and `step_completed` signals returns a new step its up to you how you want to display the information of that current step by checking its `step_type`. Check the [API](Quest_Manager_API.md) for what properties each `step_type` contains.
 
 # Creating Quests from code
 
