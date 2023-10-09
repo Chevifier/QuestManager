@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@export var quest_name = "ShootEmUp"
-@export var quest:QuestResource
+@export var quest_name = ""
+@export var quest_resource:QuestResource
 @onready var quest_info_label = $Do
 @onready var life = $HP
 enum {
@@ -16,7 +16,7 @@ func _ready():
 	state = START
 	get_tree().paused = true
 	#add the quest to player quests
-	QuestManager.add_quest_from_resource(quest,quest_name)
+	QuestManager.add_quest(quest_name,quest_resource)
 	#set the quest step initail values
 	update_ui(QuestManager.get_current_step(quest_name))
 	#Connect quest manager needed signals
@@ -40,8 +40,9 @@ func start():
 	$Quest.hide()
 	
 func quest_complete(n,rewards):
+	print(rewards)
 	state = WIN
-	$Complete.text += "\n Points " + str(rewards.Points)
+	$Complete.text += "\n Money " + str(rewards.money)
 	$Complete.show()
 	
 	get_tree().paused = true

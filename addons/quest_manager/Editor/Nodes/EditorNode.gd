@@ -52,7 +52,8 @@ func get_meta_data(func_params:bool = false):
 		data = meta_data_node.get_data(func_params)
 		return data["meta_data"]
 	else:
-		return [] if func_params else {}
+		data = {"funcparams":[]}
+		return data
 	
 func get_data():
 	node_data["id"] = id
@@ -80,11 +81,9 @@ func propagate_quest_id(_id):
 		#failsafe avoid wiping quest Id from quest node
 		if output_node.Node_Type != Type.QUEST_NODE:
 			node_data["quest_id"]= quest_id
-			print("propogating id: %s to %s" % [_id,output_node.id])
 			output_node.propagate_quest_id(_id)
 
 func clear_quest_id():
-	print("clearing quest id from %s" % id)
 	quest_id = ""
 	node_data["quest_id"]= quest_id
 	if output_node != null:

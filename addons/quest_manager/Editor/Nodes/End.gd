@@ -7,7 +7,6 @@ func add_node():
 	nodes += 1
 
 func propagate_quest_id(_id):
-	print("end")
 	if quest_id == "":
 		super.propagate_quest_id(_id)
 

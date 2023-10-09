@@ -32,7 +32,6 @@ func propagate_quest_id(id):
 	super.propagate_quest_id(id)
 	if alt_output_node != null:
 		alt_output_node.propagate_quest_id(id)
-		print("alt added")
 		
 func clear_quest_id():
 	super.clear_quest_id()

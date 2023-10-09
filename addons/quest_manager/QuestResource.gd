@@ -11,7 +11,7 @@ func get_quest_by_name(quest_name:String) -> Dictionary:
 		if quest_data[quest]["quest_name"] == quest_name:
 			return_quest = quest_data[quest].duplicate()
 			break
-	assert(!quest_data.is_empty(),"The Quest: %s was not found in loaded resource" % quest_name)
+	assert(!return_quest.is_empty(),"The Quest: %s was not found in loaded resource" % quest_name)
 	return return_quest
 
 

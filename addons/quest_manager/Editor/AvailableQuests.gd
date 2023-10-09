@@ -63,3 +63,21 @@ func set_defaults():
 	quest_name_lbl.text = "No Quest Select"
 	quest_description.text = "No Quest selected"
 	quest_step_details.text = "No Quest selected"
+
+
+func _on_quest_meta_data_pressed():
+	#Get the quest data from the resource because its not yet accepted
+	var quest = QuestManager.get_quest_from_resource(selected_quest)
+	if quest.is_empty():
+		return
+	var quest_data = "Group: %s \nMeta Data \n" % quest.group
+	var new_line = 0
+	for data in quest.meta_data:
+		if new_line%2 == 0:
+			quest_data += "%s = %s, " % [data, quest.meta_data[data]]
+		else:
+			quest_data += "%s = %s \n" % [data, quest.meta_data[data]]
+		new_line += 1
+	
+	%quest_data_label.text = quest_data
+	%quest_data.popup_centered()

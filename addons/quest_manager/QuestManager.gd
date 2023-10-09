@@ -13,7 +13,7 @@ const INCREMENTAL_STEP = "incremental_step"
 const ITEMS_STEP = "items_step"
 const TIMER_STEP = "timer_step"
 const BRANCH_STEP = "branch_step"
-const FUNCTION_CALL_STEP = "callable_step"
+const CALLABLE_STEP = "callable_step"
 const END = "end"
 #Helper variable for searching for quest
 var active_quest = ""
@@ -60,6 +60,7 @@ func get_all_player_quests_names() -> Array:
 	for i in player_quests:
 		quests.append(player_quests[i].quest_name)
 	return quests
+	
 func set_branch_step(quest_name, should_branch:bool=true) -> void:
 	var step = get_current_step(quest_name)
 	if step.step_type == BRANCH_STEP:
@@ -68,9 +69,8 @@ func set_branch_step(quest_name, should_branch:bool=true) -> void:
 #Progresses a quest to its next step
 #completes quest if it was at its last step
 func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true, branch:bool=false) -> void:
+	quest_error(quest_name)
 	active_quest = quest_name
-	if has_quest(quest_name) == false:
-		return
 	if is_quest_complete(quest_name):
 		return
 	var id = get_player_quest(quest_name).quest_id
@@ -81,8 +81,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 			player_quests[id].next_id = step["next_id"]
 			step_complete.emit(get_current_step(id,true))
 		INCREMENTAL_STEP:
-			if step.item_name != quest_item:
-				return
+			assert(step.item_name == quest_item,"Item: %s invalid" % quest_item)
 			get_current_step(id,true).collected += amount
 			step_updated.emit(get_current_step(id,true))
 			if step.collected >= step.required:
@@ -120,7 +119,8 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 			step_complete.emit(get_current_step(id,true))
 	#get updated step
 	step = get_current_step(id,true)
-	if step.step_type == FUNCTION_CALL_STEP:
+	#call function if the step is a callable step then move to next function
+	if step.step_type == CALLABLE_STEP:
 		call_function(step.callable,step.params["funcparams"])
 		get_current_step(id,true)["complete"] = true
 		player_quests[id].next_id = step["next_id"]
@@ -130,8 +130,6 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 		get_player_quest(id,true).completed = true
 		complete_quest(id,true)
 		step_updated.emit(step)
-			
-		
 
 #Updates Timer_Steps
 func _process(delta):
@@ -168,6 +166,7 @@ func _process(delta):
 #Set a specific value for Incremental and Item Steps
 #For example the player could have some of an item
 #already use this to match the players inventory
+
 func set_quest_step_items(quest_name:String,quest_item:String,amount:int=0,collected:bool=false) -> void:
 	var step = get_current_step(quest_name)
 	match step.step_type:
@@ -250,8 +249,11 @@ func remove_quest(quest_name:String) -> void:
 func get_quest_steps_from_resource(quest_name,quest_res:QuestResource=current_resource):
 	return current_resource.get_quest_steps_sorted(quest_name)
 #returns a dictionary of all the rewards of a player quest
-func get_quest_rewards(quest_name:String) -> Dictionary:
+func get_quest_rewards(quest_name:String,id_id:bool=false) -> Dictionary:
 	var quest_rewards ={}
+	if id_id:
+		quest_rewards = player_quests[quest_name].quest_rewards
+		return quest_rewards
 	for quest in player_quests:
 		if player_quests[quest].quest_name == quest_name:
 			quest_rewards = player_quests[quest].quest_rewards
@@ -265,7 +267,7 @@ func complete_quest(quest_name:String,is_id:bool = false) -> void:
 	else:
 		get_player_quest(quest_name).completed = true
 	#emits quest name and rewards dictionary
-	quest_completed.emit(quest_name,get_quest_rewards(quest_name))
+	quest_completed.emit(quest_name,get_quest_rewards(quest_name,is_id))
 
 #get all the meta data stored for this quest
 func get_meta_data(quest_name:String) -> Dictionary:
@@ -293,21 +295,25 @@ func reset_quest(quest_name:String) -> void:
 	var id = get_player_quest(quest_name).quest_id
 	player_quests[id].completed = false
 	player_quests[id].failed = false
-	player_quests[id].step_index = 0
-	for step in player_quests[id].steps:
-		match step.step_type:
+	player_quests[id].next_id = player_quests[id].first_step
+	for step in player_quests[id].quest_steps:
+		var replace_step = player_quests[id].quest_steps[step]
+		match replace_step.step_type:
 			ACTION_STEP:
-				step.complete = false
+				replace_step.complete = false
 			INCREMENTAL_STEP:
-				step.collected = 0
+				replace_step.collected = 0
 			ITEMS_STEP:
-				for i in step.items_list:
-					i.complete = false
+				for i in replace_step.items_list:
+					replace_step.item_list[i].complete = false
 			TIMER_STEP:
-				if step.is_count_down:
-					step.time = step.total_time
+				if replace_step.is_count_down:
+					replace_step.time = replace_step.total_time
 				else:
-					step.time = 0
+					replace_step.time = 0
+			BRANCH_STEP:
+				replace_step.branch = false
+		player_quests[id].quest_steps[step] = replace_step
 	quest_reset.emit(quest_name)
 	
 #Removes Every Quest from player 
@@ -320,19 +326,24 @@ func get_random_id() -> String:
 	#seed(Time.get_unix_time_from_system())
 	return str(randi() % 1000000).sha1_text().substr(0, 10)
 	
-func call_function(autoloadfunction:String,params:Array):
+func call_function(autoloadfunction:String,params:Array) -> void:
 	#split function from autoload script name
 	var autofuncsplit = autoloadfunction.split(".")
 	var singleton_name = autofuncsplit[0]
 	var function = autofuncsplit[1]
 	#get only function name without ()
 	var callable = function.split("(")[0]
-	#TestAutoLoad.call(callable)
+	#Autoload name needs to be the same as script or use name of Node instead.
+	assert(Engine.has_singleton(singleton_name)==false, "Singleton %s Not Loaded or invalid" % singleton_name)
 	var auto_load = get_tree().root.get_node(singleton_name)
-	if params.size()>=0:
+	#if array has values pass array otherwise call function normally
+	if params.size()>0:
 		auto_load.call(callable,params)
 	else:
 		auto_load.call(callable)
 		
 func testfunc(v:Array=[]):
 	print("Hello QuestManager "+str(v))
+
+func quest_error(quest_name:String) -> void:
+	assert(has_quest(quest_name),"Player doesnt have quest %s added to the player_quest Dictionary or case?" % quest_name)

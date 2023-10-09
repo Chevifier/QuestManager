@@ -24,7 +24,7 @@ The 7 types of quest steps currently.
 
 - #### BRANCH_STEP = "branch_step"
 - 
-- #### FUNCTION_CALL_STEP = "callable_step"
+- #### CALLABLE_STEP = "callable_step"
 - 
 - #### END = "end"
 
@@ -169,6 +169,10 @@ Removes quest from player_quests `quest_name`
 #### `complete_quest(quest_name:String) -> void`
 Completes quest `quest_name`
 
+#### `call_function(autoloadfunction:String,params:Array) -> void`
+
+Used by quest manager to call a function from a `callable_step`
+
 #### `get_meta_data(quest_name:String) -> Dictionary`
 Return the meta data Dictionary of the quest `quest_name`
 
@@ -187,9 +191,9 @@ Resets the quest `quest_name`
 #### `wipe_all_quest_data() -> void`
 Wipes the entire player_quests dictionary usefull for starting a name game for example
 
-#### `textfunc(v:Array) -> void`
+#### `testfunc(v:Array) -> void`
 Test function that prints Hello Quest Manager plus passed array
 
-#### `quest_error() -> void`
-Error checking
+#### `quest_error(quest_name:String) -> void`
+Catch if quest doesnt exist checking
 
