@@ -189,7 +189,7 @@ func get_quest_list(quest_resource:QuestResource=current_resource, group:String=
 #Add a quest that was created from script/at runtime
 func add_scripted_quest(quest:ScriptQuest):
 	player_quests[quest.quest_data["quest_id"]] = quest.quest_data
-	new_quest_added.emit(quest.node_data.quest_name)
+	new_quest_added.emit(quest.quest_data.quest_name)
 	active_quest = quest.quest_data.quest_name
 
 #Return true if the player currently has a quest
