@@ -8,7 +8,7 @@
 
 config_version=5
 
-quest_file_path="res://All Nodes Test.quest"
+quest_file_path="res://addons/quest_manager/Examples/All Nodes.quest"
 
 [application]
 
@@ -19,7 +19,6 @@ config/icon="res://icon.png"
 
 [autoload]
 
-TestAutoLoad="*res://TestAutoLoad.gd"
 QuestManager="*res://addons/quest_manager/QuestManager.gd"
 
 [editor_plugins]

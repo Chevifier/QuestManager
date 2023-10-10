@@ -30,10 +30,10 @@ The 7 types of quest steps currently.
 
 ### Variables
 
-- `active_quest := ""` - Helper variable to assign a quest name
+- `active_quest :String= ""` - Helper variable to assign a quest name
 - `current_resource:QuestResource` -current loaded resource
 - `player_quests :Dictionary= {}` - all player quests
-- `counter := 0.0` -counter for tracking time
+- `counter :float= 0.0` -counter for tracking time
 
 ### Methods
 

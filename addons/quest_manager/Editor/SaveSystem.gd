@@ -63,8 +63,10 @@ func load_data(file_path):
 		Editor._on_graph_edit_connection_request(con.from,con.from_port,con.to,con.to_port)
 
 func save_new_file(file_path):
-	var quest_res = QuestResource.new()
-	ResourceSaver.save(quest_res,file_path)
+	current_file_path = file_path
+	var Save = FileAccess.open(file_path,FileAccess.WRITE)
+	Save.store_var({})
+	Save.store_var({})
 	current_file_path = file_path
 	data_saved.emit(file_path)
 	Editor.clear_graph()

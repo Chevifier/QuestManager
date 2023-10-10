@@ -309,6 +309,7 @@ func _on_save_file_file_selected(path):
 
 func _on_new_file_file_selected(path):
 	%QuestManagerSaveSystem.save_new_file(path)
+	
 
 func _on_graph_edit_connection_from_empty(to_node, to_port, release_position):
 	#TO-DO context sensitive node menu
