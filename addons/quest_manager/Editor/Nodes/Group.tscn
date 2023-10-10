@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dn40x8acrpxak"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Group.gd" id="1_qh728"]
 
-[node name="GroupNode" type="GraphNode"]
+[node name="fd6aad4d12" type="GraphNode"]
 custom_minimum_size = Vector2(50, 80)
 offset_right = 186.0
 offset_bottom = 85.0
@@ -18,8 +18,16 @@ slot/0/right_type = 1
 slot/0/right_color = Color(1, 1, 1, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
 script = ExtResource("1_qh728")
-Node_Type = 4
 
 [node name="LineEdit" type="LineEdit" parent="."]
 custom_minimum_size = Vector2(150, 0)
@@ -27,5 +35,8 @@ layout_mode = 2
 alignment = 1
 clear_button_enabled = true
 middle_mouse_paste_enabled = false
+
+[node name="id_lbl" type="Label" parent="."]
+layout_mode = 2
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]

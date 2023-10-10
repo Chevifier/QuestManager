@@ -8,10 +8,13 @@ func setup():
 	focus_nodes.append(group)
 
 func get_data():
-	return group.text
+	node_data["group"] = group.text
+	super.get_data()
+	return node_data
 
 func set_data(data):
-	group.text = data
+	super.set_data(data)
+	group.text = data["group"]
 
 func _on_line_edit_text_changed(new_text):
 	node_data["text"] = group.text

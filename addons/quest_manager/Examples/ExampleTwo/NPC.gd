@@ -1,10 +1,9 @@
 extends Node2D
-signal start_quest
-signal start_dialogue
 @export var dialogue := ""
-@export var quest : Resource
+@export var quest_resource : QuestResource
 @export_enum("Father", "Mother", "Sister") var family_member = 0
-var quest_name = "Meal For The Family"
+var quest_name = "Meal for the Family"
+var gave_quest = false
 func _ready():
 	match family_member:
 		0:
@@ -15,8 +14,10 @@ func _ready():
 			$Sister.show()
 	
 func get_quest():
-	QuestManager.add_quest_from_resource(quest,quest_name)
-	QuestManager.active_quest = quest_name
+	if gave_quest == false:
+		QuestManager.add_quest(quest_name,quest_resource)
+		gave_quest = true
+		
 
 func get_family_member():
 	return family_member

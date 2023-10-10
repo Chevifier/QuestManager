@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Timer_Step.gd" id="1_7ncg0"]
 
-[node name="Timer_Step" type="GraphNode"]
+[node name="91ec861ae2" type="GraphNode"]
 custom_minimum_size = Vector2(150, 150)
 offset_right = 150.009
 offset_bottom = 150.012
@@ -28,6 +28,15 @@ slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
 script = ExtResource("1_7ncg0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -85,6 +94,9 @@ text = "Fail On Timeout"
 [node name="meta_data" type="Label" parent="."]
 layout_mode = 2
 text = "Meta Data"
+
+[node name="id_lbl" type="Label" parent="."]
+layout_mode = 2
 
 [connection signal="gui_input" from="VBoxContainer/details" to="." method="_on_details_gui_input"]
 [connection signal="toggled" from="VBoxContainer/VBoxContainer/count_dir" to="." method="_on_count_down_toggled"]

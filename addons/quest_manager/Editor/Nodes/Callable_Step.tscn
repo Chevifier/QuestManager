@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7vnivpp87vho"]
+[gd_scene load_steps=2 format=3 uid="uid://b2virj1vctulb"]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Step.gd" id="1_sv62o"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Callable_Step.gd" id="1_mxhm0"]
 
-[node name="9566f57701" type="GraphNode"]
-custom_minimum_size = Vector2(150, 150)
-offset_right = 150.009
-offset_bottom = 150.012
+[node name="d3e4bfec57" type="GraphNode"]
+custom_minimum_size = Vector2(150, 100)
+offset_right = 267.0
+offset_bottom = 113.0
 size_flags_vertical = 4
-tooltip_text = "Action Quest Step requires an action to be completed to advance"
-title = "Action Step"
+tooltip_text = "Callable step calls a function from an Auto Loaded script and then advances to next step"
+title = "Callable Step"
 resizable = true
 slot/0/left_enabled = true
 slot/0/left_type = 0
@@ -37,23 +37,25 @@ slot/2/right_type = 0
 slot/2/right_color = Color(1, 1, 1, 1)
 slot/2/right_icon = null
 slot/2/draw_stylebox = true
-script = ExtResource("1_sv62o")
+script = ExtResource("1_mxhm0")
 
-[node name="details" type="TextEdit" parent="."]
+[node name="callable" type="LineEdit" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-placeholder_text = "Step details"
+placeholder_text = "callable function"
 context_menu_enabled = false
 caret_blink = true
 caret_blink_interval = 0.5
 
 [node name="meta_data" type="Label" parent="."]
 layout_mode = 2
-text = "Meta Data"
+text = "params
+"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
+text = "d3e4bfec57"
 
-[connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]
+[connection signal="gui_input" from="callable" to="." method="_on_details_gui_input"]

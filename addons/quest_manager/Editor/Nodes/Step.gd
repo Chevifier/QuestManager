@@ -5,18 +5,17 @@ extends EditorNode
 
 
 func setup():
-	super.setup()
 	Node_Type = Type.STEP_NODE
 	focus_nodes.append(details)
+	super.setup()
 
 func get_data():
-	var data = {
-		"step_type" : "action_step",
-		"details": details.text,
-		"meta_data" : get_meta_data(),
-		"complete" : false
-	}
-	return data
+	node_data["step_type"] = "action_step"
+	node_data["details"] = details.text
+	node_data["meta_data"] = get_meta_data()
+	node_data["complete"] = false
+	super.get_data()
+	return node_data
 
 func set_data(data):
 	super.set_data(data)
@@ -26,6 +25,5 @@ func set_data(data):
 func _on_details_gui_input(event):
 	if event is InputEventKey:
 		if event.keycode == KEY_ENTER:
-			print("enter")
 			details.release_focus()
 

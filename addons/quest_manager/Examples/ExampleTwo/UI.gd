@@ -9,7 +9,7 @@ var exitpressed = false
 func _ready():
 	QuestManager.new_quest_added.connect(new_quest)
 	QuestManager.step_updated.connect(update_ui)
-	
+	QuestManager.step_complete.connect(update_ui)
 	QuestManager.quest_completed.connect(quest_complete)
 	
 func new_quest(n):
@@ -27,9 +27,6 @@ func _process(delta):
 func update_ui(step):
 	for c in %items.get_children():
 		c.free()
-	if step.is_empty():
-		quest_complete("")
-		return
 	match step.step_type:
 		QuestManager.ACTION_STEP:
 			%discription.text = step.details
@@ -45,7 +42,7 @@ func update_ui(step):
 				i.button_pressed = item.complete
 				i.show()
 
-func quest_complete(n):
+func quest_complete(n,rewards):
 	for c in %items.get_children():
 		c.free()
 	%discription.text = "QUEST COMPLETE"

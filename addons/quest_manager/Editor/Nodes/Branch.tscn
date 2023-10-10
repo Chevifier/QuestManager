@@ -1,14 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7vnivpp87vho"]
+[gd_scene load_steps=2 format=3 uid="uid://c8o5anacgxamn"]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Step.gd" id="1_sv62o"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Branch.gd" id="1_5cc0i"]
 
-[node name="9566f57701" type="GraphNode"]
-custom_minimum_size = Vector2(150, 150)
-offset_right = 150.009
-offset_bottom = 150.012
+[node name="ef314d636d" type="GraphNode"]
+custom_minimum_size = Vector2(150, 250)
+offset_right = 197.0
+offset_bottom = 250.0
 size_flags_vertical = 4
-tooltip_text = "Action Quest Step requires an action to be completed to advance"
-title = "Action Step"
+tooltip_text = "Branch Step goes to alternate step if branch contition is true.
+Use QuestManager.set_branching_step(quest_name) before calling progress quest on a branch step to enable. if called will be true by defaut otherwise false "
+title = "Branch Step"
 resizable = true
 slot/0/left_enabled = true
 slot/0/left_type = 0
@@ -19,13 +20,13 @@ slot/0/right_type = 0
 slot/0/right_color = Color(0, 1, 0, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
-slot/1/left_enabled = true
+slot/1/left_enabled = false
 slot/1/left_type = 2
 slot/1/left_color = Color(0, 0, 1, 1)
 slot/1/left_icon = null
-slot/1/right_enabled = false
+slot/1/right_enabled = true
 slot/1/right_type = 0
-slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_color = Color(0, 1, 0, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
 slot/2/left_enabled = false
@@ -34,26 +35,28 @@ slot/2/left_color = Color(1, 1, 1, 1)
 slot/2/left_icon = null
 slot/2/right_enabled = false
 slot/2/right_type = 0
-slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_color = Color(0, 1, 0, 1)
 slot/2/right_icon = null
 slot/2/draw_stylebox = true
-script = ExtResource("1_sv62o")
+script = ExtResource("1_5cc0i")
 
 [node name="details" type="TextEdit" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-placeholder_text = "Step details"
+placeholder_text = "Details"
 context_menu_enabled = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="meta_data" type="Label" parent="."]
+[node name="Branch" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Meta Data"
+text = "Branch"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
+text = "ef314d636d"
 
 [connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]

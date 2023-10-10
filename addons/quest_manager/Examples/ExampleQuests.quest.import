@@ -1,0 +1,15 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://xpnw6ggixm3w"
+path="res://.godot/imported/ExampleQuests.quest-1a6f9296a852f70ead827b0e3dab69a2.tres"
+
+[deps]
+
+source_file="res://addons/quest_manager/Examples/ExampleQuests.quest"
+dest_files=["res://.godot/imported/ExampleQuests.quest-1a6f9296a852f70ead827b0e3dab69a2.tres"]
+
+[params]
+
+defaults=true

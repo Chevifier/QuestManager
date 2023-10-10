@@ -1,0 +1,15 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://d0xwa1tto7pd8"
+path="res://.godot/imported/All Nodes.quest-5c630602503abe2a3b0bb96b2b100b94.tres"
+
+[deps]
+
+source_file="res://addons/quest_manager/Examples/All Nodes.quest"
+dest_files=["res://.godot/imported/All Nodes.quest-5c630602503abe2a3b0bb96b2b100b94.tres"]
+
+[params]
+
+defaults=true
