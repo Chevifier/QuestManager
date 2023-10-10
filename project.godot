@@ -1,0 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+quest_file_path="res://addons/quest_manager/Examples/All Nodes.quest"
+
+[application]
+
+config/name="Quest Manager"
+run/main_scene="res://addons/quest_manager/Editor/EditorWindow.tscn"
+config/features=PackedStringArray("4.1", "Forward Plus")
+config/icon="res://icon.png"
+
+[autoload]
+
+QuestManager="*res://addons/quest_manager/QuestManager.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/quest_manager/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false

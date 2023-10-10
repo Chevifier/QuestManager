@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1x0n5bd18fi4"]
+
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleOne/Enemy.gd" id="1_ww3ap"]
+[ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_65dc7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sw6wr"]
+atlas = ExtResource("2_65dc7")
+region = Rect2(480, 352, 32, 31.4437)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tvtvb"]
+radius = 15.1327
+
+[node name="Enemy" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_ww3ap")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_sw6wr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -2)
+shape = SubResource("CircleShape2D_tvtvb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="1_ooyks"]
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/NPC.gd" id="2_vio6p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwep7"]
+size = Vector2(20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwpbm"]
+atlas = ExtResource("1_ooyks")
+region = Rect2(67, 333, 26, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a6i1"]
+atlas = ExtResource("1_ooyks")
+region = Rect2(4, 341, 24, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hjjc"]
+atlas = ExtResource("1_ooyks")
+region = Rect2(40, 352, 16, 32)
+
+[node name="NPC" type="StaticBody2D" groups=["NPC"]]
+script = ExtResource("2_vio6p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_qwep7")
+
+[node name="Father" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+y_sort_enabled = true
+texture_filter = 1
+texture = SubResource("AtlasTexture_jwpbm")
+
+[node name="Mother" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+y_sort_enabled = true
+texture_filter = 1
+texture = SubResource("AtlasTexture_0a6i1")
+
+[node name="Sister" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+y_sort_enabled = true
+texture_filter = 1
+texture = SubResource("AtlasTexture_6hjjc")

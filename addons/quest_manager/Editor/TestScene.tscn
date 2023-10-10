@@ -1,0 +1,272 @@
+[gd_scene load_steps=3 format=3 uid="uid://3iqa1wur00ir"]
+
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/PlayerQuests.gd" id="2_6skof"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/AvailableQuests.gd" id="2_h4po8"]
+
+[node name="Test_Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Tabs" type="TabContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+tab_alignment = 1
+
+[node name="Available Quests" type="Control" parent="Panel/MarginContainer/Tabs"]
+layout_mode = 2
+script = ExtResource("2_h4po8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Tabs/Available Quests"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Quest_List" type="ItemList" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 1
+item_0/text = "Test"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Quest_Name" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "QUEST NAME"
+
+[node name="Quest_Description" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 20
+text = "Quest Description"
+
+[node name="STEPS" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "STEPS(Unordered)"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="QuestSteps" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 20
+text = "<Step>"
+
+[node name="REWARDS" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "REWARDS"
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Rewards" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/ScrollContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 20
+text = "<Rewards>"
+
+[node name="quest_meta_data" type="Button" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "QUEST META DATA"
+
+[node name="accept_quest" type="Button" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ACCEPT QUEST"
+
+[node name="Player Quests" type="Control" parent="Panel/MarginContainer/Tabs"]
+visible = false
+layout_mode = 2
+script = ExtResource("2_6skof")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Tabs/Player Quests"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Player_Quests_List" type="ItemList" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 1
+item_0/text = "Test"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Player_Quest_Name" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "QUEST NAME"
+
+[node name="Player_Quest_Description" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 20
+text = "svdfsdvsvdsdv
+vsrvds
+vdsvds
+vs
+dvsv
+s
+ds
+vs
+dvs
+vdsdvsdvsdv"
+
+[node name="Current Step" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "CURRENT STEP"
+
+[node name="Current_Step_Details" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 20
+text = "
+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="step_controls" type="VBoxContainer" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="show_data" type="Button" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quest Meta Data"
+
+[node name="delete_quest" type="Button" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Delete Quest"
+
+[node name="type_factory" type="Control" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="action_step_button" type="Button" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/type_factory"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 123.0
+offset_bottom = 31.0
+text = "COMPLETE STEP"
+
+[node name="incremental_step" type="HBoxContainer" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/type_factory"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="progress_label" type="Label" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/type_factory/incremental_step"]
+layout_mode = 2
+
+[node name="amount" type="SpinBox" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/type_factory/incremental_step"]
+layout_mode = 2
+
+[node name="add" type="Button" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/type_factory/incremental_step"]
+layout_mode = 2
+text = "ADD AMOUNT"
+
+[node name="item_step_button" type="CheckBox" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/type_factory"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+
+[node name="quest_data" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Quest Info"
+ok_button_text = "CLOSE"
+
+[node name="quest_data_label" type="Label" parent="quest_data"]
+unique_name_in_owner = true
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 92.0
+offset_bottom = 51.0
+vertical_alignment = 1
+
+[connection signal="item_selected" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/ScrollContainer/VBoxContainer/Quest_List" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_quest_list_item_selected"]
+[connection signal="pressed" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/quest_meta_data" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_quest_meta_data_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/accept_quest" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_accept_quest_pressed"]
+[connection signal="item_selected" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/ScrollContainer/VBoxContainer/Player_Quests_List" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_player_quests_list_item_selected"]
+[connection signal="pressed" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/show_data" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_show_data_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/delete_quest" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_delete_quest_pressed"]

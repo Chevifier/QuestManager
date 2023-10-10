@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnbtwf5q2hh1n"]
+
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/End.gd" id="1_18gav"]
+
+[node name="59444abe46" type="GraphNode"]
+custom_minimum_size = Vector2(111, 80)
+offset_right = 111.0
+offset_bottom = 80.0
+title = "END"
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(0, 1, 0, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+script = ExtResource("1_18gav")
+
+[node name="end" type="Label" parent="."]
+layout_mode = 2
+text = "Complete
+"
+vertical_alignment = 1
+
+[node name="id_lbl" type="Label" parent="."]
+layout_mode = 2

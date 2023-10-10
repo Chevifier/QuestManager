@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxs5n68ejcxr0"]
+
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ScriptQuestExample/ScriptQuestExampleScene.gd" id="1_pyllk"]
+
+[node name="ScriptQuestExampleScene" type="Node2D"]
+script = ExtResource("1_pyllk")
