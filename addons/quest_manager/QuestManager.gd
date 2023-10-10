@@ -30,8 +30,8 @@ func get_quest_from_resource(quest_name:String,resource:QuestResource=current_re
 
 #loads and add a quest to player quests from quest_resource
 func add_quest(quest_name:String,resource:QuestResource=current_resource) -> void:
-	var quest_data = resource.get_quest_by_name(quest_name)
-	player_quests[quest_data.quest_id] = quest_data.duplicate(true)
+	var node_data = resource.get_quest_by_name(quest_name)
+	player_quests[node_data.quest_id] = node_data.duplicate(true)
 	new_quest_added.emit(quest_name)
 	active_quest = quest_name
 	step_updated.emit(get_current_step(quest_name))
@@ -43,12 +43,12 @@ func load_quest_resource(quest_res:QuestResource) -> void:
 func get_player_quest(quest_name:String,is_id:bool=false) -> Dictionary:
 	if is_id:
 		return player_quests[quest_name]
-	var quest_data = {}
+	var node_data = {}
 	for quest in player_quests:
 		if player_quests[quest].quest_name == quest_name:
-			quest_data = player_quests[quest]
+			node_data = player_quests[quest]
 			break
-	return quest_data
+	return node_data
 
 #all the current quests the player has
 func get_all_player_quests() -> Dictionary:
@@ -188,8 +188,8 @@ func get_quest_list(quest_resource:QuestResource=current_resource, group:String=
 	
 #Add a quest that was created from script/at runtime
 func add_scripted_quest(quest:ScriptQuest):
-	player_quests[quest.quest_data.quest_id] = quest.quest_data
-	new_quest_added.emit(quest.quest_data.quest_name)
+	player_quests[quest.quest_data["quest_id"]] = quest.quest_data
+	new_quest_added.emit(quest.node_data.quest_name)
 	active_quest = quest.quest_data.quest_name
 
 #Return true if the player currently has a quest
@@ -318,14 +318,10 @@ func reset_quest(quest_name:String) -> void:
 	
 #Removes Every Quest from player 
 #Usefull for new game files if neccessary
-func wipe_quest_data() -> void:
+func wipe_node_data() -> void:
 	player_quests = {}
 
-func get_random_id() -> String:
-	randomize()
-	#seed(Time.get_unix_time_from_system())
-	return str(randi() % 1000000).sha1_text().substr(0, 10)
-	
+
 func call_function(autoloadfunction:String,params:Array) -> void:
 	#split function from autoload script name
 	var autofuncsplit = autoloadfunction.split(".")

@@ -51,7 +51,7 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 		return err
 	var quest_res = QuestResource.new()
 	
-	quest_res.quest_data = file.get_var()
+	quest_res.node_data = file.get_var()
 	quest_res.editor_data = file.get_var()
 	return ResourceSaver.save(quest_res, "%s.%s" % [save_path, _get_save_extension()])
 	

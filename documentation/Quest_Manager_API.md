@@ -23,9 +23,9 @@ The 7 types of quest steps currently.
 - #### TIMER_STEP = "timer_step"
 
 - #### BRANCH_STEP = "branch_step"
-- 
+  
 - #### CALLABLE_STEP = "callable_step"
-- 
+  
 - #### END = "end"
 
 ### Variables

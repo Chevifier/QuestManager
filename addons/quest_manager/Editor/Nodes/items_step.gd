@@ -19,6 +19,7 @@ func get_data():
 	node_data["step_type"] = "items_step"
 	node_data["details"]= details.text
 	node_data["item_list"]= item_list
+	node_data["complete"] = false
 	node_data["meta_data"]= get_meta_data()
 	super.get_data()
 	return node_data
