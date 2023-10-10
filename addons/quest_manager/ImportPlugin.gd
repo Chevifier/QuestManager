@@ -7,22 +7,25 @@ func _get_importer_name():
 	return "quest_importer"
 	
 func _get_import_options(path, preset_index):
-	return []
+	return [{
+		name = "defaults",
+		default_value = true
+	}]
 	
 func _get_option_visibility(path,option, options):
-	return true
+	return false
 	
 func _get_visible_name():
 	return "Quest File"
 	
 func _get_priority():
-	return 1.0
+	return 1000.0
 	
 func _get_import_order():
-	return 0
+	return -1000
 	
 func _get_recognized_extensions():
-	return ["quest"] #Quest Manager file
+	return PackedStringArray(["quest"]) #Quest Manager file
 
 func _get_save_extension():
 	return "tres"
@@ -47,8 +50,9 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	if err != OK:
 		return err
 	var quest_res = QuestResource.new()
-	quest_res.quest_data = file.get_var()
-	quest_res.graph_data = file.get_var()
+	
+	quest_res.node_data = file.get_var()
+	quest_res.editor_data = file.get_var()
 	return ResourceSaver.save(quest_res, "%s.%s" % [save_path, _get_save_extension()])
 	
 

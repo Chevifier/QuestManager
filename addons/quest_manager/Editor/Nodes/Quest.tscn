@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest.gd" id="1_i7joj"]
 
-[node name="Quest" type="GraphNode"]
+[node name="e4483ecd60" type="GraphNode"]
 custom_minimum_size = Vector2(200, 250)
 offset_left = 12.0
 offset_top = 10.0
@@ -59,6 +59,15 @@ slot/4/right_type = 0
 slot/4/right_color = Color(1, 1, 1, 1)
 slot/4/right_icon = null
 slot/4/draw_stylebox = true
+slot/5/left_enabled = false
+slot/5/left_type = 0
+slot/5/left_color = Color(1, 1, 1, 1)
+slot/5/left_icon = null
+slot/5/right_enabled = false
+slot/5/right_type = 0
+slot/5/right_color = Color(1, 1, 1, 1)
+slot/5/right_icon = null
+slot/5/draw_stylebox = true
 script = ExtResource("1_i7joj")
 
 [node name="Quest_Name" type="LineEdit" parent="."]
@@ -82,3 +91,7 @@ text = "Quest Rewards"
 [node name="Meta_Data" type="Label" parent="."]
 layout_mode = 2
 text = "Meta Data"
+
+[node name="id_lbl" type="Label" parent="."]
+layout_mode = 2
+text = "e4483ecd60"

@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="1_h2u44"]
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleOne/Spawner.gd" id="2_178tv"]
 [ext_resource type="PackedScene" uid="uid://dkgxjm5uka6l7" path="res://addons/quest_manager/Examples/ExampleOne/Player.tscn" id="2_wt15h"]
-[ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleOne/Enemy.tscn" id="2_xic0p"]
+[ext_resource type="PackedScene" uid="uid://b1x0n5bd18fi4" path="res://addons/quest_manager/Examples/ExampleOne/Enemy.tscn" id="2_xic0p"]
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleOne/UI.gd" id="5_dd25g"]
-[ext_resource type="Resource" uid="uid://xpnw6ggixm3w" path="res://addons/quest_manager/Examples/ExampleQuest.quest" id="6_cnepv"]
+[ext_resource type="Resource" uid="uid://xpnw6ggixm3w" path="res://addons/quest_manager/Examples/ExampleQuests.quest" id="6_pyphe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xsckt"]
 texture = ExtResource("1_h2u44")
@@ -126,7 +126,7 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 1441830, 1, 0, -65538, 1, 0, 10485
 
 [node name="Player" parent="." instance=ExtResource("2_wt15h")]
 unique_name_in_owner = true
-position = Vector2(446.333, 627)
+position = Vector2(588, 627)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(582, 328)
@@ -162,7 +162,8 @@ autostart = true
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("5_dd25g")
-quest = ExtResource("6_cnepv")
+quest_name = "ShootEmUp"
+quest_resource = ExtResource("6_pyphe")
 
 [node name="Quest" type="Label" parent="UI"]
 anchors_preset = 8

@@ -12,19 +12,22 @@ func setup():
 	focus_nodes.append(details)
 
 func get_data():
-	var data = {
-		"step_type" : "timer_step",
-		"details": details.text,
-		"total_time": get_time_in_seconds(),
-		"time" : get_time(count_dir.button_pressed),
-		"is_count_down" : count_dir.button_pressed,
-		"fail_on_timeout" : fail_toggle.button_pressed,
-		"time_minutes": minutes_node.value,
-		"time_seconds": seconds_node.value,
-		"meta_data" : get_meta_data()
-	}
-	return data
+	node_data["step_type"]= "timer_step"
+	node_data["details"]= details.text
+	node_data["total_time"]=  get_time_in_seconds()
+	node_data["time"]= get_time(count_dir.button_pressed)
+	node_data["is_count_down"]= count_dir.button_pressed
+	node_data["fail_on_timeout"]= fail_toggle.button_pressed
+	node_data["time_minutes"]= minutes_node.value
+	node_data["time_seconds"]= seconds_node.value
+	node_data["meta_data"]= get_meta_data()
+	node_data["complete"] = false
+	
+	super.get_data()
+	return node_data
+	
 func set_data(data):
+	super.set_data(data)
 	details.text = data["details"]
 	minutes_node.value = data["time_minutes"]
 	seconds_node.value = data["time_seconds"]

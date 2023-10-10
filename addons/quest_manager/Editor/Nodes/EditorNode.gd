@@ -1,5 +1,6 @@
 @tool
 class_name EditorNode
+
 extends GraphNode
 enum Type {
 	QUEST_NODE,
@@ -10,10 +11,12 @@ enum Type {
 	META_DATA,
 	END_NODE,
 	TIMER_NODE,
-	REWARDS_NODE
+	REWARDS_NODE,
+	BRANCH_NODE,
+	FUNCTION_CALL_NODE
 }
 
-var Node_Type :Type
+var Node_Type : Type
 
 var node_data = {}
 var input_node = null
@@ -21,12 +24,15 @@ var output_node = null
 var meta_data_node = null
 var meta_data := {}
 var id = ""
-var data = {}
+var next_id = ""
+var quest_id = ""
 var focus_nodes = []
-
+@onready var id_lbl = $id_lbl
 func _ready():
 	setup()
-
+func show_id(vis:bool):
+	id_lbl.visible = vis
+	
 func setup():
 	close_request.connect(_on_close_request)
 	resize_request.connect(_on_resize_request)
@@ -37,32 +43,51 @@ func setup():
 	position_offset_changed.connect(_on_position_offset_changed)
 	raise_request.connect(_on_raise_request)
 	id = get_random_id()
+	name = id
+	id_lbl.text = id
 	
-func get_meta_data():
+func get_meta_data(func_params:bool = false):
+	var data = {}
 	if is_instance_valid(meta_data_node):
-		return meta_data_node.get_data()
+		data = meta_data_node.get_data(func_params)
+		return data["meta_data"]
 	else:
-		return {}
+		data = {"funcparams":[]}
+		return data
+	
 func get_data():
-	return data
-
-func get_node_data():
 	node_data["id"] = id
-	node_data["name"] = name
 	node_data["type"] = Node_Type
 	node_data["position"] = position_offset
+	node_data["size"] = size
+	node_data["next_id"] = next_id
 	return node_data
-	
-func set_node_data(data):
-	id = data["id"]
-	name = data["name"]
-	Node_Type = data["type"]
-	position_offset = data["position"]
 	
 func set_data(data):
 	if data.has("meta_data"):
 		meta_data = data["meta_data"]
-	pass
+	id = data["id"]
+	name = id
+	Node_Type = data["type"]
+	position_offset = data["position"]
+	size = data["size"]
+	id_lbl.text = id
+
+
+#passes quest id to output node when a connection accures
+func propagate_quest_id(_id):
+	quest_id = _id
+	if output_node != null:
+		#failsafe avoid wiping quest Id from quest node
+		if output_node.Node_Type != Type.QUEST_NODE:
+			node_data["quest_id"]= quest_id
+			output_node.propagate_quest_id(_id)
+
+func clear_quest_id():
+	quest_id = ""
+	node_data["quest_id"]= quest_id
+	if output_node != null:
+		output_node.clear_quest_id()
 
 func _on_node_selected():
 	pass
@@ -95,7 +120,6 @@ func release_all_focus():
 
 func get_random_id() -> String:
 	randomize()
-	#seed(Time.get_unix_time_from_system())
 	return str(randi() % 1000000).sha1_text().substr(0, 10)
 	
 func update_meta_data():

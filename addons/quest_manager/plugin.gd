@@ -21,7 +21,7 @@ func _enter_tree():
 	
 func _edit(object):
 	if is_instance_valid(EditorWindow) and is_instance_valid(object):
-		EditorWindow.load_data(object.resource_path)
+		EditorWindow.get_node("QuestManagerSaveSystem").load_data(object.resource_path)
 		
 func _handles(object):
 	return object is QuestResource
@@ -66,5 +66,4 @@ func _exit_tree():
 	quest_importer = null
 
 func _update_imports(file_path):
-	get_editor_interface().get_resource_filesystem().scan()
-
+	get_editor_interface().get_resource_filesystem().scan_sources()

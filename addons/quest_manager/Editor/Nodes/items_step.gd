@@ -16,18 +16,19 @@ func setup():
 
 #Returns All added items for processing
 func get_data():
-	var data = {
-		"step_type" : "items_step",
-		"details": details.text,
-		"item_list": item_list,
-		"meta_data" : get_meta_data()
-	}
-	return data
+	node_data["step_type"] = "items_step"
+	node_data["details"]= details.text
+	node_data["item_list"]= item_list
+	node_data["complete"] = false
+	node_data["meta_data"]= get_meta_data()
+	super.get_data()
+	return node_data
 
 func get_items():
 	return item_list
 	
 func set_data(data):
+	super.set_data(data)
 	details.text = data.details
 	item_list = data.item_list
 	for item in data.item_list:

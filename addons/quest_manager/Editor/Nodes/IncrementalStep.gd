@@ -11,20 +11,23 @@ func setup():
 	focus_nodes.append(details)
 	focus_nodes.append(quantity)
 	
-#returns an array with both the stored data and node position and name data
-func get_data():
-	var data = {
-		"step_type":"incremental_step",
-		"details" : details.text,
-		"item_name" : item_name.text,
-		"required" : quantity.value,
-		"collected" : 0,
-		"meta_data" : get_meta_data()
-	}
+func propogate_quest_id(id):
+	if output_node != null:
+		output_node.propogate_quest_id(id)
 
-	return data
+func get_data():
+	node_data["step_type"] = "incremental_step"
+	node_data["details"] = details.text
+	node_data["item_name"] = item_name.text
+	node_data["required"] = quantity.value
+	node_data["collected"] = 0
+	node_data["complete"] = false
+	node_data["meta_data"] = get_meta_data()
+	super.get_data()
+	return node_data
 	
 func set_data(data):
+	super.set_data(data)
 	details.text = data.details
 	item_name.text = data.item_name
 	quantity.value = data.required

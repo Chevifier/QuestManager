@@ -3,14 +3,17 @@
 ## The Editor
 
 To create a quest you should use the editor. The editor has various nodes required to create quests. These nodes are:
-1. `Quest Node` - This Node is the main quest node it requires the `quest_name` and the `quest_details`
+1. `Quest Node` - This Node is the main quest node it requires the `quest_name` and `quest_details`
 2. `Step Node` - This node is an `action_step` node and only requires a discription of the action to complete.
 3. `Incremental Step Node` - This node is an `incremental_step` node and requires both its `details` , `item_name` and the `required` amount to complete. 
 4. `Item Step Node` - This node is an `items_step` node and requires the `details` as well as the list of items/actions to complete
-5. `End Node` - This node is required to end a quest after the final step.
-6. `Group Node` - A group node only requires its `group` name and can be connected to multiple quest nodes.
-7. `Meta Data Node` - A meta data node is use to add meta data to quest such as quest rewards or any arbitrary information stored as a `String`, `Integer`, `float` or `boolean`
-8. `Timer Node` - This Node is a `timer_step` node that is used as a Timer or a Stopwatch
+5. `Group Node` - A group node only requires its `group` name and can be connected to multiple quest nodes.
+6. `Meta Data Node` - A meta data node is use to add meta data to quest such as quest rewards or any arbitrary information stored as a `String`, `Integer`, `float` or `boolean`
+7. `Timer Node` - This Node is a `timer_step` node that is used as a Timer or a Stopwatch
+8. `Callable Node` - This Node is a `callable_step` node that is used to call a function from an Autoloaded Script.
+9. `Branch Node` - The Node is a `branch_step` that works similar to anc `action_step` but has 2 output for creating branching quests.
+10. `Rewards Node` -This Node is similar to a meta_data node but can only be connected to a `Quest Node`
+11. `End Node` - This node is required to end a quest after the final step.
 
 ## How to use
 
@@ -34,9 +37,9 @@ For this example we'll keep it simple and create a 1 step Quest to kill 15 enemi
         - `quest complete` - We update the UI to show that the quest was completed
         - `quest_failed` - Show if the quest failed if the player died
     - Then we set the QuestStart label text to the quest details and do some tweening the start the level
-8. Open up the `Example/ExampleOne/Projectile.gd` script. Notice we check to see if the bullet hits an enemy. If it did, we call `QuestManager.progress_quest("ShootEmUp","Enemies")` before removing the projectile. This increases the the `collected` items of the `Incremental Step` by 1 by default.
+8. Open up the `Example/ExampleOne/Projectile.gd` script. Notice we check to see if the bullet hits an enemy. If it did, we call `QuestManager.progress_quest("ShootEmUp","Ship")` before removing the projectile. This increases the `collected` items of the `Incremental Step` by 1 by default.
 9. In the Player.gd we also check if the player ran out of lives. If so we call `QuestManager.fail_quest("ShootEmUp")` This sets the quest as failed and emits the `quest_failed` signal.
-10. And Thats about it for the tutorial. If a quest has multiple steps the `step_updated` signal returns the new step its up to you how you want to display the information of that current step by checking its `step_type`. Check the [API](Quest_Manager_API.md) for what properties each step_type contains 
+10. And Thats about it for the tutorial. If a quest has multiple steps the `step_updated` and `step_completed` signals returns a new step its up to you how you want to display the information of that current step by checking its `step_type`. Check the [API](Quest_Manager_API.md) for what properties each `step_type` contains.
 
 # Creating Quests from code
 

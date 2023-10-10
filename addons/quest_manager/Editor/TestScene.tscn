@@ -87,10 +87,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
-text = "STEPS"
+text = "STEPS(Unordered)"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
 [node name="QuestSteps" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/ScrollContainer"]
@@ -119,6 +119,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 20
 text = "<Rewards>"
+
+[node name="quest_meta_data" type="Button" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "QUEST META DATA"
 
 [node name="accept_quest" type="Button" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -261,6 +265,7 @@ offset_bottom = 51.0
 vertical_alignment = 1
 
 [connection signal="item_selected" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/ScrollContainer/VBoxContainer/Quest_List" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_quest_list_item_selected"]
+[connection signal="pressed" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/quest_meta_data" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_quest_meta_data_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/accept_quest" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_accept_quest_pressed"]
 [connection signal="item_selected" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/ScrollContainer/VBoxContainer/Player_Quests_List" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_player_quests_list_item_selected"]
 [connection signal="pressed" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/show_data" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_show_data_pressed"]
