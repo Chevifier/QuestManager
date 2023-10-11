@@ -10,7 +10,7 @@ func _ready():
 
 func save_data(file_path):
 	var Save = FileAccess.open(file_path,FileAccess.WRITE)
-	Save.store_var(Editor.get_node_data())
+	Save.store_var(Editor.get_quests_data())
 	Save.store_var(Editor.get_editor_data())
 	current_file_path = file_path
 

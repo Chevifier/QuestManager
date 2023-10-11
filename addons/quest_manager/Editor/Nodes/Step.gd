@@ -3,7 +3,6 @@ extends EditorNode
 
 @onready var details = %details
 
-
 func setup():
 	Node_Type = Type.STEP_NODE
 	focus_nodes.append(details)

@@ -24,6 +24,7 @@ func get_data():
 	node_data["branch"]= false
 	node_data["complete"]= false
 	node_data["branch_step_id"]=branch_step_id # the step to jump if branching
+	node_data["meta_data"] = get_meta_data()
 	super.get_data()
 	return node_data
 

@@ -1,6 +1,7 @@
 @tool
 class_name EditorNode
 
+
 extends GraphNode
 enum Type {
 	QUEST_NODE,
@@ -22,7 +23,6 @@ var node_data = {}
 var input_node = null
 var output_node = null
 var meta_data_node = null
-var meta_data := {}
 var id = ""
 var next_id = ""
 var quest_id = ""
@@ -64,8 +64,6 @@ func get_data():
 	return node_data
 	
 func set_data(data):
-	if data.has("meta_data"):
-		meta_data = data["meta_data"]
 	id = data["id"]
 	name = id
 	Node_Type = data["type"]
@@ -123,11 +121,10 @@ func get_random_id() -> String:
 	return str(randi() % 1000000).sha1_text().substr(0, 10)
 	
 func update_meta_data():
-	meta_data = {}
 	if is_instance_valid(meta_data_node):
-		meta_data = meta_data_node.get_data()
+		node_data["meta_data"] = meta_data_node.get_data()
 		
 
 func clear_meta_data():
-	meta_data = {}
+	node_data["meta_data"] = {}
 	meta_data_node = null

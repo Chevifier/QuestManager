@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Branch.gd" id="1_5cc0i"]
 
-[node name="ef314d636d" type="GraphNode"]
+[node name="26f5419725" type="GraphNode"]
 custom_minimum_size = Vector2(150, 250)
 offset_right = 197.0
 offset_bottom = 250.0
@@ -29,15 +29,24 @@ slot/1/right_type = 0
 slot/1/right_color = Color(0, 1, 0, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
-slot/2/left_enabled = false
-slot/2/left_type = 0
-slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_enabled = true
+slot/2/left_type = 2
+slot/2/left_color = Color(0, 0, 1, 1)
 slot/2/left_icon = null
 slot/2/right_enabled = false
 slot/2/right_type = 0
 slot/2/right_color = Color(0, 1, 0, 1)
 slot/2/right_icon = null
 slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
 script = ExtResource("1_5cc0i")
 
 [node name="details" type="TextEdit" parent="."]
@@ -55,8 +64,12 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Branch"
 
+[node name="meta_data" type="Label" parent="."]
+layout_mode = 2
+text = "Meta Data"
+
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "ef314d636d"
+text = "26f5419725"
 
 [connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]

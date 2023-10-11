@@ -189,8 +189,8 @@ func updateMetaDataAndGroup(to,from):
 		quest.update_group_data()
 
 #Pulls all data into Quest Nodes and return it for saving
-func get_node_data():
-	var node_data = {}
+func get_quests_data():
+	var quest_data = {}
 	var quest_nodes = get_quest_nodes()
 	for quest in quest_nodes:
 		quest.update_group_data()
@@ -203,8 +203,8 @@ func get_node_data():
 					if node.quest_id == quest.id:
 						steps[node.id] = node.get_data()
 		quest.quest_steps = steps
-		node_data[quest.id] = quest.get_data()
-	return node_data
+		quest_data[quest.id] = quest.get_data()
+	return quest_data
 	
 #Gets all Nodes that are Quests
 func get_quest_nodes():

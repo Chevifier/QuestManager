@@ -18,7 +18,6 @@ func setup():
 	focus_nodes.append(quest_details)
 	quest_id = id
 
-#returns an array with both the stored data and node position and name data
 func get_data():
 	node_data["quest_id"]= id
 	node_data["quest_name"]= quest_name.text

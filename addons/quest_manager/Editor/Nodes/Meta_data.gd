@@ -18,6 +18,7 @@ func setup():
 #set is_function_param to true if you want an ordered array to be returnd
 func get_data(is_function_params :bool= false):
 	#Array for function parameter for callable Node
+	var meta_data = {}
 	var arr = [] 
 	for node in data_container.get_children():
 		var meta_name = node.get_node("name").text
@@ -81,7 +82,6 @@ func set_data(data):
 
 func delete_meta_data(node_path):
 	data_container.get_node(node_path).queue_free()
-	
 
 func _on_option_selected(index):
 	var option
