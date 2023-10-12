@@ -60,7 +60,7 @@ func load_data(file_path):
 		node.set_data(quest_res.editor_data[i])
 		node.show_id(%show_ids.button_pressed)
 	for con in quest_res.editor_data.connections_list:
-		Editor._on_graph_edit_connection_request(con.from,con.from_port,con.to,con.to_port)
+		Editor._on_graph_edit_connection_request(con.from_node,con.from_port,con.to_node,con.to_port)
 
 func save_new_file(file_path):
 	current_file_path = file_path

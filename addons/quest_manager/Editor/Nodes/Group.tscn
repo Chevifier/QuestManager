@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Group.gd" id="1_qh728"]
 
-[node name="fd6aad4d12" type="GraphNode"]
+[node name="af74bb844c" type="GraphNode"]
 custom_minimum_size = Vector2(50, 80)
 offset_right = 186.0
 offset_bottom = 85.0
 tooltip_text = "Groups are useful for filtering multiple quests to access. Can only be attached to Quest Nodes"
-title = "Group"
 resizable = true
+title = "Group"
 slot/0/left_enabled = false
 slot/0/left_type = 0
 slot/0/left_color = Color(1, 1, 1, 1)
@@ -37,6 +37,8 @@ clear_button_enabled = true
 middle_mouse_paste_enabled = false
 
 [node name="id_lbl" type="Label" parent="."]
+visible = false
 layout_mode = 2
+text = "af74bb844c"
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]

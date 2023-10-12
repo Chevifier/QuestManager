@@ -1,8 +1,13 @@
 @tool
 class_name EditorNode
-
-
 extends GraphNode
+enum SLOTTYPE {
+	STEP = 0,
+	GROUP = 1,
+	META_DATA = 2,
+	REWARDS = 3
+}
+
 enum Type {
 	QUEST_NODE,
 	STEP_NODE,
@@ -34,7 +39,7 @@ func show_id(vis:bool):
 	id_lbl.visible = vis
 	
 func setup():
-	close_request.connect(_on_close_request)
+	delete_request.connect(_on_close_request)
 	resize_request.connect(_on_resize_request)
 	slot_updated.connect(_on_slot_updated)
 	node_selected.connect(_on_node_selected)

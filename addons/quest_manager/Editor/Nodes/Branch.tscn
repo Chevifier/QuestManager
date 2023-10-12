@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Branch.gd" id="1_5cc0i"]
 
-[node name="014b9fb632" type="GraphNode"]
+[node name="98cfff9521" type="GraphNode"]
 custom_minimum_size = Vector2(150, 250)
 offset_right = 197.0
 offset_bottom = 250.0
 size_flags_vertical = 4
 tooltip_text = "Branch Step goes to alternate step if branch contition is true.
 Use QuestManager.set_branching_step(quest_name) before calling progress quest on a branch step to enable. if called will be true by defaut otherwise false "
-title = "Branch Step"
 resizable = true
+title = "Branch Step"
 slot/0/left_enabled = true
 slot/0/left_type = 0
 slot/0/left_color = Color(0, 1, 0, 1)
@@ -51,6 +51,7 @@ script = ExtResource("1_5cc0i")
 
 [node name="details" type="TextEdit" parent="."]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -70,6 +71,7 @@ text = "Meta Data"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "014b9fb632"
+size_flags_vertical = 6
+text = "98cfff9521"
 
 [connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]

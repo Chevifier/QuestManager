@@ -17,7 +17,6 @@ func _enter_tree():
 	add_import_plugin(quest_importer)
 	_make_visible(false)
 	EditorWindow.editor_plugin = self
-	EditorWindow.data_saved.connect(_update_imports)
 	
 func _edit(object):
 	if is_instance_valid(EditorWindow) and is_instance_valid(object):
@@ -64,6 +63,3 @@ func _exit_tree():
 	remove_autoload_singleton("QuestManager")
 	remove_import_plugin(quest_importer)
 	quest_importer = null
-
-func _update_imports(file_path):
-	get_editor_interface().get_resource_filesystem().scan_sources()

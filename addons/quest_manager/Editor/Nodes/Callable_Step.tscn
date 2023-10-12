@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Callable_Step.gd" id="1_mxhm0"]
 
-[node name="d3e4bfec57" type="GraphNode"]
+[node name="a885383588" type="GraphNode"]
 custom_minimum_size = Vector2(150, 100)
 offset_right = 267.0
 offset_bottom = 113.0
 size_flags_vertical = 4
 tooltip_text = "Callable step calls a function from an Auto Loaded script and then advances to next step"
-title = "Callable Step"
 resizable = true
+title = "Callable Step"
 slot/0/left_enabled = true
 slot/0/left_type = 0
 slot/0/left_color = Color(0, 1, 0, 1)
@@ -56,6 +56,7 @@ text = "params
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "d3e4bfec57"
+size_flags_vertical = 6
+text = "a885383588"
 
 [connection signal="gui_input" from="callable" to="." method="_on_details_gui_input"]

@@ -8,13 +8,14 @@
 
 config_version=5
 
-quest_file_path="res://addons/quest_manager/Examples/ExampleQuests.quest"
+quest_file_path="res://test.quest"
 
 [application]
 
 config/name="Quest Manager"
+config/tags=PackedStringArray("qm4.2")
 run/main_scene="res://addons/quest_manager/Editor/EditorWindow.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.png"
 
 [autoload]

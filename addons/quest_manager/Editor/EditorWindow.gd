@@ -129,6 +129,7 @@ func add_graph_node(index):
 
 
 func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
+	print("connecting %s to %s" % [from_node, to_node])
 	var from = get_connection_node(from_node)
 	var to = get_connection_node(to_node)
 	#Prevent multiple connections to same port
@@ -140,11 +141,10 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 			#Allow multiple connections to end node
 			to.add_node()
 			break
-		if connection.to == to_node and connection.to_port == to_port:
+		if connection.to_node == to_node and connection.to_port == to_port:
 			return
-		if connection.from == from_node and connection.from_port == from_port:
+		if connection.from_node == from_node and connection.from_port == from_port:
 			return
-
 	match from.Node_Type:
 		EditorNode.Type.GROUP_NODE:
 			to.group_node = from
@@ -275,9 +275,8 @@ func _on_graph_edit_delete_nodes_request(nodes):
 #remove connection to a node before deleting it
 func remove_connections_to_node(node):
 	for connection in graph.get_connection_list():
-		if connection.to == node.name or connection.from == node.name:
-			graph.disconnect_node(connection.from, connection.from_port, connection.to, connection.to_port)
-
+		if connection.to_node == node.name or connection.from_node == node.name:
+			graph.disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 
 #retreive editor data for saving
 func get_editor_data():
@@ -319,8 +318,9 @@ func _on_graph_edit_connection_to_empty(from_node, from_port, release_position):
 	#TO-DO context sensitive node menu
 	pass
 
-func reimport_saved_file(saved_file):
-	editor_plugin._update_imports(saved_file)
+func reimport_saved_file(save_file):
+	print("scanning sources")
+	EditorInterface.get_resource_filesystem().scan_sources()
 
 func _on_graph_edit_mouse_exited():
 	for node in get_all_nodes():
@@ -332,7 +332,7 @@ func _on_test_button_pressed():
 		return
 	ProjectSettings.set_setting("quest_file_path",%QuestManagerSaveSystem.current_file_path)
 	ProjectSettings.save()
-	editor_plugin.get_editor_interface().play_custom_scene(test_scene_path)
+	EditorInterface.play_custom_scene(test_scene_path)
 
 #copy selected node data
 func _on_graph_edit_copy_nodes_request():

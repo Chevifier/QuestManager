@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/IncrementalStep.gd" id="1_dipun"]
 
-[node name="ed99a927ea" type="GraphNode"]
+[node name="3bde978c4e" type="GraphNode"]
 custom_minimum_size = Vector2(240, 150)
 offset_right = 240.0
 offset_bottom = 100.0
 tooltip_text = "Incremental quest steps require
 a quantity of an item to be collected"
-title = "Incremental Step"
 resizable = true
+title = "Incremental Step"
 slot/0/left_enabled = true
 slot/0/left_type = 0
 slot/0/left_color = Color(0, 1, 0, 1)
@@ -45,6 +45,7 @@ size_flags_vertical = 3
 
 [node name="details" type="TextEdit" parent="VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -79,5 +80,7 @@ text = "Meta Data"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
+text = "e3c53d49c4"
 
 [connection signal="gui_input" from="VBoxContainer/details" to="." method="_on_details_gui_input"]
