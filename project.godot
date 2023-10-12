@@ -8,7 +8,7 @@
 
 config_version=5
 
-quest_file_path="res://addons/quest_manager/Examples/All Nodes.quest"
+quest_file_path="res://addons/quest_manager/Examples/ExampleQuests.quest"
 
 [application]
 

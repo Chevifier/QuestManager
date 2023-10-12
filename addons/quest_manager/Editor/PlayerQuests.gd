@@ -122,18 +122,22 @@ func set_defaults():
 
 
 func _on_show_data_pressed():
+	if selected_quest == "":
+		return
 	#get quest from player quest because its added to player quest
 	var quest = QuestManager.get_player_quest(selected_quest)
 	if quest.is_empty():
 		return
-	var node_data = "Group: %s \nMeta Data \n" % quest.group
+	if quest["meta_data"].is_empty():
+		return
+	var quest_data = "Group: %s \nMeta Data \n" % quest.group
 	var new_line = 0
 	for data in quest.meta_data:
 		if new_line%2 == 0:
-			node_data += "%s = %s, " % [data, quest.meta_data[data]]
+			quest_data += "%s = %s, " % [data, quest.meta_data[data]]
 		else:
-			node_data += "%s = %s \n" % [data, quest.meta_data[data]]
+			quest_data += "%s = %s \n" % [data, quest.meta_data[data]]
 		new_line += 1
 	
-	%node_data_label.text = node_data
-	%node_data.popup_centered()
+	%quest_data_label.text = quest_data
+	%quest_data.popup_centered()
