@@ -24,14 +24,14 @@ enum Type {
 
 var Node_Type : Type
 
-var node_data = {}
-var input_node = null
-var output_node = null
-var meta_data_node = null
-var id = ""
-var next_id = ""
-var quest_id = ""
-var focus_nodes = []
+var node_data :Dictionary= {}
+var input_node :Node= null
+var output_node :Node= null
+var meta_data_node :Node= null
+var id :String= ""
+var next_id :String= ""
+var quest_id :String= ""
+var focus_nodes :Array[Node]= []
 @onready var id_lbl = $id_lbl
 func _ready():
 	setup()

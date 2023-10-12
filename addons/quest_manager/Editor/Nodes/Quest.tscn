@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest.gd" id="1_i7joj"]
 
-[node name="72a85842e9" type="GraphNode"]
+[node name="04cae68b08" type="GraphNode"]
 custom_minimum_size = Vector2(200, 250)
 offset_left = 12.0
 offset_top = 10.0
@@ -94,4 +94,4 @@ text = "Meta Data"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "72a85842e9"
+text = "04cae68b08"

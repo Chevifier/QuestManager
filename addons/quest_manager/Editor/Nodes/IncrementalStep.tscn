@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/IncrementalStep.gd" id="1_dipun"]
 
-[node name="3bde978c4e" type="GraphNode"]
+[node name="503420a72e" type="GraphNode"]
 custom_minimum_size = Vector2(240, 150)
 offset_right = 240.0
 offset_bottom = 100.0
@@ -80,7 +80,6 @@ text = "Meta Data"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-size_flags_vertical = 3
-text = "e3c53d49c4"
+text = "503420a72e"
 
 [connection signal="gui_input" from="VBoxContainer/details" to="." method="_on_details_gui_input"]

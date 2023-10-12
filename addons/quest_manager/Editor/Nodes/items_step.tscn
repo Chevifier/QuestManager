@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/items_step.gd" id="1_xb21r"]
 
-[node name="ebf70a2673" type="GraphNode"]
+[node name="725ccff1b9" type="GraphNode"]
 custom_minimum_size = Vector2(200, 350)
 offset_right = 200.0
 offset_bottom = 325.0
@@ -87,8 +87,7 @@ text = "Meta Data"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-size_flags_vertical = 6
-text = "ebf70a2673"
+text = "725ccff1b9"
 
 [connection signal="item_selected" from="ItemList/ScrollContainer/list" to="." method="_on_list_item_selected"]
 [connection signal="pressed" from="ItemList/Add" to="." method="_on_add_pressed"]

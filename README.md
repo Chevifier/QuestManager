@@ -4,7 +4,7 @@
 QuestManager is a plugin created to make creating and managing quests/missions/objectives easier.
 
 __NOTICE!__ This plugin was created specifically for Godot 4.0.
-
+__NOTICE!__ This branch is currently foir 4.2. It will be merged when 4.2 is at stable.
 ## Installation
 1. Copy the `quest_manager` directory to your `res://addons/` folder. 
 2. Open `Project>Project Settings>Plugins` and enable the `Quest Manager` plugin
