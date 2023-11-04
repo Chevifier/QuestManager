@@ -2,6 +2,7 @@
 class_name QuestManagerSaveFileManager
 extends Node
 signal data_saved
+signal data_loaded
 var current_file_path = ""
 @onready var Editor = get_parent()
 
@@ -21,6 +22,9 @@ func save_data(file_path):
 	print("File saved %s" % file_path)
 
 func load_data(file_path):
+	if FileAccess.file_exists(file_path) == false:
+		print("file path invalid/doesnt exist: %s" % file_path)
+		return
 	var quest_res = ResourceLoader.load(file_path)
 	current_file_path = file_path
 	#clear the current nodes in the graph
@@ -61,7 +65,8 @@ func load_data(file_path):
 		node.show_id(%show_ids.button_pressed)
 	for con in quest_res.editor_data.connections_list:
 		Editor._on_graph_edit_connection_request(con.from,con.from_port,con.to,con.to_port)
-
+	data_loaded.emit(file_path)
+	
 func save_new_file(file_path):
 	current_file_path = file_path
 	var Save = FileAccess.open(file_path,FileAccess.WRITE)

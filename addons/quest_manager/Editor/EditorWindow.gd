@@ -1,6 +1,5 @@
 @tool
 extends Control
-signal data_saved()
 @onready var quest_node = preload("res://addons/quest_manager/Editor/Nodes/Quest.tscn")
 @onready var step = preload("res://addons/quest_manager/Editor/Nodes/Step.tscn")
 @onready var inc_step = preload("res://addons/quest_manager/Editor/Nodes/IncrementalStep.tscn")
@@ -12,6 +11,7 @@ signal data_saved()
 @onready var rewards = preload("res://addons/quest_manager/Editor/Nodes/Quest_Rewards.tscn")
 @onready var branch = preload("res://addons/quest_manager/Editor/Nodes/Branch.tscn")
 @onready var callable_node = preload("res://addons/quest_manager/Editor/Nodes/Callable_Step.tscn")
+
 var node_offset = Vector2(0,0)
 var selected_node = null
 var new_copy = null
@@ -25,7 +25,7 @@ var new_copy = null
 @onready var test_btn = %test
 @onready var update_btn = %update
 @onready var rightmousemenu = preload("res://addons/quest_manager/Editor/right_mouse_menu.tscn")
-
+@onready var recents_list = %RecentsList
 #Check to see if all quest are properly structured
 #Used for sending warning after save
 var quest_chains_complete = false
@@ -55,7 +55,6 @@ func _ready():
 		context_menu.get_popup().add_item(item)
 	context_menu.get_popup().index_pressed.connect(_on_context_menu_index_pressed)
 	save_btn.get_popup().index_pressed.connect(_on_save_pressed)
-	
 	
 func setup_menu():
 	for item in popup_options_list:

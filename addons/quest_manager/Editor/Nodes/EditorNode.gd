@@ -1,8 +1,5 @@
 @tool
-class_name EditorNode
-
-
-extends GraphNode
+class_name EditorNode extends GraphNode
 enum Type {
 	QUEST_NODE,
 	STEP_NODE,
