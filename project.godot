@@ -9,6 +9,7 @@
 config_version=5
 
 quest_file_path="res://test.quest"
+recent_projects=["res://addons/quest_manager/Examples/ExampleQuests.quest", "res://test.quest", "res://addons/quest_manager/Examples/All Nodes.quest"]
 
 [application]
 
