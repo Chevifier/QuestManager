@@ -38,5 +38,3 @@ func version_number(version:String):
 
 func _on_pressed():
 	OS.shell_open("https://github.com/Chevifier/QuestManager/releases/")
-
-
