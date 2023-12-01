@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Timer_Step.gd" id="1_7ncg0"]
 
-[node name="7aa16ef66e" type="GraphNode"]
+[node name="3dfb001295" type="GraphNode"]
 custom_minimum_size = Vector2(150, 150)
 offset_right = 150.009
 offset_bottom = 150.012
@@ -98,7 +98,7 @@ text = "Meta Data"
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
 size_flags_vertical = 6
-text = "7aa16ef66e"
+text = "3dfb001295"
 
 [connection signal="gui_input" from="VBoxContainer/details" to="." method="_on_details_gui_input"]
 [connection signal="toggled" from="VBoxContainer/VBoxContainer/count_dir" to="." method="_on_count_down_toggled"]

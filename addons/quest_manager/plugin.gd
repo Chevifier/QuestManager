@@ -36,7 +36,6 @@ func _input(event: InputEvent) -> void:
 			"Ctrl+S":
 				EditorWindow._on_save_pressed(0)
 
-	
 func _get_plugin_name():
 	return "Quest Manager"
 

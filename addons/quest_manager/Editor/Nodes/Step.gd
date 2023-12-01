@@ -20,7 +20,6 @@ func set_data(data):
 	super.set_data(data)
 	details.text = data["details"]
 
-
 func _on_details_gui_input(event):
 	if event is InputEventKey:
 		if event.keycode == KEY_ENTER:

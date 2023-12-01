@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Group.gd" id="1_qh728"]
 
-[node name="4186bb5143" type="GraphNode"]
+[node name="6fe674730e" type="GraphNode"]
 custom_minimum_size = Vector2(50, 80)
 offset_right = 186.0
 offset_bottom = 111.0
@@ -38,6 +38,7 @@ middle_mouse_paste_enabled = false
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "4186bb5143"
+size_flags_vertical = 6
+text = "6fe674730e"
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
