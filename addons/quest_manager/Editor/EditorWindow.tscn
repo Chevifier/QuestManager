@@ -1,14 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://blg3pqyxefe0v"]
+[gd_scene load_steps=10 format=3 uid="uid://blg3pqyxefe0v"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/EditorWindow.gd" id="1_8041a"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Updater.gd" id="2_2g81w"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/recent_project_btn.gd" id="2_8f3ju"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/RecentsList.gd" id="2_df703"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/right_mouse_menu.gd" id="2_vr34h"]
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Update_Panel.gd" id="4_2b7cs"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/SaveSystem.gd" id="5_jr3xe"]
 
-[sub_resource type="Image" id="Image_joeep"]
+[sub_resource type="Image" id="Image_7lrns"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -17,8 +16,8 @@ data = {
 "width": 16
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_i2a3x"]
-image = SubResource("Image_joeep")
+[sub_resource type="ImageTexture" id="ImageTexture_jte0h"]
+image = SubResource("Image_7lrns")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amscl"]
 
@@ -59,21 +58,21 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Create New"
-icon = SubResource("ImageTexture_i2a3x")
+icon = SubResource("ImageTexture_jte0h")
 flat = true
 
 [node name="Load" type="Button" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Open Quest File..."
-icon = SubResource("ImageTexture_i2a3x")
+icon = SubResource("ImageTexture_jte0h")
 flat = true
 
 [node name="Save" type="MenuButton" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Save Quest"
-icon = SubResource("ImageTexture_i2a3x")
+icon = SubResource("ImageTexture_jte0h")
 item_count = 2
 popup/item_0/text = "Save"
 popup/item_0/id = 0
@@ -143,7 +142,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Node..."
-icon = SubResource("ImageTexture_i2a3x")
+icon = SubResource("ImageTexture_jte0h")
 item_count = 11
 popup/item_0/text = "Add Quest"
 popup/item_0/id = 0
@@ -172,15 +171,15 @@ popup/item_10/id = 10
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Test Quest File"
-icon = SubResource("ImageTexture_i2a3x")
+icon = SubResource("ImageTexture_jte0h")
 flat = true
 
 [node name="update" type="Button" parent="MarginContainer/hb/Quest Panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0, 1, 0, 1)
 text = "0.6.3"
-icon = SubResource("ImageTexture_i2a3x")
+icon = SubResource("ImageTexture_jte0h")
 flat = true
 script = ExtResource("2_2g81w")
 
@@ -273,67 +272,6 @@ size = Vector2i(431, 135)
 dialog_text = "Quest has Duplicate Names.
 Doing this will only return the first instance of the quest."
 
-[node name="Update_Panel" type="Panel" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -470.0
-offset_top = -213.5
-offset_right = 470.0
-offset_bottom = 213.5
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("4_2b7cs")
-
-[node name="MarginContainer" type="MarginContainer" parent="Update_Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Update_Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="VersionLabel" type="Label" parent="Update_Panel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "CURRENT VERSION: 0.6.3"
-horizontal_alignment = 1
-
-[node name="VSplitContainer" type="VSplitContainer" parent="Update_Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="DownloadButton" type="Button" parent="Update_Panel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-disabled = true
-text = "Up To Date"
-
-[node name="PatchNotes" type="Button" parent="Update_Panel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "v0.6.3 Patch Notes"
-
-[node name="Cancel" type="Button" parent="Update_Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Cancel"
-
-[node name="HTTPRequest" type="HTTPRequest" parent="Update_Panel"]
-unique_name_in_owner = true
-
 [node name="QuestManagerSaveSystem" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("5_jr3xe")
@@ -359,10 +297,6 @@ script = ExtResource("5_jr3xe")
 [connection signal="file_selected" from="New_File" to="." method="_on_new_file_file_selected"]
 [connection signal="file_selected" from="Open_File" to="." method="_on_open_file_file_selected"]
 [connection signal="file_selected" from="Save_File" to="." method="_on_save_file_file_selected"]
-[connection signal="pressed" from="Update_Panel/MarginContainer/VBoxContainer/DownloadButton" to="Update_Panel" method="_on_download_button_pressed"]
-[connection signal="pressed" from="Update_Panel/MarginContainer/VBoxContainer/PatchNotes" to="Update_Panel" method="_on_patch_notes_pressed"]
-[connection signal="pressed" from="Update_Panel/MarginContainer/VBoxContainer/Cancel" to="Update_Panel" method="_on_cancel_pressed"]
-[connection signal="request_completed" from="Update_Panel/HTTPRequest" to="Update_Panel" method="_on_http_request_request_completed"]
 [connection signal="data_loaded" from="QuestManagerSaveSystem" to="MarginContainer/hb/side_panel/RecentsList" method="_on_quest_manager_save_system_data_loaded"]
 [connection signal="data_saved" from="QuestManagerSaveSystem" to="." method="reimport_saved_file"]
 [connection signal="data_saved" from="QuestManagerSaveSystem" to="MarginContainer/hb/side_panel/RecentsList" method="_on_quest_manager_save_system_data_saved"]

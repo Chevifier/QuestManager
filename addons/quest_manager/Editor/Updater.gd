@@ -25,21 +25,11 @@ func _on_http_request_request_completed(result, response_code, headers, body):
 	if not found: return
 	var new_version = found.strings[found.names.get("version")]
 	var current_version = cfg.get_value("plugin","version")
-	%VersionLabel.text = "CURRENT VERSION: %s" %current_version
-	
 	if version_number(current_version) < version_number(new_version):
 		text = new_version
-		%DownloadButton.text = "Download Update v%s" % new_version
-		%DownloadButton.disabled = false
-		%PatchNotes.text = "v%s Patch Notes" % new_version
-		%Update_Panel.next_version = new_version
 		add_theme_color_override("font_color",Color.GREEN)
 	else:
 		text = current_version
-		%DownloadButton.text = "Up To Date"
-		%DownloadButton.disabled = true
-		%PatchNotes.text = "v%s Patch Notes" % current_version
-		%Update_Panel.next_version = current_version
 		add_theme_color_override("font_color",Color.WHITE)
 
 func version_number(version:String):
@@ -47,5 +37,6 @@ func version_number(version:String):
 	return numsplit[0].to_int() * 1000 + numsplit[1].to_int() * 100 + numsplit[2].to_int()*10
 
 func _on_pressed():
-	%Update_Panel.show()
+	OS.shell_open("https://github.com/Chevifier/QuestManager/releases/")
+
 
