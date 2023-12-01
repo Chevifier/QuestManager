@@ -63,6 +63,3 @@ func _exit_tree():
 	remove_autoload_singleton("QuestManager")
 	remove_import_plugin(quest_importer)
 	quest_importer = null
-
-func _update_imports(file_path):
-	get_editor_interface().get_resource_filesystem().scan_sources()

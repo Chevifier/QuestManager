@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/EditorWindow.gd" id="1_8041a"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Updater.gd" id="2_2g81w"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/recent_project_btn.gd" id="2_8f3ju"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/RecentsList.gd" id="2_df703"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/right_mouse_menu.gd" id="2_vr34h"]
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/recent_project_btn.gd" id="3_3u2r0"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Update_Panel.gd" id="4_2b7cs"]
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/SaveSystem.gd" id="5_jr3xe"]
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/RecentsList.gd" id="6_hldf3"]
 
-[sub_resource type="Image" id="Image_0yksf"]
+[sub_resource type="Image" id="Image_g1f8y"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -17,8 +17,8 @@ data = {
 "width": 16
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_uli0w"]
-image = SubResource("Image_0yksf")
+[sub_resource type="ImageTexture" id="ImageTexture_lkd8a"]
+image = SubResource("Image_g1f8y")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amscl"]
 
@@ -59,21 +59,21 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Create New"
-icon = SubResource("ImageTexture_uli0w")
+icon = SubResource("ImageTexture_lkd8a")
 flat = true
 
 [node name="Load" type="Button" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Open Quest File..."
-icon = SubResource("ImageTexture_uli0w")
+icon = SubResource("ImageTexture_lkd8a")
 flat = true
 
 [node name="Save" type="MenuButton" parent="MarginContainer/hb/side_panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Save Quest"
-icon = SubResource("ImageTexture_uli0w")
+icon = SubResource("ImageTexture_lkd8a")
 item_count = 2
 popup/item_0/text = "Save"
 popup/item_0/id = 0
@@ -89,16 +89,15 @@ theme_override_styles/separator = SubResource("StyleBoxFlat_amscl")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("6_hldf3")
+script = ExtResource("2_df703")
 
 [node name="recent_btn_template" type="Button" parent="MarginContainer/hb/side_panel/RecentsList"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
-offset_right = 150.0
-offset_bottom = 31.0
-text = "Test"
-script = ExtResource("3_3u2r0")
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("2_8f3ju")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/hb/side_panel/RecentsList"]
 layout_mode = 1
@@ -114,7 +113,7 @@ text = "Recent"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/hb/side_panel/RecentsList/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/hb/side_panel/RecentsList/VBoxContainer"]
 layout_mode = 2
 
 [node name="sc" type="ScrollContainer" parent="MarginContainer/hb/side_panel/RecentsList/VBoxContainer"]
@@ -127,7 +126,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/hb/side_panel/RecentsList/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/hb/side_panel/RecentsList/VBoxContainer"]
 layout_mode = 2
 
 [node name="clear_recents" type="Button" parent="MarginContainer/hb/side_panel/RecentsList/VBoxContainer"]
@@ -144,7 +143,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Node..."
-icon = SubResource("ImageTexture_uli0w")
+icon = SubResource("ImageTexture_lkd8a")
 item_count = 11
 popup/item_0/text = "Add Quest"
 popup/item_0/id = 0
@@ -173,15 +172,15 @@ popup/item_10/id = 10
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Test Quest File"
-icon = SubResource("ImageTexture_uli0w")
+icon = SubResource("ImageTexture_lkd8a")
 flat = true
 
 [node name="update" type="Button" parent="MarginContainer/hb/Quest Panel/hb"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "0.6.1"
-icon = SubResource("ImageTexture_uli0w")
+text = "0.6.3"
+icon = SubResource("ImageTexture_lkd8a")
 flat = true
 script = ExtResource("2_2g81w")
 
@@ -202,9 +201,9 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 right_disconnects = true
-snap_distance = 10
-use_snap = false
-arrange_nodes_button_hidden = true
+zoom_min = 0.2
+zoom_max = 2.0
+zoom_step = 0.8
 
 [node name="right_mouse_list" type="PopupMenu" parent="MarginContainer/hb/Quest Panel/GraphEdit"]
 unique_name_in_owner = true
@@ -310,7 +309,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "CURRENT VERSION: 0.6.1"
+text = "CURRENT VERSION: 0.6.3"
 horizontal_alignment = 1
 
 [node name="VSplitContainer" type="VSplitContainer" parent="Update_Panel/MarginContainer/VBoxContainer"]
@@ -326,7 +325,7 @@ text = "Up To Date"
 [node name="PatchNotes" type="Button" parent="Update_Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "v0.6.1 Patch Notes"
+text = "v0.6.3 Patch Notes"
 
 [node name="Cancel" type="Button" parent="Update_Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2

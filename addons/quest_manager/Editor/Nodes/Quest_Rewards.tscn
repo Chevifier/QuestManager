@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest_Rewards.gd" id="1_y2wej"]
 
-[node name="3773ca26f1" type="GraphNode"]
+[node name="eb16598c71" type="GraphNode"]
 custom_minimum_size = Vector2(250, 150)
 offset_right = 247.0
 offset_bottom = 147.0
@@ -10,8 +10,8 @@ tooltip_text = "Quest Reward nodes are items the player receive on quest complet
 i.e How much coins this quest rewards or
 what items the player receives
 "
-title = "Quest Rewards"
 resizable = true
+title = "Quest Rewards"
 slot/0/left_enabled = false
 slot/0/left_type = 2
 slot/0/left_color = Color(1, 1, 1, 1)
@@ -312,4 +312,4 @@ size_flags_stretch_ratio = 0.2
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "3773ca26f1"
+text = "eb16598c71"

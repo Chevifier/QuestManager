@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Step.gd" id="1_sv62o"]
 
-[node name="14dd187eae" type="GraphNode"]
+[node name="ed7e136e35" type="GraphNode"]
 custom_minimum_size = Vector2(150, 150)
-offset_right = 150.009
-offset_bottom = 150.012
+offset_right = 150.0
+offset_bottom = 150.0
 size_flags_vertical = 4
 tooltip_text = "Action Quest Step requires an action to be completed to advance"
-title = "Action Step"
 resizable = true
+title = "Action Step"
 slot/0/left_enabled = true
 slot/0/left_type = 0
 slot/0/left_color = Color(0, 1, 0, 1)
@@ -55,6 +55,7 @@ text = "Meta Data"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "14dd187eae"
+size_flags_vertical = 1
+text = "ed7e136e35"
 
 [connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]

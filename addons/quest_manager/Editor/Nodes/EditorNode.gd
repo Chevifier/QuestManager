@@ -1,5 +1,13 @@
 @tool
-class_name EditorNode extends GraphNode
+class_name EditorNode
+extends GraphNode
+enum SLOTTYPE {
+	STEP = 0,
+	GROUP = 1,
+	META_DATA = 2,
+	REWARDS = 3
+}
+
 enum Type {
 	QUEST_NODE,
 	STEP_NODE,
@@ -16,14 +24,14 @@ enum Type {
 
 var Node_Type : Type
 
-var node_data = {}
-var input_node = null
-var output_node = null
-var meta_data_node = null
-var id = ""
-var next_id = ""
-var quest_id = ""
-var focus_nodes = []
+var node_data :Dictionary= {}
+var input_node :Node= null
+var output_node :Node= null
+var meta_data_node :Node= null
+var id :String= ""
+var next_id :String= ""
+var quest_id :String= ""
+var focus_nodes :Array[Node]= []
 @onready var id_lbl = $id_lbl
 func _ready():
 	setup()
@@ -31,7 +39,7 @@ func show_id(vis:bool):
 	id_lbl.visible = vis
 	
 func setup():
-	close_request.connect(_on_close_request)
+	delete_request.connect(_on_close_request)
 	resize_request.connect(_on_resize_request)
 	slot_updated.connect(_on_slot_updated)
 	node_selected.connect(_on_node_selected)

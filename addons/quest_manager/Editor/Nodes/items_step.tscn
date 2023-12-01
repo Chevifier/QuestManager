@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/items_step.gd" id="1_xb21r"]
 
-[node name="4bb823daa1" type="GraphNode"]
+[node name="725ccff1b9" type="GraphNode"]
 custom_minimum_size = Vector2(200, 350)
 offset_right = 200.0
 offset_bottom = 325.0
 tooltip_text = "Item Quest Steps are Similar to Action Quest Steps but requires multiple actions to be completed.
 Useful for Collecting unique items or completing unique tasks in one Step."
-title = "Items Step"
 resizable = true
+title = "Items Step"
 slot/0/left_enabled = true
 slot/0/left_type = 0
 slot/0/left_color = Color(0, 1, 0, 1)
@@ -45,16 +45,19 @@ size_flags_vertical = 3
 
 [node name="details" type="TextEdit" parent="ItemList"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Step Details"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ItemList"]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="list" type="ItemList" parent="ItemList/ScrollContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -84,7 +87,7 @@ text = "Meta Data"
 
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
-text = "4bb823daa1"
+text = "725ccff1b9"
 
 [connection signal="item_selected" from="ItemList/ScrollContainer/list" to="." method="_on_list_item_selected"]
 [connection signal="pressed" from="ItemList/Add" to="." method="_on_add_pressed"]
