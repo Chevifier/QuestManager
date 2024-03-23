@@ -247,7 +247,8 @@ func remove_quest(quest_name:String) -> void:
 			player_quests.erase(i)
 			
 func get_quest_steps_from_resource(quest_name,quest_res:QuestResource=current_resource):
-	return current_resource.get_quest_steps_sorted(quest_name)
+	return quest_res.get_quest_steps_sorted(quest_name)
+
 #returns a dictionary of all the rewards of a player quest
 func get_quest_rewards(quest_name:String,id_id:bool=false) -> Dictionary:
 	var quest_rewards ={}
