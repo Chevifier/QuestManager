@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest_Rewards.gd" id="1_y2wej"]
 
-[node name="8d6b4b46a5" type="GraphNode"]
+[node name="c4a549e8af" type="GraphNode"]
 custom_minimum_size = Vector2(250, 150)
 offset_right = 247.0
 offset_bottom = 147.0
@@ -139,6 +139,34 @@ allow_greater = true
 allow_lesser = true
 alignment = 1
 update_on_text_changed = true
+
+[node name="Bool" type="HBoxContainer" parent="Types" groups=["boolean"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="delete" type="Button" parent="Types/Bool"]
+layout_mode = 2
+text = "X"
+flat = true
+
+[node name="name" type="LineEdit" parent="Types/Bool"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Boolean name"
+
+[node name="data" type="CheckBox" parent="Types/Bool"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
 
 [node name="Float" type="HBoxContainer" parent="Types" groups=["numerical"]]
 unique_name_in_owner = true
@@ -282,35 +310,7 @@ allow_lesser = true
 alignment = 1
 update_on_text_changed = true
 
-[node name="Bool" type="HBoxContainer" parent="Types" groups=["boolean"]]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -15.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="delete" type="Button" parent="Types/Bool"]
-layout_mode = 2
-text = "X"
-flat = true
-
-[node name="name" type="LineEdit" parent="Types/Bool"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Boolean name"
-
-[node name="data" type="CheckBox" parent="Types/Bool"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-
 [node name="id_lbl" type="Label" parent="."]
 layout_mode = 2
 size_flags_vertical = 6
-text = "8d6b4b46a5"
+text = "c4a549e8af"

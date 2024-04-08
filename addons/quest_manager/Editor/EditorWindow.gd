@@ -1,6 +1,5 @@
 @tool
 extends Control
-signal data_saved()
 @onready var quest_node = preload("res://addons/quest_manager/Editor/Nodes/Quest.tscn")
 @onready var step = preload("res://addons/quest_manager/Editor/Nodes/Step.tscn")
 @onready var inc_step = preload("res://addons/quest_manager/Editor/Nodes/IncrementalStep.tscn")
@@ -12,7 +11,7 @@ signal data_saved()
 @onready var rewards = preload("res://addons/quest_manager/Editor/Nodes/Quest_Rewards.tscn")
 @onready var branch = preload("res://addons/quest_manager/Editor/Nodes/Branch.tscn")
 @onready var callable_node = preload("res://addons/quest_manager/Editor/Nodes/Callable_Step.tscn")
-var node_offset = Vector2(0,0)
+var node_init_position = Vector2(0,0)
 var selected_node = null
 var new_copy = null
 
@@ -31,7 +30,7 @@ var new_copy = null
 var quest_chains_complete = false
 var quest_name_duplicate = false
 var editor_plugin: EditorPlugin
-const test_scene_path = "res://addons/quest_manager/Editor/TestScene.tscn"
+const test_scene_path = "res://addons/quest_manager/Editor/TestScene/TestScene.tscn"
 var popup_options_list =[
 	"Add Quest",
 	"Add Step",
@@ -45,6 +44,8 @@ var popup_options_list =[
 	"Add Branch Node",
 	"Add Callable Node"
 ]
+#Used to drag out connection context menu
+var drag_data = {}
 func _ready():
 	set_button_icons()
 	%right_mouse_list.clear()
@@ -55,7 +56,7 @@ func _ready():
 		context_menu.get_popup().add_item(item)
 	context_menu.get_popup().index_pressed.connect(_on_context_menu_index_pressed)
 	save_btn.get_popup().index_pressed.connect(_on_save_pressed)
-	
+	OS.low_processor_usage_mode = true
 	
 func setup_menu():
 	for item in popup_options_list:
@@ -76,11 +77,14 @@ func _on_save_pressed(index):
 	match index:
 		0:
 			if ResourceLoader.exists(%QuestManagerSaveSystem.current_file_path):
+				print(%QuestManagerSaveSystem.current_file_path)
 				%QuestManagerSaveSystem.save_data(%QuestManagerSaveSystem.current_file_path)
 			else:
+				print(%QuestManagerSaveSystem.current_file_path)
 				%Save_File.popup_centered_clamped(Vector2(300,300))
 		1:
 			%Save_File.popup_centered_clamped(Vector2(300,300))
+
 func _on_load_pressed():
 	%Open_File.popup_centered_clamped(Vector2(300,300))
 
@@ -122,12 +126,14 @@ func add_graph_node(index):
 	graph.add_child(node)
 	node.owner = graph
 	node.show_id(%show_ids.button_pressed)
-	node.set_position_offset(graph.scroll_offset+node_offset)
-	node_offset += Vector2(50,50)
-	if node_offset.x > 400:
-		node_offset = Vector2()
-
-
+	node.position_offset = node_init_position
+	if drag_data.is_empty() == false:
+		match drag_data["type"]:
+			"to":
+				_on_graph_edit_connection_request(drag_data.from_node,drag_data.from_port,node.name,0)
+			"from":
+				_on_graph_edit_connection_request(node.name,0,drag_data["to_node"],drag_data["to_port"])
+		drag_data = {}
 func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 	var from = get_connection_node(from_node)
 	var to = get_connection_node(to_node)
@@ -250,8 +256,9 @@ func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port
 	graph.disconnect_node(from_node,from_port,to_node,to_port)
 
 func _on_graph_edit_popup_request(_position):
-	%right_mouse_list.position = get_global_mouse_position() + Vector2(100,0)
+	%right_mouse_list.position = get_global_mouse_position() + Vector2(100,50)
 	%right_mouse_list.popup()
+	node_init_position = (graph.get_local_mouse_position() + graph.scroll_offset) / graph.zoom
 
 #On Node option selected from context menu
 func _on_context_menu_index_pressed(index):
@@ -306,20 +313,14 @@ func _on_save_file_file_selected(path):
 	%QuestManagerSaveSystem.save_data(path)
 
 func _on_new_file_file_selected(path):
-	%QuestManagerSaveSystem.save_new_file(path)
-	
-
-func _on_graph_edit_connection_from_empty(to_node, to_port, release_position):
-	#TO-DO context sensitive node menu
-	pass
+	%QuestManagerSaveSystem.create_new_file(path)
 
 func _on_graph_edit_connection_to_empty(from_node, from_port, release_position):
-	#TO-DO context sensitive node menu
-	pass
-
-func reimport_saved_file(save_file):
-	EditorInterface.get_resource_filesystem().scan_sources()
-
+	drag_data = {"type":"to","from_node":from_node, "from_port":from_port}
+	_on_graph_edit_popup_request(release_position)
+func _on_graph_edit_connection_from_empty(to_node: StringName, to_port: int, release_position: Vector2) -> void:
+	drag_data = {"type":"from","to_node":to_node,"to_port":to_port}
+	_on_graph_edit_popup_request(release_position)
 func _on_graph_edit_mouse_exited():
 	for node in get_all_nodes():
 		node.release_all_focus()
@@ -351,13 +352,11 @@ func _on_graph_edit_duplicate_nodes_request():
 	_on_graph_edit_copy_nodes_request()
 	_on_graph_edit_paste_nodes_request()
 
-func _on_graph_edit_gui_input(event):
-	if event is InputEventMouseButton:
-		node_offset = graph.get_local_mouse_position()
-
 func _on_show_ids_toggled(button_pressed):
 	for node in graph.get_children():
 		if node is EditorNode:
 			node.show_id(button_pressed)
 	#workaround to redraw connections
 	graph.scroll_offset.x += 0.01
+
+

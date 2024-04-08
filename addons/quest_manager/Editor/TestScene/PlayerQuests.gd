@@ -14,26 +14,32 @@ func _ready():
 	set_defaults()
 	QuestManager.new_quest_added.connect(update_quest_list)
 	QuestManager.step_updated.connect(update_current_step)
-	QuestManager.step_complete.connect(update_current_step)
+	QuestManager.next_step.connect(update_current_step)
+	QuestManager.step_complete.connect(step_complete)
 	QuestManager.quest_completed.connect(on_quest_complete)
 	QuestManager.quest_failed.connect(on_quest_failed)
-	
-	
+
 func update_quest_list(quest_name):
 	player_quest_list.clear()
 	for quest in QuestManager.get_all_player_quests_names():
 		player_quest_list.add_item(quest)
-		
+
 func on_quest_complete(quest_name,rewards:Dictionary):
 	step_details.text = "QUEST COMPLETE"
 	for control in controls.get_children():
 		control.queue_free()
 	print(rewards)
+
 func on_quest_failed(n):
 	step_details.text = "QUEST FAILED"
 	for control in controls.get_children():
 		control.queue_free()
-		
+
+func step_complete(step):
+	#p
+	update_current_step(step)
+	pass
+
 func update_current_step(step):
 	if QuestManager.is_quest_complete(selected_quest):
 		step_details.text = "QUEST COMPLETE"
@@ -46,7 +52,7 @@ func update_current_step(step):
 	step_details.text = step.details
 	for node in controls.get_children():
 		node.queue_free()
-		
+
 	match step.step_type:
 		QuestManager.ACTION_STEP:
 			var c = action_step_btn.duplicate()
@@ -90,6 +96,7 @@ func branch_button_pressed():
 
 func add_amount_pressed(item_name,node:SpinBox):
 	QuestManager.progress_quest(selected_quest,item_name,node.value)
+
 func item_completed(complete,item_name):
 	QuestManager.progress_quest(selected_quest,item_name,1,complete)
 
@@ -116,10 +123,6 @@ func set_defaults():
 	for i in controls.get_children():
 		i.queue_free()
 	player_quest_list.clear()
-	
-	
-	
-
 
 func _on_show_data_pressed():
 	if selected_quest == "":

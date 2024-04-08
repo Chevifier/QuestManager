@@ -21,7 +21,13 @@ func reload_recents():
 		btn.pressed.connect(project_selected.bind(btn.project_path))
 		
 func project_selected(path):
-	save_system.load_data(path)
+	var exist = save_system.load_data(path)
+	if exist != null and exist == false:
+		print("File: %s invalid or deleted. Removing..." % path)
+		recents.erase(path)
+		ProjectSettings.set_setting("recent_projects",recents)
+		ProjectSettings.save()
+		reload_recents()
 
 func add_recent(path):
 	if recents.has(path) == false:

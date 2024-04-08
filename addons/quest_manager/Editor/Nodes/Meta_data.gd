@@ -74,7 +74,7 @@ func set_data(data):
 			meta_node.get_node("y").value = user_data[meta].y
 			meta_node.get_node("z").value = user_data[meta].z
 		elif typeof(user_data[meta]) == TYPE_BOOL:
-			meta_node.get_node("data").button_pressed = true #node_data[meta]
+			meta_node.get_node("data").button_pressed = user_data[meta]
 		else:
 			#Integer/Float
 			meta_node.get_node("data").value = user_data[meta]

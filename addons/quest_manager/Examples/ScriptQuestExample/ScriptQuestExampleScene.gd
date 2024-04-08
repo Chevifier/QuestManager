@@ -1,5 +1,5 @@
 extends Node2D
-
+#Use scripted quest to create quests procedurally when needed
 func _ready():
 	var Quest = ScriptQuest.new("Example","Disc")
 	#add an action step

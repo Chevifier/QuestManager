@@ -31,18 +31,42 @@ func get_quest_list() -> Dictionary:
 func get_editor_data() -> Dictionary:
 	return editor_data
 
+func sort_linked_list(steps):
+	var start_id = null
+	var next_ids = []
+	for step in steps:
+		if step.has("next_id"):
+			next_ids.append(step["next_id"])
+
+	# Find the start_id
+	for step in steps:
+		if not next_ids.has(step["id"]):
+			start_id = step["id"]
+			break
+
+	# Construct the sorted list
+	var sorted_steps = []
+	var current_id = start_id
+	while current_id != null:
+		var current_step = null
+		for step in steps:
+			if step["id"] == current_id:
+				current_step = step
+				break
+		current_id = null
+		if current_step:
+			sorted_steps.append(current_step)
+			# Update current_id to the next in the list, if it exists
+			if current_step.has("next_id"):
+				current_id = current_step.get("next_id")
+	return sorted_steps
+
 func get_quest_steps_sorted(quest_name:String) -> Array:
 	var steps = []
 	var quest = get_quest_by_name(quest_name)
-	
+
 	var steps_dic = quest.quest_steps
 	for step in steps_dic:
 		steps.append(steps_dic[step])
-	steps.sort_custom(sort_by_next_id)
+	steps = sort_linked_list(steps)
 	return steps
-
-func sort_by_next_id(a,b):
-	if a.id == b.next_id:
-		return true
-	else:
-		return false

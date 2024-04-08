@@ -22,6 +22,7 @@ func _ready():
 	#Connect quest manager needed signals
 	QuestManager.step_updated.connect(update_ui)
 	QuestManager.step_complete.connect(update_ui)
+	QuestManager.next_step.connect(update_ui)
 	QuestManager.quest_completed.connect(quest_complete)
 	QuestManager.quest_failed.connect(quest_failed)
 	#set quest detail text 
@@ -40,7 +41,6 @@ func start():
 	$Quest.hide()
 	
 func quest_complete(n,rewards):
-	print(rewards)
 	state = WIN
 	$Complete.text += "\n Money " + str(rewards.money)
 	$Complete.show()
