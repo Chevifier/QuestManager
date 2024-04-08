@@ -1,12 +1,13 @@
 @tool
 extends Node
 
-signal quest_completed(quest_name)
-signal quest_failed(quest_name)
-signal step_complete(quest_name)
-signal step_updated(quest_name)
-signal new_quest_added(quest_name)
-signal quest_reset(quest_name)
+signal quest_completed(quest:Dictionary)
+signal quest_failed(quest:Dictionary)
+signal step_complete(step:Dictionary)
+signal next_step(step:Dictionary)
+signal step_updated(step:Dictionary)
+signal new_quest_added(quest_name:String)
+signal quest_reset(quest_name:String)
 
 const ACTION_STEP = "action_step"
 const INCREMENTAL_STEP = "incremental_step"
@@ -75,18 +76,18 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 		return
 	var id = get_player_quest(quest_name).quest_id
 	var step = get_current_step(id,true)
+	var current_step_id = step.id
+	var next_id = step.next_id
 	match step.step_type:
 		ACTION_STEP:
 			get_current_step(id,true).complete = completed
-			player_quests[id].next_id = step["next_id"]
-			step_complete.emit(get_current_step(id,true))
 		INCREMENTAL_STEP:
 			assert(step.item_name == quest_item,"Item: %s invalid" % quest_item)
 			get_current_step(id,true).collected += amount
 			step_updated.emit(get_current_step(id,true))
 			if step.collected >= step.required:
-				player_quests[id].next_id = step["next_id"]
-				step_complete.emit(get_current_step(id,true))
+				step_complete.emit(get_current_step(id,true),next_id)
+				get_current_step(id,true).complete = completed
 		ITEMS_STEP:
 			for item in get_current_step(id,true).item_list:
 				if item.name == quest_item:
@@ -101,31 +102,35 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 					break
 			if missing_items == false:
 				get_current_step(id,true).complete = true
-				player_quests[id].next_id = step["next_id"]
-				step_complete.emit(get_current_step(id,true))
+				step_complete.emit(get_current_step(id,true),next_id)
 		TIMER_STEP:
 			if quest_item != "":
 				#prevents progress quest calls that contains item
 				return
-			player_quests[id].next_id = step["next_id"]
-			step_complete.emit(get_current_step(id,true))
+			get_current_step(id,true).complete = true
 		#Checks condition and decides if it should branch
 		BRANCH_STEP:
-			if get_current_step(id,true).branch == false:
-				player_quests[id].next_id = get_current_step(id,true)["next_id"]
-			else:
-				player_quests[id].next_id = get_current_step(id,true)["branch_step_id"]
-			get_current_step(id,true)["complete"] = true
-			step_complete.emit(get_current_step(id,true))
+			#use set_branch_step function to set branching
+			#before calling update step
+			get_current_step(id,true).complete = completed
+		
+	#Update to new step
+	if get_current_step(id,true).complete:
+		step_complete.emit(get_current_step(id,true),next_id)
+		if step.step_type == BRANCH_STEP and step.branch == true:
+			next_id = step.branch_step_id
+		player_quests[id].next_id = next_id
+		next_step.emit(get_current_step(id,true))
+		
 	#get updated step
 	step = get_current_step(id,true)
-	#call function if the step is a callable step then move to next function
+	#FUNCTION CALL if the step is a callable step then call and move to next step
 	if step.step_type == CALLABLE_STEP:
 		call_function(step.callable,step.params["funcparams"])
 		get_current_step(id,true)["complete"] = true
 		player_quests[id].next_id = step["next_id"]
-		step_complete.emit(get_current_step(id,true))
-	#Ends the quest
+		next_step.emit(get_current_step(id,true))
+	#Ends/Completes the quest
 	if step.step_type == END:
 		get_player_quest(id,true).completed = true
 		complete_quest(id,true)
@@ -232,7 +237,6 @@ func get_current_step(quest_name:String,is_id:bool=false) -> Dictionary:
 	if is_id:
 		var next_id = player_quests[quest_name].next_id
 		return player_quests[quest_name]["quest_steps"][next_id]
-
 	if has_quest(quest_name)==false:
 		return {}
 	if is_quest_complete(quest_name):
@@ -248,6 +252,7 @@ func remove_quest(quest_name:String) -> void:
 			
 func get_quest_steps_from_resource(quest_name,quest_res:QuestResource=current_resource):
 	return current_resource.get_quest_steps_sorted(quest_name)
+
 #returns a dictionary of all the rewards of a player quest
 func get_quest_rewards(quest_name:String,id_id:bool=false) -> Dictionary:
 	var quest_rewards ={}

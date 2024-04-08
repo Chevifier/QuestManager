@@ -4,12 +4,13 @@
 
 ### Signals
 
-- `quest_complete()` - Emitted when a quest is complete, returns quest name
-- `quest_failed` - Emittied when a quest was failed
-- `step_complete()` - Emitted when a step is complete returns the step dictionary
-- `step_updated()` - Emitted when a step is updated returns the step dictionary
-- `new_quest_added`- Emitted when a quest is added to player quests, returns quest_name
-- `quest_reset` - Emitted when a quest was reset returns quest name
+- `quest_complete(quest:Dictionary)` - Emitted when a quest is complete, returns quest name
+- `quest_failed(quest:Dictionary)` - Emittied when a quest was failed
+- `step_complete(step:Dictionary)` - Emitted when a step is complete returns the step dictionary
+- `next_step(step:Dictionary)` - Emits the new step after the previous step was completed
+- `step_updated(step:Dictionary)` - Emitted when a step is updated returns the step dictionary
+- `new_quest_added(quest_name:String)`- Emitted when a quest is added to player quests, returns quest_name
+- `quest_reset(quest_name:String)` - Emitted when a quest was reset returns quest name
 
 ### Constants
 
@@ -56,6 +57,7 @@ A `Quest` has various properties such as:
         - `step_type`  - The type of step i.e `action_step`
         - `next_id` - The next steps id after this step.
         - `complete` - boolean stating if step is completed
+        - `meta_data` - A dictionary containing stored meta data for this step
     2. `incremental_step` - This step requires an amount of an item to be collected.
         - `id` - The ID of this step
         - `details` - Details for this step
@@ -65,6 +67,7 @@ A `Quest` has various properties such as:
         - `required` - integer of total items required
         - `next_id` - The next steps id after this step.  
         - `complete` - boolean stating if step is completed
+        - `meta_data` - A dictionary containing stored meta data for this step
     3. `items_step` - This step requires a unique set of actions/items to be completed/collected
         - `id` - The ID of this step
         - `details` - Details for this step
@@ -74,6 +77,7 @@ A `Quest` has various properties such as:
             - `complete` - boolean stating if item was collected/complete
         - `next_id` - The next steps id after this step.
         - `complete` - boolean stating if step is completed
+        - `meta_data` - A dictionary containing stored meta data for this step
     4. `timer_step` - This step tracks time and can serve both as a timer or a stop watch
         - `id` - The ID of this step
         - `details` - Details for this step
@@ -86,6 +90,7 @@ A `Quest` has various properties such as:
         - `fail_on_timeout` - boolean stating if quest fails on timeout if not step becomes complete.
         - `next_id` - The next steps id after this step. 
         - `complete` - boolean stating if step is completed 
+        - `meta_data` - A dictionary containing stored meta data for this step
     5. `callable_step` - This step calls a function on an autoloaded script then immediately goes to the next step.
         - `id` - The ID of this step
         - `callable` -The function that will be called ie `QuestManager.testfunc`
@@ -102,10 +107,11 @@ A `Quest` has various properties such as:
         - `next_id` - The next steps id after this step. 
    	    - `complete` - Boolean stating if step was complete
 	    - `branch_step_id` - The id of the alternate step for branching
+	    - `meta_data` - A dictionary containing stored meta data for this step
     7. `end` - The End of a quest
         - `id` - The ID of the step
         - `details` - Details of this step. Not used contains 'Complete'
-  - `meta_data` - A dictionary containing stored meta data for the quest
+- `meta_data` - A dictionary containing stored meta data for the quest
       - `key` - name of variable
       - `value` - Variant type of value `int,float,string,boolean,vec2,vec3`
 

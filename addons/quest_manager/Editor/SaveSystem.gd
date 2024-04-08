@@ -1,13 +1,10 @@
 @tool
 class_name QuestManagerSaveFileManager
 extends Node
-signal data_saved
-signal data_loaded
+signal data_saved(file_path:String)
+signal data_loaded(file_path:String)
 var current_file_path = ""
 @onready var Editor = get_parent()
-
-func _ready():
-	pass
 
 func save_data(file_path):
 	var Save = FileAccess.open(file_path,FileAccess.WRITE)
@@ -17,11 +14,13 @@ func save_data(file_path):
 
 	if Editor.quest_name_duplicate == true:
 		%Quest_Name_Warning.popup_centered()
-		
+	EditorInterface.get_resource_filesystem().scan_sources()
 	data_saved.emit(file_path)
-	print("File saved %s" % file_path)
+	print("Quest Resource File saved: %s" % file_path)
 
 func load_data(file_path):
+	if FileAccess.file_exists(file_path) == false:
+		return false
 	var quest_res = ResourceLoader.load(file_path)
 	current_file_path = file_path
 	#clear the current nodes in the graph
@@ -64,12 +63,15 @@ func load_data(file_path):
 		Editor._on_graph_edit_connection_request(con.from_node,con.from_port,con.to_node,con.to_port)
 	data_loaded.emit(file_path)
 	
-func save_new_file(file_path):
+func create_new_file(file_path):
+	Editor.clear_graph()
 	current_file_path = file_path
 	var Save = FileAccess.open(file_path,FileAccess.WRITE)
-	Save.store_var({})
-	Save.store_var({})
-	current_file_path = file_path
+	Save.store_var(Editor.get_quests_data())
+	Save.store_var(Editor.get_editor_data())
+	Save.close()
+	EditorInterface.get_resource_filesystem().scan()
+	#EditorInterface.get_resource_filesystem().scan_sources()
 	data_saved.emit(file_path)
-	Editor.clear_graph()
+	
 	

@@ -34,8 +34,11 @@ func _on_quest_list_item_selected(index):
 	quest_description.text = quest.quest_details
 	var steps = QuestManager.get_quest_steps_from_resource(selected_quest)
 	var steps_string :String= ""
+	var step_no = 1
 	for step in steps:
-		steps_string += "%s \n" % step.details
+		steps_string += "%d: %s \n" % [step_no,step.details]
+		step_no +=1
+		#TO-DO display branch steps list
 	quest_step_details.text = steps_string
 	
 	var quest_rewards = QuestManager.get_quest_from_resource(selected_quest).quest_rewards

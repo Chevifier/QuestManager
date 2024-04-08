@@ -83,7 +83,6 @@ func add_timer_step(step_details:String,time_in_seconds:int,is_count_down:bool =
 	step_data["meta_data"]= step_meta_data
 	step_data["complete"] = false
 	add_step(step_data)
-	
 
 #set quest rewards dictionary
 func set_rewards(rewards:Dictionary) -> void:

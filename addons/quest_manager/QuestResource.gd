@@ -59,7 +59,6 @@ func sort_linked_list(steps):
 			# Update current_id to the next in the list, if it exists
 			if current_step.has("next_id"):
 				current_id = current_step.get("next_id")
-
 	return sorted_steps
 
 func get_quest_steps_sorted(quest_name:String) -> Array:

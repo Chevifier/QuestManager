@@ -10,6 +10,7 @@ func _ready():
 	QuestManager.new_quest_added.connect(new_quest)
 	QuestManager.step_updated.connect(update_ui)
 	QuestManager.step_complete.connect(update_ui)
+	QuestManager.next_step.connect(update_ui)
 	QuestManager.quest_completed.connect(quest_complete)
 	
 func new_quest(n):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://3iqa1wur00ir"]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/PlayerQuests.gd" id="2_6skof"]
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/AvailableQuests.gd" id="2_h4po8"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/TestScene/PlayerQuests.gd" id="2_6skof"]
+[ext_resource type="Script" path="res://addons/quest_manager/Editor/TestScene/AvailableQuests.gd" id="2_h4po8"]
 
 [node name="Test_Scene" type="Control"]
 layout_mode = 3
@@ -87,7 +87,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
-text = "STEPS(Unordered)"
+text = "STEPS"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 150)
