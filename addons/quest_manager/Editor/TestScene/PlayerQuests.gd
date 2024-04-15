@@ -131,7 +131,8 @@ func _on_show_data_pressed():
 	var quest = QuestManager.get_player_quest(selected_quest)
 	if quest.is_empty():
 		return
-	if quest["meta_data"].is_empty():
+	if quest.meta_data.is_empty():
+		
 		return
 	var quest_data = "Group: %s \nMeta Data \n" % quest.group
 	var new_line = 0
@@ -141,6 +142,29 @@ func _on_show_data_pressed():
 		else:
 			quest_data += "%s = %s \n" % [data, quest.meta_data[data]]
 		new_line += 1
-	
+	%quest_data.get_window().title = "Quest Data"
 	%quest_data_label.text = quest_data
 	%quest_data.popup_centered()
+
+
+func _on_show_step_data_pressed() -> void:
+	if selected_quest == "":
+		return
+		#get quest from player quest because its added to player quest
+	var quest = QuestManager.get_player_quest(selected_quest)
+	if quest.is_empty():
+		return
+	var step = QuestManager.get_current_step(selected_quest,false)
+	if step.meta_data.is_empty():
+		return
+	var step_data = ""
+	var new_line = 0
+	for data in step.meta_data:
+		if new_line%2 == 0:
+			step_data += "%s = %s, " % [data, step.meta_data[data]]
+		else:
+			step_data += "%s = %s \n" % [data, step.meta_data[data]]
+		new_line += 1
+		%quest_data.get_window().title = "Step Meta Data"
+		%quest_data_label.text = step_data
+		%quest_data.popup_centered()

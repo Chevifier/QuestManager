@@ -175,16 +175,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 20
-text = "svdfsdvsvdsdv
-vsrvds
-vdsvds
-vs
-dvsv
-s
-ds
-vs
-dvs
-vdsdvsdvsdv"
+text = "-no desc-"
 
 [node name="Current Step" type="RichTextLabel" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
@@ -209,6 +200,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="show_step_data" type="Button" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Step Meta Data"
 
 [node name="show_data" type="Button" parent="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -268,5 +263,6 @@ vertical_alignment = 1
 [connection signal="pressed" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/quest_meta_data" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_quest_meta_data_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/Tabs/Available Quests/HBoxContainer/VBoxContainer/accept_quest" to="Panel/MarginContainer/Tabs/Available Quests" method="_on_accept_quest_pressed"]
 [connection signal="item_selected" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/ScrollContainer/VBoxContainer/Player_Quests_List" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_player_quests_list_item_selected"]
+[connection signal="pressed" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/show_step_data" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_show_step_data_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/show_data" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_show_data_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/Tabs/Player Quests/HBoxContainer/VBoxContainer/delete_quest" to="Panel/MarginContainer/Tabs/Player Quests" method="_on_delete_quest_pressed"]
