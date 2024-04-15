@@ -35,7 +35,9 @@ func add_quest(quest_name:String,resource:QuestResource=current_resource) -> voi
 	player_quests[node_data.quest_id] = node_data.duplicate(true)
 	new_quest_added.emit(quest_name)
 	active_quest = quest_name
+	check_callable_step(node_data.quest_id)
 	step_updated.emit(get_current_step(quest_name))
+	
 
 func load_quest_resource(quest_res:QuestResource) -> void:
 	current_resource = quest_res
@@ -74,68 +76,73 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 	active_quest = quest_name
 	if is_quest_complete(quest_name):
 		return
-	var id = get_player_quest(quest_name).quest_id
-	var step = get_current_step(id,true)
+	var quest_id = get_player_quest(quest_name).quest_id
+	var step = get_current_step(quest_id,true)
 	var current_step_id = step.id
 	var next_id = step.next_id
 	match step.step_type:
 		ACTION_STEP:
-			get_current_step(id,true).complete = completed
+			get_current_step(quest_id,true).complete = completed
 		INCREMENTAL_STEP:
 			assert(step.item_name == quest_item,"Item: %s invalid" % quest_item)
-			get_current_step(id,true).collected += amount
-			step_updated.emit(get_current_step(id,true))
+			get_current_step(quest_id,true).collected += amount
+			step_updated.emit(get_current_step(quest_id,true))
 			if step.collected >= step.required:
-				step_complete.emit(get_current_step(id,true),next_id)
-				get_current_step(id,true).complete = completed
+				step_complete.emit(get_current_step(quest_id,true),next_id)
+				get_current_step(quest_id,true).complete = completed
 		ITEMS_STEP:
-			for item in get_current_step(id,true).item_list:
+			for item in get_current_step(quest_id,true).item_list:
 				if item.name == quest_item:
 					item.complete = true
-					step_updated.emit(get_current_step(id,true))
+					step_updated.emit(get_current_step(quest_id,true))
 					break
 			var missing_items = false
 			for item in get_current_step(quest_name).item_list:
 				if item.complete == false:
 					missing_items = true
-					step_updated.emit(get_current_step(id,true))
+					step_updated.emit(get_current_step(quest_id,true))
 					break
 			if missing_items == false:
-				get_current_step(id,true).complete = true
-				step_complete.emit(get_current_step(id,true),next_id)
+				get_current_step(quest_id,true).complete = true
+				step_complete.emit(get_current_step(quest_id,true),next_id)
 		TIMER_STEP:
 			if quest_item != "":
 				#prevents progress quest calls that contains item
 				return
-			get_current_step(id,true).complete = true
+			get_current_step(quest_id,true).complete = true
 		#Checks condition and decides if it should branch
 		BRANCH_STEP:
 			#use set_branch_step function to set branching
 			#before calling update step
-			get_current_step(id,true).complete = completed
+			get_current_step(quest_id,true).complete = completed
 		
 	#Update to new step
-	if get_current_step(id,true).complete:
-		step_complete.emit(get_current_step(id,true),next_id)
+	if get_current_step(quest_id,true).complete:
+		step_complete.emit(get_current_step(quest_id,true))
 		if step.step_type == BRANCH_STEP and step.branch == true:
 			next_id = step.branch_step_id
-		player_quests[id].next_id = next_id
-		next_step.emit(get_current_step(id,true))
+		player_quests[quest_id].next_id = next_id
+		next_step.emit(get_current_step(quest_id,true))
 		
 	#get updated step
-	step = get_current_step(id,true)
+	step = get_current_step(quest_id,true)
 	#FUNCTION CALL if the step is a callable step then call and move to next step
-	if step.step_type == CALLABLE_STEP:
-		call_function(step.callable,step.params["funcparams"])
-		get_current_step(id,true)["complete"] = true
-		player_quests[id].next_id = step["next_id"]
-		next_step.emit(get_current_step(id,true))
+	check_callable_step(quest_id)
+	#get updated step if callable was called
+	step = get_current_step(quest_id,true)
 	#Ends/Completes the quest
 	if step.step_type == END:
-		get_player_quest(id,true).completed = true
-		complete_quest(id,true)
+		get_player_quest(quest_id,true).completed = true
+		complete_quest(quest_id,true)
 		step_updated.emit(step)
 
+func check_callable_step(quest_id):
+	var step = get_current_step(quest_id,true)
+	if step.step_type == CALLABLE_STEP:
+		call_function(step.callable,step.params["funcparams"])
+		get_current_step(quest_id,true)["complete"] = true
+		player_quests[quest_id].next_id = step["next_id"]
+		next_step.emit(get_current_step(quest_id,true))
 #Updates Timer_Steps
 func _process(delta):
 	if Engine.is_editor_hint():
@@ -194,6 +201,7 @@ func get_quest_list(quest_resource:QuestResource=current_resource, group:String=
 #Add a quest that was created from script/at runtime
 func add_scripted_quest(quest:ScriptQuest):
 	player_quests[quest.quest_data["quest_id"]] = quest.quest_data
+	check_callable_step(quest.quest_data["quest_id"])
 	new_quest_added.emit(quest.quest_data.quest_name)
 	active_quest = quest.quest_data.quest_name
 

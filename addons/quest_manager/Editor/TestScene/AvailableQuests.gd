@@ -13,8 +13,10 @@ var selected_quest :=""
 func _ready():
 	set_defaults()
 	var quest_path = ProjectSettings.get_setting("quest_file_path","Error")
+	print(quest_path)
 	assert(quest_path != "Error","Path Not Set")
 	if ResourceLoader.exists(quest_path):
+		print("resource loaded")
 		var quest:QuestResource = ResourceLoader.load(quest_path)
 		QuestManager.load_quest_resource(quest)
 		setup_available_quests(QuestManager.get_quest_list())
@@ -29,6 +31,8 @@ func setup_available_quests(quests):
 
 func _on_quest_list_item_selected(index):
 	selected_quest = Quest_list.get_item_text(index)
+	if selected_quest == "-None-":
+		return
 	var quest = QuestManager.get_quest_from_resource(selected_quest)
 	quest_name_lbl.text = quest.quest_name
 	quest_description.text = quest.quest_details

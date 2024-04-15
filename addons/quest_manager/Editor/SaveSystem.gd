@@ -11,12 +11,13 @@ func save_data(file_path):
 	Save.store_var(Editor.get_quests_data())
 	Save.store_var(Editor.get_editor_data())
 	current_file_path = file_path
+	Save.close() #Fixes reimport issue
 
 	if Editor.quest_name_duplicate == true:
 		%Quest_Name_Warning.popup_centered()
-	EditorInterface.get_resource_filesystem().scan_sources()
 	data_saved.emit(file_path)
 	print("Quest Resource File saved: %s" % file_path)
+	EditorInterface.get_resource_filesystem().scan()
 
 func load_data(file_path):
 	if FileAccess.file_exists(file_path) == false:
@@ -70,8 +71,7 @@ func create_new_file(file_path):
 	Save.store_var(Editor.get_quests_data())
 	Save.store_var(Editor.get_editor_data())
 	Save.close()
-	EditorInterface.get_resource_filesystem().scan()
-	#EditorInterface.get_resource_filesystem().scan_sources()
 	data_saved.emit(file_path)
+	EditorInterface.get_resource_filesystem().scan()
 	
 	

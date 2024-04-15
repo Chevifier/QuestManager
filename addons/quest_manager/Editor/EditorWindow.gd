@@ -31,9 +31,10 @@ var quest_chains_complete = false
 var quest_name_duplicate = false
 var editor_plugin: EditorPlugin
 const test_scene_path = "res://addons/quest_manager/Editor/TestScene/TestScene.tscn"
+var test_request = true
 var popup_options_list =[
 	"Add Quest",
-	"Add Step",
+	"Add Action Step",
 	"Add Incremental Step",
 	"Add Item Step",
 	"Add Group Tag",
@@ -57,6 +58,7 @@ func _ready():
 	context_menu.get_popup().index_pressed.connect(_on_context_menu_index_pressed)
 	save_btn.get_popup().index_pressed.connect(_on_save_pressed)
 	OS.low_processor_usage_mode = true
+	%QuestManagerSaveSystem.data_saved.connect(test_scene)
 	
 func setup_menu():
 	for item in popup_options_list:
@@ -77,10 +79,8 @@ func _on_save_pressed(index):
 	match index:
 		0:
 			if ResourceLoader.exists(%QuestManagerSaveSystem.current_file_path):
-				print(%QuestManagerSaveSystem.current_file_path)
 				%QuestManagerSaveSystem.save_data(%QuestManagerSaveSystem.current_file_path)
 			else:
-				print(%QuestManagerSaveSystem.current_file_path)
 				%Save_File.popup_centered_clamped(Vector2(300,300))
 		1:
 			%Save_File.popup_centered_clamped(Vector2(300,300))
@@ -326,12 +326,21 @@ func _on_graph_edit_mouse_exited():
 		node.release_all_focus()
 
 func _on_test_button_pressed():
+	#set test_request to true to launch on data save @test_scene
+	test_request = true
 	_on_save_pressed(0)
-	if %QuestManagerSaveSystem.current_file_path == "":
+	print(%QuestManagerSaveSystem.current_file_path)
+	if not FileAccess.file_exists(%QuestManagerSaveSystem.current_file_path):
+		print("Failed to Open, File Not Saved...")
 		return
-	ProjectSettings.set_setting("quest_file_path",%QuestManagerSaveSystem.current_file_path)
-	ProjectSettings.save()
-	EditorInterface.play_custom_scene(test_scene_path)
+
+#connected to SaveSystem data_saved signal
+func test_scene(file_path):
+	if test_request:
+		test_request = false
+		ProjectSettings.set_setting("quest_file_path",file_path)
+		ProjectSettings.save()
+		EditorInterface.play_custom_scene(test_scene_path)
 
 #copy selected node data
 func _on_graph_edit_copy_nodes_request():
