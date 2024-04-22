@@ -31,7 +31,7 @@ var quest_chains_complete = false
 var quest_name_duplicate = false
 var editor_plugin: EditorPlugin
 const test_scene_path = "res://addons/quest_manager/Editor/TestScene/TestScene.tscn"
-var test_request = true
+var test_request = false
 var popup_options_list =[
 	"Add Quest",
 	"Add Action Step",

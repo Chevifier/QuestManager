@@ -88,7 +88,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 			get_current_step(quest_id,true).collected += amount
 			step_updated.emit(get_current_step(quest_id,true))
 			if step.collected >= step.required:
-				step_complete.emit(get_current_step(quest_id,true),next_id)
+				step_complete.emit(get_current_step(quest_id,true))
 				get_current_step(quest_id,true).complete = completed
 		ITEMS_STEP:
 			for item in get_current_step(quest_id,true).item_list:
@@ -104,7 +104,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
 					break
 			if missing_items == false:
 				get_current_step(quest_id,true).complete = true
-				step_complete.emit(get_current_step(quest_id,true),next_id)
+				step_complete.emit(get_current_step(quest_id,true))
 		TIMER_STEP:
 			if quest_item != "":
 				#prevents progress quest calls that contains item

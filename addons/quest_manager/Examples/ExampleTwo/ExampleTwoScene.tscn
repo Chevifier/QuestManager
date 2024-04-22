@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleTwo/player.tscn" id="5_ryyt7"]
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/UI.gd" id="6_ydyli"]
 [ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleTwo/apple_spawner.tscn" id="7_5xqfh"]
-[ext_resource type="PackedScene" uid="uid://4mxj5ftcj1fx" path="res://addons/quest_manager/extras/action_step_area.tscn" id="8_dst23"]
+[ext_resource type="PackedScene" path="res://addons/quest_manager/extras/action_step_area.tscn" id="8_dst23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jx4ok"]
 texture = ExtResource("2_1wes3")

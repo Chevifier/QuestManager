@@ -119,6 +119,5 @@ func finalize_quest() -> void:
 	
 func get_random_id() -> String:
 	randomize()
-	#seed(Time.get_unix_time_from_system())
 	return str(randi() % 1000000).sha1_text().substr(0, 10)
 	
