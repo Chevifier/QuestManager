@@ -1,6 +1,7 @@
+#(WIP=Not implemented)
 #Quest objects are used to auto update each quest step
 #they are created for active quests only
-#you connent signals to the funtions to process the
+#you connent signals to the functions to process the
 #current step related to that function
 class_name QuestObject extends RefCounted
 var quest_id = ""

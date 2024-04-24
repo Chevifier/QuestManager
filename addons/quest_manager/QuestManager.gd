@@ -21,7 +21,7 @@ var active_quest = ""
 
 var current_resource:QuestResource
 var player_quests = {}
-var active_quest_objects = []
+var active_quest_objects = [] #(Unused WIP)
 #---TIMER_STEP VARIABLE-------
 var counter = 0.0
 #used to update timer steps individually
@@ -145,6 +145,7 @@ func check_callable_step(quest_id):
 		get_current_step(quest_id,true)["complete"] = true
 		player_quests[quest_id].next_id = step["next_id"]
 		next_step.emit(get_current_step(quest_id,true))
+
 #Updates Timer_Steps
 func _process(delta):
 	if Engine.is_editor_hint():
@@ -216,6 +217,7 @@ func has_quest(quest_name:String,is_id:bool = false) -> bool:
 		if player_quests[i].quest_name == quest_name:
 			return true
 	return false
+
 #Returns all the player quests that are not
 #completed or have not been failed
 func get_quests_in_progress():
@@ -260,7 +262,7 @@ func remove_quest(quest_name:String) -> void:
 		if player_quests[i].quest_name == quest_name:
 			player_quests.erase(i)
 			
-func get_quest_steps_from_resource(quest_name,quest_res:QuestResource=current_resource):
+func get_quest_steps_from_resource(quest_name,quest_res:QuestResource=current_resource) -> Array[Dictionary]:
 	return current_resource.get_quest_steps_sorted(quest_name)
 
 #returns a dictionary of all the rewards of a player quest
@@ -330,10 +332,15 @@ func reset_quest(quest_name:String) -> void:
 				replace_step.branch = false
 		player_quests[id].quest_steps[step] = replace_step
 	quest_reset.emit(quest_name)
-	
+#helper function to save player data
+func get_save_quest_data() -> Dictionary:
+	return player_quests
+#helper function to load player data
+func load_saved_quest_data(data:Dictionary) -> void:
+	player_quests = data.duplicate(true)
 #Removes Every Quest from player 
 #Usefull for new game files if neccessary
-func wipe_node_data() -> void:
+func wipe_player_data() -> void:
 	player_quests = {}
 
 
