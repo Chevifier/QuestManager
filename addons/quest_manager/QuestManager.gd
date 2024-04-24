@@ -21,6 +21,7 @@ var active_quest = ""
 
 var current_resource:QuestResource
 var player_quests = {}
+var active_quest_objects = []
 #---TIMER_STEP VARIABLE-------
 var counter = 0.0
 #used to update timer steps individually
@@ -37,8 +38,9 @@ func add_quest(quest_name:String,resource:QuestResource=current_resource) -> voi
 	active_quest = quest_name
 	check_callable_step(node_data.quest_id)
 	step_updated.emit(get_current_step(quest_name))
+	var quest_object = QuestObject.new(player_quests[node_data.quest_id])
+	active_quest_objects.append(quest_object)
 	
-
 func load_quest_resource(quest_res:QuestResource) -> void:
 	current_resource = quest_res
 
@@ -280,7 +282,7 @@ func complete_quest(quest_name:String,is_id:bool = false) -> void:
 	else:
 		get_player_quest(quest_name).completed = true
 	#emits quest name and rewards dictionary
-	quest_completed.emit(quest_name,get_quest_rewards(quest_name,is_id))
+	quest_completed.emit(get_player_quest(quest_name,is_id))
 
 #get all the meta data stored for this quest
 func get_meta_data(quest_name:String) -> Dictionary:
@@ -301,7 +303,7 @@ func set_meta_data(quest_name:String,meta_data:String, value:Variant) -> void:
 func fail_quest(quest_name:String) -> void:
 	var id = get_player_quest(quest_name).quest_id
 	player_quests[id].failed = true
-	quest_failed.emit(quest_name)
+	quest_failed.emit(player_quests[id])
 	
 #Reset Quest Values
 func reset_quest(quest_name:String) -> void:
