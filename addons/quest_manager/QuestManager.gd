@@ -38,9 +38,7 @@ func add_quest(quest_name:String,resource:QuestResource=current_resource) -> voi
 	active_quest = quest_name
 	check_callable_step(node_data.quest_id)
 	step_updated.emit(get_current_step(quest_name))
-	var quest_object = QuestObject.new(player_quests[node_data.quest_id])
-	active_quest_objects.append(quest_object)
-	
+
 func load_quest_resource(quest_res:QuestResource) -> void:
 	current_resource = quest_res
 
@@ -262,7 +260,7 @@ func remove_quest(quest_name:String) -> void:
 		if player_quests[i].quest_name == quest_name:
 			player_quests.erase(i)
 			
-func get_quest_steps_from_resource(quest_name,quest_res:QuestResource=current_resource) -> Array[Dictionary]:
+func get_quest_steps_from_resource(quest_name,quest_res:QuestResource=current_resource) -> Array:
 	return current_resource.get_quest_steps_sorted(quest_name)
 
 #returns a dictionary of all the rewards of a player quest
