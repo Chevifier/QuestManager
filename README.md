@@ -18,9 +18,9 @@ on an older Godot 4 version
 
 [Quest Manager API](documentation/Quest_Manager_API.md)
 
-[Video Tutorial pt 1: Setup and Interface](https://youtu.be/9tu-Q-T--mY)
+[Video Tutorial pt 1: Setup and Interface](https://youtu.be/zBJ6NEJTT9s)
 
-[Video Tutorial pt 2: Adding and Completing Quests](https://youtu.be/9tu-Q-T--mY)
+[Video Tutorial pt 2: Adding and Completing Quests](https://youtu.be/JI_LXcY8-Ug)
 
 ## Discord
 
