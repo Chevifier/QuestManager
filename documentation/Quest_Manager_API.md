@@ -4,7 +4,7 @@
 
 ### Signals
 
-- `quest_complete(quest:Dictionary)` - Emitted when a quest is complete, returns quest name
+- `quest_completed(quest:Dictionary)` - Emitted when a quest is complete, returns the quest dictionary
 - `quest_failed(quest:Dictionary)` - Emittied when a quest was failed
 - `step_complete(step:Dictionary)` - Emitted when a step is complete returns the step dictionary
 - `next_step(step:Dictionary)` - Emits the new step after the previous step was completed
