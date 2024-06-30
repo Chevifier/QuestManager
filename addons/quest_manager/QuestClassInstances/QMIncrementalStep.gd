@@ -1,4 +1,4 @@
-extends QMQuestStep
+class_name QMIncrementalStep extends QMQuestStep
 
 var collected = 0
 var required = 999

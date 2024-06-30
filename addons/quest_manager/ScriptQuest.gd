@@ -37,7 +37,7 @@ func add_incremental_step(step_details:String, item_name:String, required:int,st
 	step_data["required"] = required
 	step_data["collected"] = 0
 	step_data["meta_data"] = step_meta_data
-	step_data["completed"] = false
+	step_data["complete"] = false
 	add_step(step_data)
 
 func add_items_step(step_details:String, items:PackedStringArray,step_meta_data:Dictionary={}) -> void:

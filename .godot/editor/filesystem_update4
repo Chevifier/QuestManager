@@ -1,9 +1,8 @@
-res://addons/quest_manager/Editor/EditorWindow.tscn
-res://addons/quest_manager/extras/ItemCollect2D.gd
+res://addons/quest_manager/Examples/ExampleOne/SpaceArcade.tscn
+res://addons/quest_manager/QuestClassInstances/QMQuest.gd
 res://addons/quest_manager/QuestManager.gd
-res://addons/quest_manager/QuestClasses/QMQuestStep.gd
-res://addons/quest_manager/QuestClasses/QuestTracker.gd
-res://addons/quest_manager/QuestClasses/QMQuest.gd
-res://addons/quest_manager/QuestClasses/QuestManagerTracker.gd
-res://addons/quest_manager/QuestClasses/QMCollectableStep.gd
-res://addons/quest_manager/QuestClasses/QMTimerStep.gd
+res://addons/quest_manager/QuestClassInstances/QMIncrementalStep.gd
+res://addons/quest_manager/QuestClassInstances/QMItemsStep.gd
+res://addons/quest_manager/QuestClassInstances/QMQuestStep.gd
+res://addons/quest_manager/Editor/Nodes/IncrementalStep.gd
+res://addons/quest_manager/ScriptQuest.gd

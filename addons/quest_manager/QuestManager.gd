@@ -36,11 +36,15 @@ func get_quest_from_resource(quest_name:String,resource:QuestResource=current_re
 func add_quest(quest_name:String,resource:QuestResource=current_resource) -> void:
 	var node_data = resource.get_quest_by_name(quest_name)
 	player_quests[node_data.quest_id] = node_data.duplicate(true)
+	load_quest(quest_name)
 	new_quest_added.emit(quest_name)
 	active_quest = quest_name
-	check_callable_step(node_data.quest_id)
 	step_updated.emit(get_current_step(quest_name))
 
+func load_quest(quest_name) -> void:
+	var quest = QMQuest.new(quest_name)
+	add_child(quest)
+	
 func load_quest_resource(quest_res:QuestResource) -> void:
 	current_resource = quest_res
 

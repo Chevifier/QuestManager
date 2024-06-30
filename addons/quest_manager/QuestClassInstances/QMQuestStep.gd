@@ -5,7 +5,7 @@ var quest_id := ""
 var step_complete:=false
 var step_id := ""
 var step = {}
-func _init(_quest_name) -> void:
+func _init(step_data:Dictionary) -> void:
 	quest_name = quest_name
 	quest_id = QuestManager.get_quest_id(_quest_name)
 	var step = QuestManager.get_current_step(quest_id,true)
