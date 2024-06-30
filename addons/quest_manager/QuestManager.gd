@@ -1,5 +1,7 @@
 @tool
 extends Node
+#Adds each quest as children to be updated
+#Each Quest adds its current step add its child
 
 signal quest_completed(quest:Dictionary)
 signal quest_failed(quest:Dictionary)
@@ -57,6 +59,15 @@ func get_player_quest(quest_name:String,is_id:bool=false) -> Dictionary:
 func get_all_player_quests() -> Dictionary:
 	return player_quests
 	
+func get_quest_id(quest_name):
+	var id = null
+	for quest_id in player_quests:
+		if player_quests[quest_id].quest_name == quest_name:
+			id = quest_id
+			break
+	return id
+	
+
 #returns all player quests names as array
 func get_all_player_quests_names() -> Array:
 	var quests = []
@@ -68,73 +79,6 @@ func set_branch_step(quest_name, should_branch:bool=true) -> void:
 	var step = get_current_step(quest_name)
 	if step.step_type == BRANCH_STEP:
 		get_current_step(quest_name)["branch"] = should_branch
-		
-#Progresses a quest to its next step
-#completes quest if it was at its last step
-func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true, branch:bool=false) -> void:
-	quest_error(quest_name)
-	active_quest = quest_name
-	if is_quest_complete(quest_name):
-		return
-	var quest_id = get_player_quest(quest_name).quest_id
-	var step = get_current_step(quest_id,true)
-	var current_step_id = step.id
-	var next_id = step.next_id
-	match step.step_type:
-		ACTION_STEP:
-			get_current_step(quest_id,true).complete = completed
-		INCREMENTAL_STEP:
-			assert(step.item_name == quest_item,"Item: %s invalid" % quest_item)
-			get_current_step(quest_id,true).collected += amount
-			step_updated.emit(get_current_step(quest_id,true))
-			if step.collected >= step.required:
-				step_complete.emit(get_current_step(quest_id,true))
-				get_current_step(quest_id,true).complete = completed
-		ITEMS_STEP:
-			for item in get_current_step(quest_id,true).item_list:
-				if item.name == quest_item:
-					item.complete = true
-					step_updated.emit(get_current_step(quest_id,true))
-					break
-			var missing_items = false
-			for item in get_current_step(quest_name).item_list:
-				if item.complete == false:
-					missing_items = true
-					step_updated.emit(get_current_step(quest_id,true))
-					break
-			if missing_items == false:
-				get_current_step(quest_id,true).complete = true
-				step_complete.emit(get_current_step(quest_id,true))
-		TIMER_STEP:
-			if quest_item != "":
-				#prevents progress quest calls that contains item
-				return
-			get_current_step(quest_id,true).complete = true
-		#Checks condition and decides if it should branch
-		BRANCH_STEP:
-			#use set_branch_step function to set branching
-			#before calling update step
-			get_current_step(quest_id,true).complete = completed
-		
-	#Update to new step
-	if get_current_step(quest_id,true).complete:
-		step_complete.emit(get_current_step(quest_id,true))
-		if step.step_type == BRANCH_STEP and step.branch == true:
-			next_id = step.branch_step_id
-		player_quests[quest_id].next_id = next_id
-		next_step.emit(get_current_step(quest_id,true))
-		
-	#get updated step
-	step = get_current_step(quest_id,true)
-	#FUNCTION CALL if the step is a callable step then call and move to next step
-	check_callable_step(quest_id)
-	#get updated step if callable was called
-	step = get_current_step(quest_id,true)
-	#Ends/Completes the quest
-	if step.step_type == END:
-		get_player_quest(quest_id,true).completed = true
-		complete_quest(quest_id,true)
-		step_updated.emit(step)
 
 func check_callable_step(quest_id):
 	var step = get_current_step(quest_id,true)
@@ -144,37 +88,6 @@ func check_callable_step(quest_id):
 		player_quests[quest_id].next_id = step["next_id"]
 		next_step.emit(get_current_step(quest_id,true))
 
-#Updates Timer_Steps
-func _process(delta):
-	if Engine.is_editor_hint():
-		return
-	counter += delta
-	for quest in get_quests_in_progress():
-		var step = get_current_step(player_quests[quest].quest_name)
-		if step.is_empty():
-			return
-		if step.step_type != TIMER_STEP:
-			return
-		if counter >= 1.0:
-			if step.is_count_down:
-				step.time -= 1
-				if step.time <= 0:
-					if step.fail_on_timeout:
-						fail_quest(player_quests[quest].quest_name)
-					else:
-						progress_quest(player_quests[quest].quest_name)
-			else:
-				step.time += 1
-				if step.time >= step.total_time:
-					if step.fail_on_timeout:
-						fail_quest(player_quests[quest].quest_name)
-					else:
-						progress_quest(player_quests[quest].quest_name)
-						
-			step_updated.emit(step)
-	if counter >= 1.0:
-		counter = 0
-	
 #------------------------------
 #Set a specific value for Incremental and Item Steps
 #For example the player could have some of an item
@@ -243,7 +156,7 @@ func is_quest_failed(quest_name) -> bool:
 	return quest.failed
 	
 #get the current step in quest
-func get_current_step(quest_name:String,is_id:bool=false) -> Dictionary:
+func get_current_step(quest_name:String,is_id = false) -> Dictionary:
 	if is_id:
 		var next_id = player_quests[quest_name].next_id
 		return player_quests[quest_name]["quest_steps"][next_id]
@@ -300,10 +213,9 @@ func set_meta_data(quest_name:String,meta_data:String, value:Variant) -> void:
 	player_quests[id].metadata[meta_data] = value
 
 #Fails a quest
-func fail_quest(quest_name:String) -> void:
-	var id = get_player_quest(quest_name).quest_id
-	player_quests[id].failed = true
-	quest_failed.emit(player_quests[id])
+func fail_quest(quest_id:String) -> void:
+	player_quests[quest_id].failed = true
+	quest_failed.emit(player_quests[quest_id])
 	
 #Reset Quest Values
 func reset_quest(quest_name:String) -> void:
