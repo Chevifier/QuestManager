@@ -1,0 +1,607 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_h3lpx"]
+
+[resource]
+script = ExtResource("1_h3lpx")
+quest_data = {
+"dc7cd288b5": {
+"completed": false,
+"failed": false,
+"first_step": "a507b8f9b4",
+"group": "test group",
+"id": "dc7cd288b5",
+"meta_data": {
+"Int": 42.0,
+"String": "Hello Godot",
+"True": true,
+"Vec2": Vector2(10, 20.5),
+"Vec3": Vector3(1, 2, 3),
+"float": 3.14,
+"funcparams": [],
+"some meta": "test"
+},
+"next_id": "a507b8f9b4",
+"position": Vector2(-41.4329, -99.3704),
+"quest_details": "This is a Test Quest",
+"quest_id": "dc7cd288b5",
+"quest_name": "Test",
+"quest_rewards": {
+"Cool Helm": "cool_helm_id",
+"coins": 20.0,
+"test bool": true,
+"test vect": Vector2(10, 11),
+"testfloat": 0.005,
+"vec3": Vector3(3, 20, 1)
+},
+"quest_steps": {
+"2bd318c64f": {
+"callable": "QuestManager.testfunc()",
+"complete": false,
+"details": "QuestManager.testfunc()",
+"id": "2bd318c64f",
+"next_id": "6eedff1ef3",
+"params": {
+"funcparams": [25.0],
+"test": 25.0
+},
+"position": Vector2(1300, -20),
+"quest_id": "dc7cd288b5",
+"size": Vector2(267, 113),
+"step_type": "callable_step",
+"type": 10
+},
+"42d1e0c7b0": {
+"branch": false,
+"branch_step_id": "b6ac038dc4",
+"complete": false,
+"details": "Step 5 Branch Step",
+"id": "42d1e0c7b0",
+"meta_data": {
+"Test": "number",
+"funcparams": []
+},
+"next_id": "b6e45acb32",
+"position": Vector2(2108.51, -123.6),
+"quest_id": "dc7cd288b5",
+"size": Vector2(197.002, 250),
+"step_type": "branch_step",
+"type": 9
+},
+"6eedff1ef3": {
+"complete": false,
+"details": "Step 4: Timer Step",
+"fail_on_timeout": true,
+"id": "6eedff1ef3",
+"is_count_down": true,
+"meta_data": {
+"funcparams": []
+},
+"next_id": "42d1e0c7b0",
+"position": Vector2(1734.96, -96.9965),
+"quest_id": "dc7cd288b5",
+"size": Vector2(190, 281),
+"step_type": "timer_step",
+"time": 10.0,
+"time_minutes": 0.0,
+"time_seconds": 10.0,
+"total_time": 10.0,
+"type": 7
+},
+"9b6ac1ac6d": {
+"complete": false,
+"details": "Step 3: Items Step",
+"id": "9b6ac1ac6d",
+"item_list": [{
+"complete": false,
+"name": "an item"
+}, {
+"complete": false,
+"name": "another item"
+}, {
+"complete": false,
+"name": "third item"
+}],
+"meta_data": {
+"funcparams": []
+},
+"next_id": "2bd318c64f",
+"position": Vector2(843.801, -207.475),
+"quest_id": "dc7cd288b5",
+"size": Vector2(200, 423),
+"step_type": "items_step",
+"type": 3
+},
+"a507b8f9b4": {
+"complete": false,
+"details": "Step 1: Action Step",
+"id": "a507b8f9b4",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "cb6982b58b",
+"position": Vector2(232.11, -5.85112),
+"quest_id": "dc7cd288b5",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"b6ac038dc4": {
+"complete": false,
+"details": "Alt Step 6b",
+"id": "b6ac038dc4",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "b6e45acb32",
+"position": Vector2(2384.98, 61.3649),
+"quest_id": "dc7cd288b5",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"b6e45acb32": {
+"details": "Complete",
+"id": "b6e45acb32",
+"next_id": "",
+"position": Vector2(2680, -40),
+"size": Vector2(116, 85.0002),
+"step_type": "end",
+"type": 6
+},
+"cb6982b58b": {
+"collected": 0,
+"complete": false,
+"details": "Step 2: Incremental Step
+",
+"id": "cb6982b58b",
+"item_name": "items",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "9b6ac1ac6d",
+"position": Vector2(481.331, -63.464),
+"quest_id": "dc7cd288b5",
+"required": 1.0,
+"size": Vector2(240, 231),
+"step_type": "incremental_step",
+"type": 2
+}
+},
+"size": Vector2(200, 250),
+"type": 0
+}
+}
+editor_data = {
+"1ed388962c": {
+"group": "test group",
+"id": "1ed388962c",
+"next_id": "",
+"position": Vector2(-340, -180),
+"size": Vector2(186, 85.0002),
+"type": 4
+},
+"2bd318c64f": {
+"callable": "QuestManager.testfunc()",
+"complete": false,
+"details": "QuestManager.testfunc()",
+"id": "2bd318c64f",
+"next_id": "6eedff1ef3",
+"params": {
+"funcparams": [25.0],
+"test": 25.0
+},
+"position": Vector2(1300, -20),
+"quest_id": "dc7cd288b5",
+"size": Vector2(267, 113),
+"step_type": "callable_step",
+"type": 10
+},
+"42d1e0c7b0": {
+"branch": false,
+"branch_step_id": "b6ac038dc4",
+"complete": false,
+"details": "Step 5 Branch Step",
+"id": "42d1e0c7b0",
+"meta_data": {
+"Test": "number",
+"funcparams": []
+},
+"next_id": "b6e45acb32",
+"position": Vector2(2108.51, -123.6),
+"quest_id": "dc7cd288b5",
+"size": Vector2(197.002, 250),
+"step_type": "branch_step",
+"type": 9
+},
+"6eedff1ef3": {
+"complete": false,
+"details": "Step 4: Timer Step",
+"fail_on_timeout": true,
+"id": "6eedff1ef3",
+"is_count_down": true,
+"meta_data": {
+"funcparams": []
+},
+"next_id": "42d1e0c7b0",
+"position": Vector2(1734.96, -96.9965),
+"quest_id": "dc7cd288b5",
+"size": Vector2(190, 281),
+"step_type": "timer_step",
+"time": 10.0,
+"time_minutes": 0.0,
+"time_seconds": 10.0,
+"total_time": 10.0,
+"type": 7
+},
+"86c0818420": {
+"id": "86c0818420",
+"meta_data": {
+"Int": 42.0,
+"String": "Hello Godot",
+"True": true,
+"Vec2": Vector2(10, 20.5),
+"Vec3": Vector3(1, 2, 3),
+"float": 3.14,
+"funcparams": [],
+"some meta": "test"
+},
+"next_id": "",
+"position": Vector2(-520, 180),
+"size": Vector2(361, 308),
+"type": 5
+},
+"9b6ac1ac6d": {
+"complete": false,
+"details": "Step 3: Items Step",
+"id": "9b6ac1ac6d",
+"item_list": [{
+"complete": false,
+"name": "an item"
+}, {
+"complete": false,
+"name": "another item"
+}, {
+"complete": false,
+"name": "third item"
+}],
+"meta_data": {
+"funcparams": []
+},
+"next_id": "2bd318c64f",
+"position": Vector2(843.801, -207.475),
+"quest_id": "dc7cd288b5",
+"size": Vector2(200, 423),
+"step_type": "items_step",
+"type": 3
+},
+"a507b8f9b4": {
+"complete": false,
+"details": "Step 1: Action Step",
+"id": "a507b8f9b4",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "cb6982b58b",
+"position": Vector2(232.11, -5.85112),
+"quest_id": "dc7cd288b5",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"b11ccff0c1": {
+"id": "b11ccff0c1",
+"next_id": "",
+"position": Vector2(-520, -80),
+"rewards": {
+"Cool Helm": "cool_helm_id",
+"coins": 20.0,
+"test bool": true,
+"test vect": Vector2(10, 11),
+"testfloat": 0.005,
+"vec3": Vector3(3, 20, 1)
+},
+"size": Vector2(361, 258),
+"type": 8
+},
+"b6ac038dc4": {
+"complete": false,
+"details": "Alt Step 6b",
+"id": "b6ac038dc4",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "b6e45acb32",
+"position": Vector2(2384.98, 61.3649),
+"quest_id": "dc7cd288b5",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"b6e45acb32": {
+"details": "Complete",
+"id": "b6e45acb32",
+"next_id": "",
+"position": Vector2(2680, -40),
+"size": Vector2(116, 85.0002),
+"step_type": "end",
+"type": 6
+},
+"cb6982b58b": {
+"collected": 0,
+"complete": false,
+"details": "Step 2: Incremental Step
+",
+"id": "cb6982b58b",
+"item_name": "items",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "9b6ac1ac6d",
+"position": Vector2(481.331, -63.464),
+"quest_id": "dc7cd288b5",
+"required": 1.0,
+"size": Vector2(240, 231),
+"step_type": "incremental_step",
+"type": 2
+},
+"connections_list": [{
+"from_node": &"1ed388962c",
+"from_port": 0,
+"to_node": &"dc7cd288b5",
+"to_port": 0
+}, {
+"from_node": &"86c0818420",
+"from_port": 0,
+"to_node": &"dc7cd288b5",
+"to_port": 2
+}, {
+"from_node": &"dc7cd288b5",
+"from_port": 0,
+"to_node": &"a507b8f9b4",
+"to_port": 0
+}, {
+"from_node": &"a507b8f9b4",
+"from_port": 0,
+"to_node": &"cb6982b58b",
+"to_port": 0
+}, {
+"from_node": &"cb6982b58b",
+"from_port": 0,
+"to_node": &"9b6ac1ac6d",
+"to_port": 0
+}, {
+"from_node": &"9b6ac1ac6d",
+"from_port": 0,
+"to_node": &"2bd318c64f",
+"to_port": 0
+}, {
+"from_node": &"2bd318c64f",
+"from_port": 0,
+"to_node": &"6eedff1ef3",
+"to_port": 0
+}, {
+"from_node": &"6eedff1ef3",
+"from_port": 0,
+"to_node": &"42d1e0c7b0",
+"to_port": 0
+}, {
+"from_node": &"42d1e0c7b0",
+"from_port": 0,
+"to_node": &"b6e45acb32",
+"to_port": 0
+}, {
+"from_node": &"42d1e0c7b0",
+"from_port": 1,
+"to_node": &"b6ac038dc4",
+"to_port": 0
+}, {
+"from_node": &"b6ac038dc4",
+"from_port": 0,
+"to_node": &"b6e45acb32",
+"to_port": 0
+}, {
+"from_node": &"f18c78380b",
+"from_port": 0,
+"to_node": &"42d1e0c7b0",
+"to_port": 1
+}, {
+"from_node": &"de69c1d4fe",
+"from_port": 0,
+"to_node": &"2bd318c64f",
+"to_port": 1
+}, {
+"from_node": &"b11ccff0c1",
+"from_port": 0,
+"to_node": &"dc7cd288b5",
+"to_port": 1
+}],
+"dc7cd288b5": {
+"completed": false,
+"failed": false,
+"first_step": "a507b8f9b4",
+"group": "test group",
+"id": "dc7cd288b5",
+"meta_data": {
+"Int": 42.0,
+"String": "Hello Godot",
+"True": true,
+"Vec2": Vector2(10, 20.5),
+"Vec3": Vector3(1, 2, 3),
+"float": 3.14,
+"funcparams": [],
+"some meta": "test"
+},
+"next_id": "a507b8f9b4",
+"position": Vector2(-41.4329, -99.3704),
+"quest_details": "This is a Test Quest",
+"quest_id": "dc7cd288b5",
+"quest_name": "Test",
+"quest_rewards": {
+"Cool Helm": "cool_helm_id",
+"coins": 20.0,
+"test bool": true,
+"test vect": Vector2(10, 11),
+"testfloat": 0.005,
+"vec3": Vector3(3, 20, 1)
+},
+"quest_steps": {
+"2bd318c64f": {
+"callable": "QuestManager.testfunc()",
+"complete": false,
+"details": "QuestManager.testfunc()",
+"id": "2bd318c64f",
+"next_id": "6eedff1ef3",
+"params": {
+"funcparams": [25.0],
+"test": 25.0
+},
+"position": Vector2(1300, -20),
+"quest_id": "dc7cd288b5",
+"size": Vector2(267, 113),
+"step_type": "callable_step",
+"type": 10
+},
+"42d1e0c7b0": {
+"branch": false,
+"branch_step_id": "b6ac038dc4",
+"complete": false,
+"details": "Step 5 Branch Step",
+"id": "42d1e0c7b0",
+"meta_data": {
+"Test": "number",
+"funcparams": []
+},
+"next_id": "b6e45acb32",
+"position": Vector2(2108.51, -123.6),
+"quest_id": "dc7cd288b5",
+"size": Vector2(197.002, 250),
+"step_type": "branch_step",
+"type": 9
+},
+"6eedff1ef3": {
+"complete": false,
+"details": "Step 4: Timer Step",
+"fail_on_timeout": true,
+"id": "6eedff1ef3",
+"is_count_down": true,
+"meta_data": {
+"funcparams": []
+},
+"next_id": "42d1e0c7b0",
+"position": Vector2(1734.96, -96.9965),
+"quest_id": "dc7cd288b5",
+"size": Vector2(190, 281),
+"step_type": "timer_step",
+"time": 10.0,
+"time_minutes": 0.0,
+"time_seconds": 10.0,
+"total_time": 10.0,
+"type": 7
+},
+"9b6ac1ac6d": {
+"complete": false,
+"details": "Step 3: Items Step",
+"id": "9b6ac1ac6d",
+"item_list": [{
+"complete": false,
+"name": "an item"
+}, {
+"complete": false,
+"name": "another item"
+}, {
+"complete": false,
+"name": "third item"
+}],
+"meta_data": {
+"funcparams": []
+},
+"next_id": "2bd318c64f",
+"position": Vector2(843.801, -207.475),
+"quest_id": "dc7cd288b5",
+"size": Vector2(200, 423),
+"step_type": "items_step",
+"type": 3
+},
+"a507b8f9b4": {
+"complete": false,
+"details": "Step 1: Action Step",
+"id": "a507b8f9b4",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "cb6982b58b",
+"position": Vector2(232.11, -5.85112),
+"quest_id": "dc7cd288b5",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"b6ac038dc4": {
+"complete": false,
+"details": "Alt Step 6b",
+"id": "b6ac038dc4",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "b6e45acb32",
+"position": Vector2(2384.98, 61.3649),
+"quest_id": "dc7cd288b5",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"b6e45acb32": {
+"details": "Complete",
+"id": "b6e45acb32",
+"next_id": "",
+"position": Vector2(2680, -40),
+"size": Vector2(116, 85.0002),
+"step_type": "end",
+"type": 6
+},
+"cb6982b58b": {
+"collected": 0,
+"complete": false,
+"details": "Step 2: Incremental Step
+",
+"id": "cb6982b58b",
+"item_name": "items",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "9b6ac1ac6d",
+"position": Vector2(481.331, -63.464),
+"quest_id": "dc7cd288b5",
+"required": 1.0,
+"size": Vector2(240, 231),
+"step_type": "incremental_step",
+"type": 2
+}
+},
+"size": Vector2(200, 250),
+"type": 0
+},
+"de69c1d4fe": {
+"id": "de69c1d4fe",
+"meta_data": {
+"funcparams": [],
+"test": 25.0
+},
+"next_id": "",
+"position": Vector2(1020, 200),
+"size": Vector2(250, 150),
+"type": 5
+},
+"f18c78380b": {
+"id": "f18c78380b",
+"meta_data": {
+"Test": "number",
+"funcparams": []
+},
+"next_id": "",
+"position": Vector2(1737.15, 259.057),
+"size": Vector2(250, 150),
+"type": 5
+}
+}

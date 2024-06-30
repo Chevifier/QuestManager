@@ -1,0 +1,766 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_o1xs4"]
+
+[resource]
+script = ExtResource("1_o1xs4")
+quest_data = {
+"1e3cd6e59f": {
+"completed": false,
+"failed": false,
+"first_step": "1118a2488c",
+"group": "",
+"id": "1e3cd6e59f",
+"meta_data": {
+"Is Somthing True": false,
+"funcparams": []
+},
+"next_id": "1118a2488c",
+"position": Vector2(380, -440),
+"quest_details": "",
+"quest_id": "1e3cd6e59f",
+"quest_name": "ShootEmUp",
+"quest_rewards": {
+"money": 1000.0
+},
+"quest_steps": {
+"1118a2488c": {
+"collected": 0,
+"complete": false,
+"details": "Destroy 10 ships",
+"id": "1118a2488c",
+"item_name": "Ships",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "e95c4966d1",
+"position": Vector2(619.791, -396.681),
+"quest_id": "1e3cd6e59f",
+"required": 10.0,
+"size": Vector2(240, 231),
+"step_type": "incremental_step",
+"type": 2
+},
+"a5e44c9e14": {
+"details": "Complete",
+"id": "a5e44c9e14",
+"next_id": "",
+"position": Vector2(1260, -420),
+"size": Vector2(115, 85),
+"step_type": "end",
+"type": 6
+},
+"e95c4966d1": {
+"complete": false,
+"details": "Survive 5 seconds",
+"fail_on_timeout": false,
+"id": "e95c4966d1",
+"is_count_down": true,
+"meta_data": {
+"funcparams": []
+},
+"next_id": "a5e44c9e14",
+"position": Vector2(960, -500),
+"quest_id": "1e3cd6e59f",
+"size": Vector2(231, 281),
+"step_type": "timer_step",
+"time": 5.0,
+"time_minutes": 0.0,
+"time_seconds": 5.0,
+"total_time": 5.0,
+"type": 7
+}
+},
+"size": Vector2(200, 250),
+"type": 0
+},
+"d64dafe941": {
+"completed": false,
+"failed": false,
+"first_step": "36004a44db",
+"group": "",
+"id": "d64dafe941",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "36004a44db",
+"position": Vector2(380, 280),
+"quest_details": "An example branching quest",
+"quest_id": "d64dafe941",
+"quest_name": "Branching Quest",
+"quest_rewards": {},
+"quest_steps": {
+"034f84f308": {
+"complete": false,
+"details": "DId Nothing",
+"id": "034f84f308",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "31625ed365",
+"position": Vector2(960, 400),
+"quest_id": "d64dafe941",
+"size": Vector2(150, 150),
+"step_type": "action_step",
+"type": 1
+},
+"288156f6ba": {
+"complete": false,
+"details": "DId Something",
+"id": "288156f6ba",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "31625ed365",
+"position": Vector2(960, 240),
+"quest_id": "d64dafe941",
+"size": Vector2(150, 150),
+"step_type": "action_step",
+"type": 1
+},
+"31625ed365": {
+"details": "Complete",
+"id": "31625ed365",
+"next_id": "",
+"position": Vector2(1280, 340),
+"size": Vector2(117, 80),
+"step_type": "end",
+"type": 6
+},
+"36004a44db": {
+"branch": false,
+"branch_step_id": "034f84f308",
+"complete": false,
+"details": "Do something or Nothing",
+"id": "36004a44db",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "288156f6ba",
+"position": Vector2(680, 240),
+"quest_id": "d64dafe941",
+"size": Vector2(197, 250),
+"step_type": "branch_step",
+"type": 9
+}
+},
+"size": Vector2(200, 250),
+"type": 0
+},
+"e6040ba290": {
+"completed": false,
+"failed": false,
+"first_step": "27aaf4c493",
+"group": "",
+"id": "e6040ba290",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "27aaf4c493",
+"position": Vector2(380, -100),
+"quest_details": "Get apples to make a pie. and share it 
+with everyone",
+"quest_id": "e6040ba290",
+"quest_name": "Meal for the Family",
+"quest_rewards": {},
+"quest_steps": {
+"086deb180a": {
+"complete": false,
+"details": "Share a slice with everyone",
+"id": "086deb180a",
+"item_list": [{
+"complete": false,
+"name": "Mother"
+}, {
+"complete": false,
+"name": "Father"
+}, {
+"complete": false,
+"name": "Sister"
+}],
+"meta_data": {
+"funcparams": []
+},
+"next_id": "1b6192889b",
+"position": Vector2(1420, -200),
+"quest_id": "e6040ba290",
+"size": Vector2(200, 423),
+"step_type": "items_step",
+"type": 3
+},
+"1b6192889b": {
+"details": "Complete",
+"id": "1b6192889b",
+"next_id": "",
+"position": Vector2(1683.8, -49.0974),
+"size": Vector2(118, 84.9998),
+"step_type": "end",
+"type": 6
+},
+"27aaf4c493": {
+"complete": false,
+"details": "Go Outside",
+"id": "27aaf4c493",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "ef2e76154d",
+"position": Vector2(656.972, -139.529),
+"quest_id": "e6040ba290",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"8871bddadd": {
+"complete": false,
+"details": "Make a pie in the kitchen",
+"id": "8871bddadd",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "086deb180a",
+"position": Vector2(1219.97, -171.62),
+"quest_id": "e6040ba290",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"ef2e76154d": {
+"collected": 0,
+"complete": false,
+"details": "Pick up 10 apples",
+"id": "ef2e76154d",
+"item_name": "Apple",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "8871bddadd",
+"position": Vector2(907.336, -140.62),
+"quest_id": "e6040ba290",
+"required": 10.0,
+"size": Vector2(240, 231),
+"step_type": "incremental_step",
+"type": 2
+}
+},
+"size": Vector2(200, 250),
+"type": 0
+}
+}
+editor_data = {
+"034f84f308": {
+"complete": false,
+"details": "DId Nothing",
+"id": "034f84f308",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "31625ed365",
+"position": Vector2(960, 400),
+"quest_id": "d64dafe941",
+"size": Vector2(150, 150),
+"step_type": "action_step",
+"type": 1
+},
+"086deb180a": {
+"complete": false,
+"details": "Share a slice with everyone",
+"id": "086deb180a",
+"item_list": [{
+"complete": false,
+"name": "Mother"
+}, {
+"complete": false,
+"name": "Father"
+}, {
+"complete": false,
+"name": "Sister"
+}],
+"meta_data": {
+"funcparams": []
+},
+"next_id": "1b6192889b",
+"position": Vector2(1420, -200),
+"quest_id": "e6040ba290",
+"size": Vector2(200, 423),
+"step_type": "items_step",
+"type": 3
+},
+"1118a2488c": {
+"collected": 0,
+"complete": false,
+"details": "Destroy 10 ships",
+"id": "1118a2488c",
+"item_name": "Ships",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "e95c4966d1",
+"position": Vector2(619.791, -396.681),
+"quest_id": "1e3cd6e59f",
+"required": 10.0,
+"size": Vector2(240, 231),
+"step_type": "incremental_step",
+"type": 2
+},
+"1b6192889b": {
+"details": "Complete",
+"id": "1b6192889b",
+"next_id": "",
+"position": Vector2(1683.8, -49.0974),
+"size": Vector2(118, 84.9998),
+"step_type": "end",
+"type": 6
+},
+"1e3cd6e59f": {
+"completed": false,
+"failed": false,
+"first_step": "1118a2488c",
+"group": "",
+"id": "1e3cd6e59f",
+"meta_data": {
+"Is Somthing True": false,
+"funcparams": []
+},
+"next_id": "1118a2488c",
+"position": Vector2(380, -440),
+"quest_details": "",
+"quest_id": "1e3cd6e59f",
+"quest_name": "ShootEmUp",
+"quest_rewards": {
+"money": 1000.0
+},
+"quest_steps": {
+"1118a2488c": {
+"collected": 0,
+"complete": false,
+"details": "Destroy 10 ships",
+"id": "1118a2488c",
+"item_name": "Ships",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "e95c4966d1",
+"position": Vector2(619.791, -396.681),
+"quest_id": "1e3cd6e59f",
+"required": 10.0,
+"size": Vector2(240, 231),
+"step_type": "incremental_step",
+"type": 2
+},
+"a5e44c9e14": {
+"details": "Complete",
+"id": "a5e44c9e14",
+"next_id": "",
+"position": Vector2(1260, -420),
+"size": Vector2(115, 85),
+"step_type": "end",
+"type": 6
+},
+"e95c4966d1": {
+"complete": false,
+"details": "Survive 5 seconds",
+"fail_on_timeout": false,
+"id": "e95c4966d1",
+"is_count_down": true,
+"meta_data": {
+"funcparams": []
+},
+"next_id": "a5e44c9e14",
+"position": Vector2(960, -500),
+"quest_id": "1e3cd6e59f",
+"size": Vector2(231, 281),
+"step_type": "timer_step",
+"time": 5.0,
+"time_minutes": 0.0,
+"time_seconds": 5.0,
+"total_time": 5.0,
+"type": 7
+}
+},
+"size": Vector2(200, 250),
+"type": 0
+},
+"27aaf4c493": {
+"complete": false,
+"details": "Go Outside",
+"id": "27aaf4c493",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "ef2e76154d",
+"position": Vector2(656.972, -139.529),
+"quest_id": "e6040ba290",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"288156f6ba": {
+"complete": false,
+"details": "DId Something",
+"id": "288156f6ba",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "31625ed365",
+"position": Vector2(960, 240),
+"quest_id": "d64dafe941",
+"size": Vector2(150, 150),
+"step_type": "action_step",
+"type": 1
+},
+"31625ed365": {
+"details": "Complete",
+"id": "31625ed365",
+"next_id": "",
+"position": Vector2(1280, 340),
+"size": Vector2(117, 80),
+"step_type": "end",
+"type": 6
+},
+"36004a44db": {
+"branch": false,
+"branch_step_id": "034f84f308",
+"complete": false,
+"details": "Do something or Nothing",
+"id": "36004a44db",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "288156f6ba",
+"position": Vector2(680, 240),
+"quest_id": "d64dafe941",
+"size": Vector2(197, 250),
+"step_type": "branch_step",
+"type": 9
+},
+"39111b2f8c": {
+"id": "39111b2f8c",
+"next_id": "",
+"position": Vector2(0, -480),
+"rewards": {
+"money": 1000.0
+},
+"size": Vector2(250, 150),
+"type": 8
+},
+"5dbc5a902b": {
+"id": "5dbc5a902b",
+"meta_data": {
+"Is Somthing True": false,
+"funcparams": []
+},
+"next_id": "",
+"position": Vector2(20, -180),
+"size": Vector2(250, 150),
+"type": 5
+},
+"8871bddadd": {
+"complete": false,
+"details": "Make a pie in the kitchen",
+"id": "8871bddadd",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "086deb180a",
+"position": Vector2(1219.97, -171.62),
+"quest_id": "e6040ba290",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"a5e44c9e14": {
+"details": "Complete",
+"id": "a5e44c9e14",
+"next_id": "",
+"position": Vector2(1260, -420),
+"size": Vector2(115, 85),
+"step_type": "end",
+"type": 6
+},
+"connections_list": [{
+"from_node": &"39111b2f8c",
+"from_port": 0,
+"to_node": &"1e3cd6e59f",
+"to_port": 1
+}, {
+"from_node": &"1e3cd6e59f",
+"from_port": 0,
+"to_node": &"1118a2488c",
+"to_port": 0
+}, {
+"from_node": &"e6040ba290",
+"from_port": 0,
+"to_node": &"27aaf4c493",
+"to_port": 0
+}, {
+"from_node": &"27aaf4c493",
+"from_port": 0,
+"to_node": &"ef2e76154d",
+"to_port": 0
+}, {
+"from_node": &"e95c4966d1",
+"from_port": 0,
+"to_node": &"a5e44c9e14",
+"to_port": 0
+}, {
+"from_node": &"086deb180a",
+"from_port": 0,
+"to_node": &"1b6192889b",
+"to_port": 0
+}, {
+"from_node": &"8871bddadd",
+"from_port": 0,
+"to_node": &"086deb180a",
+"to_port": 0
+}, {
+"from_node": &"ef2e76154d",
+"from_port": 0,
+"to_node": &"8871bddadd",
+"to_port": 0
+}, {
+"from_node": &"1118a2488c",
+"from_port": 0,
+"to_node": &"e95c4966d1",
+"to_port": 0
+}, {
+"from_node": &"d64dafe941",
+"from_port": 0,
+"to_node": &"36004a44db",
+"to_port": 0
+}, {
+"from_node": &"36004a44db",
+"from_port": 0,
+"to_node": &"288156f6ba",
+"to_port": 0
+}, {
+"from_node": &"36004a44db",
+"from_port": 1,
+"to_node": &"034f84f308",
+"to_port": 0
+}, {
+"from_node": &"288156f6ba",
+"from_port": 0,
+"to_node": &"31625ed365",
+"to_port": 0
+}, {
+"from_node": &"034f84f308",
+"from_port": 0,
+"to_node": &"31625ed365",
+"to_port": 0
+}, {
+"from_node": &"5dbc5a902b",
+"from_port": 0,
+"to_node": &"1e3cd6e59f",
+"to_port": 2
+}],
+"d64dafe941": {
+"completed": false,
+"failed": false,
+"first_step": "36004a44db",
+"group": "",
+"id": "d64dafe941",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "36004a44db",
+"position": Vector2(380, 280),
+"quest_details": "An example branching quest",
+"quest_id": "d64dafe941",
+"quest_name": "Branching Quest",
+"quest_rewards": {},
+"quest_steps": {
+"034f84f308": {
+"complete": false,
+"details": "DId Nothing",
+"id": "034f84f308",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "31625ed365",
+"position": Vector2(960, 400),
+"quest_id": "d64dafe941",
+"size": Vector2(150, 150),
+"step_type": "action_step",
+"type": 1
+},
+"288156f6ba": {
+"complete": false,
+"details": "DId Something",
+"id": "288156f6ba",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "31625ed365",
+"position": Vector2(960, 240),
+"quest_id": "d64dafe941",
+"size": Vector2(150, 150),
+"step_type": "action_step",
+"type": 1
+},
+"31625ed365": {
+"details": "Complete",
+"id": "31625ed365",
+"next_id": "",
+"position": Vector2(1280, 340),
+"size": Vector2(117, 80),
+"step_type": "end",
+"type": 6
+},
+"36004a44db": {
+"branch": false,
+"branch_step_id": "034f84f308",
+"complete": false,
+"details": "Do something or Nothing",
+"id": "36004a44db",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "288156f6ba",
+"position": Vector2(680, 240),
+"quest_id": "d64dafe941",
+"size": Vector2(197, 250),
+"step_type": "branch_step",
+"type": 9
+}
+},
+"size": Vector2(200, 250),
+"type": 0
+},
+"e6040ba290": {
+"completed": false,
+"failed": false,
+"first_step": "27aaf4c493",
+"group": "",
+"id": "e6040ba290",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "27aaf4c493",
+"position": Vector2(380, -100),
+"quest_details": "Get apples to make a pie. and share it 
+with everyone",
+"quest_id": "e6040ba290",
+"quest_name": "Meal for the Family",
+"quest_rewards": {},
+"quest_steps": {
+"086deb180a": {
+"complete": false,
+"details": "Share a slice with everyone",
+"id": "086deb180a",
+"item_list": [{
+"complete": false,
+"name": "Mother"
+}, {
+"complete": false,
+"name": "Father"
+}, {
+"complete": false,
+"name": "Sister"
+}],
+"meta_data": {
+"funcparams": []
+},
+"next_id": "1b6192889b",
+"position": Vector2(1420, -200),
+"quest_id": "e6040ba290",
+"size": Vector2(200, 423),
+"step_type": "items_step",
+"type": 3
+},
+"1b6192889b": {
+"details": "Complete",
+"id": "1b6192889b",
+"next_id": "",
+"position": Vector2(1683.8, -49.0974),
+"size": Vector2(118, 84.9998),
+"step_type": "end",
+"type": 6
+},
+"27aaf4c493": {
+"complete": false,
+"details": "Go Outside",
+"id": "27aaf4c493",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "ef2e76154d",
+"position": Vector2(656.972, -139.529),
+"quest_id": "e6040ba290",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"8871bddadd": {
+"complete": false,
+"details": "Make a pie in the kitchen",
+"id": "8871bddadd",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "086deb180a",
+"position": Vector2(1219.97, -171.62),
+"quest_id": "e6040ba290",
+"size": Vector2(150.009, 150.012),
+"step_type": "action_step",
+"type": 1
+},
+"ef2e76154d": {
+"collected": 0,
+"complete": false,
+"details": "Pick up 10 apples",
+"id": "ef2e76154d",
+"item_name": "Apple",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "8871bddadd",
+"position": Vector2(907.336, -140.62),
+"quest_id": "e6040ba290",
+"required": 10.0,
+"size": Vector2(240, 231),
+"step_type": "incremental_step",
+"type": 2
+}
+},
+"size": Vector2(200, 250),
+"type": 0
+},
+"e95c4966d1": {
+"complete": false,
+"details": "Survive 5 seconds",
+"fail_on_timeout": false,
+"id": "e95c4966d1",
+"is_count_down": true,
+"meta_data": {
+"funcparams": []
+},
+"next_id": "a5e44c9e14",
+"position": Vector2(960, -500),
+"quest_id": "1e3cd6e59f",
+"size": Vector2(231, 281),
+"step_type": "timer_step",
+"time": 5.0,
+"time_minutes": 0.0,
+"time_seconds": 5.0,
+"total_time": 5.0,
+"type": 7
+},
+"ef2e76154d": {
+"collected": 0,
+"complete": false,
+"details": "Pick up 10 apples",
+"id": "ef2e76154d",
+"item_name": "Apple",
+"meta_data": {
+"funcparams": []
+},
+"next_id": "8871bddadd",
+"position": Vector2(907.336, -140.62),
+"quest_id": "e6040ba290",
+"required": 10.0,
+"size": Vector2(240, 231),
+"step_type": "incremental_step",
+"type": 2
+}
+}
