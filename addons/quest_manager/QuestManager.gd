@@ -18,33 +18,55 @@ const TIMER_STEP = "timer_step"
 const BRANCH_STEP = "branch_step"
 const CALLABLE_STEP = "callable_step"
 const END = "end"
+
+#quest instance signals
+signal incrimental_item_collected(item_name,quantity)
+signal action_step_complete()
+signal item_collected(item_name)
+signal branch_activated(is_active)
+
 #Helper variable for searching for quest
 var active_quest = ""
-
 var current_resource:QuestResource
 var player_quests = {}
-var active_quest_objects = [] #(Unused WIP)
-#---TIMER_STEP VARIABLE-------
-var counter = 0.0
-#used to update timer steps individually
+
+func set_incremental_collected(item_name,quantity:=1):
+	incrimental_item_collected.emit(item_name,quantity)
+func set_item_collected(item_name):
+	item_collected.emit(item_name)
+func set_branch_activated(activated:=false):
+	branch_activated.emit(activated)
 
 #get quest to view data
 func get_quest_from_resource(quest_name:String,resource:QuestResource=current_resource):
 	return resource.get_quest_by_name(quest_name)
+#creates all instanced of uncompleted player quests
+#usefull after loading saved data
+func initialize_player_quests():
+	for quest in player_quests:
+		if player_quests[quest].completed == false and player_quests[quest].failed == false:
+			load_quest(player_quests[quest].quest_name)
 
-#loads and add a quest to player quests from quest_resource
+#loads and add a quest and quest instance to player quests from quest_resource
 func add_quest(quest_name:String,resource:QuestResource=current_resource) -> void:
 	var node_data = resource.get_quest_by_name(quest_name)
 	player_quests[node_data.quest_id] = node_data.duplicate(true)
-	load_quest(quest_name)
 	new_quest_added.emit(quest_name)
 	active_quest = quest_name
 	step_updated.emit(get_current_step(quest_name))
+	load_quest(quest_name)
 
+#creates and instance of a quest as child of the questmanager
 func load_quest(quest_name) -> void:
-	var quest = QMQuest.new(quest_name)
+	var quest = QMQuest.new()
 	add_child(quest)
-	
+	var quest_data = get_player_quest(quest_name)
+	quest.name = get_quest_id(quest_name)
+	quest.set_quest(quest_name)
+	#connect all quest signals
+	item_collected.connect(quest._on_item_collected)
+	incrimental_item_collected.connect(quest._on_incremental_item_collected)
+	branch_activated.connect(quest._on_branch_activated)
 func load_quest_resource(quest_res:QuestResource) -> void:
 	current_resource = quest_res
 
@@ -84,15 +106,6 @@ func set_branch_step(quest_name, should_branch:bool=true) -> void:
 	if step.step_type == BRANCH_STEP:
 		get_current_step(quest_name)["branch"] = should_branch
 
-func check_callable_step(quest_id):
-	var step = get_current_step(quest_id,true)
-	if step.step_type == CALLABLE_STEP:
-		call_function(step.callable,step.params["funcparams"])
-		get_current_step(quest_id,true)["complete"] = true
-		player_quests[quest_id].next_id = step["next_id"]
-		next_step.emit(get_current_step(quest_id,true))
-
-#------------------------------
 #Set a specific value for Incremental and Item Steps
 #For example the player could have some of an item
 #already use this to match the players inventory
@@ -119,7 +132,6 @@ func get_quest_list(quest_resource:QuestResource=current_resource, group:String=
 #Add a quest that was created from script/at runtime
 func add_scripted_quest(quest:ScriptQuest):
 	player_quests[quest.quest_data["quest_id"]] = quest.quest_data
-	check_callable_step(quest.quest_data["quest_id"])
 	new_quest_added.emit(quest.quest_data.quest_name)
 	active_quest = quest.quest_data.quest_name
 
@@ -246,6 +258,8 @@ func reset_quest(quest_name:String) -> void:
 				replace_step.branch = false
 		player_quests[id].quest_steps[step] = replace_step
 	quest_reset.emit(quest_name)
+	
+
 #helper function to save player data
 func get_save_quest_data() -> Dictionary:
 	return player_quests
@@ -258,22 +272,7 @@ func wipe_player_data() -> void:
 	player_quests = {}
 
 
-func call_function(autoloadfunction:String,params:Array) -> void:
-	#split function from autoload script name
-	var autofuncsplit = autoloadfunction.split(".")
-	var singleton_name = autofuncsplit[0]
-	var function = autofuncsplit[1]
-	#get only function name without ()
-	var callable = function.split("(")[0]
-	#Autoload name needs to be the same as script or use name of Node instead.
-	assert(Engine.has_singleton(singleton_name)==false, "Singleton %s Not Loaded or invalid" % singleton_name)
-	var auto_load = get_tree().root.get_node(singleton_name)
-	#if array has values pass array otherwise call function normally
-	if params.size()>0:
-		auto_load.call(callable,params)
-	else:
-		auto_load.call(callable)
-		
+
 func testfunc(v:Array=[]):
 	print("Hello QuestManager "+str(v))
 

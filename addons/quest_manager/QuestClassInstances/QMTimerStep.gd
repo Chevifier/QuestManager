@@ -1,4 +1,4 @@
-extends QMQuestStep
+class_name QMTimerStep extends QMQuestStep
 
 var counter := 0.0
 

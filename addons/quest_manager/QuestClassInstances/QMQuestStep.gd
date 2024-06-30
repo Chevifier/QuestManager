@@ -1,18 +1,15 @@
 class_name QMQuestStep extends Node
-var quest_name = ""
-var description = ""
-var quest_id := ""
-var step_complete:=false
-var step_id := ""
-var step = {}
-func _init(step_data:Dictionary) -> void:
-	quest_name = quest_name
-	quest_id = QuestManager.get_quest_id(_quest_name)
-	var step = QuestManager.get_current_step(quest_id,true)
-	description = step.description
-	step_id = step.id
+signal step_complete()
 
-func _ready() -> void:
-	step = QuestManager.get_current_step(quest_id,true)
+var step = {}
+
+func set_step_data(step_data:Dictionary) -> void:
+	step = step_data
+
+func complete_step():
+	step.complete = true
+	step_complete.emit(step)
+	queue_free()
+
 func get_next_step():
-	QuestManager.next(quest_id)
+	QuestManager.next(step.next_id)

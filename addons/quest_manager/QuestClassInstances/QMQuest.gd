@@ -1,32 +1,51 @@
 class_name QMQuest extends Node
 
 var quest = {}
-func _init(_quest_name,step_id) -> void:
-	quest = QuestManager.get_player_quest(_quest_name)
-	set_current_step(step_id)
+func set_quest(quest_data:Dictionary) -> void:
+	quest = quest_data
+	set_current_step(quest.next_id)
 
 func set_current_step(step_id:String):
 	var next_id = quest.next_id
-	var step_data = QuestManager.get_current_step(quest.quest_name)
+	var step_data = quest.quest_steps[quest.next_id]
 	var step_instance = null
 	match step_data.step_type:
 		QuestManager.ACTION_STEP:
-			step_instance = QMQuestStep.new(step_data)
+			step_instance = QMQuestStep.new()
 		QuestManager.INCREMENTAL_STEP:
-			step_instance = QMIncrementalStep.new(step_data)
+			step_instance = QMIncrementalStep.new()
 		QuestManager.ITEMS_STEP:
-			step_instance = QMItemsStep.new(step_data)
+			step_instance = QMItemsStep.new()
 		QuestManager.TIMER_STEP:
-			pass
+			step_instance = QMTimerStep.new()
 		QuestManager.BRANCH_STEP:
-			pass
+			step_instance = QMBranchStep.new()
 		QuestManager.CALLABLE_STEP:
-			pass
+			step_instance = QMCallableStep.new()
 		QuestManager.END:
-			pass
+			step_instance = QMEndStep.new()
 	add_child(step_instance)
-	
+	step_instance.set_step_data(step_data)
 #called by child node with next_id
+
+
+func _on_item_collected(item_name):
+	pass
+	
+func _on_incremental_item_collected(item_name,quantity:int):
+	pass
+
+func _on_branch_activated(is_branching):
+	pass
+
 func set_next_step(next_id):
 	quest.next_id = next_id
 	set_current_step(quest.next_id)
+
+func complete_quest():
+	quest.completed = true
+	QuestManager.quest_completed.emit(quest)
+	queue_free()
+	
+	
+	
