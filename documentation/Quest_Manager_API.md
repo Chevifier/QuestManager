@@ -4,7 +4,7 @@
 
 ### Signals
 
-- `quest_complete(quest:Dictionary)` - Emitted when a quest is complete, returns quest name
+- `quest_completed(quest:Dictionary)` - Emitted when a quest is complete, returns the quest dictionary
 - `quest_failed(quest:Dictionary)` - Emittied when a quest was failed
 - `step_complete(step:Dictionary)` - Emitted when a step is complete returns the step dictionary
 - `next_step(step:Dictionary)` - Emits the new step after the previous step was completed
@@ -194,8 +194,8 @@ Returns all quests that have not been completed or failed
 #### `reset_quest(quest_name:String) -> void`
 Resets the quest `quest_name`
 
-#### `wipe_all_quest_data() -> void`
-Wipes the entire player_quests dictionary usefull for starting a name game for example
+#### `wipe_player_data() -> void`
+Wipes the entire player_quests dictionary useful for starting a name game for example.
 
 #### `testfunc(v:Array) -> void`
 Test function that prints Hello Quest Manager plus passed array
