@@ -1,7 +1,8 @@
 Label
+Button
+Control
 VBoxContainer
 HSeparator
-Button
 ItemList
 ScrollContainer
 Node

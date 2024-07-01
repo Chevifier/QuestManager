@@ -1,5 +1,5 @@
 class_name QMEndStep extends QMQuestStep
 
 
-func complete_quest():
-	pass
+func _ready() -> void:
+	get_parent().complete_quest()

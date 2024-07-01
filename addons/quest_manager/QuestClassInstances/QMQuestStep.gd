@@ -10,6 +10,3 @@ func complete_step():
 	step.complete = true
 	step_complete.emit(step)
 	queue_free()
-
-func get_next_step():
-	QuestManager.next(step.next_id)

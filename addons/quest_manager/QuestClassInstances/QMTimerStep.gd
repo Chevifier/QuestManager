@@ -11,17 +11,17 @@ func _process(delta):
 			step.time -= 1
 			if step.time <= 0:
 				if step.fail_on_timeout:
-					QuestManager.fail_quest(quest_id)
+					QuestManager.fail_quest(get_parent().name)
 				else:
-					#load next step
+					complete_step()
 					pass
 			else:
 				step.time += 1
 				if step.time >= step.total_time:
 					if step.fail_on_timeout:
-						QuestManager.fail_quest(quest_id)
+						QuestManager.fail_quest(get_parent().name)
 					else:
-						#load next step
+						complete_step() 
 						pass
 		counter = 0.0
 	

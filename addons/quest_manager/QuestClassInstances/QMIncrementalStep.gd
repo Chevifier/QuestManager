@@ -3,11 +3,9 @@ class_name QMIncrementalStep extends QMQuestStep
 var collected = 0
 var required = 999
 var item_name = ""
-func _ready() -> void:
-	var step = QuestManager.get_current_step(quest_id,true)
-	item_name = step.item_name
-	required = step.required
-	collected = step.collected
 
-func item_collected(amount:=1):
-	collected += amount
+func item_collected(item_name,amount:=1):
+	if step.item_name == item_name:
+		step.collected += amount
+		if step.collected >= step.collected:
+			complete_step()
