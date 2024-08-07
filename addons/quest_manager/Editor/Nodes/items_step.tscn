@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/items_step.gd" id="1_xb21r"]
 
-[node name="f010bc8c02" type="GraphNode"]
+[node name="227e2f33cd" type="GraphNode"]
 custom_minimum_size = Vector2(200, 350)
 offset_right = 200.0
 offset_bottom = 325.0
@@ -83,13 +83,13 @@ text = "REMOVE"
 
 [node name="meta_data" type="Label" parent="."]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 text = "Meta Data"
 
 [node name="id_lbl" type="LineEdit" parent="."]
 layout_mode = 2
 size_flags_vertical = 6
-text = "f010bc8c02"
+text = "227e2f33cd"
 editable = false
 
 [connection signal="item_selected" from="ItemList/ScrollContainer/list" to="." method="_on_list_item_selected"]

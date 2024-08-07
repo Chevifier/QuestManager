@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Callable_Step.gd" id="1_mxhm0"]
 
-[node name="e556b2f1f1" type="GraphNode"]
+[node name="0c294ffc4e" type="GraphNode"]
 custom_minimum_size = Vector2(150, 100)
 offset_right = 267.0
 offset_bottom = 113.0
@@ -51,14 +51,14 @@ caret_blink_interval = 0.5
 
 [node name="meta_data" type="Label" parent="."]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 text = "params
 "
 
 [node name="id_lbl" type="LineEdit" parent="."]
 layout_mode = 2
 size_flags_vertical = 6
-text = "e556b2f1f1"
+text = "0c294ffc4e"
 editable = false
 
 [connection signal="gui_input" from="callable" to="." method="_on_details_gui_input"]

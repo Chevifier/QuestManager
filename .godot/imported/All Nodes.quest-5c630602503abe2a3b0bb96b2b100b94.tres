@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_eodlq"]
+[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_xwkoi"]
 
 [resource]
-script = ExtResource("1_eodlq")
+script = ExtResource("1_xwkoi")
 quest_data = {
 "dc7cd288b5": {
 "completed": false,
@@ -12,14 +12,7 @@ quest_data = {
 "group": "test group",
 "id": "dc7cd288b5",
 "meta_data": {
-"Int": 42.0,
-"String": "Hello Godot",
-"True": true,
-"Vec2": Vector2(10, 20.5),
-"Vec3": Vector3(1, 2, 3),
-"float": 3.14,
-"funcparams": [],
-"some meta": "test"
+"funcparams": []
 },
 "next_id": "a507b8f9b4",
 "position": Vector2(-80, -100),
@@ -117,12 +110,19 @@ quest_data = {
 "details": "Step 1: Action Step",
 "id": "a507b8f9b4",
 "meta_data": {
-"funcparams": []
+"Int": 42.0,
+"String": "Hello Godot",
+"True": true,
+"Vec2": Vector2(10, 20.5),
+"Vec3": Vector3(1, 2, 3),
+"float": 3.14,
+"funcparams": [],
+"some meta": "test"
 },
 "next_id": "cb6982b58b",
-"position": Vector2(232.11, -5.85112),
+"position": Vector2(280, -60),
 "quest_id": "dc7cd288b5",
-"size": Vector2(150.009, 150.012),
+"size": Vector2(150, 150),
 "step_type": "action_step",
 "type": 1
 },
@@ -161,7 +161,7 @@ quest_data = {
 "funcparams": []
 },
 "next_id": "9b6ac1ac6d",
-"position": Vector2(481.331, -63.464),
+"position": Vector2(480, -60),
 "quest_id": "dc7cd288b5",
 "required": 1.0,
 "size": Vector2(240, 234),
@@ -169,7 +169,7 @@ quest_data = {
 "type": 2
 }
 },
-"size": Vector2(200, 250),
+"size": Vector2(306.649, 381.666),
 "type": 0
 }
 }
@@ -249,7 +249,7 @@ editor_data = {
 "some meta": "test"
 },
 "next_id": "",
-"position": Vector2(-520, 180),
+"position": Vector2(-680, 240),
 "quest_id": "",
 "size": Vector2(361, 322),
 "type": 5
@@ -283,12 +283,19 @@ editor_data = {
 "details": "Step 1: Action Step",
 "id": "a507b8f9b4",
 "meta_data": {
-"funcparams": []
+"Int": 42.0,
+"String": "Hello Godot",
+"True": true,
+"Vec2": Vector2(10, 20.5),
+"Vec3": Vector3(1, 2, 3),
+"float": 3.14,
+"funcparams": [],
+"some meta": "test"
 },
 "next_id": "cb6982b58b",
-"position": Vector2(232.11, -5.85112),
+"position": Vector2(280, -60),
 "quest_id": "dc7cd288b5",
-"size": Vector2(150.009, 150.012),
+"size": Vector2(150, 150),
 "step_type": "action_step",
 "type": 1
 },
@@ -343,7 +350,7 @@ editor_data = {
 "funcparams": []
 },
 "next_id": "9b6ac1ac6d",
-"position": Vector2(481.331, -63.464),
+"position": Vector2(480, -60),
 "quest_id": "dc7cd288b5",
 "required": 1.0,
 "size": Vector2(240, 234),
@@ -406,11 +413,6 @@ editor_data = {
 "to_node": &"42d1e0c7b0",
 "to_port": 1
 }, {
-"from_node": &"de69c1d4fe",
-"from_port": 0,
-"to_node": &"2bd318c64f",
-"to_port": 1
-}, {
 "from_node": &"b11ccff0c1",
 "from_port": 0,
 "to_node": &"dc7cd288b5",
@@ -418,8 +420,13 @@ editor_data = {
 }, {
 "from_node": &"86c0818420",
 "from_port": 0,
-"to_node": &"dc7cd288b5",
-"to_port": 2
+"to_node": &"a507b8f9b4",
+"to_port": 1
+}, {
+"from_node": &"de69c1d4fe",
+"from_port": 0,
+"to_node": &"2bd318c64f",
+"to_port": 1
 }],
 "dc7cd288b5": {
 "completed": false,
@@ -428,14 +435,7 @@ editor_data = {
 "group": "test group",
 "id": "dc7cd288b5",
 "meta_data": {
-"Int": 42.0,
-"String": "Hello Godot",
-"True": true,
-"Vec2": Vector2(10, 20.5),
-"Vec3": Vector3(1, 2, 3),
-"float": 3.14,
-"funcparams": [],
-"some meta": "test"
+"funcparams": []
 },
 "next_id": "a507b8f9b4",
 "position": Vector2(-80, -100),
@@ -533,12 +533,19 @@ editor_data = {
 "details": "Step 1: Action Step",
 "id": "a507b8f9b4",
 "meta_data": {
-"funcparams": []
+"Int": 42.0,
+"String": "Hello Godot",
+"True": true,
+"Vec2": Vector2(10, 20.5),
+"Vec3": Vector3(1, 2, 3),
+"float": 3.14,
+"funcparams": [],
+"some meta": "test"
 },
 "next_id": "cb6982b58b",
-"position": Vector2(232.11, -5.85112),
+"position": Vector2(280, -60),
 "quest_id": "dc7cd288b5",
-"size": Vector2(150.009, 150.012),
+"size": Vector2(150, 150),
 "step_type": "action_step",
 "type": 1
 },
@@ -577,7 +584,7 @@ editor_data = {
 "funcparams": []
 },
 "next_id": "9b6ac1ac6d",
-"position": Vector2(481.331, -63.464),
+"position": Vector2(480, -60),
 "quest_id": "dc7cd288b5",
 "required": 1.0,
 "size": Vector2(240, 234),
@@ -585,7 +592,7 @@ editor_data = {
 "type": 2
 }
 },
-"size": Vector2(200, 250),
+"size": Vector2(306.649, 381.666),
 "type": 0
 },
 "de69c1d4fe": {
@@ -595,7 +602,7 @@ editor_data = {
 "test": 25.0
 },
 "next_id": "",
-"position": Vector2(1020, 200),
+"position": Vector2(960, 260),
 "quest_id": "",
 "size": Vector2(250, 150),
 "type": 5

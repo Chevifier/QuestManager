@@ -70,8 +70,7 @@ func progress_quest_by_name(quest_name,item_name="",quantity=1,collected=true):
 	progress_quest(quest_id,current_step.id,item_name,quantity,collected)
 
 func progress_quest(quest_id:String,step_id:String, item_name="",quantity=1,collected=true):
-	if player_quests.has(quest_id) == false:
-		print(quest_id)
+	if has_quest(quest_id,true) == false:
 		return
 	if player_quests[quest_id].completed == true:
 		return
@@ -105,6 +104,7 @@ func progress_quest(quest_id:String,step_id:String, item_name="",quantity=1,coll
 			complete_step(quest_id,step)
 			
 		CALLABLE_STEP:
+			#call function
 			call_function(step.detail,step.params)
 			complete_step(quest_id,step)
 		BRANCH_STEP:
@@ -113,6 +113,9 @@ func progress_quest(quest_id:String,step_id:String, item_name="",quantity=1,coll
 		END:
 			step_complete.emit(step)
 	var next_step = player_quests[quest_id].quest_steps[step.next_id]
+	if next_step.step_type == CALLABLE_STEP and step.completed:
+		call_function(next_step.details,next_step.params.funcparams)
+		complete_step(quest_id,next_step)
 	if next_step.step_type == END and step.completed:
 		complete_quest(quest_id,true)
 #Updates Timer_Steps
@@ -147,7 +150,6 @@ func _process(delta):
 						fail_quest(player_quests[quest_id].quest_name)
 					else:
 						progress_quest(player_quests[quest_id].quest_id,step.id)
-						
 			step_updated.emit(step)
 
 func get_quest_id(quest_name):
@@ -164,7 +166,7 @@ func get_all_player_quests_names() -> Array:
 	for i in player_quests:
 		quests.append(player_quests[i].quest_name)
 	return quests
-	
+
 func set_branch_step(quest_id,step_id, should_branch:bool=true) -> void:
 	var step = player_quests[quest_id].quest_steps[step_id]
 	if step.step_type == BRANCH_STEP:
@@ -174,7 +176,15 @@ func set_branch_step(quest_id,step_id, should_branch:bool=true) -> void:
 func get_quest_list(quest_resource:QuestResource=current_resource, group:String="") -> Dictionary:
 	assert(quest_resource != null, "Quest Resource not Loaded")
 	return quest_resource.get_quests(group)
-	
+
+func has_quest(quest_name:String,is_id:bool = false)->bool:
+	if is_id:
+		return player_quests.has(quest_name)
+	else:
+		for quest in player_quests:
+			if player_quests[quest].quest_name == quest_name:
+				return true
+		return false
 #Add a quest that was created from script/at runtime
 func add_scripted_quest(quest:ScriptQuest):
 	player_quests[quest.quest_data["quest_id"]] = quest.quest_data
@@ -307,7 +317,7 @@ func wipe_player_data() -> void:
 	player_quests = {}
 
 
-func test_func(v:Array=[]):
+func testfunc(v:Array=[]):
 	print("Hello QuestManager "+str(v))
 
 func call_function(autoloadfunction:String,params:Array) -> void:

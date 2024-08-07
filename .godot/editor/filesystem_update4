@@ -13,3 +13,9 @@ res://addons/quest_manager/extras/Action_Step_Area.gd
 res://addons/quest_manager/Examples/ExampleTwo/UI.gd
 res://addons/quest_manager/Examples/ExampleTwo/NPC.gd
 res://addons/quest_manager/Examples/ExampleTwo/Apple.gd
+res://addons/quest_manager/Editor/Nodes/Timer_Step.tscn
+res://addons/quest_manager/Editor/Nodes/Branch.tscn
+res://addons/quest_manager/Editor/Nodes/Step.tscn
+res://addons/quest_manager/Editor/Nodes/IncrementalStep.tscn
+res://addons/quest_manager/Editor/Nodes/Callable_Step.tscn
+res://addons/quest_manager/Editor/Nodes/items_step.tscn
