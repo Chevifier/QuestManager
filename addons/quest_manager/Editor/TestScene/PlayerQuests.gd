@@ -8,8 +8,9 @@ extends Control
 @onready var incremental_step_ctrls = %incremental_step
 @onready var item_step_btn = %item_step_button
 @onready var controls = %step_controls
-var selected_quest = ""
-
+var selected_quest := ""
+var quest_id := ""
+var current_step_id := ""
 func _ready():
 	set_defaults()
 	QuestManager.new_quest_added.connect(update_quest_list)
@@ -24,11 +25,11 @@ func update_quest_list(quest_name):
 	for quest in QuestManager.get_all_player_quests_names():
 		player_quest_list.add_item(quest)
 
-func on_quest_complete(quest_name,rewards:Dictionary):
+func on_quest_complete(quest):
 	step_details.text = "QUEST COMPLETE"
 	for control in controls.get_children():
 		control.queue_free()
-	print(rewards)
+	print(quest.quest_rewards)
 
 func on_quest_failed(n):
 	step_details.text = "QUEST FAILED"
@@ -36,22 +37,21 @@ func on_quest_failed(n):
 		control.queue_free()
 
 func step_complete(step):
-	#p
 	update_current_step(step)
 	pass
 
-func update_current_step(step):
-	if QuestManager.is_quest_complete(selected_quest):
-		step_details.text = "QUEST COMPLETE"
-		return
-	if QuestManager.is_quest_failed(selected_quest):
-		step_details.text = "QUEST FAILED"
-		return
-	if QuestManager.has_quest(selected_quest)==false:
-		return
-	step_details.text = step.details
+func update_current_step(step:Dictionary):
+	quest_id = step.quest_id
+	current_step_id = step.id
 	for node in controls.get_children():
 		node.queue_free()
+	if QuestManager.is_quest_complete(quest_id,true):
+		step_details.text = "QUEST COMPLETE"
+		return
+	if QuestManager.is_quest_failed(quest_id,true):
+		step_details.text = "QUEST FAILED"
+		return
+	step_details.text = step.details
 
 	match step.step_type:
 		QuestManager.ACTION_STEP:
@@ -85,36 +85,37 @@ func update_current_step(step):
 			controls.add_child(d)
 			d.text = "BRANCH"
 			d.pressed.connect(branch_button_pressed)
-
+	current_step_id = step.id
 func action_button_pressed():
-	QuestManager.set_branch_step(selected_quest,false)
-	QuestManager.progress_quest(selected_quest)
+	QuestManager.set_branch_step(quest_id,current_step_id,false)
+	QuestManager.progress_quest(quest_id,current_step_id)
 
 func branch_button_pressed():
-	QuestManager.set_branch_step(selected_quest,true)
-	QuestManager.progress_quest(selected_quest)
+	QuestManager.set_branch_step(quest_id,current_step_id,true)
+	QuestManager.progress_quest(quest_id,current_step_id)
 
 func add_amount_pressed(item_name,node:SpinBox):
-	QuestManager.progress_quest(selected_quest,item_name,node.value)
+	QuestManager.progress_quest(quest_id,current_step_id,item_name,node.value)
 
-func item_completed(complete,item_name):
-	QuestManager.progress_quest(selected_quest,item_name,1,complete)
-
+func item_completed(collected,item_name):
+	print(collected)
+	print(item_name)
+	QuestManager.progress_quest(quest_id,current_step_id,item_name,1,collected)
+	
 func _on_player_quests_list_item_selected(index):
 	selected_quest = player_quest_list.get_item_text(index)
 	var quest = QuestManager.get_player_quest(selected_quest)
+	quest_id = quest.quest_id
 	player_quest_name_lbl.text = quest.quest_name
 	player_quest_description.text = quest.quest_details
-	update_current_step(QuestManager.get_current_step(selected_quest))
+	update_current_step(QuestManager.get_current_step(quest_id,true))
 
 
 func _on_delete_quest_pressed():
-	if QuestManager.has_quest(selected_quest):
-		#QuestManager.reset_quest(selected_quest)
-		QuestManager.remove_quest(selected_quest)
-		set_defaults()
-		update_quest_list("")
-		%accept_quest.disabled = false
+	QuestManager.remove_quest(selected_quest)
+	set_defaults()
+	update_quest_list("")
+	%accept_quest.disabled = false
 
 func set_defaults():
 	player_quest_name_lbl.text = "No Quest Select"

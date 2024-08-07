@@ -2,12 +2,10 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest.gd" id="1_i7joj"]
 
-[node name="fb37d06549" type="GraphNode"]
+[node name="fa76506ad3" type="GraphNode"]
 custom_minimum_size = Vector2(200, 250)
-offset_left = 12.0
-offset_top = 10.0
-offset_right = 212.0
-offset_bottom = 260.0
+offset_right = 200.0
+offset_bottom = 250.0
 tooltip_text = "The Main Node for Creating a Quest
 Set Quest name and Information about the Quest"
 mouse_filter = 1
@@ -82,17 +80,21 @@ placeholder_text = "Quest Details"
 
 [node name="Group_Tag" type="Label" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Group"
 
 [node name="Quest_Rewards" type="Label" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Quest Rewards"
 
 [node name="Meta_Data" type="Label" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Meta Data"
 
-[node name="id_lbl" type="Label" parent="."]
+[node name="id_lbl" type="LineEdit" parent="."]
 layout_mode = 2
 size_flags_vertical = 6
-text = "fb37d06549"
+text = "fa76506ad3"
+editable = false

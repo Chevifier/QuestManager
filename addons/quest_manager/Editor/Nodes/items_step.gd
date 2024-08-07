@@ -19,7 +19,7 @@ func get_data():
 	node_data["step_type"] = "items_step"
 	node_data["details"]= details.text
 	node_data["item_list"]= item_list
-	node_data["complete"] = false
+	node_data["completed"] = false
 	node_data["meta_data"]= get_meta_data()
 	super.get_data()
 	return node_data
@@ -46,7 +46,7 @@ func _on_add_pressed():
 	list.add_item(item_to_add.text)
 	item_list.append({
 		"name" : item_to_add.text,
-		"complete" : false
+		"completed" : false
 		})
 	item_to_add.clear()
 	print(item_list)

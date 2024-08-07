@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://keestvd6efhf"]
+
+[ext_resource type="Script" path="res://addons/quest_manager/QMStepTracker.gd" id="1_3e4uk"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="QMStepTracker" type="Node" parent="Area2D"]
+script = ExtResource("1_3e4uk")
+item_name = ""
+quantity = 1
+is_branching = false

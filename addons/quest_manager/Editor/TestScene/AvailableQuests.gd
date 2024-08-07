@@ -8,7 +8,6 @@ extends Control
 @onready var quest_step_details = %QuestSteps
 @onready var quest_rewards_details = %Rewards
 
-
 var selected_quest :=""
 func _ready():
 	set_defaults()
@@ -22,7 +21,6 @@ func _ready():
 		setup_available_quests(QuestManager.get_quest_list())
 	else:
 		print("Quest File Not found")
-
 
 func setup_available_quests(quests):
 	Quest_list.clear()
@@ -54,10 +52,8 @@ func _on_quest_list_item_selected(index):
 	if quest_rewards.is_empty():
 		rewards_string = "None"
 	quest_rewards_details.text = rewards_string
-	if QuestManager.has_quest(selected_quest):
-		%accept_quest.disabled = true
-	else:
-		%accept_quest.disabled = false
+	%accept_quest.disabled = false
+
 
 func _on_accept_quest_pressed():
 	if selected_quest == "":

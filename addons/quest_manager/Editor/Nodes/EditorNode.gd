@@ -66,6 +66,7 @@ func get_data():
 	node_data["position"] = position_offset
 	node_data["size"] = size
 	node_data["next_id"] = next_id
+	node_data["quest_id"] = quest_id
 	return node_data
 	
 func set_data(data):

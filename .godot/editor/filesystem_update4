@@ -1,1 +1,4 @@
 res://addons/quest_manager/Editor/EditorWindow.tscn
+res://addons/quest_manager/QuestResource.gd
+res://addons/quest_manager/Editor/Nodes/Step.tscn
+res://addons/quest_manager/ScriptQuest.gd
