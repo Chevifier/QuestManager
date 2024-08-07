@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://dx3k0hwo1vibo"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleOne/Projectile.gd" id="1_qhv4u"]
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_s0dt4"]
+[ext_resource type="Script" path="res://addons/quest_manager/QMStepTracker.gd" id="3_gv4dd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7na8"]
 
@@ -18,5 +19,14 @@ shape = SubResource("CircleShape2D_j7na8")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 2
 texture = SubResource("AtlasTexture_fccpt")
+
+[node name="QMStepTracker" type="Node" parent="."]
+script = ExtResource("3_gv4dd")
+step_type = 1
+quest_id = "1e3cd6e59f"
+step_id = "1118a2488c"
+item_name = ""
+quantity = 1
+is_branching = false
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

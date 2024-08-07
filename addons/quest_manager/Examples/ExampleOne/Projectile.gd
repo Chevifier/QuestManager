@@ -9,7 +9,7 @@ func _physics_process(delta):
 
 func _on_area_entered(area):
 	if area.is_in_group("enemy"):
-		QuestManager.progress_quest(QuestManager.active_quest,"Ships")
 		area.queue_free()
+		$QMStepTracker.update_step()
 	queue_free()
 

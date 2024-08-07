@@ -43,7 +43,6 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed(interact):
 		talk()
-	
 
 func talk():
 	var objects = interact_area.get_overlapping_bodies()
@@ -57,32 +56,22 @@ func talk():
 			dis = d
 		if ob.is_in_group("stove"):
 			if apples >= 10:
-				QuestManager.progress_quest(QuestManager.active_quest)
+				ob.interact()
 				has_pie = true
 	if npc == null:
 		return
 	
-	if npc.family_member == 1 and !QuestManager.has_quest(QuestManager.active_quest): #Mother
+	
+	if has_pie == false:
 		get_parent().get_node("UI").set_text(npc.get_dialogue(0))
-		npc.get_quest()
-
-	elif npc.family_member == 1:
-		if has_pie == false:
-			get_parent().get_node("UI").set_text("Ill be waiting for my slice")
-		else:
-			QuestManager.progress_quest(QuestManager.active_quest,"Mother")
-			get_parent().get_node("UI").set_text("Tasty, Youve outdone yourself")
 	else:
-		if has_pie == false:
-			get_parent().get_node("UI").set_text(npc.get_dialogue(0))
-		else:
-			if npc.family_member == 0:
-				QuestManager.progress_quest(QuestManager.active_quest,"Father")
-			elif npc.family_member ==2:
-				QuestManager.progress_quest(QuestManager.active_quest,"Sister")
-			elif  npc.family_member == 1:
-				QuestManager.progress_quest(QuestManager.active_quest,"Mother")
-			get_parent().get_node("UI").set_text(npc.get_dialogue(1))
+		if npc.family_member == 0:
+			QuestManager.progress_quest_by_name(QuestManager.active_quest,"Father")
+		elif npc.family_member == 2:
+			QuestManager.progress_quest_by_name(QuestManager.active_quest,"Sister")
+		elif  npc.family_member == 1:
+			QuestManager.progress_quest_by_name(QuestManager.active_quest,"Mother")
+		get_parent().get_node("UI").set_text(npc.get_dialogue(1))
 
 
 

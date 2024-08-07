@@ -10,6 +10,7 @@ func _ready():
 			$Father.show()
 		1:
 			$Mother.show()
+			get_quest()
 		2:
 			$Sister.show()
 	

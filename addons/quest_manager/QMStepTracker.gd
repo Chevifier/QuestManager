@@ -26,19 +26,13 @@ var item_name = ""
 var quantity = 1
 var is_branching = false
 
-func _ready() -> void:
-	var area = get_parent()
-	if area is Area2D or area is Area3D:
-		area.body_entered.connect(_update_step)
-		area.area_entered.connect(_update_step)
 
-func _update_step():
+func update_step():
 	if step_type == Step_Type.BRANCH:
 		QuestManager.set_branch_step(quest_id,is_branching)
 	QuestManager.progress_quest(quest_id,step_id,item_name,quantity)
 
 func _get_property_list() -> Array:
-	print("Step Type chaged: "+str(step_type))
 	var quest_id_usage = PROPERTY_USAGE_NO_EDITOR
 	var item_name_usage = PROPERTY_USAGE_NO_EDITOR
 	var quantity_usage = PROPERTY_USAGE_NO_EDITOR

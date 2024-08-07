@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_bwiq2"]
+[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_36uh3"]
 
 [resource]
-script = ExtResource("1_bwiq2")
+script = ExtResource("1_36uh3")
 quest_data = {
 "1e3cd6e59f": {
 "completed": false,
@@ -17,7 +17,7 @@ quest_data = {
 },
 "next_id": "1118a2488c",
 "position": Vector2(380, -440),
-"quest_details": "",
+"quest_details": "Ready",
 "quest_id": "1e3cd6e59f",
 "quest_name": "ShootEmUp",
 "quest_rewards": {
@@ -196,7 +196,7 @@ with everyone",
 "next_id": "",
 "position": Vector2(1683.8, -49.0974),
 "quest_id": "e6040ba290",
-"size": Vector2(118, 84.9999),
+"size": Vector2(118, 85),
 "step_type": "end",
 "type": 6
 },
@@ -222,7 +222,7 @@ with everyone",
 "funcparams": []
 },
 "next_id": "086deb180a",
-"position": Vector2(1219.97, -171.62),
+"position": Vector2(1220, -180),
 "quest_id": "e6040ba290",
 "size": Vector2(150.009, 150.012),
 "step_type": "action_step",
@@ -312,7 +312,7 @@ editor_data = {
 "next_id": "",
 "position": Vector2(1683.8, -49.0974),
 "quest_id": "e6040ba290",
-"size": Vector2(118, 84.9999),
+"size": Vector2(118, 85),
 "step_type": "end",
 "type": 6
 },
@@ -328,7 +328,7 @@ editor_data = {
 },
 "next_id": "1118a2488c",
 "position": Vector2(380, -440),
-"quest_details": "",
+"quest_details": "Ready",
 "quest_id": "1e3cd6e59f",
 "quest_name": "ShootEmUp",
 "quest_rewards": {
@@ -471,7 +471,7 @@ editor_data = {
 "funcparams": []
 },
 "next_id": "086deb180a",
-"position": Vector2(1219.97, -171.62),
+"position": Vector2(1220, -180),
 "quest_id": "e6040ba290",
 "size": Vector2(150.009, 150.012),
 "step_type": "action_step",
@@ -684,7 +684,7 @@ with everyone",
 "next_id": "",
 "position": Vector2(1683.8, -49.0974),
 "quest_id": "e6040ba290",
-"size": Vector2(118, 84.9999),
+"size": Vector2(118, 85),
 "step_type": "end",
 "type": 6
 },
@@ -710,7 +710,7 @@ with everyone",
 "funcparams": []
 },
 "next_id": "086deb180a",
-"position": Vector2(1219.97, -171.62),
+"position": Vector2(1220, -180),
 "quest_id": "e6040ba290",
 "size": Vector2(150.009, 150.012),
 "step_type": "action_step",

@@ -41,7 +41,9 @@ func add_quest(quest_name:String,resource:QuestResource=current_resource) -> voi
 	player_quests[node_data.quest_id] = node_data.duplicate(true)
 	new_quest_added.emit(quest_name)
 	active_quest = quest_name
-	step_updated.emit(get_current_step(quest_name))
+	var quest_id = get_quest_id(quest_name)
+	var step = get_current_step(quest_id,true)
+	step_updated.emit(step)
 
 func load_quest_resource(quest_res:QuestResource) -> void:
 	current_resource = quest_res
@@ -61,8 +63,20 @@ func get_player_quest(quest_name:String,is_id:bool=false) -> Dictionary:
 #all the current quests the player has
 func get_all_player_quests() -> Dictionary:
 	return player_quests
+	
+func progress_quest_by_name(quest_name,item_name="",quantity=1,collected=true):
+	var quest_id = get_quest_id(quest_name)
+	var current_step = get_current_step(quest_id,true)
+	progress_quest(quest_id,current_step.id,item_name,quantity,collected)
 
 func progress_quest(quest_id:String,step_id:String, item_name="",quantity=1,collected=true):
+	if player_quests.has(quest_id) == false:
+		print(quest_id)
+		return
+	if player_quests[quest_id].completed == true:
+		return
+	if player_quests[quest_id].quest_steps.has(step_id) != true:
+		return
 	var step = player_quests[quest_id].quest_steps[step_id]
 	match step.step_type:
 		ACTION_STEP:
@@ -135,8 +149,6 @@ func _process(delta):
 						progress_quest(player_quests[quest_id].quest_id,step.id)
 						
 			step_updated.emit(step)
-			print("step emited")
-		
 
 func get_quest_id(quest_name):
 	var id = null
@@ -251,9 +263,10 @@ func set_meta_data(quest_name:String,meta_data:String, value:Variant) -> void:
 	player_quests[id].metadata[meta_data] = value
 
 #Fails a quest
-func fail_quest(quest_id:String) -> void:
-	player_quests[quest_id].failed = true
-	quest_failed.emit(player_quests[quest_id])
+func fail_quest(quest_name:String,is_id=false) -> void:
+	var quest = get_player_quest(quest_name,is_id)
+	quest.failed = true
+	quest_failed.emit(quest)
 	
 #Reset Quest Values
 func reset_quest(quest_name:String) -> void:

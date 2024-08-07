@@ -12,7 +12,6 @@ func _ready():
 	QuestManager.step_complete.connect(update_ui)
 	QuestManager.next_step.connect(update_ui)
 	QuestManager.quest_completed.connect(quest_complete)
-	
 func new_quest(n):
 	update_ui(QuestManager.get_current_step(n))
 	
@@ -43,10 +42,11 @@ func update_ui(step):
 				i.button_pressed = item.complete
 				i.show()
 
-func quest_complete(n,rewards):
+func quest_complete(quest):
 	for c in %items.get_children():
 		c.free()
 	%discription.text = "QUEST COMPLETE"
+	
 func process_input():
 	if Input.is_action_just_pressed("ui_accept")and exitpressed == false:
 		exitpressed = true

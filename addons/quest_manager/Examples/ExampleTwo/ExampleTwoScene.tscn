@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d32kwvg5rw8em"]
+[gd_scene load_steps=17 format=3 uid="uid://d32kwvg5rw8em"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/ExampleTwo.gd" id="1_q7www"]
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_1wes3"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleTwo/player.tscn" id="5_ryyt7"]
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/UI.gd" id="6_ydyli"]
 [ext_resource type="PackedScene" path="res://addons/quest_manager/Examples/ExampleTwo/apple_spawner.tscn" id="7_5xqfh"]
-[ext_resource type="PackedScene" path="res://addons/quest_manager/extras/action_step_area.tscn" id="8_dst23"]
+[ext_resource type="PackedScene" uid="uid://4mxj5ftcj1fx" path="res://addons/quest_manager/extras/action_step_area.tscn" id="8_dst23"]
+[ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/Stove.gd" id="9_hmw7j"]
+[ext_resource type="Script" path="res://addons/quest_manager/QMStepTracker.gd" id="9_hq4aj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jx4ok"]
 texture = ExtResource("2_1wes3")
@@ -300,6 +302,7 @@ sources/1 = SubResource("TileSetAtlasSource_jx4ok")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6et00"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b82o7"]
+size = Vector2(40, 33)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t60a6"]
 atlas = ExtResource("2_1wes3")
@@ -449,16 +452,24 @@ position = Vector2(2011, -9)
 [node name="Apple_Spawner6" parent="." instance=ExtResource("7_5xqfh")]
 position = Vector2(2143, -7)
 
-[node name="Action_Step_Area" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_dst23")]
+[node name="Action_Step_Area" parent="." instance=ExtResource("8_dst23")]
 position = Vector2(1871, 221)
-quest_name = "Meal for the Family"
-target = NodePath("../Player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Action_Step_Area"]
+position = Vector2(2, -11)
 shape = SubResource("RectangleShape2D_b82o7")
+
+[node name="QMStepTracker" type="Node" parent="Action_Step_Area"]
+script = ExtResource("9_hq4aj")
+quest_id = "e6040ba290"
+step_id = "27aaf4c493"
+item_name = ""
+quantity = 1
+is_branching = false
 
 [node name="Stove" type="StaticBody2D" parent="." groups=["stove"]]
 position = Vector2(208, -14)
+script = ExtResource("9_hmw7j")
 
 [node name="Sprite2D" type="Sprite2D" parent="Stove"]
 texture_filter = 1
@@ -467,6 +478,14 @@ texture = SubResource("AtlasTexture_t60a6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stove"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_1yxfq")
+
+[node name="QMStepTracker" type="Node" parent="Stove"]
+script = ExtResource("9_hq4aj")
+quest_id = "e6040ba290"
+step_id = "8871bddadd"
+item_name = ""
+quantity = 1
+is_branching = false
 
 [connection signal="body_entered" from="House Enter" to="." method="_on_house_enter_body_entered"]
 [connection signal="body_entered" from="House Exit" to="." method="_on_house_exit_body_entered"]

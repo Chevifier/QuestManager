@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c33jsppqupobi"]
+[gd_scene load_steps=6 format=3 uid="uid://c33jsppqupobi"]
 
 [ext_resource type="Script" path="res://addons/quest_manager/Examples/ExampleTwo/Apple.gd" id="1_xin7v"]
 [ext_resource type="Texture2D" uid="uid://ux6u0ocdyfmb" path="res://addons/quest_manager/assets/SpriteSheet.png" id="2_arn76"]
+[ext_resource type="Script" path="res://addons/quest_manager/QMStepTracker.gd" id="3_84w1a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3byu"]
 atlas = ExtResource("2_arn76")
@@ -17,5 +18,14 @@ texture = SubResource("AtlasTexture_p3byu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xkq5d")
+
+[node name="QMStepTracker" type="Node" parent="."]
+script = ExtResource("3_84w1a")
+step_type = 1
+quest_id = "e6040ba290"
+step_id = "ef2e76154d"
+item_name = ""
+quantity = 1
+is_branching = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
