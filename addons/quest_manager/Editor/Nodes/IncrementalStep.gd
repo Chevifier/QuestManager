@@ -21,7 +21,7 @@ func get_data():
 	node_data["item_name"] = item_name.text
 	node_data["required"] = quantity.value
 	node_data["collected"] = 0
-	node_data["complete"] = false
+	node_data["completed"] = false
 	node_data["meta_data"] = get_meta_data()
 	super.get_data()
 	return node_data

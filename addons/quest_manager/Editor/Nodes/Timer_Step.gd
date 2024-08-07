@@ -21,7 +21,7 @@ func get_data():
 	node_data["time_minutes"]= minutes_node.value
 	node_data["time_seconds"]= seconds_node.value
 	node_data["meta_data"]= get_meta_data()
-	node_data["complete"] = false
+	node_data["completed"] = false
 	
 	super.get_data()
 	return node_data

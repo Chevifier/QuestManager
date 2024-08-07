@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_o4ox5"]
+[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_grver"]
 
 [resource]
-script = ExtResource("1_o4ox5")
+script = ExtResource("1_grver")
 quest_data = {
 "dc7cd288b5": {
 "completed": false,
@@ -22,7 +22,7 @@ quest_data = {
 "some meta": "test"
 },
 "next_id": "a507b8f9b4",
-"position": Vector2(-41.4329, -99.3704),
+"position": Vector2(-80, -100),
 "quest_details": "This is a Test Quest",
 "quest_id": "dc7cd288b5",
 "quest_name": "Test",
@@ -47,14 +47,14 @@ quest_data = {
 },
 "position": Vector2(1300, -20),
 "quest_id": "dc7cd288b5",
-"size": Vector2(267, 113),
+"size": Vector2(266.999, 113),
 "step_type": "callable_step",
 "type": 10
 },
 "42d1e0c7b0": {
 "branch": false,
 "branch_step_id": "b6ac038dc4",
-"complete": false,
+"completed": false,
 "details": "Step 5 Branch Step",
 "id": "42d1e0c7b0",
 "meta_data": {
@@ -64,12 +64,12 @@ quest_data = {
 "next_id": "b6e45acb32",
 "position": Vector2(2108.51, -123.6),
 "quest_id": "dc7cd288b5",
-"size": Vector2(197.002, 250),
+"size": Vector2(197.001, 250),
 "step_type": "branch_step",
 "type": 9
 },
 "6eedff1ef3": {
-"complete": false,
+"completed": false,
 "details": "Step 4: Timer Step",
 "fail_on_timeout": true,
 "id": "6eedff1ef3",
@@ -80,7 +80,7 @@ quest_data = {
 "next_id": "42d1e0c7b0",
 "position": Vector2(1734.96, -96.9965),
 "quest_id": "dc7cd288b5",
-"size": Vector2(190, 281),
+"size": Vector2(190.001, 282),
 "step_type": "timer_step",
 "time": 10.0,
 "time_minutes": 0.0,
@@ -89,7 +89,7 @@ quest_data = {
 "type": 7
 },
 "9b6ac1ac6d": {
-"complete": false,
+"completed": false,
 "details": "Step 3: Items Step",
 "id": "9b6ac1ac6d",
 "item_list": [{
@@ -108,12 +108,12 @@ quest_data = {
 "next_id": "2bd318c64f",
 "position": Vector2(843.801, -207.475),
 "quest_id": "dc7cd288b5",
-"size": Vector2(200, 423),
+"size": Vector2(200, 426),
 "step_type": "items_step",
 "type": 3
 },
 "a507b8f9b4": {
-"complete": false,
+"completed": false,
 "details": "Step 1: Action Step",
 "id": "a507b8f9b4",
 "meta_data": {
@@ -127,7 +127,7 @@ quest_data = {
 "type": 1
 },
 "b6ac038dc4": {
-"complete": false,
+"completed": false,
 "details": "Alt Step 6b",
 "id": "b6ac038dc4",
 "meta_data": {
@@ -145,13 +145,13 @@ quest_data = {
 "id": "b6e45acb32",
 "next_id": "",
 "position": Vector2(2680, -40),
-"size": Vector2(116, 85.0002),
+"size": Vector2(116.001, 85.0002),
 "step_type": "end",
 "type": 6
 },
 "cb6982b58b": {
 "collected": 0,
-"complete": false,
+"completed": false,
 "details": "Step 2: Incremental Step
 ",
 "id": "cb6982b58b",
@@ -163,7 +163,7 @@ quest_data = {
 "position": Vector2(481.331, -63.464),
 "quest_id": "dc7cd288b5",
 "required": 1.0,
-"size": Vector2(240, 231),
+"size": Vector2(240, 234),
 "step_type": "incremental_step",
 "type": 2
 }
@@ -193,14 +193,14 @@ editor_data = {
 },
 "position": Vector2(1300, -20),
 "quest_id": "dc7cd288b5",
-"size": Vector2(267, 113),
+"size": Vector2(266.999, 113),
 "step_type": "callable_step",
 "type": 10
 },
 "42d1e0c7b0": {
 "branch": false,
 "branch_step_id": "b6ac038dc4",
-"complete": false,
+"completed": false,
 "details": "Step 5 Branch Step",
 "id": "42d1e0c7b0",
 "meta_data": {
@@ -210,12 +210,12 @@ editor_data = {
 "next_id": "b6e45acb32",
 "position": Vector2(2108.51, -123.6),
 "quest_id": "dc7cd288b5",
-"size": Vector2(197.002, 250),
+"size": Vector2(197.001, 250),
 "step_type": "branch_step",
 "type": 9
 },
 "6eedff1ef3": {
-"complete": false,
+"completed": false,
 "details": "Step 4: Timer Step",
 "fail_on_timeout": true,
 "id": "6eedff1ef3",
@@ -226,7 +226,7 @@ editor_data = {
 "next_id": "42d1e0c7b0",
 "position": Vector2(1734.96, -96.9965),
 "quest_id": "dc7cd288b5",
-"size": Vector2(190, 281),
+"size": Vector2(190.001, 282),
 "step_type": "timer_step",
 "time": 10.0,
 "time_minutes": 0.0,
@@ -248,11 +248,11 @@ editor_data = {
 },
 "next_id": "",
 "position": Vector2(-520, 180),
-"size": Vector2(361, 308),
+"size": Vector2(361, 322),
 "type": 5
 },
 "9b6ac1ac6d": {
-"complete": false,
+"completed": false,
 "details": "Step 3: Items Step",
 "id": "9b6ac1ac6d",
 "item_list": [{
@@ -271,12 +271,12 @@ editor_data = {
 "next_id": "2bd318c64f",
 "position": Vector2(843.801, -207.475),
 "quest_id": "dc7cd288b5",
-"size": Vector2(200, 423),
+"size": Vector2(200, 426),
 "step_type": "items_step",
 "type": 3
 },
 "a507b8f9b4": {
-"complete": false,
+"completed": false,
 "details": "Step 1: Action Step",
 "id": "a507b8f9b4",
 "meta_data": {
@@ -292,7 +292,7 @@ editor_data = {
 "b11ccff0c1": {
 "id": "b11ccff0c1",
 "next_id": "",
-"position": Vector2(-520, -80),
+"position": Vector2(-680, -80),
 "rewards": {
 "Cool Helm": "cool_helm_id",
 "coins": 20.0,
@@ -301,11 +301,11 @@ editor_data = {
 "testfloat": 0.005,
 "vec3": Vector3(3, 20, 1)
 },
-"size": Vector2(361, 258),
+"size": Vector2(361, 288),
 "type": 8
 },
 "b6ac038dc4": {
-"complete": false,
+"completed": false,
 "details": "Alt Step 6b",
 "id": "b6ac038dc4",
 "meta_data": {
@@ -323,13 +323,13 @@ editor_data = {
 "id": "b6e45acb32",
 "next_id": "",
 "position": Vector2(2680, -40),
-"size": Vector2(116, 85.0002),
+"size": Vector2(116.001, 85.0002),
 "step_type": "end",
 "type": 6
 },
 "cb6982b58b": {
 "collected": 0,
-"complete": false,
+"completed": false,
 "details": "Step 2: Incremental Step
 ",
 "id": "cb6982b58b",
@@ -341,7 +341,7 @@ editor_data = {
 "position": Vector2(481.331, -63.464),
 "quest_id": "dc7cd288b5",
 "required": 1.0,
-"size": Vector2(240, 231),
+"size": Vector2(240, 234),
 "step_type": "incremental_step",
 "type": 2
 },
@@ -350,11 +350,6 @@ editor_data = {
 "from_port": 0,
 "to_node": &"dc7cd288b5",
 "to_port": 0
-}, {
-"from_node": &"86c0818420",
-"from_port": 0,
-"to_node": &"dc7cd288b5",
-"to_port": 2
 }, {
 "from_node": &"dc7cd288b5",
 "from_port": 0,
@@ -415,6 +410,11 @@ editor_data = {
 "from_port": 0,
 "to_node": &"dc7cd288b5",
 "to_port": 1
+}, {
+"from_node": &"86c0818420",
+"from_port": 0,
+"to_node": &"dc7cd288b5",
+"to_port": 2
 }],
 "dc7cd288b5": {
 "completed": false,
@@ -433,7 +433,7 @@ editor_data = {
 "some meta": "test"
 },
 "next_id": "a507b8f9b4",
-"position": Vector2(-41.4329, -99.3704),
+"position": Vector2(-80, -100),
 "quest_details": "This is a Test Quest",
 "quest_id": "dc7cd288b5",
 "quest_name": "Test",
@@ -458,14 +458,14 @@ editor_data = {
 },
 "position": Vector2(1300, -20),
 "quest_id": "dc7cd288b5",
-"size": Vector2(267, 113),
+"size": Vector2(266.999, 113),
 "step_type": "callable_step",
 "type": 10
 },
 "42d1e0c7b0": {
 "branch": false,
 "branch_step_id": "b6ac038dc4",
-"complete": false,
+"completed": false,
 "details": "Step 5 Branch Step",
 "id": "42d1e0c7b0",
 "meta_data": {
@@ -475,12 +475,12 @@ editor_data = {
 "next_id": "b6e45acb32",
 "position": Vector2(2108.51, -123.6),
 "quest_id": "dc7cd288b5",
-"size": Vector2(197.002, 250),
+"size": Vector2(197.001, 250),
 "step_type": "branch_step",
 "type": 9
 },
 "6eedff1ef3": {
-"complete": false,
+"completed": false,
 "details": "Step 4: Timer Step",
 "fail_on_timeout": true,
 "id": "6eedff1ef3",
@@ -491,7 +491,7 @@ editor_data = {
 "next_id": "42d1e0c7b0",
 "position": Vector2(1734.96, -96.9965),
 "quest_id": "dc7cd288b5",
-"size": Vector2(190, 281),
+"size": Vector2(190.001, 282),
 "step_type": "timer_step",
 "time": 10.0,
 "time_minutes": 0.0,
@@ -500,7 +500,7 @@ editor_data = {
 "type": 7
 },
 "9b6ac1ac6d": {
-"complete": false,
+"completed": false,
 "details": "Step 3: Items Step",
 "id": "9b6ac1ac6d",
 "item_list": [{
@@ -519,12 +519,12 @@ editor_data = {
 "next_id": "2bd318c64f",
 "position": Vector2(843.801, -207.475),
 "quest_id": "dc7cd288b5",
-"size": Vector2(200, 423),
+"size": Vector2(200, 426),
 "step_type": "items_step",
 "type": 3
 },
 "a507b8f9b4": {
-"complete": false,
+"completed": false,
 "details": "Step 1: Action Step",
 "id": "a507b8f9b4",
 "meta_data": {
@@ -538,7 +538,7 @@ editor_data = {
 "type": 1
 },
 "b6ac038dc4": {
-"complete": false,
+"completed": false,
 "details": "Alt Step 6b",
 "id": "b6ac038dc4",
 "meta_data": {
@@ -556,13 +556,13 @@ editor_data = {
 "id": "b6e45acb32",
 "next_id": "",
 "position": Vector2(2680, -40),
-"size": Vector2(116, 85.0002),
+"size": Vector2(116.001, 85.0002),
 "step_type": "end",
 "type": 6
 },
 "cb6982b58b": {
 "collected": 0,
-"complete": false,
+"completed": false,
 "details": "Step 2: Incremental Step
 ",
 "id": "cb6982b58b",
@@ -574,7 +574,7 @@ editor_data = {
 "position": Vector2(481.331, -63.464),
 "quest_id": "dc7cd288b5",
 "required": 1.0,
-"size": Vector2(240, 231),
+"size": Vector2(240, 234),
 "step_type": "incremental_step",
 "type": 2
 }
@@ -601,7 +601,7 @@ editor_data = {
 },
 "next_id": "",
 "position": Vector2(1737.15, 259.057),
-"size": Vector2(250, 150),
+"size": Vector2(250.001, 150),
 "type": 5
 }
 }

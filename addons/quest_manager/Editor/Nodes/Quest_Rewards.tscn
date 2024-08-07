@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest_Rewards.gd" id="1_y2wej"]
 
-[node name="c4a549e8af" type="GraphNode"]
+[node name="84e7a4369c" type="GraphNode"]
 custom_minimum_size = Vector2(250, 150)
 offset_right = 247.0
 offset_bottom = 147.0
@@ -310,7 +310,8 @@ allow_lesser = true
 alignment = 1
 update_on_text_changed = true
 
-[node name="id_lbl" type="Label" parent="."]
+[node name="id_lbl" type="LineEdit" parent="."]
 layout_mode = 2
 size_flags_vertical = 6
-text = "c4a549e8af"
+text = "84e7a4369c"
+editable = false

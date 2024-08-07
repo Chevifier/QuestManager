@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Step.gd" id="1_sv62o"]
 
-[node name="1b055bb6a0" type="GraphNode"]
+[node name="7956764615" type="GraphNode"]
 custom_minimum_size = Vector2(150, 150)
 offset_right = 150.0
 offset_bottom = 150.0
@@ -51,11 +51,13 @@ caret_blink_interval = 0.5
 
 [node name="meta_data" type="Label" parent="."]
 layout_mode = 2
+size_flags_vertical = 6
 text = "Meta Data"
 
-[node name="id_lbl" type="Label" parent="."]
+[node name="id_lbl" type="LineEdit" parent="."]
 layout_mode = 2
-size_flags_vertical = 3
-text = "1b055bb6a0"
+size_flags_vertical = 6
+text = "7956764615"
+editable = false
 
 [connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]

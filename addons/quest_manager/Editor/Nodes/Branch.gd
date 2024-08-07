@@ -22,7 +22,7 @@ func get_data():
 	node_data["step_type"]= "branch_step"
 	node_data["details"]= details.text
 	node_data["branch"]= false
-	node_data["complete"]= false
+	node_data["completed"]= false
 	node_data["branch_step_id"]=branch_step_id # the step to jump if branching
 	node_data["meta_data"] = get_meta_data()
 	super.get_data()

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_q6c2a"]
+[ext_resource type="Script" path="res://addons/quest_manager/QuestResource.gd" id="1_51oxr"]
 
 [resource]
-script = ExtResource("1_q6c2a")
+script = ExtResource("1_51oxr")
 quest_data = {
 "1e3cd6e59f": {
 "completed": false,
@@ -26,7 +26,7 @@ quest_data = {
 "quest_steps": {
 "1118a2488c": {
 "collected": 0,
-"complete": false,
+"completed": false,
 "details": "Destroy 10 ships",
 "id": "1118a2488c",
 "item_name": "Ships",
@@ -37,7 +37,7 @@ quest_data = {
 "position": Vector2(619.791, -396.681),
 "quest_id": "1e3cd6e59f",
 "required": 10.0,
-"size": Vector2(240, 231),
+"size": Vector2(240, 234),
 "step_type": "incremental_step",
 "type": 2
 },
@@ -45,13 +45,14 @@ quest_data = {
 "details": "Complete",
 "id": "a5e44c9e14",
 "next_id": "",
-"position": Vector2(1260, -420),
+"position": Vector2(1280, -440),
+"quest_id": "1e3cd6e59f",
 "size": Vector2(115, 85),
 "step_type": "end",
 "type": 6
 },
 "e95c4966d1": {
-"complete": false,
+"completed": false,
 "details": "Survive 5 seconds",
 "fail_on_timeout": false,
 "id": "e95c4966d1",
@@ -62,7 +63,7 @@ quest_data = {
 "next_id": "a5e44c9e14",
 "position": Vector2(960, -500),
 "quest_id": "1e3cd6e59f",
-"size": Vector2(231, 281),
+"size": Vector2(231, 282),
 "step_type": "timer_step",
 "time": 5.0,
 "time_minutes": 0.0,
@@ -91,28 +92,28 @@ quest_data = {
 "quest_rewards": {},
 "quest_steps": {
 "034f84f308": {
-"complete": false,
+"completed": false,
 "details": "DId Nothing",
 "id": "034f84f308",
 "meta_data": {
 "funcparams": []
 },
 "next_id": "31625ed365",
-"position": Vector2(960, 400),
+"position": Vector2(940, 380),
 "quest_id": "d64dafe941",
 "size": Vector2(150, 150),
 "step_type": "action_step",
 "type": 1
 },
 "288156f6ba": {
-"complete": false,
+"completed": false,
 "details": "DId Something",
 "id": "288156f6ba",
 "meta_data": {
 "funcparams": []
 },
 "next_id": "31625ed365",
-"position": Vector2(960, 240),
+"position": Vector2(940, 200),
 "quest_id": "d64dafe941",
 "size": Vector2(150, 150),
 "step_type": "action_step",
@@ -122,7 +123,8 @@ quest_data = {
 "details": "Complete",
 "id": "31625ed365",
 "next_id": "",
-"position": Vector2(1280, 340),
+"position": Vector2(1240, 240),
+"quest_id": "d64dafe941",
 "size": Vector2(117, 80),
 "step_type": "end",
 "type": 6
@@ -130,7 +132,7 @@ quest_data = {
 "36004a44db": {
 "branch": false,
 "branch_step_id": "034f84f308",
-"complete": false,
+"completed": false,
 "details": "Do something or Nothing",
 "id": "36004a44db",
 "meta_data": {
@@ -165,7 +167,7 @@ with everyone",
 "quest_rewards": {},
 "quest_steps": {
 "086deb180a": {
-"complete": false,
+"completed": false,
 "details": "Share a slice with everyone",
 "id": "086deb180a",
 "item_list": [{
@@ -184,7 +186,7 @@ with everyone",
 "next_id": "1b6192889b",
 "position": Vector2(1420, -200),
 "quest_id": "e6040ba290",
-"size": Vector2(200, 423),
+"size": Vector2(200, 426),
 "step_type": "items_step",
 "type": 3
 },
@@ -193,12 +195,13 @@ with everyone",
 "id": "1b6192889b",
 "next_id": "",
 "position": Vector2(1683.8, -49.0974),
-"size": Vector2(118, 84.9998),
+"quest_id": "e6040ba290",
+"size": Vector2(118, 84.9999),
 "step_type": "end",
 "type": 6
 },
 "27aaf4c493": {
-"complete": false,
+"completed": false,
 "details": "Go Outside",
 "id": "27aaf4c493",
 "meta_data": {
@@ -212,7 +215,7 @@ with everyone",
 "type": 1
 },
 "8871bddadd": {
-"complete": false,
+"completed": false,
 "details": "Make a pie in the kitchen",
 "id": "8871bddadd",
 "meta_data": {
@@ -227,7 +230,7 @@ with everyone",
 },
 "ef2e76154d": {
 "collected": 0,
-"complete": false,
+"completed": false,
 "details": "Pick up 10 apples",
 "id": "ef2e76154d",
 "item_name": "Apple",
@@ -238,7 +241,7 @@ with everyone",
 "position": Vector2(907.336, -140.62),
 "quest_id": "e6040ba290",
 "required": 10.0,
-"size": Vector2(240, 231),
+"size": Vector2(240, 234),
 "step_type": "incremental_step",
 "type": 2
 }
@@ -249,21 +252,21 @@ with everyone",
 }
 editor_data = {
 "034f84f308": {
-"complete": false,
+"completed": false,
 "details": "DId Nothing",
 "id": "034f84f308",
 "meta_data": {
 "funcparams": []
 },
 "next_id": "31625ed365",
-"position": Vector2(960, 400),
+"position": Vector2(940, 380),
 "quest_id": "d64dafe941",
 "size": Vector2(150, 150),
 "step_type": "action_step",
 "type": 1
 },
 "086deb180a": {
-"complete": false,
+"completed": false,
 "details": "Share a slice with everyone",
 "id": "086deb180a",
 "item_list": [{
@@ -282,13 +285,13 @@ editor_data = {
 "next_id": "1b6192889b",
 "position": Vector2(1420, -200),
 "quest_id": "e6040ba290",
-"size": Vector2(200, 423),
+"size": Vector2(200, 426),
 "step_type": "items_step",
 "type": 3
 },
 "1118a2488c": {
 "collected": 0,
-"complete": false,
+"completed": false,
 "details": "Destroy 10 ships",
 "id": "1118a2488c",
 "item_name": "Ships",
@@ -299,7 +302,7 @@ editor_data = {
 "position": Vector2(619.791, -396.681),
 "quest_id": "1e3cd6e59f",
 "required": 10.0,
-"size": Vector2(240, 231),
+"size": Vector2(240, 234),
 "step_type": "incremental_step",
 "type": 2
 },
@@ -308,7 +311,8 @@ editor_data = {
 "id": "1b6192889b",
 "next_id": "",
 "position": Vector2(1683.8, -49.0974),
-"size": Vector2(118, 84.9998),
+"quest_id": "e6040ba290",
+"size": Vector2(118, 84.9999),
 "step_type": "end",
 "type": 6
 },
@@ -333,7 +337,7 @@ editor_data = {
 "quest_steps": {
 "1118a2488c": {
 "collected": 0,
-"complete": false,
+"completed": false,
 "details": "Destroy 10 ships",
 "id": "1118a2488c",
 "item_name": "Ships",
@@ -344,7 +348,7 @@ editor_data = {
 "position": Vector2(619.791, -396.681),
 "quest_id": "1e3cd6e59f",
 "required": 10.0,
-"size": Vector2(240, 231),
+"size": Vector2(240, 234),
 "step_type": "incremental_step",
 "type": 2
 },
@@ -352,13 +356,14 @@ editor_data = {
 "details": "Complete",
 "id": "a5e44c9e14",
 "next_id": "",
-"position": Vector2(1260, -420),
+"position": Vector2(1280, -440),
+"quest_id": "1e3cd6e59f",
 "size": Vector2(115, 85),
 "step_type": "end",
 "type": 6
 },
 "e95c4966d1": {
-"complete": false,
+"completed": false,
 "details": "Survive 5 seconds",
 "fail_on_timeout": false,
 "id": "e95c4966d1",
@@ -369,7 +374,7 @@ editor_data = {
 "next_id": "a5e44c9e14",
 "position": Vector2(960, -500),
 "quest_id": "1e3cd6e59f",
-"size": Vector2(231, 281),
+"size": Vector2(231, 282),
 "step_type": "timer_step",
 "time": 5.0,
 "time_minutes": 0.0,
@@ -382,7 +387,7 @@ editor_data = {
 "type": 0
 },
 "27aaf4c493": {
-"complete": false,
+"completed": false,
 "details": "Go Outside",
 "id": "27aaf4c493",
 "meta_data": {
@@ -396,14 +401,14 @@ editor_data = {
 "type": 1
 },
 "288156f6ba": {
-"complete": false,
+"completed": false,
 "details": "DId Something",
 "id": "288156f6ba",
 "meta_data": {
 "funcparams": []
 },
 "next_id": "31625ed365",
-"position": Vector2(960, 240),
+"position": Vector2(940, 200),
 "quest_id": "d64dafe941",
 "size": Vector2(150, 150),
 "step_type": "action_step",
@@ -413,7 +418,8 @@ editor_data = {
 "details": "Complete",
 "id": "31625ed365",
 "next_id": "",
-"position": Vector2(1280, 340),
+"position": Vector2(1240, 240),
+"quest_id": "d64dafe941",
 "size": Vector2(117, 80),
 "step_type": "end",
 "type": 6
@@ -421,7 +427,7 @@ editor_data = {
 "36004a44db": {
 "branch": false,
 "branch_step_id": "034f84f308",
-"complete": false,
+"completed": false,
 "details": "Do something or Nothing",
 "id": "36004a44db",
 "meta_data": {
@@ -438,6 +444,7 @@ editor_data = {
 "id": "39111b2f8c",
 "next_id": "",
 "position": Vector2(0, -480),
+"quest_id": "",
 "rewards": {
 "money": 1000.0
 },
@@ -452,11 +459,12 @@ editor_data = {
 },
 "next_id": "",
 "position": Vector2(20, -180),
+"quest_id": "",
 "size": Vector2(250, 150),
 "type": 5
 },
 "8871bddadd": {
-"complete": false,
+"completed": false,
 "details": "Make a pie in the kitchen",
 "id": "8871bddadd",
 "meta_data": {
@@ -473,7 +481,8 @@ editor_data = {
 "details": "Complete",
 "id": "a5e44c9e14",
 "next_id": "",
-"position": Vector2(1260, -420),
+"position": Vector2(1280, -440),
+"quest_id": "1e3cd6e59f",
 "size": Vector2(115, 85),
 "step_type": "end",
 "type": 6
@@ -539,20 +548,20 @@ editor_data = {
 "to_node": &"034f84f308",
 "to_port": 0
 }, {
-"from_node": &"288156f6ba",
+"from_node": &"5dbc5a902b",
 "from_port": 0,
-"to_node": &"31625ed365",
-"to_port": 0
+"to_node": &"1e3cd6e59f",
+"to_port": 2
 }, {
 "from_node": &"034f84f308",
 "from_port": 0,
 "to_node": &"31625ed365",
 "to_port": 0
 }, {
-"from_node": &"5dbc5a902b",
+"from_node": &"288156f6ba",
 "from_port": 0,
-"to_node": &"1e3cd6e59f",
-"to_port": 2
+"to_node": &"31625ed365",
+"to_port": 0
 }],
 "d64dafe941": {
 "completed": false,
@@ -571,28 +580,28 @@ editor_data = {
 "quest_rewards": {},
 "quest_steps": {
 "034f84f308": {
-"complete": false,
+"completed": false,
 "details": "DId Nothing",
 "id": "034f84f308",
 "meta_data": {
 "funcparams": []
 },
 "next_id": "31625ed365",
-"position": Vector2(960, 400),
+"position": Vector2(940, 380),
 "quest_id": "d64dafe941",
 "size": Vector2(150, 150),
 "step_type": "action_step",
 "type": 1
 },
 "288156f6ba": {
-"complete": false,
+"completed": false,
 "details": "DId Something",
 "id": "288156f6ba",
 "meta_data": {
 "funcparams": []
 },
 "next_id": "31625ed365",
-"position": Vector2(960, 240),
+"position": Vector2(940, 200),
 "quest_id": "d64dafe941",
 "size": Vector2(150, 150),
 "step_type": "action_step",
@@ -602,7 +611,8 @@ editor_data = {
 "details": "Complete",
 "id": "31625ed365",
 "next_id": "",
-"position": Vector2(1280, 340),
+"position": Vector2(1240, 240),
+"quest_id": "d64dafe941",
 "size": Vector2(117, 80),
 "step_type": "end",
 "type": 6
@@ -610,7 +620,7 @@ editor_data = {
 "36004a44db": {
 "branch": false,
 "branch_step_id": "034f84f308",
-"complete": false,
+"completed": false,
 "details": "Do something or Nothing",
 "id": "36004a44db",
 "meta_data": {
@@ -645,7 +655,7 @@ with everyone",
 "quest_rewards": {},
 "quest_steps": {
 "086deb180a": {
-"complete": false,
+"completed": false,
 "details": "Share a slice with everyone",
 "id": "086deb180a",
 "item_list": [{
@@ -664,7 +674,7 @@ with everyone",
 "next_id": "1b6192889b",
 "position": Vector2(1420, -200),
 "quest_id": "e6040ba290",
-"size": Vector2(200, 423),
+"size": Vector2(200, 426),
 "step_type": "items_step",
 "type": 3
 },
@@ -673,12 +683,13 @@ with everyone",
 "id": "1b6192889b",
 "next_id": "",
 "position": Vector2(1683.8, -49.0974),
-"size": Vector2(118, 84.9998),
+"quest_id": "e6040ba290",
+"size": Vector2(118, 84.9999),
 "step_type": "end",
 "type": 6
 },
 "27aaf4c493": {
-"complete": false,
+"completed": false,
 "details": "Go Outside",
 "id": "27aaf4c493",
 "meta_data": {
@@ -692,7 +703,7 @@ with everyone",
 "type": 1
 },
 "8871bddadd": {
-"complete": false,
+"completed": false,
 "details": "Make a pie in the kitchen",
 "id": "8871bddadd",
 "meta_data": {
@@ -707,7 +718,7 @@ with everyone",
 },
 "ef2e76154d": {
 "collected": 0,
-"complete": false,
+"completed": false,
 "details": "Pick up 10 apples",
 "id": "ef2e76154d",
 "item_name": "Apple",
@@ -718,7 +729,7 @@ with everyone",
 "position": Vector2(907.336, -140.62),
 "quest_id": "e6040ba290",
 "required": 10.0,
-"size": Vector2(240, 231),
+"size": Vector2(240, 234),
 "step_type": "incremental_step",
 "type": 2
 }
@@ -727,7 +738,7 @@ with everyone",
 "type": 0
 },
 "e95c4966d1": {
-"complete": false,
+"completed": false,
 "details": "Survive 5 seconds",
 "fail_on_timeout": false,
 "id": "e95c4966d1",
@@ -738,7 +749,7 @@ with everyone",
 "next_id": "a5e44c9e14",
 "position": Vector2(960, -500),
 "quest_id": "1e3cd6e59f",
-"size": Vector2(231, 281),
+"size": Vector2(231, 282),
 "step_type": "timer_step",
 "time": 5.0,
 "time_minutes": 0.0,
@@ -748,7 +759,7 @@ with everyone",
 },
 "ef2e76154d": {
 "collected": 0,
-"complete": false,
+"completed": false,
 "details": "Pick up 10 apples",
 "id": "ef2e76154d",
 "item_name": "Apple",
@@ -759,7 +770,7 @@ with everyone",
 "position": Vector2(907.336, -140.62),
 "quest_id": "e6040ba290",
 "required": 10.0,
-"size": Vector2(240, 231),
+"size": Vector2(240, 234),
 "step_type": "incremental_step",
 "type": 2
 }

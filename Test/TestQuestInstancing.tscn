@@ -1,33 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://keestvd6efhf"]
 
-[ext_resource type="Script" path="res://Test/incremental.gd" id="1_6uhvo"]
+[ext_resource type="Script" path="res://addons/quest_manager/QMStepTracker.gd" id="1_3e4uk"]
 
-[node name="TestQuestInstancing" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Node2D" type="Node2D"]
 
-[node name="incremental" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_6uhvo")
+[node name="Area2D" type="Area2D" parent="."]
 
-[node name="text" type="Label" parent="incremental"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="add_item" type="Button" parent="incremental"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Add Item"
-
-[connection signal="pressed" from="incremental/add_item" to="incremental" method="_on_add_item_pressed"]
+[node name="QMStepTracker" type="Node" parent="Area2D"]
+script = ExtResource("1_3e4uk")
+item_name = ""
+quantity = 1
+is_branching = false

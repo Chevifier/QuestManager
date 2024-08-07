@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/End.gd" id="1_18gav"]
 
-[node name="e8f5e51bc9" type="GraphNode"]
+[node name="d2cee2d1af" type="GraphNode"]
 custom_minimum_size = Vector2(111, 80)
 offset_right = 111.0
 offset_bottom = 80.0
@@ -33,7 +33,8 @@ text = "Complete
 "
 vertical_alignment = 1
 
-[node name="id_lbl" type="Label" parent="."]
+[node name="id_lbl" type="LineEdit" parent="."]
 layout_mode = 2
 size_flags_vertical = 6
-text = "e8f5e51bc9"
+text = "d2cee2d1af"
+editable = false
