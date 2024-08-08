@@ -1,5 +1,5 @@
 7c50899f80ed00a44591d843c2e8957f
-::res://::1723070590
+::res://::1723073690
 icon.png::CompressedTexture2D::1748050438985762272::1697129142::1723058240::1::::<><>::
 LICENSE.md::TextFile::-1::1697129142::0::1::::<><>::
 README.md::TextFile::-1::1723058408::0::1::::<><>::
@@ -18,20 +18,20 @@ Character Sheet.png::CompressedTexture2D::5943220897721697047::1697129142::17230
 SpriteSheet.png::CompressedTexture2D::1453176838564725597::1697129142::1723058240::1::::<><>::
 ::res://addons/quest_manager/assets/icons/::1723058240
 icon.png::CompressedTexture2D::6047921757347022381::1697129142::1723058240::1::::<><>::
-::res://addons/quest_manager/Editor/::1723065781
-EditorWindow.gd::GDScript::-1::1723058295::0::1::::<>Control<>::
-EditorWindow.tscn::PackedScene::3172611971441320767::1723065781::0::1::::<><>::res://addons/quest_manager/Editor/EditorWindow.gd<>res://addons/quest_manager/Editor/Updater.gd<>res://addons/quest_manager/Editor/recent_project_btn.gd<>res://addons/quest_manager/Editor/RecentsList.gd<>res://addons/quest_manager/Editor/right_mouse_menu.gd<>res://addons/quest_manager/Editor/SaveSystem.gd
+::res://addons/quest_manager/Editor/::1723073690
+EditorWindow.gd::GDScript::-1::1723073269::0::1::::<>Control<>::
+EditorWindow.tscn::PackedScene::3172611971441320767::1723073690::0::1::::<><>::res://addons/quest_manager/Editor/EditorWindow.gd<>res://addons/quest_manager/Editor/Updater.gd<>res://addons/quest_manager/Editor/recent_project_btn.gd<>res://addons/quest_manager/Editor/RecentsList.gd<>res://addons/quest_manager/Editor/right_mouse_menu.gd<>res://addons/quest_manager/Editor/SaveSystem.gd
 RecentsList.gd::GDScript::-1::1712527716::0::1::::<>Node<>::
 recent_project_btn.gd::GDScript::-1::1699060616::0::1::::<>Button<>::
 right_mouse_menu.gd::GDScript::-1::1697129142::0::1::::<>PopupMenu<>::
 right_mouse_menu.tscn::PackedScene::2645707054950454276::1697129142::0::1::::<><>::res://addons/quest_manager/Editor/right_mouse_menu.gd
 SaveSystem.gd::GDScript::-1::1713147556::0::1::::QuestManagerSaveFileManager<>Node<>::
 Updater.gd::GDScript::-1::1701454077::0::1::::<>Button<>::
-::res://addons/quest_manager/Editor/Nodes/::1723070724
+::res://addons/quest_manager/Editor/Nodes/::1723073690
 Branch.gd::GDScript::-1::1723056867::0::1::::Branch<>EditorNode<>::
-Branch.tscn::PackedScene::7119796688684446717::1723070729::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/Branch.gd
+Branch.tscn::PackedScene::7119796688684446717::1723073690::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/Branch.gd
 Callable_Step.gd::GDScript::-1::1701453605::0::1::::<>EditorNode<>::
-Callable_Step.tscn::PackedScene::4325388003026398623::1723070729::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/Callable_Step.gd
+Callable_Step.tscn::PackedScene::4325388003026398623::1723073690::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/Callable_Step.gd
 EditorNode.gd::GDScript::-1::1723056867::0::1::::EditorNode<>GraphNode<>::
 End.gd::GDScript::-1::1701453605::0::1::::<>EditorNode<>::
 End.tscn::PackedScene::3302133248794267525::1723056867::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/End.gd
@@ -40,7 +40,7 @@ Group.tscn::PackedScene::8133144704705191342::1723056867::0::1::::<><>::res://ad
 IncrementalStep.gd::GDScript::-1::1723056867::0::1::::<>EditorNode<>::
 IncrementalStep.tscn::PackedScene::3574198456823505617::1723068095::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/IncrementalStep.gd
 items_step.gd::GDScript::-1::1723056867::0::1::::<>EditorNode<>::
-items_step.tscn::PackedScene::4846742096729221831::1723070729::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/items_step.gd
+items_step.tscn::PackedScene::4846742096729221831::1723073690::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/items_step.gd
 Meta_data.gd::GDScript::-1::1712513337::0::1::::<>EditorNode<>::
 Meta_data.tscn::PackedScene::7676633921397548546::1723056867::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/Meta_data.gd
 Quest.gd::GDScript::-1::1697135112::0::1::::<>EditorNode<>::
@@ -50,14 +50,14 @@ Quest_Rewards.tscn::PackedScene::7756339395585813275::1723056867::0::1::::<><>::
 Step.gd::GDScript::-1::1723056867::0::1::::<>EditorNode<>::
 Step.tscn::PackedScene::4676620347091927808::1723068534::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/Step.gd
 Timer_Step.gd::GDScript::-1::1723056867::0::1::::<>EditorNode<>::
-Timer_Step.tscn::PackedScene::160007808320660453::1723070729::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/Timer_Step.gd
+Timer_Step.tscn::PackedScene::160007808320660453::1723073690::0::1::::<><>::res://addons/quest_manager/Editor/Nodes/Timer_Step.gd
 ::res://addons/quest_manager/Editor/TestScene/::1723056867
 AvailableQuests.gd::GDScript::-1::1723056867::0::1::::<>Control<>::
 PlayerQuests.gd::GDScript::-1::1723056867::0::1::::<>Control<>::
 TestScene.tscn::PackedScene::1982775516306887261::1723055598::0::1::::<><>::res://addons/quest_manager/Editor/TestScene/PlayerQuests.gd<>res://addons/quest_manager/Editor/TestScene/AvailableQuests.gd
-::res://addons/quest_manager/Examples/::1723070590
-All Nodes.quest::Resource::8962801000055994435::1723070590::1723070529::1::::<><>::
-ExampleQuests.quest::Resource::1646139316134416246::1723064266::1723064202::1::::<><>::
+::res://addons/quest_manager/Examples/::1723073690
+All Nodes.quest::Resource::8962801000055994435::1723073606::1723073607::1::::<><>::res://addons/quest_manager/QuestResource.gd
+ExampleQuests.quest::Resource::1646139316134416246::1723073690::1723073691::1::::<><>::res://addons/quest_manager/QuestResource.gd
 ::res://addons/quest_manager/Examples/ExampleOne/::1723061591
 Enemy.gd::GDScript::-1::1697129142::0::1::::<>Area2D<>::
 Enemy.tscn::PackedScene::4260354024182905993::1697129142::0::1::::<><>::res://addons/quest_manager/Examples/ExampleOne/Enemy.gd<>uid://ux6u0ocdyfmb::::res://addons/quest_manager/assets/SpriteSheet.png

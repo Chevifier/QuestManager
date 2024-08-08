@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Branch.gd" id="1_5cc0i"]
 
-[node name="fce6470601" type="GraphNode"]
+[node name="30c291fba6" type="GraphNode"]
 custom_minimum_size = Vector2(150, 250)
 offset_right = 197.0
 offset_bottom = 250.0
@@ -73,7 +73,7 @@ text = "Meta Data"
 [node name="id_lbl" type="LineEdit" parent="."]
 layout_mode = 2
 size_flags_vertical = 6
-text = "fce6470601"
+text = "30c291fba6"
 editable = false
 
 [connection signal="gui_input" from="details" to="." method="_on_details_gui_input"]

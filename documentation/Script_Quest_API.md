@@ -12,7 +12,7 @@ When finished call the `finialize_quest` function. Then add this quest to the pl
 
 #### `_init(quest_name:String,quest_details :String= "") -> void`
 
-Class initializer when `ScriptQuest.new()` is called. Requires the name of the quest and its details/discription.
+Class initializer when `ScriptQuest.new()` is called. Requires the name of the quest and optionally its details/discription.
 
 #### `set_quest_details(details:String) -> void`
 

@@ -15,15 +15,14 @@ var state = START
 func _ready():
 	state = START
 	get_tree().paused = true
-	#add the quest to player quests
-	QuestManager.add_quest(quest_name,quest_resource)
 	#Connect quest manager needed signals
 	QuestManager.step_updated.connect(update_ui)
 	QuestManager.step_complete.connect(update_ui)
 	QuestManager.next_step.connect(update_ui)
 	QuestManager.quest_completed.connect(quest_complete)
 	QuestManager.quest_failed.connect(quest_failed)
-	#set quest detail text 
+	#add the quest to player quests
+	QuestManager.add_quest(quest_name,quest_resource)
 	$Quest.text = QuestManager.get_player_quest(quest_name).quest_details
 	#scale quest label to initailly be 0 for tweening
 	$Quest.scale.y = 0

@@ -131,19 +131,25 @@ Returns all player quests names as an array
 #### `func set_branch_step(quest_name, should_branch:bool=true) => void`
 If the current step is a branch set it branch to alternate step.
 
-#### `progress_quest(quest_name:String,item_name:String="",amount:int=1) -> void`
+#### `func progress_quest_by_name(quest_name:String, item_name:String="", quantity:int=1, collected:bool=true)->void`
+
+Progress a quest using its name. This function pulls the id for the quest then uses it to progress_quest below function
+
+#### `progress_quest(quest_id:String,step_id:String,item_name:String="",amount:int=1,collected:bool=true) -> void`
 Progresses a quest to its next step if it was an action step updates other steps and progresses to next step if all requirements for that step are met. Completes quest if it was at its last step.
-- `quest_name` - Name of the quest to progress
+- `quest_id` - id of the quest to progress
+- `step_id` - id of the current step you want to progress
 - `item_name` - Name of an item to collect/complete.
 - `amount` - Amount to increment `incremental_steps`. 1 by default
+- `collected` - set if `item_name` was collected default true if not set
 
 #### `func _process(delta) -> void`
 
 Called by the Engine and updates the time of any quest that is currently at a `timer_step`
 
-#### `func set_quest_step_items(quest_name:String,quest_item:String,amount:int=0,collected:bool=false) -> void:`
+####  `func get_quest_id(quest_name:String)->String`
 
-Set a specific value for Incremental and Item Steps. For example the player could have some of an item already use this to match the players inventory
+Get the id of the quest `quest_name` 
 
 #### `get_quest_list(group:String="") -> Dictionary`
 Returns all the quest stored in the current_resource. optionally get only the quests in the specified group
@@ -157,22 +163,22 @@ Add a ScriptQuest to player_quests.
 #### `get_quest_from_resource(quest_name:String) -> Dictionary`
 Returns a quest from the current_resource
 
-#### `has_quest(quest_name:String) -> bool`
-Returns if the player has this quest `quest_name`
+#### `func has_quest(quest_name:String,is_id:bool = false)->bool`
+Returns if the player has this quest `quest_name`. Optionally pass if quest_name is an id using `is_id`
 
-#### `is_quest_complete(quest_name:String) -> bool`
+#### `is_quest_complete(quest_name:String,is_id:bool=false) -> bool`
 Returns if the player has completed this quest `quest_name`
 
-#### `is_quest_failed(quest_name) -> bool`
+#### `is_quest_failed(quest_name,is_id:bool=false) -> bool`
 Returns if the player has failed this quest `quest_name`
 
-#### `get_current_step(quest_name:String) -> Dictionary`
+#### `get_current_step(quest_name:String,is_id=false) -> Dictionary`
 Returns a dictionary of the current quest step of this quest `quest_name`
 
-#### `remove_quest(quest_name:String) -> void`
+#### `remove_quest(quest_name:String,is_id:bool=false) -> void`
 Removes quest from player_quests `quest_name`
 
-#### `complete_quest(quest_name:String) -> void`
+#### `complete_quest(quest_name:String,is_id:bool=false) -> void`
 Completes quest `quest_name`
 
 #### `call_function(autoloadfunction:String,params:Array) -> void`
@@ -198,8 +204,4 @@ Resets the quest `quest_name`
 Wipes the entire player_quests dictionary useful for starting a name game for example.
 
 #### `testfunc(v:Array) -> void`
-Test function that prints Hello Quest Manager plus passed array
-
-#### `quest_error(quest_name:String) -> void`
-Catch if quest doesnt exist checking
-
+Test function that prints "Hello Quest Manager" plus passed array

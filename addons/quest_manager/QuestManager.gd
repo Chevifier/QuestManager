@@ -19,12 +19,6 @@ const BRANCH_STEP = "branch_step"
 const CALLABLE_STEP = "callable_step"
 const END = "end"
 
-#quest instance signals
-signal incrimental_item_collected(item_name,quantity)
-signal action_step_complete()
-signal item_collected(item_name)
-signal branch_activated(is_active)
-
 #Helper variable for searching for quest
 var active_quest = ""
 var current_resource:QuestResource
@@ -64,12 +58,12 @@ func get_player_quest(quest_name:String,is_id:bool=false) -> Dictionary:
 func get_all_player_quests() -> Dictionary:
 	return player_quests
 	
-func progress_quest_by_name(quest_name,item_name="",quantity=1,collected=true):
+func progress_quest_by_name(quest_name,item_name:String="",quantity:int=1,collected:bool=true)->void:
 	var quest_id = get_quest_id(quest_name)
 	var current_step = get_current_step(quest_id,true)
 	progress_quest(quest_id,current_step.id,item_name,quantity,collected)
 
-func progress_quest(quest_id:String,step_id:String, item_name="",quantity=1,collected=true):
+func progress_quest(quest_id:String,step_id:String, item_name:String="",quantity:int=1,collected:bool=true):
 	if has_quest(quest_id,true) == false:
 		return
 	if player_quests[quest_id].completed == true:
@@ -152,8 +146,8 @@ func _process(delta):
 						progress_quest(player_quests[quest_id].quest_id,step.id)
 			step_updated.emit(step)
 
-func get_quest_id(quest_name):
-	var id = null
+func get_quest_id(quest_name:String)->String:
+	var id = ""
 	for quest_id in player_quests:
 		if player_quests[quest_id].quest_name == quest_name:
 			id = quest_id
@@ -166,7 +160,7 @@ func get_all_player_quests_names() -> Array:
 	for i in player_quests:
 		quests.append(player_quests[i].quest_name)
 	return quests
-
+#set if a branch step should branch
 func set_branch_step(quest_id,step_id, should_branch:bool=true) -> void:
 	var step = player_quests[quest_id].quest_steps[step_id]
 	if step.step_type == BRANCH_STEP:
@@ -186,14 +180,10 @@ func has_quest(quest_name:String,is_id:bool = false)->bool:
 				return true
 		return false
 #Add a quest that was created from script/at runtime
-func add_scripted_quest(quest:ScriptQuest):
+func add_scripted_quest(quest:ScriptQuest)->void:
 	player_quests[quest.quest_data["quest_id"]] = quest.quest_data
 	new_quest_added.emit(quest.quest_data.quest_name)
 	active_quest = quest.quest_data.quest_name
-
-#Returns all the player quests that are not
-
-	
 #return true if quest is complete
 func is_quest_complete(quest_name:String,is_id:bool=false) -> bool:
 	if is_id:
@@ -202,7 +192,7 @@ func is_quest_complete(quest_name:String,is_id:bool=false) -> bool:
 	var quest = get_player_quest(quest_name,is_id)
 	return quest.completed
 #returns true if quest was failed
-func is_quest_failed(quest_name,is_id=false) -> bool:
+func is_quest_failed(quest_name:String,is_id:bool=false) -> bool:
 	var quest = get_player_quest(quest_name,is_id)
 	if quest.is_empty():
 		return false
