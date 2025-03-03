@@ -20,7 +20,8 @@ func get_quests(group:String="") -> Dictionary:
 	if group == "":
 		quests = quest_data.duplicate()
 	else:
-		for quest in quest_data:
+		for key in quest_data:
+			var quest = quest_data.get(key)
 			if quest.group == group:
 				quests[quest.id] = quest.duplicate()
 	return quests
